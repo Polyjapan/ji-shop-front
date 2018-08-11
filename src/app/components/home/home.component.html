@@ -1,0 +1,45 @@
+
+
+<div class="jumbotron" *ngIf="!hasContent()">
+  <h1 class="display-4">Rien à voir ici :(</h1>
+  <p class="lead">Nous sommes ravis de voir que notre événement vous intéresse, mais notre boutique n'est pas encore ouverte. Revenez bientôt !</p>
+  <hr class="my-4">
+  <p>Notre boutique ouvre en général 3 mois avant Japan Impact. Vous y trouverez vos places pour la convention, ainsi que des goodies que vous pourrez y retirer !</p>
+</div>
+
+<ng-container *ngIf="hasContent()">
+  <h1 class="display-4">Billetterie Japan Impact</h1>
+  <p>Bienvenue sur la boutique officielle de Japan Impact. </p>
+  <!-- todo: editable text? -->
+  <hr class="my-3" />
+
+  <div class="row">
+    <div class="col-lg-8">
+
+    <ng-container *ngIf="hasTickets()">
+        <h2>Billets</h2>
+        <app-item-list-display [items]="tickets"></app-item-list-display>
+    </ng-container>
+
+    <ng-container *ngIf="hasGoodies()">
+        <h2>Goodies</h2>
+        <p>Attention, les goodies sont à retirer sur notre stand lors de la convention, assurez vous de disposer d'un billet d'entrée avant d'en commander.</p>
+        <app-item-list-display [items]="goodies"></app-item-list-display>
+    </ng-container>
+
+    </div>
+
+    <div class="col-lg-3 offset-lg-1">
+      <div class="border p-2 mt-1 pb-2">
+        <h2>Panier</h2>
+
+        <p>Some stuff here</p>
+
+        <!-- todo: griser le bouton -->
+        <a class="btn btn-primary" href="#" role="button">Passer commande</a>
+      </div>
+    </div>
+  </div>
+
+
+</ng-container>
