@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
-import {JwtHelper} from 'angular2-jwt';
 import {ApiResult} from '../types/api_result';
 import {BackendService} from './backend.service';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable()
 export class AuthService {
-  private jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(private backend: BackendService) {}
+  constructor(private backend: BackendService, private jwtHelper: JwtHelperService) {}
 
   login(user: string, password: string): Promise<LoginResponse> {
 

@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {AuthHttp} from 'angular2-jwt';
 import {environment} from '../../environments/environment';
 import {ItemsResponse} from '../types/items';
 import {CheckedOutItem, FullOrder, Order, Source} from '../types/order';
 import {LoginResponse} from './auth.service';
 import {ApiResult} from '../types/api_result';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 
 @Injectable()
@@ -20,50 +20,49 @@ import {ApiResult} from '../types/api_result';
 POST        /orders/create                  controllers.orders.CheckoutController.checkout
 
  */
+
+// https://angular.io/guide/http#error-handling
+// Todo: switch everything to Observables
 export class BackendService {
   private _baseApiUrl = environment.apiurl;
   private _shopUrl = this._baseApiUrl + '/shop';
   private _ordersUrl = this._baseApiUrl + '/orders';
   private _authUrl = this._baseApiUrl + '/users';
 
-  constructor(private http: Http, private authHttp: AuthHttp) {
+  constructor(private http: HttpClient) {
   }
 
   getItems(): Promise<ItemsResponse> {
-    return this.http.get(this._shopUrl + '/items')
-      .toPromise()
-      .then(result => result.json() as ItemsResponse);
+    return this.http.get<ItemsResponse>(this._shopUrl + '/items')
+      .toPromise();
   }
 
   getAllItems(): Promise<ItemsResponse> {
     // TODO: handle errors
-    return this.http.get(this._shopUrl + '/items/all')
-      .toPromise()
-      .then(result => result.json() as ItemsResponse);
+    return this.http.get<ItemsResponse>(this._shopUrl + '/items/all')
+      .toPromise();
   }
 
-  getPdf(barcode: string): Promise<Response> {
-    return this.authHttp.get(this._ordersUrl + '/download/' + barcode + '.pdf').toPromise();
+  getPdf(barcode: string): Observable<Blob> {
+    return this.http.get(this._ordersUrl + '/download/' + barcode + '.pdf', {responseType: 'blob'});
   }
 
   getOrders(): Promise<Order[]> {
-    return this.authHttp.get(this._ordersUrl + '/view')
-      .toPromise()
-      .then(r => r.json() as Order[]);
+    return this.http.get<Order[]>(this._ordersUrl + '/view')
+      .toPromise();
   }
 
   getOrder(id: number): Promise<FullOrder> {
-    return this.authHttp.get(this._ordersUrl + '/view/' + id)
-      .toPromise()
-      .then(r => r.json() as FullOrder);
+    return this.http.get<FullOrder>(this._ordersUrl + '/view/' + id)
+      .toPromise();
   }
 
   login(user: string, password: string): Promise<LoginResponse> {
     return this.http
-      .post(this._authUrl + '/login', {'email': user, 'password': password})
+      .post<LoginResponse>(this._authUrl + '/login', {'email': user, 'password': password}, { observe: 'response' })
       .toPromise()
       .then(result => {
-        const resp = result.json() as LoginResponse;
+        const resp = result.body;
         resp.token = result.headers.get('Authorization');
         return resp;
       });
@@ -71,44 +70,38 @@ export class BackendService {
 
   register(user: string, password: string, lastname: string, firstname: string): Promise<ApiResult> {
     return this.http
-      .post(this._authUrl + '/signup', {'email': user, 'password': password, 'firstname': firstname, 'lastname': lastname})
-      .toPromise()
-      .then(r => r.json() as ApiResult);
+      .post<ApiResult>(this._authUrl + '/signup', {'email': user, 'password': password, 'firstname': firstname, 'lastname': lastname})
+      .toPromise();
   }
 
   emailConfirm(user: string, code: string): Promise<ApiResult> {
     return this.http
-      .post(this._authUrl + '/emailConfirm', {'email': user, 'code': code})
-      .toPromise()
-      .then(r => r.json() as ApiResult);
+      .post<ApiResult>(this._authUrl + '/emailConfirm', {'email': user, 'code': code})
+      .toPromise();
   }
 
   passwordRecover(user: string): Promise<ApiResult> {
     return this.http
-      .post(this._authUrl + '/recoverPassword', {'email': user})
-      .toPromise()
-      .then(r => r.json() as ApiResult);
+      .post<ApiResult>(this._authUrl + '/recoverPassword', {'email': user})
+      .toPromise();
   }
 
   passwordChange(password: string): Promise<ApiResult> {
     return this.http
-      .post(this._authUrl + '/changePassword', {'password': password})
-      .toPromise()
-      .then(r => r.json() as ApiResult);
+      .post<ApiResult>(this._authUrl + '/changePassword', {'password': password})
+      .toPromise();
   }
 
   passwordReset(user: string, code: string, password: string): Promise<ApiResult> {
     return this.http
-      .post(this._authUrl + '/resetPassword', {'email': user, 'code': code, 'password': password})
-      .toPromise()
-      .then(r => r.json() as ApiResult);
+      .post<ApiResult>(this._authUrl + '/resetPassword', {'email': user, 'code': code, 'password': password})
+      .toPromise();
   }
 
   placeOrder(items: CheckedOutItem[], source?: Source): Promise<CheckOutResponse> {
-    return this.authHttp
-      .post(this._ordersUrl + '/create', {'items': items, 'orderType': source})
-      .toPromise()
-      .then(r => r.json() as CheckOutResponse);
+    return this.http
+      .post<CheckOutResponse>(this._ordersUrl + '/create', {'items': items, 'orderType': source})
+      .toPromise();
   }
 }
 
