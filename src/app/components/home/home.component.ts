@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {BackendService} from '../../services/backend.service';
-import {ItemList} from '../../types/items';
+import {ItemList, ItemsResponse} from '../../types/items';
 
 @Component({
   selector: 'app-home',
@@ -16,10 +16,12 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.backend.getItems().then(resp => {
-      this.goodies = resp.goodies;
-      this.tickets = resp.tickets;
-    });
+    this.backend.getItems().subscribe(
+      (resp: ItemsResponse) => {
+          this.goodies = resp.goodies;
+          this.tickets = resp.tickets;
+        }
+    );
   }
 
   hasContent(): boolean {

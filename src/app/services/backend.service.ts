@@ -32,76 +32,65 @@ export class BackendService {
   constructor(private http: HttpClient) {
   }
 
-  getItems(): Promise<ItemsResponse> {
-    return this.http.get<ItemsResponse>(this._shopUrl + '/items')
-      .toPromise();
+  getItems(): Observable<ItemsResponse> {
+    return this.http.get<ItemsResponse>(this._shopUrl + '/items');
   }
 
-  getAllItems(): Promise<ItemsResponse> {
+  getAllItems(): Observable<ItemsResponse> {
     // TODO: handle errors
-    return this.http.get<ItemsResponse>(this._shopUrl + '/items/all')
-      .toPromise();
+    return this.http.get<ItemsResponse>(this._shopUrl + '/items/all');
   }
 
   getPdf(barcode: string): Observable<Blob> {
     return this.http.get(this._ordersUrl + '/download/' + barcode + '.pdf', {responseType: 'blob'});
   }
 
-  getOrders(): Promise<Order[]> {
-    return this.http.get<Order[]>(this._ordersUrl + '/view')
-      .toPromise();
+  getOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(this._ordersUrl + '/view');
   }
 
-  getOrder(id: number): Promise<FullOrder> {
-    return this.http.get<FullOrder>(this._ordersUrl + '/view/' + id)
-      .toPromise();
+  getOrder(id: number): Observable<FullOrder> {
+    return this.http.get<FullOrder>(this._ordersUrl + '/view/' + id);
   }
 
-  login(user: string, password: string): Promise<LoginResponse> {
+  login(user: string, password: string): Observable<LoginResponse> {
     return this.http
       .post<LoginResponse>(this._authUrl + '/login', {'email': user, 'password': password}, { observe: 'response' })
-      .toPromise()
-      .then(result => {
+      .lift(result => {
         const resp = result.body;
         resp.token = result.headers.get('Authorization');
         return resp;
       });
   }
 
-  register(user: string, password: string, lastname: string, firstname: string): Promise<ApiResult> {
+  register(user: string, password: string, lastname: string, firstname: string): Observable<ApiResult> {
     return this.http
-      .post<ApiResult>(this._authUrl + '/signup', {'email': user, 'password': password, 'firstname': firstname, 'lastname': lastname})
-      .toPromise();
+      .post<ApiResult>(this._authUrl + '/signup', {'email': user, 'password': password, 'firstname': firstname, 'lastname': lastname});
   }
 
-  emailConfirm(user: string, code: string): Promise<ApiResult> {
+  emailConfirm(user: string, code: string): Observable<ApiResult> {
     return this.http
-      .post<ApiResult>(this._authUrl + '/emailConfirm', {'email': user, 'code': code})
-      .toPromise();
+      .post<ApiResult>(this._authUrl + '/emailConfirm', {'email': user, 'code': code});
   }
 
-  passwordRecover(user: string): Promise<ApiResult> {
+  passwordRecover(user: string): Observable<ApiResult> {
     return this.http
-      .post<ApiResult>(this._authUrl + '/recoverPassword', {'email': user})
-      .toPromise();
+      .post<ApiResult>(this._authUrl + '/recoverPassword', {'email': user});
   }
 
-  passwordChange(password: string): Promise<ApiResult> {
+  passwordChange(password: string): Observable<ApiResult> {
     return this.http
-      .post<ApiResult>(this._authUrl + '/changePassword', {'password': password})
-      .toPromise();
+      .post<ApiResult>(this._authUrl + '/changePassword', {'password': password});
   }
 
-  passwordReset(user: string, code: string, password: string): Promise<ApiResult> {
+  passwordReset(user: string, code: string, password: string): Observable<ApiResult> {
     return this.http
-      .post<ApiResult>(this._authUrl + '/resetPassword', {'email': user, 'code': code, 'password': password})
-      .toPromise();
+      .post<ApiResult>(this._authUrl + '/resetPassword', {'email': user, 'code': code, 'password': password});
   }
 
-  placeOrder(items: CheckedOutItem[], source?: Source): Promise<CheckOutResponse> {
+  placeOrder(items: CheckedOutItem[], source?: Source): Observable<CheckOutResponse> {
     return this.http
-      .post<CheckOutResponse>(this._ordersUrl + '/create', {'items': items, 'orderType': source})
-      .toPromise();
+      .post<CheckOutResponse>(this._ordersUrl + '/create', {'items': items, 'orderType': source});
   }
 }
 
