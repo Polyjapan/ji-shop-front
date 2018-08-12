@@ -8,10 +8,13 @@ import {AuthModule} from './services/auth.module';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {HomeModule} from './components/home/home.module';
+import {AuthenticateComponent} from './components/authenticate/authenticate.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
+    AuthenticateComponent
   ],
   imports: [
     BrowserModule,

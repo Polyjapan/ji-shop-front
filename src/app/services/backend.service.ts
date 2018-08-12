@@ -63,9 +63,9 @@ export class BackendService {
       });
   }
 
-  register(user: string, password: string, lastname: string, firstname: string): Observable<ApiResult> {
+  register(data: string): Observable<ApiResult> {
     return this.http
-      .post<ApiResult>(this._authUrl + '/signup', {'email': user, 'password': password, 'firstname': firstname, 'lastname': lastname});
+      .post<ApiResult>(this._authUrl + '/signup', data);
   }
 
   emailConfirm(user: string, code: string): Observable<ApiResult> {
