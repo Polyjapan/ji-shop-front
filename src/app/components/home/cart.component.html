@@ -1,0 +1,12 @@
+<ng-container *ngIf="cart.items.length > 0">
+  <table style="width: 100%;">
+    <app-cart-item-display *ngFor="let item of cart.items" [item]="item" style="width: 100%;"></app-cart-item-display>
+  </table>
+
+  <hr>
+  <p>Prix total : <b>{{cart.total}}.&ndash;</b></p>
+
+  <a class="btn btn-primary" href="#" role="button">Passer commande</a>
+</ng-container>
+
+<p *ngIf="cart.items.length === 0">Vous n'avez rien mis dans votre panier pour le moment.</p>

@@ -2,25 +2,7 @@
   <h2 *ngIf="items.length > 1">{{cat.event.name}}</h2>
 
   <table style="width: 100%;">
-    <tr *ngFor="let item of cat.items">
-      <!--
-      export class Item {
-  id?: number;
-  name: string;
-  price: number;
-  description: string;
-  longDescription: string;
-  maxItems: number;
-  eventId: number;
-  isTicket: boolean;
-  freePrice: boolean;
-  isVisible: boolean;
-}
--->
-      <!-- todo: add images -->
-
-      <td><strong>{{item.name}}</strong><br>{{item.description}}</td>
-      <td width="10%">{{item.price}} CHF</td>
-    </tr>
+    <app-item-display *ngFor="let item of cat.items" [item]="item">
+    </app-item-display>
   </table>
 </ng-container>

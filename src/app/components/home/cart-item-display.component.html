@@ -1,0 +1,9 @@
+<tr>
+  <td>{{item.amount}} * {{item.baseItem.name}} ({{item.price}}.&ndash;)</td>
+  <td width="10%"><b>{{item.amount * item.price}}.&ndash;</b></td>
+  <td width="5%">
+    <div class="input-group">
+      <button (click)="removeItem()" class="btn btn-danger btn-sm"><span class="fas fa-trash-alt"></span></button>
+    </div>
+  </td>
+</tr>

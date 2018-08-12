@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.backend.getItems().subscribe(
-      (resp: ItemsResponse) => {
+      resp => {
           this.goodies = resp.goodies;
           this.tickets = resp.tickets;
         }

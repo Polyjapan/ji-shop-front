@@ -1,0 +1,20 @@
+<tr>
+  <td><strong>{{item.name}}</strong><br>{{item.description}}</td>
+  <td width="17%" *ngIf="!item.freePrice">{{item.price}}.&ndash;</td>
+  <td width="17%" *ngIf="item.freePrice">
+    <div class="input-group">
+
+      <input type="number" class="form-control" [(ngModel)]="price" min="{{item.price}}" max="{{3 * item.price}}" aria-describedby="basic-addon2" title="Prix">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">.&ndash;</span>
+      </div>
+    </div>
+
+
+
+  <td width="5%">
+  <div class="input-group">
+    <button (click)="addItem()" class="btn btn-success"><span class="fas fa-cart-plus"></span></button>
+  </div>
+</td>
+</tr>

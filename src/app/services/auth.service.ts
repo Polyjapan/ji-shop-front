@@ -3,18 +3,19 @@ import 'rxjs/add/operator/toPromise';
 import {ApiResult} from '../types/api_result';
 import {BackendService} from './backend.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class AuthService {
 
   constructor(private backend: BackendService, private jwtHelper: JwtHelperService) {}
 
-  login(user: string, password: string): Promise<LoginResponse> {
+  login(user: string, password: string): Observable<LoginResponse> {
 
 
     return this.backend
       .login(user, password)
-      .then(resp => {
+      .lift<LoginResponse>((resp: LoginResponse) => {
         if (resp.token != null) {
           resp.token = resp.token.replace('Bearer ', ''); // remove the prefix in the token
         }

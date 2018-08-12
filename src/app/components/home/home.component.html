@@ -16,27 +16,27 @@
   <div class="row">
     <div class="col-lg-8">
 
-    <ng-container *ngIf="hasTickets()">
-        <h2>Billets</h2>
-        <app-item-list-display [items]="tickets"></app-item-list-display>
-    </ng-container>
+      <ng-container *ngIf="hasTickets()">
+          <h2>Billets</h2>
+          <app-item-list-display [items]="tickets"></app-item-list-display>
+      </ng-container>
 
-    <ng-container *ngIf="hasGoodies()">
-        <h2>Goodies</h2>
-        <p>Attention, les goodies sont à retirer sur notre stand lors de la convention, assurez vous de disposer d'un billet d'entrée avant d'en commander.</p>
-        <app-item-list-display [items]="goodies"></app-item-list-display>
-    </ng-container>
+      <hr class="my-3" />
+
+      <ng-container *ngIf="hasGoodies()">
+          <h2>Goodies</h2>
+          <p>Attention, les goodies sont à retirer sur notre stand lors de la convention, assurez vous de disposer d'un billet d'entrée avant d'en commander.</p>
+          <app-item-list-display [items]="goodies"></app-item-list-display>
+      </ng-container>
 
     </div>
 
-    <div class="col-lg-3 offset-lg-1">
+    <div class="col-lg-4">
       <div class="border p-2 mt-1 pb-2">
         <h2>Panier</h2>
 
-        <p>Some stuff here</p>
+        <app-cart></app-cart>
 
-        <!-- todo: griser le bouton -->
-        <a class="btn btn-primary" href="#" role="button">Passer commande</a>
       </div>
     </div>
   </div>
