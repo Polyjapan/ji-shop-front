@@ -10,7 +10,7 @@
   </ul>
 </div>
 
-<div *ngIf="done">
+<div *ngIf="done && !multiSendStart">
   <h1>Récapitulatif de commande</h1>
   <p>Vérifiez que votre commande est correcte.</p>
   <p *ngIf="isGift">Cette commande sera générée comme <b>un cadeau</b>.</p>
@@ -55,15 +55,33 @@
   <p>Si vous confirmez que la commande est correcte, vous pouvez passer au paiement ici :</p>
   <a class="btn btn-success" href="{{checkoutLink}}" *ngIf="checkoutLink"><i class="far fa-credit-card"></i> Paiement sécurisé <i class="fas fa-lock"></i></a>
 
-  <form *ngIf="isGift">
+  <div *ngIf="isGift">
+    <h3>M'envoyer les billets par email</h3>
+    <p>Vous recevez les invitations sur votre adresse personnelle et pourrez les distribuer directement.</p>
+    <button (click)="sendToMe()" class="btn btn-primary">Envoyer les billets pour moi</button>
+
+    <hr>
+
+    <h3>Envoyer les billets à quelqu'un</h3>
+    <p>La personne indiquée recevra les billets directement par email.</p>
+
     <div class="form-group">
       <label for="inputEmail">Envoyer les billets à</label>
       <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" #email>
     </div>
 
-    <p><button (click)="sendTo(email)" class="btn btn-success">Envoyer</button> ou
-      <button (click)="sendToMe()" class="btn btn-primary">Envoyer les billets pour moi</button></p>
-  </form>
+    <button (click)="sendTo(email)" class="btn btn-success">Envoyer</button>
+
+    <hr>
+
+    <h3>Envoyer cette commande à plusieurs personnes</h3>
+    <p>Vous pouvez dupliquer cette commande et l'envoyer à plusieurs personnes en indiquant leurs emails, un par ligne.</p>
+
+    <textarea class="form-control" #emails rows="5"></textarea>
+
+    <button (click)="sendToMultiple(emails)" class="btn btn-success">Envoyer</button>
+
+  </div>
 </div>
 
 <div *ngIf="adminSent">
@@ -79,4 +97,15 @@
       {{err}}
     </li>
   </ul>
+</div>
+
+<div *ngIf="multiSendStart">
+  <h1>Envoi multiple en cours</h1>
+  <!--<div class="progress">
+    <div class="progress-bar bg-info" role="progressbar" [style]="multiSendProgressText"></div>
+  </div>-->
+
+  <hr>
+
+  <pre>{{multiSendLog}}</pre>
 </div>

@@ -7,6 +7,8 @@ import {CartItem, CartService} from '../../services/cart.service';
 import {CheckedOutItem, Source} from '../../types/order';
 import {Permissions} from '../../constants/permissions';
 import {Observable} from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs-compat/add/operator/map';
 
 @Component({
   selector: 'app-checkout',
@@ -24,9 +26,16 @@ export class CheckoutComponent implements OnInit {
   // Admin sent
   adminSent = false;
   adminSendErrors: string[];
+  multiSendLog: string;
+  multiSendProgress: number;
+  multiSendStart = false;
 
   constructor(private backend: BackendService, private auth: AuthService, private route: ActivatedRoute, public cart: CartService) {
 
+  }
+
+  get multiSendProgressText() {
+    return 'width: ' + (this.multiSendProgress * 100) + '%;';
   }
 
   wasUpdated(item: CartItem): boolean {
@@ -39,6 +48,42 @@ export class CheckoutComponent implements OnInit {
 
   get isGift(): boolean {
     return this.source === Source.Gift;
+  }
+
+  private placeOrder(source: Source) {
+
+    const order = this.cart.getOrder();
+
+    return this.backend.placeOrder(order, source).map(response => {
+      // Build a map
+      const netMap: Map<string, CheckedOutItem> = new Map<string, CheckedOutItem>();
+      for (const item of response.ordered) {
+        if (!this.cart.hasCartItem(item.itemId, item.itemPrice)) {
+          this.checkoutErrors = ['Une erreur s\'est produite (des éléments ont été ajoutés à votre commande par le serveur)'];
+          return;
+        }
+
+        netMap.set(item.itemId + '-' + item.itemPrice, item);
+      }
+
+      // Compare source array with map
+      const removed: CartItem[] = [];
+      const updated: Map<string, number> = new Map<string, number>();
+      for (const item of order) {
+        const key = item.itemId + '-' + item.itemPrice;
+        const networkItem = netMap.get(key);
+
+        if (!networkItem) {
+          removed.push({price: item.itemPrice, amount: item.itemAmount, baseItem: this.cart.setItemById(item.itemId, item.itemPrice, 0)});
+        } else if (networkItem.itemAmount !== item.itemAmount) {
+          updated.set(key, item.itemAmount); // store the old amount
+          this.cart.setItemById(item.itemId, item.itemPrice, networkItem.itemAmount);
+        }
+      }
+
+      return {checkoutLink: response.redirect, orderId: response['orderId'], updated: updated, removed: removed};
+    });
+
   }
 
   ngOnInit(): void {
@@ -59,50 +104,25 @@ export class CheckoutComponent implements OnInit {
         }
       }
 
-      const order = this.cart.getOrder();
-
-      this.backend.placeOrder(order, source).subscribe(response => {
-        // Build a map
-        const netMap: Map<string, CheckedOutItem> = new Map<string, CheckedOutItem>();
-        for (const item of response.ordered) {
-          if (!this.cart.hasCartItem(item.itemId, item.itemPrice)) {
-            this.checkoutErrors = ['Une erreur s\'est produite (des éléments ont été ajoutés à votre commande par le serveur)'];
-            return;
+      this.placeOrder(source).subscribe(
+        result => {
+          // Store everything
+          if (result.updated.size > 0) {
+            this.checkoutUpdated = result.updated;
+          }
+          if (result.removed.length > 0) {
+            this.checkoutRemoved = result.removed;
           }
 
-          netMap.set(item.itemId + '-' + item.itemPrice, item);
-        }
-
-        // Compare source array with map
-        const removed: CartItem[] = [];
-        const updated: Map<string, number> = new Map<string, number>();
-        for (const item of order) {
-          const key = item.itemId + '-' + item.itemPrice;
-          const networkItem = netMap.get(key);
-
-          if (!networkItem) {
-            removed.push({price: item.itemPrice, amount: item.itemAmount, baseItem: this.cart.setItemById(item.itemId, item.itemPrice, 0)});
-          } else if (networkItem.itemAmount !== item.itemAmount) {
-            updated.set(key, item.itemAmount); // store the old amount
-            this.cart.setItemById(item.itemId, item.itemPrice, networkItem.itemAmount);
-          }
-        }
-
-        // Store everything
-        if (updated.size > 0) {
-          this.checkoutUpdated = updated;
-        }
-        if (removed.length > 0) {
-          this.checkoutRemoved = removed;
-        }
-        this.checkoutLink = response.redirect;
-        this.done = true;
-        this.orderId = response['orderId'];
-        this.source = source;
-      }, error => {
-        this.checkoutErrors = this.parseErrors(error.error.errors);
-      });
+          this.checkoutLink = result.checkoutLink;
+          this.done = true;
+          this.orderId = result.orderId;
+          this.source = source;
+        }, error => {
+          this.checkoutErrors = this.parseErrors(error.error.errors);
+        });
     }
+
   }
 
   sendTo(email: HTMLInputElement) {
@@ -115,6 +135,54 @@ export class CheckoutComponent implements OnInit {
     this.handle(this.backend.confirmOrder(this.orderId));
   }
 
+  sendToMultiple(emails: HTMLTextAreaElement) {
+    const mails = emails.value.split('\n');
+    const toDo = mails.length;
+
+    this.multiSendStart = true;
+
+    this.validateOrder(this.orderId, mails, toDo);
+  }
+
+  private validateOrder(orderId: number, remainingItems: string[], todoTotal: number) {
+    const email = remainingItems.pop();
+    this.backend.confirmOrder(orderId, email).subscribe(
+      result => {
+        this.multiSendLog = 'Order #' + orderId + ' sent to ' + email + '. Success: ' + result.success + '. Errors: ' +
+          this.parseErrors(result.errors).join('; ') + '\n' + this.multiSendLog;
+
+        // Update progress
+        this.multiSendProgress = (todoTotal - remainingItems.length) / todoTotal;
+        this.createOrder(remainingItems, todoTotal);
+      }, error => {
+        this.multiSendLog = 'Order #' + orderId + ' sent to ' + email + '. Errors encountered.' +
+          this.parseErrors(error.error.errors).join('; ') + '\n' + this.multiSendLog;
+        this.multiSendProgress = (todoTotal - remainingItems.length) / todoTotal;
+        this.createOrder(remainingItems, todoTotal);
+      }
+    );
+  }
+
+  private createOrder(remainingItems: string[], todoTotal: number) {
+    if (remainingItems.length === 0) {
+      this.multiSendLog = 'Finished! \n' + this.multiSendLog;
+      return;
+    }
+
+    this.placeOrder(Source.Gift).subscribe(
+      result => {
+        // Store everything
+        const orderId = result.orderId;
+        this.multiSendLog = 'Order #' + orderId + ' created.' + '\n' + this.multiSendLog;
+
+        this.validateOrder(orderId, remainingItems, todoTotal);
+      }, error => {
+        this.checkoutErrors = this.parseErrors(error.error.errors);
+
+        this.multiSendLog = 'Order creation failed. Cancel.' + this.parseErrors(error.error.errors).join('; ') + '\n' + this.multiSendLog;
+      });
+  }
+
   private handle(adminReq: Observable<ApiResult>) {
     adminReq.subscribe(
       result => {
@@ -124,7 +192,7 @@ export class CheckoutComponent implements OnInit {
           this.adminSendErrors = this.parseErrors(result.errors);
         }
       }, err => this.parseErrors(err.error.errors)
-    )
+    );
   }
 
   private parseErrors(errors: ApiError[]) {
