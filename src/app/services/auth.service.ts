@@ -4,28 +4,44 @@ import {ApiResult} from '../types/api_result';
 import {BackendService} from './backend.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Observable} from 'rxjs/Rx';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private backend: BackendService, private jwtHelper: JwtHelperService) {}
+  constructor(private backend: BackendService, private jwtHelper: JwtHelperService, private route: Router) {}
 
-  login(user: string, password: string): Observable<LoginResponse> {
+  login(token: string) {
+    localStorage.setItem('id_token', token);
+    let act = this.loadNextAction();
 
+    if (!act) {
+      act = '/';
+    }
 
-    return this.backend
-      .login(user, password)
-      .lift<LoginResponse>((resp: LoginResponse) => {
-        if (resp.token != null) {
-          resp.token = resp.token.replace('Bearer ', ''); // remove the prefix in the token
-        }
+    this.route.navigate([act]);
+  }
 
-        if (resp.success) {
-          localStorage.setItem('id_token', resp.token);
-        }
+  requiresLogin(redirectTo: string): boolean {
+    if (this.isAuthenticated()) {
+      return true;
+    } else {
+      this.storeNextAction(redirectTo);
+      this.route.navigate(['login']);
 
-        return resp;
-      });
+      return false;
+    }
+  }
+
+  private storeNextAction(action: string) {
+    localStorage.setItem('_post_login_action', action);
+  }
+
+  private loadNextAction(): string {
+    const act = localStorage.getItem('_post_login_action');
+    localStorage.removeItem('_post_login_action');
+
+    return act;
   }
 
   public logout(): void {
@@ -67,6 +83,8 @@ export class AuthService {
     if (token === null) {
       return false;
     }
+
+    console.log('hey, token ' + token + ', expired=' + this.jwtHelper.isTokenExpired(token));
 
     try {
       return !this.jwtHelper.isTokenExpired(token);

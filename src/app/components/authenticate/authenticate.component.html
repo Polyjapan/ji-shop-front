@@ -54,13 +54,44 @@
           Ces informations ne seront pas transmises à des tiers ou utilisées à des fins publicitaires.</p>
 
 
-        <button type="submit" class="btn btn-primary" [disabled]="!register.valid">Inscription</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!register.valid || registerSent">Inscription
+          <i class="fas fa-spinner" *ngIf="registerSent"></i>
+        </button>
       </form>
     </div>
 
     <div class="col-md-6 border-left text-right">
       <h2>Déjà client</h2>
       <p class="text-muted">Indiquez simplement votre email et votre mot de passe pour poursuivre.</p>
+
+      <br>
+
+      <div class="alert alert-danger" role="alert" *ngIf="loginErrors && loginErrors.length > 0">
+        <p>Impossible de vous connecter !</p>
+        <ul>
+          <!-- TODO: handle errors correctly -->
+          <ng-container *ngFor="let group of loginErrors">
+            <li *ngFor="let err of group.messages">{{err}}</li>
+          </ng-container>
+        </ul>
+      </div>
+
+      <form #login="ngForm" class="form" (ngSubmit)="onLogin(login)" action="#">
+        <div class="form-group">
+          <label for="inputLoginEmail">Email</label>
+          <input type="email" name="email" class="form-control" id="inputLoginEmail" placeholder="Email" required ngModel>
+        </div>
+        <div class="form-group">
+          <label for="inputLoginPassword">Mot de passe</label>
+          <input type="password" name="password" class="form-control" id="inputLoginPassword" placeholder="Mot de passe" required ngModel>
+        </div>
+
+        <hr>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!login.valid || loginSent">Connexion
+          <i class="fas fa-spinner" *ngIf="loginSent"></i>
+        </button>
+      </form>
     </div>
   </div>
 

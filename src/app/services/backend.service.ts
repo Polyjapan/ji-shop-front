@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
 import {environment} from '../../environments/environment';
 import {ItemsResponse} from '../types/items';
 import {CheckedOutItem, FullOrder, Order, Source} from '../types/order';
 import {LoginResponse} from './auth.service';
 import {ApiResult} from '../types/api_result';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 
@@ -53,14 +54,9 @@ export class BackendService {
     return this.http.get<FullOrder>(this._ordersUrl + '/view/' + id);
   }
 
-  login(user: string, password: string): Observable<LoginResponse> {
+  login(data: string): Observable<LoginResponse> {
     return this.http
-      .post<LoginResponse>(this._authUrl + '/login', {'email': user, 'password': password}, { observe: 'response' })
-      .lift(result => {
-        const resp = result.body;
-        resp.token = result.headers.get('Authorization');
-        return resp;
-      });
+      .post<LoginResponse>(this._authUrl + '/login', data);
   }
 
   register(data: string): Observable<ApiResult> {
