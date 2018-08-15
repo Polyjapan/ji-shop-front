@@ -1,0 +1,50 @@
+<div *ngIf="loading">
+  <h1>Veuillez patienter...</h1>
+  <p>Merci de patienter quelques instants, nous recherchons votre commande.</p>
+</div>
+
+<div *ngIf="errors && errors.length > 0" class="alert alert-danger">
+  <h2>Une erreur s'est produite</h2>
+  <ul>
+    <li *ngFor="let error of errors">
+      {{error}}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="order">
+  <h1>Commande #{{order.order.id}}</h1>
+  <p>Passée le {{date}}</p>
+  <hr>
+  <h3>Récapitulatif de la commande</h3>
+  <table class="table table-bordered">
+    <tr>
+      <th width="40%">Article</th>
+      <th>Prix unit.</th>
+      <th>Quantité</th>
+      <th>Prix total</th>
+      <th width="25%">Billets</th>
+    </tr>
+    <tr *ngFor="let item of order.products">
+      <td>{{item.product.name}}</td>
+      <td>{{item.paidPrice}}</td>
+      <td>{{item.amount}}</td>
+      <td>{{item.amount * item.paidPrice}}.&ndash;</td>
+      <td *ngIf="item.product.isTicket">
+        <ul class="list-unstyled">
+          <li *ngFor="let code of item.codes">
+            <button class="btn btn-outline-secondary btn-sm mb-1 text-monospace" style="width: 100%;" (click)="downloadTicket(code)">
+              <i class="fas fa-file-download"></i> {{code}}</button></li>
+        </ul>
+      </td>
+      <td *ngIf="!item.product.isTicket"><button (click)="downloadTicket(order.orderCode)" style="width: 100%;" class="btn btn-outline-secondary btn-sm">
+        <i class="fas fa-file-download"></i> Billet Goodies : <span class="text-monospace">{{order.orderCode}}</span></button> </td>
+    </tr>
+
+
+    <tr>
+      <td colspan="3"><b>Total</b></td>
+      <td colspan="2">{{totalAmount}}.&ndash;</td>
+    </tr>
+  </table>
+</div>

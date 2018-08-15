@@ -3,7 +3,7 @@
   <p>Merci de patienter quelques instants, nous vérifions votre commande.</p>
 </div>
 
-<div *ngIf="checkoutErrors" class="alert alert-error">
+<div *ngIf="checkoutErrors" class="alert alert-danger">
   <h2>Impossible de passer la commande</h2>
   <ul>
     <li *ngFor="let err of checkoutErrors">{{err}}</li>

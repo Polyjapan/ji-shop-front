@@ -14,6 +14,8 @@ import {JwtModule} from '@auth0/angular-jwt';
 import {environment} from '../environments/environment';
 import {CallbackComponent} from './components/checkout/callback.component';
 import {EmailcheckComponent} from './components/authenticate/emailcheck.component';
+import {MyOrdersComponent} from './components/members/my-orders.component';
+import {ViewOrderComponent} from './components/members/view-order.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import {EmailcheckComponent} from './components/authenticate/emailcheck.componen
     CheckoutComponent,
     CallbackComponent,
     EmailcheckComponent,
+    MyOrdersComponent,
+    ViewOrderComponent,
 
     AuthenticateComponent
   ],
