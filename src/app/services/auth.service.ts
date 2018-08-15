@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private backend: BackendService, private jwtHelper: JwtHelperService, private route: Router) {}
 
-  login(token: string) {
+  login(token: string, activeRedirect: boolean = true): string {
     localStorage.setItem('id_token', token);
     let act = this.loadNextAction();
 
@@ -19,7 +19,10 @@ export class AuthService {
       act = '/';
     }
 
-    this.route.navigate([act]);
+    if (activeRedirect) {
+      this.route.navigate([act]);
+    }
+    return act;
   }
 
   requiresLogin(redirectTo: string): boolean {

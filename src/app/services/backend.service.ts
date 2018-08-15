@@ -64,7 +64,7 @@ export class BackendService {
       .post<ApiResult>(this._authUrl + '/signup', data);
   }
 
-  emailConfirm(user: string, code: string): Observable<ApiResult> {
+  emailConfirm(user: string, code: string): Observable<LoginResponse> {
     return this.http
       .post<ApiResult>(this._authUrl + '/emailConfirm', {'email': user, 'code': code});
   }

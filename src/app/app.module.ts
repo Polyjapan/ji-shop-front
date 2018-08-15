@@ -13,12 +13,14 @@ import {CheckoutComponent} from './components/checkout/checkout.component';
 import {JwtModule} from '@auth0/angular-jwt';
 import {environment} from '../environments/environment';
 import {CallbackComponent} from './components/checkout/callback.component';
+import {EmailcheckComponent} from './components/authenticate/emailcheck.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CheckoutComponent,
     CallbackComponent,
+    EmailcheckComponent,
 
     AuthenticateComponent
   ],

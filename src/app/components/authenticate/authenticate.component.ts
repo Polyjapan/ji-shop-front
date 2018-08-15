@@ -25,7 +25,7 @@ export class AuthenticateComponent implements OnInit {
   onRegister(form: NgForm) {
     console.log(form.value);
     this.registerErrors = null;
-    this.loginSent = true;
+    this.registerSent = true;
 
 
     this.backend.register(form.value).subscribe(
