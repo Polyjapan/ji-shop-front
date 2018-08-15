@@ -1,4 +1,4 @@
-<div *ngIf="!checkoutErrors && !checkoutLink">
+<div *ngIf="!checkoutErrors && !done">
   <h1>Veuillez patienter...</h1>
   <p>Merci de patienter quelques instants, nous vérifions votre commande.</p>
 </div>
@@ -10,9 +10,10 @@
   </ul>
 </div>
 
-<div *ngIf="checkoutLink">
+<div *ngIf="done">
   <h1>Récapitulatif de commande</h1>
   <p>Vérifiez que votre commande est correcte.</p>
+  <p *ngIf="isGift">Cette commande sera générée comme <b>un cadeau</b>.</p>
 
   <div *ngIf="checkoutRemoved" class="alert alert-warning">
     <h2>Attention !</h2>
@@ -52,5 +53,30 @@
   <p>Rappel important : si votre commande contient des goodies, <strong>assurez vous de disposer d'un billet pour entrer
   dans la manifestation, ou vous ne pourrez pas les récupérer.</strong></p>
   <p>Si vous confirmez que la commande est correcte, vous pouvez passer au paiement ici :</p>
-  <a class="btn btn-success" href="{{checkoutLink}}"><i class="far fa-credit-card"></i> Paiement sécurisé <i class="fas fa-lock"></i></a>
+  <a class="btn btn-success" href="{{checkoutLink}}" *ngIf="checkoutLink"><i class="far fa-credit-card"></i> Paiement sécurisé <i class="fas fa-lock"></i></a>
+
+  <form *ngIf="isGift">
+    <div class="form-group">
+      <label for="inputEmail">Envoyer les billets à</label>
+      <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" #email>
+    </div>
+
+    <p><button (click)="sendTo(email)" class="btn btn-success">Envoyer</button> ou
+      <button (click)="sendToMe()" class="btn btn-primary">Envoyer les billets pour moi</button></p>
+  </form>
+</div>
+
+<div *ngIf="adminSent">
+  <h1>Commande confirmée !</h1>
+  <p>La commande a bien été envoyée et validée :)</p>
+</div>
+
+<div *ngIf="adminSendErrors && adminSendErrors.length > 0" class="alert alert-danger">
+  <h2>Oups, impossible de terminer la commande</h2>
+  <p>Voici le(s) code(s) d'erreur(s) rencontré(s) :</p>
+  <ul>
+    <li *ngFor="let err of adminSendErrors">
+      {{err}}
+    </li>
+  </ul>
 </div>

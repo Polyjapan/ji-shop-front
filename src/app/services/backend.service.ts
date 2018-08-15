@@ -29,6 +29,7 @@ export class BackendService {
   private _shopUrl = this._baseApiUrl + '/shop';
   private _ordersUrl = this._baseApiUrl + '/orders';
   private _authUrl = this._baseApiUrl + '/users';
+  private _adminUrl = this._baseApiUrl + '/admin';
 
   constructor(private http: HttpClient) {
   }
@@ -87,6 +88,12 @@ export class BackendService {
   placeOrder(items: CheckedOutItem[], source?: Source): Observable<CheckOutResponse> {
     return this.http
       .post<CheckOutResponse>(this._ordersUrl + '/create', {'items': items, 'orderType': source});
+  }
+
+  confirmOrder(orderId: number, targetEmail?: string): Observable<ApiResult> {
+
+    return this.http
+      .post<CheckOutResponse>(this._adminUrl + '/orders/validate', {'orderId': orderId, 'targetEmail': targetEmail});
   }
 }
 

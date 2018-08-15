@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Item} from '../types/items';
 import {CheckedOutItem} from '../types/order';
+import {isNullOrUndefined, isUndefined} from 'util';
 
 @Injectable()
 export class CartService {
@@ -21,6 +22,15 @@ export class CartService {
 
   constructor() {
     this.load();
+  }
+
+  zeroPrices() {
+    const items = this.items;
+    this.items = [];
+
+    for (const item of items) {
+      this.addItem(item.baseItem, item.amount, 0);
+    }
   }
 
   getOrder(): CheckedOutItem[] {
@@ -97,11 +107,11 @@ export class CartService {
   }
 
   addItem(item: Item, amount?: number, price?: number) {
-    if (!amount) {
+    if (isNullOrUndefined(amount)) {
       amount = 1;
     }
 
-    if (!price || !item.freePrice) {
+    if (isNullOrUndefined(price)) {
       price = item.price;
     }
 

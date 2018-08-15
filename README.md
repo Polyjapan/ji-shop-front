@@ -17,8 +17,8 @@
   -  [ ] Deep clone events
   -  [ ] Create and update products within events
   -  [ ] Update the default template
-  -  [ ] Create free tickets of any kind of item
-  -  [ ] Sell tickets with printed money
+  -  [x] Create free tickets of any kind of item
+  -  [ ] Sell tickets with banknotes/physical money
 - [ ] (Admin) Read data
   -  [ ] Export all tickets for a given edition to different lists
   -  [ ] Display stats 

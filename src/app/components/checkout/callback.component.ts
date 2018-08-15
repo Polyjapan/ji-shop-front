@@ -1,13 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth.service';
-import {BackendService} from '../../services/backend.service';
-import {NgForm} from '@angular/forms';
-import {ApiError} from '../../types/api_result';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CartItem, CartService} from '../../services/cart.service';
-import {CheckedOutItem, Source} from '../../types/order';
-import {Item} from '../../types/items';
-import {environment} from '../../../environments/environment';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {CartService} from '../../services/cart.service';
 
 @Component({
   selector: 'app-callback',

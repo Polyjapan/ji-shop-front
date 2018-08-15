@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {BackendService} from '../../services/backend.service';
-import {NgForm} from '@angular/forms';
-import {ApiError} from '../../types/api_result';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ApiError, ApiResult} from '../../types/api_result';
+import {ActivatedRoute} from '@angular/router';
 import {CartItem, CartService} from '../../services/cart.service';
 import {CheckedOutItem, Source} from '../../types/order';
-import {Item} from '../../types/items';
-import {environment} from '../../../environments/environment';
+import {Permissions} from '../../constants/permissions';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-checkout',
@@ -18,6 +17,13 @@ export class CheckoutComponent implements OnInit {
   checkoutRemoved: CartItem[] = null;
   checkoutUpdated: Map<string, number> = null;
   checkoutLink: string = null;
+  done = false;
+  orderId: number = null;
+  source: Source = Source.Web;
+
+  // Admin sent
+  adminSent = false;
+  adminSendErrors: string[];
 
   constructor(private backend: BackendService, private auth: AuthService, private route: ActivatedRoute, public cart: CartService) {
 
@@ -31,11 +37,14 @@ export class CheckoutComponent implements OnInit {
     return this.checkoutUpdated.get(item.baseItem.id + '-' + item.price);
   }
 
+  get isGift(): boolean {
+    return this.source === Source.Gift;
+  }
+
   ngOnInit(): void {
     if (this.auth.requiresLogin('/checkout')) {
       // We are logged in
       // We send the request
-      const order = this.cart.getOrder();
 
       let source = Source.Web;
       const params = this.route.snapshot.paramMap;
@@ -43,9 +52,14 @@ export class CheckoutComponent implements OnInit {
       if (params.has('ordertype')) {
         const type = params.get('ordertype');
         if (type === 'gift') {
-          source = Source.Gift; // the server will check the perm
+          if (this.auth.hasPermission(Permissions.GIVE_FOR_FREE)) {
+            source = Source.Gift; // the server will check the perm
+            this.cart.zeroPrices();
+          }
         }
       }
+
+      const order = this.cart.getOrder();
 
       this.backend.placeOrder(order, source).subscribe(response => {
         // Build a map
@@ -82,16 +96,46 @@ export class CheckoutComponent implements OnInit {
           this.checkoutRemoved = removed;
         }
         this.checkoutLink = response.redirect;
-
+        this.done = true;
+        this.orderId = response['orderId'];
+        this.source = source;
       }, error => {
-        this.checkoutErrors = [];
-        for (const err of error.error.errors) {
-          const apiErr = err as ApiError;
-          for (const msg of apiErr.messages) {
-            this.checkoutErrors.push(msg);
-          }
-        }
+        this.checkoutErrors = this.parseErrors(error.error.errors);
       });
     }
+  }
+
+  sendTo(email: HTMLInputElement) {
+    this.done = false;
+    this.handle(this.backend.confirmOrder(this.orderId, email.value));
+  }
+
+  sendToMe() {
+    this.done = false;
+    this.handle(this.backend.confirmOrder(this.orderId));
+  }
+
+  private handle(adminReq: Observable<ApiResult>) {
+    adminReq.subscribe(
+      result => {
+        if (result.success) {
+          this.adminSent = true;
+        } else {
+          this.adminSendErrors = this.parseErrors(result.errors);
+        }
+      }, err => this.parseErrors(err.error.errors)
+    )
+  }
+
+  private parseErrors(errors: ApiError[]) {
+    const ret = [];
+    for (const err of errors) {
+      const apiErr = err as ApiError;
+      for (const msg of apiErr.messages) {
+        ret.push(msg);
+      }
+    }
+
+    return ret;
   }
 }
