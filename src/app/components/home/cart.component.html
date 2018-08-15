@@ -6,7 +6,7 @@
   <hr>
   <p>Prix total : <b>{{cart.total}}.&ndash;</b></p>
 
-  <a class="btn btn-primary" href="#" role="button">Passer commande</a>
+  <a href="checkout" class="btn btn-primary">Passer commande</a> <!-- Why routerLink doesnt work? -->
 </ng-container>
 
 <p *ngIf="cart.items.length === 0">Vous n'avez rien mis dans votre panier pour le moment.</p>

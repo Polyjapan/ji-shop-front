@@ -22,7 +22,7 @@ export class FullOrder {
 }
 
 export enum Source {
-  Web, OnSite, Reseller, Gift
+  Web = 'WEB', OnSite = 'ONSITE', Reseller = 'RESELLER', Gift = 'GIFT'
 }
 
 

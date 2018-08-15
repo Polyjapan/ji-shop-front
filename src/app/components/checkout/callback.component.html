@@ -1,0 +1,12 @@
+<div *ngIf="accepted">
+  <h1>Merci pour vos achats !</h1>
+  <p>Votre commande a bien été acceptée. Vos billets vous seront envoyés par email dès que nous aurons reçu votre
+  paiement. Vous pourrez également les retrouver dans votre espace client. <!-- TODO insert link -->
+    <br>A bientôt sur le festival !</p>
+</div>
+
+<div *ngIf="!accepted">
+  <h1>Une erreur s'est produite</h1>
+  <p>On dirait que votre paiement a été refusé par PostFinance... Merci de bien vouloir réessayer plus tard. <br>
+  <a routerLink="/">Retour à l'accueil</a></p>
+</div>

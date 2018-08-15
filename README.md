@@ -1,9 +1,14 @@
 ## Todo (frontend)
 
 - [ ] Register / login
+  - [x] Register
+    - [ ] Show errors
+    - [ ] Confirm emails
+  - [x] Login
+    - [ ] Show errors
 - [ ] Actual shop
-  -  [ ] List products for the active edition or show an error page
-  -  [ ] Select products and purchase them
+  -  [x] List products for the active edition or show an error page
+  -  [x] Select products and purchase them
   -  [ ] Go to the payment page and pay
   -  [ ] Display bought tickets on the user page
 - [ ] (Admin) Manage the shop

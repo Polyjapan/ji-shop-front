@@ -1,0 +1,56 @@
+<div *ngIf="!checkoutErrors && !checkoutLink">
+  <h1>Veuillez patienter...</h1>
+  <p>Merci de patienter quelques instants, nous vérifions votre commande.</p>
+</div>
+
+<div *ngIf="checkoutErrors" class="alert alert-error">
+  <h2>Impossible de passer la commande</h2>
+  <ul>
+    <li *ngFor="let err of checkoutErrors">{{err}}</li>
+  </ul>
+</div>
+
+<div *ngIf="checkoutLink">
+  <h1>Récapitulatif de commande</h1>
+  <p>Vérifiez que votre commande est correcte.</p>
+
+  <div *ngIf="checkoutRemoved" class="alert alert-warning">
+    <h2>Attention !</h2>
+    <p>Les éléments suivants se trouvaient dans votre panier et ont été supprimés.</p>
+    <table>
+      <tr *ngFor="let item of checkoutRemoved">
+        <td>{{item.amount}} * {{item.baseItem.name}} ({{item.price}}.&ndash;)</td>
+        <td width="10%"><b>{{item.amount * item.price}}.&ndash;</b></td>
+      </tr>
+    </table>
+  </div>
+
+  <table class="table table-bordered">
+    <tr>
+      <th>Article</th>
+      <th>Prix unitaire</th>
+      <th>Quantité</th>
+      <th>Prix total</th>
+      <th *ngIf="checkoutUpdated">Particularités</th>
+    </tr>
+    <tr *ngFor="let item of cart.items">
+      <td>{{item.baseItem.name}}</td>
+      <td>{{item.price}}</td>
+      <td *ngIf="wasUpdated(item)">{{item.amount}} <s>{{previousAmount(item)}}</s></td>
+      <td *ngIf="!wasUpdated(item)">{{item.amount}}</td>
+      <td>{{item.amount * item.price}}.&ndash;</td>
+      <td *ngIf="checkoutUpdated && wasUpdated(item)">Quantité modifiée !</td>
+    </tr>
+
+    <tr>
+      <td colspan="3"><b>Total</b></td>
+      <td>{{cart.total}}</td>
+    </tr>
+  </table>
+
+  <hr>
+  <p>Rappel important : si votre commande contient des goodies, <strong>assurez vous de disposer d'un billet pour entrer
+  dans la manifestation, ou vous ne pourrez pas les récupérer.</strong></p>
+  <p>Si vous confirmez que la commande est correcte, vous pouvez passer au paiement ici :</p>
+  <a class="btn btn-success" href="{{checkoutLink}}"><i class="far fa-credit-card"></i> Paiement sécurisé <i class="fas fa-lock"></i></a>
+</div>

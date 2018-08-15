@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Item} from '../types/items';
+import {CheckedOutItem} from '../types/order';
 
 @Injectable()
 export class CartService {
@@ -22,6 +23,12 @@ export class CartService {
     this.load();
   }
 
+  getOrder(): CheckedOutItem[] {
+    return this.items.map((value: CartItem) => {
+      return {itemId: value.baseItem.id, itemPrice: value.price, itemAmount: value.amount};
+    });
+  }
+
   removeItem(item: Item, amountToRemove?: number, price?: number) {
     if (!amountToRemove) {
       amountToRemove = 1;
@@ -40,26 +47,17 @@ export class CartService {
     return amount;
   }
 
-  addItem(item: Item, amount?: number, price?: number) {
-    if (!amount) {
-      amount = 1;
-    }
+  hasCartItem(id: number, price: number) {
+    return this.findCartItem(id, price).index !== -1;
+  }
 
-    if (!price || !item.freePrice) {
-      price = item.price;
-    }
-
-    let cart = new CartItem();
-    cart.baseItem = item;
-    cart.amount = 0;
-    cart.price = price;
-
+  private findCartItem(itemId: number, itemPrice: number, def?: CartItem) {
+    let cart: CartItem = def;
     let index = -1;
-
     // Search for the same item, if it exists
     for (const cartItem of this.items) {
-      if (cartItem.baseItem.id === item.id) {
-        if (cartItem.price === price) {
+      if (cartItem.baseItem.id === itemId) {
+        if (cartItem.price === itemPrice) {
           cart = cartItem;
           index = this.items.indexOf(cartItem);
 
@@ -68,9 +66,10 @@ export class CartService {
       }
     }
 
-    // Add the amount
-    cart.amount += amount;
+    return {cart: cart, index: index};
+  }
 
+  private updateCart(cart: CartItem, index: number) {
     if (cart.amount > 0) {
       if (index < 0) {
         this.items.push(cart);
@@ -85,6 +84,42 @@ export class CartService {
     this.save();
   }
 
+  setItemById(itemId: number, itemPrice: number, amount: number): Item {
+    const result = this.findCartItem(itemId, itemPrice);
+    const cart = result.cart;
+    const index = result.index;
+
+    // Add the amount
+    cart.amount = amount;
+    this.updateCart(cart, index);
+
+    return cart.baseItem;
+  }
+
+  addItem(item: Item, amount?: number, price?: number) {
+    if (!amount) {
+      amount = 1;
+    }
+
+    if (!price || !item.freePrice) {
+      price = item.price;
+    }
+
+    let cart = new CartItem();
+    cart.baseItem = item;
+    cart.amount = 0;
+    cart.price = price;
+
+    const result = this.findCartItem(item.id, price, cart);
+    cart = result.cart;
+    const index = result.index;
+
+    // Add the amount
+    cart.amount += amount;
+
+    this.updateCart(cart, index);
+  }
+
   private refreshTotal() {
     let total = 0;
     for (const it of this.items) {
@@ -92,6 +127,12 @@ export class CartService {
     }
 
     this.total = total;
+  }
+
+  clear() {
+    this.items = [];
+    this.save();
+    this.refreshTotal();
   }
 }
 

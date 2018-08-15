@@ -3,10 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import {PageNotFoundComponent} from './page-not-found.component';
 import {HomeComponent} from './components/home/home.component';
 import {AuthenticateComponent} from './components/authenticate/authenticate.component';
+import {CheckoutComponent} from './components/checkout/checkout.component';
+import {CallbackComponent} from './components/checkout/callback.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: AuthenticateComponent },
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'callback/:accepted', component: CallbackComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

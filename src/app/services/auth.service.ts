@@ -84,8 +84,6 @@ export class AuthService {
       return false;
     }
 
-    console.log('hey, token ' + token + ', expired=' + this.jwtHelper.isTokenExpired(token));
-
     try {
       return !this.jwtHelper.isTokenExpired(token);
     } catch (e) {
