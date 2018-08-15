@@ -13,7 +13,7 @@ export class CartItemDisplayComponent {
   removeItem() {
     this.cart.removeItem(this.item.baseItem, 1, this.item.price);
 
-    console.log(this.cart.items);
+    console.log('remove item ' + this.item.baseItem.id);
   }
 
 

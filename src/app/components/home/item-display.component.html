@@ -14,7 +14,7 @@
 
   <td width="5%">
   <div class="input-group">
-    <button (click)="addItem()" class="btn btn-success"><span class="fas fa-cart-plus"></span></button>
+    <button (click)="addItem()" [disabled]="!canAddMore" class="btn btn-success"><span class="fas fa-cart-plus"></span></button>
   </div>
 </td>
 </tr>

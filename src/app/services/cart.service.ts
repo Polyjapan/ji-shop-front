@@ -30,6 +30,16 @@ export class CartService {
     this.addItem(item, -amountToRemove, price);
   }
 
+  countItem(item: Item): number {
+    let amount = 0;
+    for (const it of this.items) {
+      if (item.id === it.baseItem.id) {
+        amount += it.amount;
+      }
+    }
+    return amount;
+  }
+
   addItem(item: Item, amount?: number, price?: number) {
     if (!amount) {
       amount = 1;
@@ -44,12 +54,15 @@ export class CartService {
     cart.amount = 0;
     cart.price = price;
 
+    let index = -1;
+
     // Search for the same item, if it exists
     for (const cartItem of this.items) {
-      if (cartItem.baseItem === item) {
+      if (cartItem.baseItem.id === item.id) {
         if (cartItem.price === price) {
           cart = cartItem;
-          this.items.splice(this.items.indexOf(cartItem));
+          index = this.items.indexOf(cartItem);
+
           break;
         }
       }
@@ -59,7 +72,13 @@ export class CartService {
     cart.amount += amount;
 
     if (cart.amount > 0) {
-      this.items.push(cart);
+      if (index < 0) {
+        this.items.push(cart);
+      } else {
+        this.items.splice(index, 1, cart);
+      }
+    } else if (index >= 0) {
+      this.items.splice(index, 1);
     }
 
     this.refreshTotal();

@@ -15,9 +15,25 @@ export class ItemDisplayComponent implements OnInit {
   constructor(private cart: CartService) {}
 
   addItem() {
-    this.cart.addItem(this.item, 1, this.price);
+    if (this.canAddMore) {
+      this.cart.addItem(this.item, 1, this.price);
+    }
+  }
 
-    console.log(this.cart.items);
+  get amountAdded(): number {
+    return this.cart.countItem(this.item);
+  }
+
+  get maxItems(): number {
+    if (this.item.maxItems < 0 || this.item.maxItems > 20) {
+      return 20;
+    } else {
+      return this.item.maxItems;
+    }
+  }
+
+  get canAddMore(): boolean {
+    return this.amountAdded < this.maxItems;
   }
 
   ngOnInit(): void {
