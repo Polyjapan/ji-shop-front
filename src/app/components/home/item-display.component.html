@@ -1,5 +1,5 @@
 <tr>
-  <td><strong>{{item.name}}</strong><br>{{item.description}}</td>
+  <td><strong [class]="item.isVisible ? '' : 'text-muted'">{{item.name}}</strong><br>{{item.description}}</td>
   <td width="17%" *ngIf="!item.freePrice">{{item.price}}.&ndash;</td>
   <td width="17%" *ngIf="item.freePrice">
     <div class="input-group">

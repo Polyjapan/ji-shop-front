@@ -57,19 +57,20 @@ export class AuthService {
     return this.jwtHelper.decodeToken(token);
   }
 
-  public hasPermission(perm: String): boolean {
+  public hasPermission(perm: string): boolean {
     const token = this.getToken();
-    if (token) {
-      const perms = token['perms'] as Set<String>;
+    if (token && token.user && token.user.permissions) {
+      const perms: string[] = token.user.permissions;
 
-      if (perms.has(perm)) {
+      if (perms && perms.indexOf(perm) !== -1) {
         return true;
       } else {
         const groups = perm.split('.').reverse();
         let currentGroup = '';
 
         while (groups.length > 0) {
-          if (perms.has(currentGroup + '*')) {
+          console.log(perms + ' ' + currentGroup);
+          if (perms && perms.indexOf(currentGroup + '*') !== -1) {
             return true;
           }
 

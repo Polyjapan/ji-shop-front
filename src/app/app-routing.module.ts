@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: AuthenticateComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'checkout/:ordertype', component: CheckoutComponent },
   { path: 'callback/:accepted', component: CallbackComponent },
   { path: 'emailConfirm/:email/:code', component: EmailcheckComponent },
   { path: 'orders', component: MyOrdersComponent },

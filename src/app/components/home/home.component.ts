@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {BackendService} from '../../services/backend.service';
 import {ItemList, ItemsResponse} from '../../types/items';
+import {Observable} from 'rxjs/Rx';
+import {Permissions} from '../../constants/permissions';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +13,20 @@ export class HomeComponent implements OnInit {
   goodies: ItemList[] = null;
   tickets: ItemList[] = null;
 
-  constructor(public backend: BackendService) {
+  constructor(public backend: BackendService, private auth: AuthService) {
   }
 
 
   ngOnInit(): void {
-    this.backend.getItems().subscribe(
+    let observable: Observable<ItemsResponse>;
+
+    if (this.auth.hasPermission(Permissions.SEE_INVISIBLE_ITEMS)) {
+      observable = this.backend.getAllItems();
+    } else {
+      observable = this.backend.getItems();
+    }
+
+    observable.subscribe(
       resp => {
           this.goodies = resp.goodies;
           this.tickets = resp.tickets;

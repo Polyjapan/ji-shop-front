@@ -3,7 +3,7 @@ import {AuthService} from '../../services/auth.service';
 import {BackendService} from '../../services/backend.service';
 import {NgForm} from '@angular/forms';
 import {ApiError} from '../../types/api_result';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CartItem, CartService} from '../../services/cart.service';
 import {CheckedOutItem, Source} from '../../types/order';
 import {Item} from '../../types/items';
@@ -19,7 +19,7 @@ export class CheckoutComponent implements OnInit {
   checkoutUpdated: Map<string, number> = null;
   checkoutLink: string = null;
 
-  constructor(private backend: BackendService, private auth: AuthService, private router: Router, public cart: CartService) {
+  constructor(private backend: BackendService, private auth: AuthService, private route: ActivatedRoute, public cart: CartService) {
 
   }
 
@@ -36,10 +36,18 @@ export class CheckoutComponent implements OnInit {
       // We are logged in
       // We send the request
       const order = this.cart.getOrder();
-      console.log("<.>.>.>.<.<.");
-      console.log(environment.apiurl);
 
-      this.backend.placeOrder(order, Source.Web).subscribe(response => {
+      let source = Source.Web;
+      const params = this.route.snapshot.paramMap;
+
+      if (params.has('ordertype')) {
+        const type = params.get('ordertype');
+        if (type === 'gift') {
+          source = Source.Gift; // the server will check the perm
+        }
+      }
+
+      this.backend.placeOrder(order, source).subscribe(response => {
         // Build a map
         const netMap: Map<string, CheckedOutItem> = new Map<string, CheckedOutItem>();
         for (const item of response.ordered) {

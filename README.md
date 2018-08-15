@@ -1,16 +1,17 @@
 ## Todo (frontend)
 
-- [ ] Register / login
+- [ ] Error system
+- [ ] Password change
+- [ ] Forgotten password
+- [x] Register / login
   - [x] Register
-    - [ ] Show errors
-    - [ ] Confirm emails
+    - [x] Confirm emails
   - [x] Login
-    - [ ] Show errors
-- [ ] Actual shop
+- [x] Actual shop
   -  [x] List products for the active edition or show an error page
   -  [x] Select products and purchase them
-  -  [ ] Go to the payment page and pay
-  -  [ ] Display bought tickets on the user page
+  -  [x] Go to the payment page and pay
+  -  [x] Display bought tickets on the user page
 - [ ] (Admin) Manage the shop
   -  [ ] Create and update events
   -  [ ] Deep clone events
