@@ -5,6 +5,8 @@ import {ItemList, ItemsResponse} from '../../types/items';
 import {NgForm} from '@angular/forms';
 import {ApiError} from '../../types/api_result';
 import {ActivatedRoute, Router} from '@angular/router';
+import * as Errors from '../../constants/errors';
+import {ErrorCodes} from '../../constants/errors';
 
 @Component({
   selector: 'app-emailcheck',
@@ -44,6 +46,14 @@ export class EmailcheckComponent implements OnInit {
         },
         error => {
           this.loading = false;
+          this.errors = Errors.replaceErrors(error.error.errors, new Map<string, string>([
+            [ErrorCodes.NOT_FOUND, '{key} n\'a pas été trouvé.'],
+          ]), new Map<string, string>([
+            ['email', 'Cet email'],
+            ['code', 'Ce code de confirmation'],
+          ]));
+
+
           for (const err of error.error.errors) {
             const apiErr = err as ApiError;
             for (const msg of apiErr.messages) {

@@ -9,6 +9,8 @@ import {CheckedOutItem, Order, Source} from '../../types/order';
 import {Item} from '../../types/items';
 import {environment} from '../../../environments/environment';
 import {DateFormatter} from '../../../../node_modules/@angular/common/src/pipes/deprecated/intl';
+import * as Errors from '../../constants/errors';
+import {ErrorCodes} from '../../constants/errors';
 
 @Component({
   selector: 'app-my-orders',
@@ -16,6 +18,7 @@ import {DateFormatter} from '../../../../node_modules/@angular/common/src/pipes/
 })
 export class MyOrdersComponent implements OnInit {
   orders: Order[];
+  errors: string[];
 
   constructor(public auth: AuthService, private backend: BackendService) {
   }
@@ -27,7 +30,7 @@ export class MyOrdersComponent implements OnInit {
           return b.createdAt - a.createdAt;
         });
       }, error => {
-
+        this.errors = Errors.replaceErrors(error.error.errors);
       });
     }
   }

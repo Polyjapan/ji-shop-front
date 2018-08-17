@@ -9,6 +9,8 @@ import {Permissions} from '../../constants/permissions';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs-compat/add/operator/map';
+import * as Errors from '../../constants/errors';
+import {ErrorCodes} from '../../constants/errors';
 
 @Component({
   selector: 'app-checkout',
@@ -32,10 +34,6 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private backend: BackendService, private auth: AuthService, private route: ActivatedRoute, public cart: CartService) {
 
-  }
-
-  get multiSendProgressText() {
-    return 'width: ' + (this.multiSendProgress * 100) + '%;';
   }
 
   wasUpdated(item: CartItem): boolean {
@@ -196,14 +194,10 @@ export class CheckoutComponent implements OnInit {
   }
 
   private parseErrors(errors: ApiError[]) {
-    const ret = [];
-    for (const err of errors) {
-      const apiErr = err as ApiError;
-      for (const msg of apiErr.messages) {
-        ret.push(msg);
-      }
-    }
-
-    return ret;
+    return Errors.replaceErrors(errors, new Map<string, string>([
+      [ErrorCodes.OUT_OF_STOCK, 'Certains produits de votre commande ne sont plus disponibles.'],
+      [ErrorCodes.MISSING_ITEM, 'Certains produits de votre commande n\'existent pas.'],
+      [ErrorCodes.NO_REQUESTED_ITEM, 'Votre commande est vide.'],
+    ]));
   }
 }

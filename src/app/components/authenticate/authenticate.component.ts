@@ -5,14 +5,16 @@ import {ItemList, ItemsResponse} from '../../types/items';
 import {NgForm} from '@angular/forms';
 import {ApiError} from '../../types/api_result';
 import {Router} from '@angular/router';
+import * as Errors from '../../constants/errors';
+import {ErrorCodes} from '../../constants/errors';
 
 @Component({
   selector: 'app-authenticate',
   templateUrl: './authenticate.component.html'
 })
 export class AuthenticateComponent implements OnInit {
-  registerErrors: ApiError[] = null;
-  loginErrors: ApiError[] = null;
+  registerErrors: string[] = null;
+  loginErrors: string[] = null;
   loginSent = false;
   registerSent = false;
 
@@ -34,7 +36,15 @@ export class AuthenticateComponent implements OnInit {
         this.registerSent = false;
         },
       err => {
-        this.registerErrors = err.error.errors;
+        this.registerErrors = Errors.replaceErrors(err.error.errors, new Map<string, string>([
+          [ErrorCodes.USER_EXISTS, 'Un utilisateur avec cette adresse email existe déjà.'],
+        ]), new Map<string, string>([
+          ['firstname', 'Prénom'],
+          ['lastname', 'Nom'],
+          ['email', 'Email'],
+          ['password', 'Mot de passe'],
+        ]));
+
         this.registerSent = false;
       }
     );
@@ -53,7 +63,14 @@ export class AuthenticateComponent implements OnInit {
         this.loginSent = false;
       },
       err => {
-        this.loginErrors = err.error.errors;
+        this.loginErrors = Errors.replaceErrors(err.error.errors, new Map<string, string>([
+          [ErrorCodes.NOT_FOUND, 'Cette combinaison email/mot de passe n\'existe pas.'],
+          [ErrorCodes.EMAIL_NOT_CONFIRMED, 'Vous devez confirmer votre adresse email pour continuer.'],
+        ]), new Map<string, string>([
+          ['email', 'Email'],
+          ['password', 'Mot de passe'],
+        ]));
+
         this.loginSent = false;
       }
     );

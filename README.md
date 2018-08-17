@@ -1,6 +1,6 @@
 ## Todo (frontend)
 
-- [ ] Error system
+- [x] Error system
 - [ ] Password change
 - [ ] Forgotten password
 - [x] Register / login

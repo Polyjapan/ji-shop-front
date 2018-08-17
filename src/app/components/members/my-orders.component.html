@@ -2,7 +2,15 @@
 
 <p>Voici l'historique des commandes que vous avez passées sur notre boutique.</p>
 
-<p class="text-muted" *ngIf="!orders">Veuillez patienter, chargement en cours...</p>
+<p class="text-muted" *ngIf="!orders && !errors">Veuillez patienter, chargement en cours...</p>
+
+<div *ngIf="errors" class="alert alert-danger">
+  <h2>Impossible de charger vos commandes</h2>
+  <ul>
+    <li *ngFor="let err of errors">{{err}}</li>
+  </ul>
+</div>
+
 
 <p class="text-muted" *ngIf="orders && orders.length === 0">Vous n'avez passé aucune commande sur le site.</p>
 

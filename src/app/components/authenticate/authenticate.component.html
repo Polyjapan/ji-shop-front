@@ -21,10 +21,7 @@
       <div class="alert alert-danger" role="alert" *ngIf="registerErrors && registerErrors.length > 0">
         <p>Impossible de vous inscrire !</p>
         <ul>
-          <!-- TODO: handle errors correctly -->
-          <ng-container *ngFor="let group of registerErrors">
-            <li *ngFor="let err of group.messages">{{err}}</li>
-          </ng-container>
+          <li *ngFor="let err of registerErrors">{{err}}</li>
         </ul>
       </div>
 
@@ -69,10 +66,9 @@
       <div class="alert alert-danger" role="alert" *ngIf="loginErrors && loginErrors.length > 0">
         <p>Impossible de vous connecter !</p>
         <ul>
-          <!-- TODO: handle errors correctly -->
-          <ng-container *ngFor="let group of loginErrors">
-            <li *ngFor="let err of group.messages">{{err}}</li>
-          </ng-container>
+          <ul>
+            <li *ngFor="let err of loginErrors">{{err}}</li>
+          </ul>
         </ul>
       </div>
 

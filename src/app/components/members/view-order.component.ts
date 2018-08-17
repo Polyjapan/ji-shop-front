@@ -1,15 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {BackendService} from '../../services/backend.service';
-import {NgForm} from '@angular/forms';
-import {ApiError} from '../../types/api_result';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CartItem, CartService} from '../../services/cart.service';
-import {CheckedOutItem, FullOrder, Order, Source} from '../../types/order';
-import {Item} from '../../types/items';
-import {environment} from '../../../environments/environment';
+import {ActivatedRoute} from '@angular/router';
+import {FullOrder} from '../../types/order';
 import * as FileSaver from 'file-saver';
-
+import * as Errors from '../../constants/errors';
+import {ErrorCodes} from '../../constants/errors';
 
 
 @Component({
@@ -37,7 +33,7 @@ export class ViewOrderComponent implements OnInit {
           this.order = order;
         }
       }, errors => {
-
+        this.errors = Errors.replaceErrors(errors.error.errors, new Map<string, string>([[ErrorCodes.NOT_FOUND, 'Cette commande n\'existe pas.']]));
       });
     }
   }
@@ -65,7 +61,10 @@ export class ViewOrderComponent implements OnInit {
         FileSaver.saveAs(blob, 'ticket-' + barcode + '.pdf');
       }
     }, error => {
+      const errors = Errors.replaceErrors(error.error.errors, new Map<string, string>(
+        [[ErrorCodes.NOT_FOUND, 'Ce billet n\'existe pas ou ne peut pas être consulté par vous.']]));
 
+      alert('Impossible de télécharger le billet : \n' + errors.join('\n'));
     });
   }
 }

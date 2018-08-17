@@ -6,24 +6,11 @@ import {ItemsResponse} from '../types/items';
 import {CheckedOutItem, FullOrder, Order, Source} from '../types/order';
 import {LoginResponse} from './auth.service';
 import {ApiResult} from '../types/api_result';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 
 @Injectable()
-/**
- * Provides mapping to the magic keeper forms
- */
-
-
-/*
-
-POST        /orders/create                  controllers.orders.CheckoutController.checkout
-
- */
-
-// https://angular.io/guide/http#error-handling
-// Todo: switch everything to Observables
 export class BackendService {
   private _baseApiUrl = environment.apiurl;
   private _shopUrl = this._baseApiUrl + '/shop';
@@ -39,7 +26,6 @@ export class BackendService {
   }
 
   getAllItems(): Observable<ItemsResponse> {
-    // TODO: handle errors
     return this.http.get<ItemsResponse>(this._shopUrl + '/items/all');
   }
 
