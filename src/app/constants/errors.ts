@@ -18,6 +18,8 @@ export function replaceErrors(errors: ApiError[], codeMap?: Map<string, string>,
       ret.push(setFieldName(getMessage(msg, codeMap), fieldName));
     }
   }
+
+  return ret;
 }
 
 function setFieldName(translatedMessage: string, fieldName: string) {
@@ -36,6 +38,7 @@ export enum ErrorCodes {
   AUTH_MISSING = 'error.no_auth_token',
   PERMS_MISSING = 'error.no_permissions',
   NOT_FOUND = 'error.not_found',
+  CAPTCHA = 'error.captcha',
 
   /*
   Specific errors
@@ -100,6 +103,7 @@ const basicCodes = new Map<string, string>([
   ['error.email', 'Le format de l\'email est incorrect.'],
   ['error.minLength', 'Trop court !'],
   ['error.maxLength', 'Trop long !'],
+  [ ErrorCodes.CAPTCHA, 'Le captcha est incorrect.' ],
 ]);
 
 

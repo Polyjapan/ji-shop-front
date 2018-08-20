@@ -8,6 +8,8 @@ import {CallbackComponent} from './components/checkout/callback.component';
 import {EmailcheckComponent} from './components/authenticate/emailcheck.component';
 import {MyOrdersComponent} from './components/members/my-orders.component';
 import {ViewOrderComponent} from './components/members/view-order.component';
+import {ForgottenPasswordComponent} from './components/authenticate/forgotten-password.component';
+import {RecoverPasswordComponent} from './components/authenticate/recover-password.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'checkout/:ordertype', component: CheckoutComponent },
   { path: 'callback/:accepted', component: CallbackComponent },
   { path: 'emailConfirm/:email/:code', component: EmailcheckComponent },
+  { path: 'passwordForget', component: ForgottenPasswordComponent },
+  { path: 'passwordReset/:email/:code', component: RecoverPasswordComponent },
   { path: 'orders', component: MyOrdersComponent },
   { path: 'orders/:id', component: ViewOrderComponent },
   { path: '**', component: PageNotFoundComponent }

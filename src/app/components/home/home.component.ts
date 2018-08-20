@@ -12,6 +12,7 @@ import {Permissions} from '../../constants/permissions';
 export class HomeComponent implements OnInit {
   goodies: ItemList[] = null;
   tickets: ItemList[] = null;
+  loading = true;
 
   constructor(public backend: BackendService, private auth: AuthService) {
   }
@@ -28,9 +29,10 @@ export class HomeComponent implements OnInit {
 
     observable.subscribe(
       resp => {
-          this.goodies = resp.goodies;
-          this.tickets = resp.tickets;
-        }
+        this.goodies = resp.goodies;
+        this.tickets = resp.tickets;
+        this.loading = false;
+      }
     );
   }
 

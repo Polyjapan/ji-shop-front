@@ -56,9 +56,9 @@ export class BackendService {
       .post<ApiResult>(this._authUrl + '/emailConfirm', {'email': user, 'code': code});
   }
 
-  passwordRecover(user: string): Observable<ApiResult> {
+  passwordRecover(mail: string, captcha: string): Observable<ApiResult> {
     return this.http
-      .post<ApiResult>(this._authUrl + '/recoverPassword', {'email': user});
+      .post<ApiResult>(this._authUrl + '/recoverPassword', {'email': mail, 'captcha': captcha});
   }
 
   passwordChange(password: string): Observable<ApiResult> {

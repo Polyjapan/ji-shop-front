@@ -1,6 +1,10 @@
+<ng-container *ngIf="loading">
+  <h1>Chargement...</h1>
 
+  <p>Un petit instant, nous récupérons la liste des articles en vente...</p>
+</ng-container>
 
-<div class="jumbotron" *ngIf="!hasContent()">
+<div class="jumbotron" *ngIf="!hasContent() && !loading">
   <h1 class="display-4">Rien à voir ici :(</h1>
   <p class="lead">Nous sommes ravis de voir que notre événement vous intéresse, mais notre boutique n'est pas encore ouverte. Revenez bientôt !</p>
   <hr class="my-4">
