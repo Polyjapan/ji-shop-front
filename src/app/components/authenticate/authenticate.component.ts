@@ -25,12 +25,15 @@ export class AuthenticateComponent implements OnInit {
   }
 
   onRegister(form: NgForm) {
-    console.log(form.value);
     this.registerErrors = null;
     this.registerSent = true;
 
+    declare var grecaptcha: any;
 
-    this.backend.register(form.value).subscribe(
+    const data = form.value;
+    data['captcha'] = grecaptcha.getResponse();
+
+    this.backend.register(data).subscribe(
       res => {
         this.registerOk = true;
         this.registerSent = false;
@@ -51,7 +54,6 @@ export class AuthenticateComponent implements OnInit {
   }
 
   onLogin(form: NgForm) {
-    console.log(form.value);
     this.loginErrors = null;
     this.loginSent = true;
 
@@ -59,7 +61,6 @@ export class AuthenticateComponent implements OnInit {
       res => {
         console.log(res);
         this.auth.login(res.token);
-        alert('It\'s okay, It\'s alright, oh-oh');
         this.loginSent = false;
       },
       err => {
