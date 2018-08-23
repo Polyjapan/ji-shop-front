@@ -69,7 +69,6 @@ export class AuthService {
         let currentGroup = '';
 
         while (groups.length > 0) {
-          console.log(perms + ' ' + currentGroup);
           if (perms && perms.indexOf(currentGroup + '*') !== -1) {
             return true;
           }

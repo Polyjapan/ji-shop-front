@@ -2,7 +2,7 @@
 
 - [x] Error system
 - [ ] Password change
-- [ ] Forgotten password
+- [x] Forgotten password
 - [x] Register / login
   - [x] Register
     - [x] Confirm emails
