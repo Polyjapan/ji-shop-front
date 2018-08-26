@@ -42,7 +42,7 @@ import {ForgottenPasswordComponent} from './components/authenticate/forgotten-pa
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: [environment.apiurl.split('//')[1]]
+        whitelistedDomains: environment.tokenWhitelist
       }
     }),
 

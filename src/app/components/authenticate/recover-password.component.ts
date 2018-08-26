@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {BackendService} from '../../services/backend.service';
 import * as Errors from '../../constants/errors';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {isNullOrUndefined} from 'util';
 import {ErrorCodes} from '../../constants/errors';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-recover-password',
@@ -17,7 +18,7 @@ export class RecoverPasswordComponent implements OnInit {
   email: string;
   code: string;
 
-  constructor(private backend: BackendService, private route: ActivatedRoute) {
+  constructor(private backend: BackendService, private route: ActivatedRoute, private router: Router, private auth: AuthService) {
   }
 
   resetPassword(form: HTMLInputElement) {

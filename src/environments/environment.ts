@@ -5,5 +5,7 @@
 
 export const environment = {
   production: false,
-  apiurl: 'http://localhost:9000'
+  apiurl: 'http://localhost:9000',
+  tokenWhitelist: ['localhost:9000']
+
 };

@@ -12,14 +12,6 @@ export function tokenGetter() {
 @NgModule({
   providers: [
     AuthService,
-  ],
-  imports: [
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: [environment.apiurl]
-      }
-    })
   ]
 })
 export class AuthModule {}

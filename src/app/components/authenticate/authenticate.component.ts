@@ -28,6 +28,7 @@ export class AuthenticateComponent implements OnInit {
     this.registerErrors = null;
     this.registerSent = true;
 
+    // @ts-ignore
     declare var grecaptcha: any;
 
     const data = form.value;
