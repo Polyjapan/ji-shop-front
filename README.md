@@ -21,7 +21,19 @@
   -  [ ] Sell tickets with banknotes/physical money
   -  [ ] Import tickets from resellers
   -  [x] Scan tickets
-    -  [ ] Feedback sonore  
+    -  [x] Feedback sonore  
 - [ ] (Admin) Read data
   -  [ ] Export all tickets for a given edition to different lists
   -  [ ] Display stats 
+
+## Credits (audio)
+
+    Title: Robot Blip
+    License: Attribution 3.0 
+    Recorded by Marianne Gagnon 
+    File: /src/assets/sounds/ok.mp3
+
+    Title: Computer Error
+    License: Attribution 3.0 
+    Recorded by Mike Koenig
+    File: /src/assets/sounds/nope.mp3 

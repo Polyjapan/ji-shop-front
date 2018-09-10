@@ -30,6 +30,9 @@ export class ScanComponent implements OnInit {
 
   resp: ScanResult;
 
+  okAudio: HTMLAudioElement;
+  nopeAudio: HTMLAudioElement;
+
   constructor(public backend: BackendService, private auth: AuthService,
               private router: Router, private route: ActivatedRoute) {
   }
@@ -46,6 +49,14 @@ export class ScanComponent implements OnInit {
       console.log('Perm');
       const params = this.route.snapshot.paramMap;
       this.configId = parseInt(params.get('configId'), 10);
+
+      this.okAudio = new Audio();
+      this.okAudio.src = '../../../assets/sounds/ok.mp3';
+      this.okAudio.load();
+
+      this.nopeAudio = new Audio();
+      this.nopeAudio.src = '../../../assets/sounds/nope.mp3';
+      this.nopeAudio.load();
     }
   }
 
@@ -80,6 +91,7 @@ export class ScanComponent implements OnInit {
     ]))[0];
 
     this.status = Status.REFUSED;
+    this.nopeAudio.play();
   }
 
   processTicket() {
@@ -89,12 +101,15 @@ export class ScanComponent implements OnInit {
           if (res.product) {
             this.status = Status.ACCEPTED_SINGLE;
             this.resp = res;
+            this.okAudio.play();
           } else if (res.products && res.user) {
             this.status = Status.ACCEPTED_MULTI;
             this.resp = res;
+            this.okAudio.play();
           } else {
             this.status = Status.REFUSED;
             this.errorMessage = 'Erreur inconnue : données incomplètes.';
+            this.nopeAudio.play();
           }
         } else {
           this.handleErrors(res.errors);
