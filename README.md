@@ -21,6 +21,7 @@
   -  [ ] Sell tickets with banknotes/physical money
   -  [ ] Import tickets from resellers
   -  [x] Scan tickets
+    -  [ ] Feedback sonore  
 - [ ] (Admin) Read data
   -  [ ] Export all tickets for a given edition to different lists
   -  [ ] Display stats 
