@@ -59,7 +59,7 @@ export class AuthService {
 
   public hasPermission(perm: string): boolean {
     const token = this.getToken();
-    if (token && token.user && token.user.permissions) {
+    if (this.isAuthenticated() && token && token.user && token.user.permissions) {
       const perms: string[] = token.user.permissions;
 
       if (perms && perms.indexOf(perm) !== -1) {
@@ -76,8 +76,12 @@ export class AuthService {
           currentGroup = currentGroup + groups.pop() + '.';
         }
 
+        console.log('Permission missing ' + perm);
         return false;
       }
+    } else {
+      console.log('Perm check: not online');
+      return false;
     }
   }
 

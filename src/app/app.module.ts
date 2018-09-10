@@ -18,6 +18,7 @@ import {MyOrdersComponent} from './components/members/my-orders.component';
 import {ViewOrderComponent} from './components/members/view-order.component';
 import {RecoverPasswordComponent} from './components/authenticate/recover-password.component';
 import {ForgottenPasswordComponent} from './components/authenticate/forgotten-password.component';
+import {ScanComponent} from './components/scan/scan.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {ForgottenPasswordComponent} from './components/authenticate/forgotten-pa
     ViewOrderComponent,
     RecoverPasswordComponent,
     ForgottenPasswordComponent,
+    ScanComponent,
 
     AuthenticateComponent
   ],

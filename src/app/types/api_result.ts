@@ -8,4 +8,5 @@ export class ApiResult {
 export class ApiError {
   key: string;
   messages: string[];
+  args?: any[];
 }

@@ -10,6 +10,7 @@ import {MyOrdersComponent} from './components/members/my-orders.component';
 import {ViewOrderComponent} from './components/members/view-order.component';
 import {ForgottenPasswordComponent} from './components/authenticate/forgotten-password.component';
 import {RecoverPasswordComponent} from './components/authenticate/recover-password.component';
+import {ScanComponent} from './components/scan/scan.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'passwordReset/:email/:code', component: RecoverPasswordComponent },
   { path: 'orders', component: MyOrdersComponent },
   { path: 'orders/:id', component: ViewOrderComponent },
+  { path: 'scan/:configId', component: ScanComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -1,0 +1,54 @@
+<h1>Scan de billets</h1>
+
+<br>
+
+<form (submit)="processTicket()">
+  <input #ticketLine type="text" name="firstname" class="form-control" placeholder="Code" [(ngModel)]="ticketId" [disabled]="status === Status.SENDING" autofocus>
+</form>
+
+<br>
+
+<div class="alert alert-success" role="alert" *ngIf="status === Status.ACCEPTED_SINGLE">
+  <h2>Billet accepté <code>{{previousTicketId}}</code> !</h2>
+  <strong>Type de billet : {{resp.product.name}}</strong>
+  <p>{{resp.product.description}}</p>
+  <p>{{resp.product.longDescription}}</p>
+</div>
+
+<div class="alert alert-info" role="alert" *ngIf="status === Status.SENDING">
+  <h2>Vérification du billet en cours...</h2>
+</div>
+
+<div class="alert alert-success" role="alert" *ngIf="status === Status.ACCEPTED_MULTI">
+  <h2>Billet accepté <code>{{previousTicketId}}</code> !</h2>
+  <strong>Nom du porteur : {{resp.user}}</strong>
+  <hr>
+  <h3>Liste des items :</h3>
+  <table class="table table-bordered">
+    <tr>
+      <th>Type d'objet</th>
+      <th>Quantité</th>
+    </tr>
+
+    <tr *ngFor="let pair of resp.products">
+      <td>{{pair[0].name}}</td>
+      <td>{{pair[1]}}</td>
+    </tr>
+  </table>
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="status === Status.REFUSED">
+  <h2>Billet refusé <code>{{previousTicketId}}</code></h2>
+
+  <strong>{{errorMessage}}</strong>
+
+  <ng-container *ngIf="errorType === ErrorCodes.ALREADY_SCANNED">
+    <hr>
+    <p>Ce billet a été validé par {{errorData['scannedBy']}} le {{parseDate(errorData['scannedAt'])}}</p>
+  </ng-container>
+
+  <ng-container *ngIf="errorType === ErrorCodes.PRODUCT_NOT_ALLOWED">
+    <hr>
+    <p>Le produit refusé est <strong>{{errorData['name']}}</strong></p>
+  </ng-container>
+</div>

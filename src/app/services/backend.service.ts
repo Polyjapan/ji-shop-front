@@ -8,6 +8,7 @@ import {LoginResponse} from './auth.service';
 import {ApiResult} from '../types/api_result';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {ScanResult} from '../types/scan_result';
 
 
 @Injectable()
@@ -17,6 +18,7 @@ export class BackendService {
   private _ordersUrl = this._baseApiUrl + '/orders';
   private _authUrl = this._baseApiUrl + '/users';
   private _adminUrl = this._baseApiUrl + '/admin';
+  private _scanUrl = this._baseApiUrl + '/scan';
 
   constructor(private http: HttpClient) {
   }
@@ -79,7 +81,12 @@ export class BackendService {
   confirmOrder(orderId: number, targetEmail?: string): Observable<ApiResult> {
 
     return this.http
-      .post<CheckOutResponse>(this._adminUrl + '/orders/validate', {'orderId': orderId, 'targetEmail': targetEmail});
+      .post<ApiResult>(this._adminUrl + '/orders/validate', {'orderId': orderId, 'targetEmail': targetEmail});
+  }
+
+  scanTicket(configId: number, ticketId: string): Observable<ScanResult> {
+    return this.http
+      .post<ScanResult>(this._scanUrl + '/process/' + configId, {'barcode': ticketId});
   }
 }
 
