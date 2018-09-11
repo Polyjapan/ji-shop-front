@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {AppRoutingModule} from './app-routing.module';
+import {AdminRoutingModule} from './admin-routing.module';
 import {BackendService} from './services/backend.service';
 import {AuthModule, tokenGetter} from './services/auth.module';
 import {HttpClientModule} from '@angular/common/http';
@@ -20,43 +20,20 @@ import {RecoverPasswordComponent} from './components/authenticate/recover-passwo
 import {ForgottenPasswordComponent} from './components/authenticate/forgotten-password.component';
 import {ScanComponent} from './components/scan/scan.component';
 import {ScanSelectComponent} from './components/scan/scan-select.component';
-import {PermissionAuthGuard} from './services/permission-auth-guard.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CheckoutComponent,
-    CallbackComponent,
-    EmailcheckComponent,
-    MyOrdersComponent,
-    ViewOrderComponent,
-    RecoverPasswordComponent,
-    ForgottenPasswordComponent,
-    ScanComponent,
-    ScanSelectComponent,
 
-    AuthenticateComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AuthModule,
-    FormsModule,
-    HomeModule,
-
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: environment.tokenWhitelist
-      }
-    }),
-
-    AppRoutingModule
+    FormsModule
   ],
   providers: [
     BackendService,
-    PermissionAuthGuard,
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AdminModule { }

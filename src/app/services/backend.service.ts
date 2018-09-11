@@ -9,6 +9,7 @@ import {ApiResult} from '../types/api_result';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ScanResult} from '../types/scan_result';
+import {ScanConfiguration} from '../types/scan_configuration';
 
 
 @Injectable()
@@ -87,6 +88,10 @@ export class BackendService {
   scanTicket(configId: number, ticketId: string): Observable<ScanResult> {
     return this.http
       .post<ScanResult>(this._scanUrl + '/process/' + configId, {'barcode': ticketId});
+  }
+
+  getScanningConfigurations(): Observable<ScanConfiguration[]> {
+    return this.http.get<ScanConfiguration[]>(this._scanUrl + '/configurations');
   }
 }
 

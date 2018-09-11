@@ -90,7 +90,13 @@ export enum ErrorCodes {
    */
   USER_EXISTS = 'error.user_exists',
 
-  POLYBANKING = 'error.polybanking'
+  POLYBANKING = 'error.polybanking',
+
+
+  /**
+   * There are fields missing in the CSV file
+   */
+  MISSING_FIELDS = 'error.missing_fields'
 
 }
 

@@ -9,6 +9,10 @@
       <li class="nav-item active">
         <a class="nav-link" routerLink="orders" *ngIf="auth.isAuthenticated()">Mes commandes</a>
       </li>
+
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="scan" *ngIf="auth.hasPermission(Permissions.SCAN_TICKET)">Scan Mode</a>
+      </li>
     </ul>
 
     <ul  class="navbar-nav mr-left">

@@ -85,42 +85,36 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.auth.requiresLogin('/checkout')) {
-      // We are logged in
-      // We send the request
+    let source = Source.Web;
+    const params = this.route.snapshot.paramMap;
 
-      let source = Source.Web;
-      const params = this.route.snapshot.paramMap;
-
-      if (params.has('ordertype')) {
-        const type = params.get('ordertype');
-        if (type === 'gift') {
-          if (this.auth.hasPermission(Permissions.GIVE_FOR_FREE)) {
-            source = Source.Gift; // the server will check the perm
-            this.cart.zeroPrices();
-          }
+    if (params.has('ordertype')) {
+      const type = params.get('ordertype');
+      if (type === 'gift') {
+        if (this.auth.hasPermission(Permissions.GIVE_FOR_FREE)) {
+          source = Source.Gift; // the server will check the perm
+          this.cart.zeroPrices();
         }
       }
-
-      this.placeOrder(source).subscribe(
-        result => {
-          // Store everything
-          if (result.updated.size > 0) {
-            this.checkoutUpdated = result.updated;
-          }
-          if (result.removed.length > 0) {
-            this.checkoutRemoved = result.removed;
-          }
-
-          this.checkoutLink = result.checkoutLink;
-          this.done = true;
-          this.orderId = result.orderId;
-          this.source = source;
-        }, error => {
-          this.checkoutErrors = this.parseErrors(error.error.errors);
-        });
     }
 
+    this.placeOrder(source).subscribe(
+      result => {
+        // Store everything
+        if (result.updated.size > 0) {
+          this.checkoutUpdated = result.updated;
+        }
+        if (result.removed.length > 0) {
+          this.checkoutRemoved = result.removed;
+        }
+
+        this.checkoutLink = result.checkoutLink;
+        this.done = true;
+        this.orderId = result.orderId;
+        this.source = source;
+      }, error => {
+        this.checkoutErrors = this.parseErrors(error.error.errors);
+      });
   }
 
   sendTo(email: HTMLInputElement) {

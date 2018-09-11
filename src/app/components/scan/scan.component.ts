@@ -1,9 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {BackendService} from '../../services/backend.service';
-import {Item, ItemList, ItemsResponse} from '../../types/items';
-import {Observable} from 'rxjs/Rx';
-import {Permissions} from '../../constants/permissions';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as Errors from '../../constants/errors';
 import {ErrorCodes} from '../../constants/errors';
@@ -37,27 +34,17 @@ export class ScanComponent implements OnInit {
               private router: Router, private route: ActivatedRoute) {
   }
 
-  get sending(): boolean {
-    return this.status === Status.SENDING;
-  }
-
   ngOnInit(): void {
-    if (!this.auth.hasPermission(Permissions.SCAN_TICKET)) {
-      console.log('No perm');
-      this.router.navigate(['/']);
-    } else {
-      console.log('Perm');
-      const params = this.route.snapshot.paramMap;
-      this.configId = parseInt(params.get('configId'), 10);
+    const params = this.route.snapshot.paramMap;
+    this.configId = parseInt(params.get('configId'), 10);
 
-      this.okAudio = new Audio();
-      this.okAudio.src = '../../../assets/sounds/ok.mp3';
-      this.okAudio.load();
+    this.okAudio = new Audio();
+    this.okAudio.src = '../../../assets/sounds/ok.mp3';
+    this.okAudio.load();
 
-      this.nopeAudio = new Audio();
-      this.nopeAudio.src = '../../../assets/sounds/nope.mp3';
-      this.nopeAudio.load();
-    }
+    this.nopeAudio = new Audio();
+    this.nopeAudio.src = '../../../assets/sounds/nope.mp3';
+    this.nopeAudio.load();
   }
 
   parseDate(time: number): string {
@@ -79,11 +66,11 @@ export class ScanComponent implements OnInit {
 
     // Here we extract the error
     this.errorMessage = Errors.replaceErrors(errors, new Map<string, string>([
-      [ErrorCodes.NOT_FOUND, '{key} introuvable.' ],
+      [ErrorCodes.NOT_FOUND, '{key} introuvable.'],
       [ErrorCodes.PRODUCT_NOT_ALLOWED, 'Billet valide mais non autorisé dans la configuration actuelle. Refusez le billet et orientez le ' +
-      'client vers la bonne file. Ne laissez pas rentrer le client.' ],
+      'client vers la bonne file. Ne laissez pas rentrer le client.'],
       [ErrorCodes.PRODUCTS_ONLY, 'Billet de goodies non autorisé par cette configuration. Ce billet doit être utilisé sur le stand ' +
-      'PolyJapan.' ],
+      'PolyJapan.'],
       [ErrorCodes.ALREADY_SCANNED, 'Billet déjà scanné.']
     ]), new Map<string, string>([
       ['config', 'Configuration de scan'],
@@ -117,7 +104,9 @@ export class ScanComponent implements OnInit {
 
         this.previousTicketId = this.ticketId;
         this.ticketId = '';
-        setTimeout(() => { this.ticketLine.nativeElement.focus(); }, 100);
+        setTimeout(() => {
+          this.ticketLine.nativeElement.focus();
+        }, 100);
       },
       err => {
         this.handleErrors(err.error.errors);
@@ -125,7 +114,9 @@ export class ScanComponent implements OnInit {
 
         this.previousTicketId = this.ticketId;
         this.ticketId = '';
-        setTimeout(() => { this.ticketLine.nativeElement.focus(); }, 100);
+        setTimeout(() => {
+          this.ticketLine.nativeElement.focus();
+        }, 100);
       });
   }
 }

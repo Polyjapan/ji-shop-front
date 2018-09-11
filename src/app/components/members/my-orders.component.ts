@@ -24,15 +24,13 @@ export class MyOrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.auth.requiresLogin('/orders')) {
-      this.backend.getOrders().subscribe(orders => {
-        this.orders = orders.sort((a, b) => {
-          return b.createdAt - a.createdAt;
-        });
-      }, error => {
-        this.errors = Errors.replaceErrors(error.error.errors);
+    this.backend.getOrders().subscribe(orders => {
+      this.orders = orders.sort((a, b) => {
+        return b.createdAt - a.createdAt;
       });
-    }
+    }, error => {
+      this.errors = Errors.replaceErrors(error.error.errors);
+    });
   }
 
   formatDate(order: Order) {

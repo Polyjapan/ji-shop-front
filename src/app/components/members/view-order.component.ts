@@ -23,19 +23,18 @@ export class ViewOrderComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
 
-    if (this.auth.requiresLogin('/orders/' + id)) {
-      this.backend.getOrder(Number(id)).subscribe(order => {
-        this.loading = false;
+    this.backend.getOrder(Number(id)).subscribe(order => {
+      this.loading = false;
 
-        if (!order.order.paymentConfirmed) {
-          this.errors.push('La commande n\'a pas été payée, impossible de l\'afficher.');
-        } else {
-          this.order = order;
-        }
-      }, errors => {
-        this.errors = Errors.replaceErrors(errors.error.errors, new Map<string, string>([[ErrorCodes.NOT_FOUND, 'Cette commande n\'existe pas.']]));
-      });
-    }
+      if (!order.order.paymentConfirmed) {
+        this.errors.push('La commande n\'a pas été payée, impossible de l\'afficher.');
+      } else {
+        this.order = order;
+      }
+    }, errors => {
+      this.errors = Errors.replaceErrors(errors.error.errors,
+        new Map<string, string>([[ErrorCodes.NOT_FOUND, 'Cette commande n\'existe pas.']]));
+    });
   }
 
   get date(): string {
