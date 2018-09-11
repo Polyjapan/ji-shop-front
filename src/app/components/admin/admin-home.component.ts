@@ -1,5 +1,4 @@
-import {Component, Input} from '@angular/core';
-import {CartItem, CartService} from '../../services/cart.service';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-admin-home',

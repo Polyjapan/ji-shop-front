@@ -21,6 +21,7 @@ import {ForgottenPasswordComponent} from './components/authenticate/forgotten-pa
 import {ScanComponent} from './components/scan/scan.component';
 import {ScanSelectComponent} from './components/scan/scan-select.component';
 import {PermissionAuthGuard} from './services/permission-auth-guard.service';
+import {AdminModule} from './components/admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {PermissionAuthGuard} from './services/permission-auth-guard.service';
     AuthModule,
     FormsModule,
     HomeModule,
+    AdminModule,
 
     JwtModule.forRoot({
       config: {

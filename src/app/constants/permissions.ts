@@ -50,5 +50,11 @@ export enum Permissions {
   /**
    * Permission to export all tickets for an event to a FNAC-compatible list
    */
-  EXPORT_TICKETS = 'admin.export_tickets'
+  EXPORT_TICKETS = 'admin.export_tickets',
+
+  /**
+   * Permission to access the admin area
+   */
+  ADMIN_ACCESS = 'admin.access_dashboard'
+
 }
