@@ -14,19 +14,20 @@
 
 <p class="text-muted" *ngIf="orders && orders.length === 0">Vous n'avez passé aucune commande sur le site.</p>
 
+<p class="text-muted">Votre commande n'apparaît pas encore ? Patientez quelques minutes, le traîtement de votre paiement peut
+  prendre un peu de temps.</p>
+
 <table *ngIf="orders && orders.length > 0" class="table table-bordered">
   <tr>
     <th>Date de la commande</th>
     <th>Montant</th>
-    <th>Etat</th>
     <th>Détails</th>
   </tr>
 
   <tr *ngFor="let order of orders">
     <td>{{formatDate(order)}}</td>
     <td>{{order.price}}.&ndash;</td>
-    <td *ngIf="order.paymentConfirmed"><span class="badge badge-success">Payé</span></td>
-    <td *ngIf="!order.paymentConfirmed" colspan="2"><span class="badge badge-danger">En attente de paiement</span></td>
-    <td *ngIf="order.paymentConfirmed"><a [routerLink]="[order.id]" class="btn btn-primary">Voir la commande</a></td>
+    <td><a [routerLink]="[order.id]" class="btn btn-primary">Voir la commande</a></td>
   </tr>
 </table>
+

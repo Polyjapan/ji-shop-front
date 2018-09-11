@@ -27,7 +27,7 @@ export class MyOrdersComponent implements OnInit {
     this.backend.getOrders().subscribe(orders => {
       this.orders = orders.sort((a, b) => {
         return b.createdAt - a.createdAt;
-      });
+      }).filter(order => order.paymentConfirmed); // only display paid orders
     }, error => {
       this.errors = Errors.replaceErrors(error.error.errors);
     });
