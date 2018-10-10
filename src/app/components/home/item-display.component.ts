@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth.service';
-import {BackendService} from '../../services/backend.service';
-import {Item, ItemList} from '../../types/items';
-import {CartService} from '../../services/cart.service';
+import {Item} from '../../types/items';
+import {CartService} from '../cart/cart.service';
 
 @Component({
   selector: 'app-item-display',

@@ -1,20 +1,14 @@
 import {NgModule} from '@angular/core';
-import {ItemDisplayComponent} from './item-display.component';
-import {ItemListDisplayComponent} from './item-list-display.component';
-import {HomeComponent} from './home.component';
-import {PageNotFoundComponent} from '../../page-not-found.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthModule} from '../../services/auth.module';
 import {FormsModule} from '@angular/forms';
+import {PosComponent} from './pos.component';
 import {CartModule} from '../cart/cart.module';
 
 @NgModule({
   declarations: [
-    ItemDisplayComponent,
-    ItemListDisplayComponent,
-    HomeComponent,
-    PageNotFoundComponent
+    PosComponent
   ],
   imports: [
     BrowserModule,
@@ -23,6 +17,9 @@ import {CartModule} from '../cart/cart.module';
     FormsModule,
     CartModule
   ],
-  providers: []
+  providers: [
+    // Probably a service for sumup
+  ]
 })
-export class HomeModule { }
+export class PosModule {
+}

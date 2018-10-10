@@ -1,0 +1,95 @@
+<h1> Point  of  Sale </h1>
+
+<style>
+  .pos-item {
+    height: 8rem;
+    width: 8rem;
+    display: inline-block;
+    margin: 5px;
+    box-sizing: border-box;
+    padding: 0.5rem;
+  }
+</style>
+
+<div class="row">
+  <div class="col-sm-9">
+
+    <ng-container *ngIf="items">
+
+      <div class="row" *ngFor="let row of items">
+        <ng-container *ngFor="let item of row">
+          <div *ngIf="item" [class]="getItemClasses(item)" (click)="test(item)">
+            <h2>{{item.item.name}}</h2>
+          </div>
+          <div *ngIf="!item" class="pos-item"></div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="border p-2 mt-1 pb-2">
+      <h2>Items demandés</h2>
+
+      <app-cart>
+        <p>Ici un bouton pour acheter</p>
+      </app-cart>
+
+
+    </div>
+  </div>
+</div>
+
+
+<hr>
+
+<div class="row">
+<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Primary card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Secondary card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Success card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Danger card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Warning card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Info card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card bg-light mb-3" style="max-width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Light card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Dark card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+</div>

@@ -4,7 +4,7 @@ import {BackendService} from '../../services/backend.service';
 import {NgForm} from '@angular/forms';
 import {ApiError} from '../../types/api_result';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CartItem, CartService} from '../../services/cart.service';
+import {CartItem, CartService} from '../cart/cart.service';
 import {CheckedOutItem, Order, Source} from '../../types/order';
 import {Item} from '../../types/items';
 import {environment} from '../../../environments/environment';

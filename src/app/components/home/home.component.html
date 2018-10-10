@@ -39,7 +39,10 @@
       <div class="border p-2 mt-1 pb-2">
         <h2>Panier</h2>
 
-        <app-cart></app-cart>
+        <app-cart>
+          <a href="checkout" class="btn btn-primary">Passer commande</a> <!-- Why routerLink doesnt work? -->
+          <a href="checkout/gift" class="btn btn-success" *ngIf="isAdmin">Générer un cadeau</a> <!-- Why routerLink doesnt work? -->
+        </app-cart>
 
       </div>
     </div>

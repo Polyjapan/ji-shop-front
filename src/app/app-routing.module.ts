@@ -14,6 +14,7 @@ import {ScanComponent} from './components/scan/scan.component';
 import {ScanSelectComponent} from './components/scan/scan-select.component';
 import {PermissionAuthGuard} from './services/permission-auth-guard.service';
 import {Permissions} from './constants/permissions';
+import {PosComponent} from './components/pos/pos.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'orders/:id', component: ViewOrderComponent, canActivate: [PermissionAuthGuard] },
   { path: 'scan/:configId', component: ScanComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SCAN_TICKET} },
   { path: 'scan', component: ScanSelectComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SCAN_TICKET} },
+  { path: 'pos', component: PosComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SELL_ON_SITE} },
   { path: '**', component: PageNotFoundComponent }
 ];
 

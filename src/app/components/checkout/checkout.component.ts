@@ -3,7 +3,7 @@ import {AuthService} from '../../services/auth.service';
 import {BackendService} from '../../services/backend.service';
 import {ApiError, ApiResult} from '../../types/api_result';
 import {ActivatedRoute} from '@angular/router';
-import {CartItem, CartService} from '../../services/cart.service';
+import {CartItem, CartService} from '../cart/cart.service';
 import {CheckedOutItem, Source} from '../../types/order';
 import {Permissions} from '../../constants/permissions';
 import {Observable} from 'rxjs/Rx';

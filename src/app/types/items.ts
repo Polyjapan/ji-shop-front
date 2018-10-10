@@ -20,3 +20,11 @@ export class Item {
   freePrice: boolean;
   isVisible: boolean;
 }
+
+export class SoldItem {
+  item: Item;
+  row: number;
+  col: number;
+  color: string;
+  textColor: string;
+}

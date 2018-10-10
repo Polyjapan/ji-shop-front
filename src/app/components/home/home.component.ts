@@ -47,4 +47,8 @@ export class HomeComponent implements OnInit {
   hasGoodies(): boolean {
     return this.goodies && this.goodies.length > 0;
   }
+
+  get isAdmin() {
+    return this.auth.hasPermission(Permissions.GIVE_FOR_FREE);
+  }
 }

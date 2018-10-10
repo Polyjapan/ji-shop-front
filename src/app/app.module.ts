@@ -22,6 +22,7 @@ import {ScanComponent} from './components/scan/scan.component';
 import {ScanSelectComponent} from './components/scan/scan-select.component';
 import {PermissionAuthGuard} from './services/permission-auth-guard.service';
 import {AdminModule} from './components/admin/admin.module';
+import {PosModule} from './components/pos/pos.module';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {AdminModule} from './components/admin/admin.module';
     FormsModule,
     HomeModule,
     AdminModule,
+    PosModule,
 
     JwtModule.forRoot({
       config: {
