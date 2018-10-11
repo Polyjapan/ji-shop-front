@@ -55,6 +55,10 @@ export enum Permissions {
   /**
    * Permission to access the admin area
    */
-  ADMIN_ACCESS = 'admin.access_dashboard'
+  ADMIN_ACCESS = 'admin.access_dashboard',
 
+  /**
+   * Permission to modify POS configurations
+   */
+  CHANGE_POS_CONFIGURATIONS = 'admin.change_pos_configurations'
 }
