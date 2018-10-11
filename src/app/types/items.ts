@@ -21,10 +21,10 @@ export class Item {
   isVisible: boolean;
 }
 
-export class SoldItem {
+export class PosConfigItem {
   item: Item;
   row: number;
   col: number;
   color: string;
-  textColor: string;
+  fontColor: string;
 }

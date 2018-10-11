@@ -1,23 +1,25 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {BackendService} from '../../services/backend.service';
-import {Item, ItemList, ItemsResponse, SoldItem} from '../../types/items';
+import {Item, ItemList, ItemsResponse, PosConfigItem} from '../../types/items';
 import {Observable} from 'rxjs/Rx';
 import {Permissions} from '../../constants/permissions';
 import {CartService} from '../cart/cart.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-pos',
   templateUrl: './pos.component.html'
 })
 export class PosComponent implements OnInit {
-  items: SoldItem[][];
+  items: PosConfigItem[][];
   loading = true;
 
-  constructor(public backend: BackendService, private auth: AuthService, private cart: CartService) {
+  constructor(public backend: BackendService, private auth: AuthService, private cart: CartService,
+              private route: ActivatedRoute) {
   }
 
-  private buildRows(itemsArray: SoldItem[]): SoldItem[][] {
+  private buildRows(itemsArray: PosConfigItem[]): PosConfigItem[][] {
     let maxRow = 0;
     let maxCol = 0;
 
@@ -30,7 +32,7 @@ export class PosComponent implements OnInit {
       }
     }
 
-    const items: SoldItem[][] = [];
+    const items: PosConfigItem[][] = [];
     for (let col = 0; col <= maxCol; col++) {
       items.push([]);
       for (let row = 0; row <= maxRow; row++) {
@@ -49,44 +51,26 @@ export class PosComponent implements OnInit {
     return items;
   }
 
-
-  test(i: SoldItem): void {
-    console.log('Clicked item ');
+  addItem(i: PosConfigItem): void {
     console.log(i);
     this.cart.addItem(i.item);
   }
 
-  private buildTestItem(data: any, price: number): SoldItem {
-    const item: Item = {id: data.id, name: data.displayName, longDescription: null, description: null, isVisible: true, isTicket: true, maxItems: -1, eventId: -1, freePrice: false, price};
-    return {item: item, textColor: data.textColor, color: data.color, row: data.row, col: data.col};
-  }
-
   ngOnInit(): void {
     this.cart.clear(); // just in case
+    const params = this.route.snapshot.paramMap;
+    const configId = parseInt(params.get('configId'), 10);
 
-    const items: SoldItem[] = [];
-    let i = 0;
-
-    items.push(this.buildTestItem({id: ++i, displayName: 'Oishi Noir', col: 0, row: 0, color: 'bg-primary', textColor: 'text-white'}, 3));
-    items.push(this.buildTestItem({id: ++i, displayName: 'Oishi Vert', col: 1, row: 0, color: 'bg-success', textColor: 'text-white'}, 3));
-    items.push(this.buildTestItem({id: ++i, displayName: 'Oishi Jaune', col: 2, row: 0, color: 'bg-warning', textColor: 'text-white'}, 3));
-    items.push(this.buildTestItem({id: ++i, displayName: 'Mikado', col: 0, row: 1, color: 'bg-primary', textColor: 'text-white'}, 3));
-    items.push(this.buildTestItem({id: ++i, displayName: 'Mikado White', col: 1, row: 1, color: 'bg-success', textColor: 'text-white'}, 3));
-    items.push(this.buildTestItem({id: ++i, displayName: 'Mikado Milk', col: 2, row: 1, color: 'bg-warning', textColor: 'text-white'}, 3));
-    items.push(this.buildTestItem({id: ++i, displayName: 'Cup Chicken', col: 0, row: 2, color: 'bg-primary', textColor: 'text-white'}, 3));
-    items.push(this.buildTestItem({id: ++i, displayName: 'Cup Pork', col: 1, row: 2, color: 'bg-success', textColor: 'text-white'}, 3));
-    items.push(this.buildTestItem({id: ++i, displayName: 'Cup Beef', col: 2, row: 2, color: 'bg-warning', textColor: 'text-white'}, 3));
-    items.push(this.buildTestItem({id: ++i, displayName: 'Cup Shrimps', col: 3, row: 2, color: 'bg-warning', textColor: 'text-white'}, 3));
-    items.push(this.buildTestItem({id: ++i, displayName: 'Cup Vege', col: 4, row: 2, color: 'bg-warning', textColor: 'text-white'}, 3));
-    items.push(this.buildTestItem({id: ++i, displayName: 'Udon 1', col: 0, row: 3, color: 'bg-primary', textColor: 'text-white'}, 6));
-    items.push(this.buildTestItem({id: ++i, displayName: 'Udon 2', col: 1, row: 3, color: 'bg-success', textColor: 'text-white'}, 6));
-    items.push(this.buildTestItem({id: ++i, displayName: 'Udon 3', col: 2, row: 3, color: 'bg-warning', textColor: 'text-white'}, 6));
-
-    this.items = this.buildRows(items);
+    this.backend.getPosConfiguration(configId).subscribe(data => {
+      this.items = this.buildRows(data.items);
+      this.loading = false;
+    }, err => {
+      this.loading = false;
+    });
   }
 
-  getItemClasses(item: SoldItem): string {
-    return ['pos-item', item.color, item.textColor].join(' ');
+  getItemClasses(item: PosConfigItem): string {
+    return ['pos-item', item.color, item.fontColor].join(' ');
   }
 
 }

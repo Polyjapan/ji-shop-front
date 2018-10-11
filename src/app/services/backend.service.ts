@@ -10,6 +10,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ScanResult} from '../types/scan_result';
 import {ScanConfiguration} from '../types/scan_configuration';
+import {PosConfiguration, PosGetConfigResponse} from '../types/pos_configuration';
 
 
 @Injectable()
@@ -20,6 +21,7 @@ export class BackendService {
   private _authUrl = this._baseApiUrl + '/users';
   private _adminUrl = this._baseApiUrl + '/admin';
   private _scanUrl = this._baseApiUrl + '/scan';
+  private _posUrl = this._baseApiUrl + '/pos';
 
   constructor(private http: HttpClient) {
   }
@@ -92,6 +94,14 @@ export class BackendService {
 
   getScanningConfigurations(): Observable<ScanConfiguration[]> {
     return this.http.get<ScanConfiguration[]>(this._scanUrl + '/configurations');
+  }
+
+  getPosConfigurations(): Observable<PosConfiguration[]> {
+    return this.http.get<PosConfiguration[]>(this._posUrl + '/configurations');
+  }
+
+  getPosConfiguration(id: number): Observable<PosGetConfigResponse> {
+    return this.http.get<PosGetConfigResponse>(this._posUrl + '/configurations/' + id);
   }
 }
 

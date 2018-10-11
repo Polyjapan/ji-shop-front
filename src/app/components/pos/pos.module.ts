@@ -5,17 +5,21 @@ import {AuthModule} from '../../services/auth.module';
 import {FormsModule} from '@angular/forms';
 import {PosComponent} from './pos.component';
 import {CartModule} from '../cart/cart.module';
+import {PosSelectComponent} from './pos-select.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
-    PosComponent
+    PosComponent,
+    PosSelectComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AuthModule,
     FormsModule,
-    CartModule
+    CartModule,
+    RouterModule
   ],
   providers: [
     // Probably a service for sumup
