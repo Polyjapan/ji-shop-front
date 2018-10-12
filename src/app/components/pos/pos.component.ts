@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {BackendService} from '../../services/backend.service';
-import {Item, ItemList, ItemsResponse, PosConfigItem} from '../../types/items';
-import {Observable} from 'rxjs/Rx';
-import {Permissions} from '../../constants/permissions';
+import {PosConfigItem} from '../../types/items';
 import {CartService} from '../cart/cart.service';
 import {ActivatedRoute} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import * as Errors from '../../constants/errors';
+import {ErrorCodes} from '../../constants/errors';
 
 @Component({
   selector: 'app-pos',
@@ -15,8 +16,27 @@ export class PosComponent implements OnInit {
   items: PosConfigItem[][];
   loading = true;
 
+  // Processing checkout
+  checkoutPrice: number;
+  checkoutOrderId: number;
+  checkoutErrors: string[];
+
+  givenAmount: number;
+
   constructor(public backend: BackendService, private auth: AuthService, private cart: CartService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private modalService: NgbModal) {
+  }
+
+  get change(): number {
+    return this.givenAmount - this.checkoutPrice;
+  }
+
+  private resetComponent(): void {
+    this.cart.clear();
+
+    this.checkoutPrice = undefined;
+    this.checkoutOrderId = undefined;
+    this.checkoutErrors = undefined;
   }
 
   private buildRows(itemsArray: PosConfigItem[]): PosConfigItem[][] {
@@ -53,11 +73,13 @@ export class PosComponent implements OnInit {
 
   addItem(i: PosConfigItem): void {
     console.log(i);
+
     this.cart.addItem(i.item);
   }
 
   ngOnInit(): void {
-    this.cart.clear(); // just in case
+    this.resetComponent(); // just in case
+
     const params = this.route.snapshot.paramMap;
     const configId = parseInt(params.get('configId'), 10);
 
@@ -71,6 +93,36 @@ export class PosComponent implements OnInit {
 
   getItemClasses(item: PosConfigItem): string {
     return ['pos-item', item.color, item.fontColor].join(' ');
+  }
+
+  pay(modalSuccess, modalError): void {
+    const order = this.cart.getOrder();
+
+    this.backend.placePosOrder(order).subscribe(response => {
+      this.checkoutPrice = response.price;
+      this.checkoutOrderId = response.orderId;
+
+      // Open the "payment method" modal
+      this.modalService.open(modalSuccess, { size: 'lg' }).result.then((result) => {
+
+        // Open the "payment ok" modal (or the bank card modal, that will redirect to somewhere else)
+        this.modalService.open(result, { size: 'lg' }).result.then((result2) => {
+          this.resetComponent();
+        });
+      }, (reason) => {
+
+      });
+
+    }, err => {
+      this.checkoutErrors = Errors.replaceErrors(err.error.errors, new Map<string, string>([
+        [ErrorCodes.OUT_OF_STOCK, 'Certains produits de votre commande ne sont plus disponibles.'],
+        [ErrorCodes.MISSING_ITEM, 'Certains produits de votre commande n\'existent pas.'],
+        [ErrorCodes.NO_REQUESTED_ITEM, 'Votre commande est vide.'],
+      ]));
+
+      this.modalService.open(modalError, { size: 'lg' });
+    });
+
   }
 
 }

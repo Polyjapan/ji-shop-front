@@ -7,6 +7,7 @@ import {PosComponent} from './pos.component';
 import {CartModule} from '../cart/cart.module';
 import {PosSelectComponent} from './pos-select.component';
 import {RouterModule} from '@angular/router';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {RouterModule} from '@angular/router';
     AuthModule,
     FormsModule,
     CartModule,
-    RouterModule
+    RouterModule,
+    NgbModule
   ],
   providers: [
     // Probably a service for sumup

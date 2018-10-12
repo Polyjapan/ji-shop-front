@@ -7,6 +7,7 @@ import {CartItem, CartService} from './cart.service';
 })
 export class CartItemDisplayComponent {
   @Input() item: CartItem = null;
+  @Input() displayMode: boolean = false;
 
   constructor(private cart: CartService) {}
 

@@ -10,7 +10,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ScanResult} from '../types/scan_result';
 import {ScanConfiguration} from '../types/scan_configuration';
-import {PosConfiguration, PosGetConfigResponse} from '../types/pos_configuration';
+import {PosConfiguration, PosGetConfigResponse, PosOrderResponse} from '../types/pos_configuration';
 
 
 @Injectable()
@@ -102,6 +102,11 @@ export class BackendService {
 
   getPosConfiguration(id: number): Observable<PosGetConfigResponse> {
     return this.http.get<PosGetConfigResponse>(this._posUrl + '/configurations/' + id);
+  }
+
+  placePosOrder(items: CheckedOutItem[]): Observable<PosOrderResponse> {
+    return this.http
+      .post<PosOrderResponse>(this._posUrl + '/checkout', {'items': items});
   }
 }
 

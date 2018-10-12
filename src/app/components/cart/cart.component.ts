@@ -8,5 +8,7 @@ import {Permissions} from '../../constants/permissions';
   templateUrl: './cart.component.html'
 })
 export class CartComponent {
+  @Input() displayMode = false;
+
   constructor(public cart: CartService) {}
 }

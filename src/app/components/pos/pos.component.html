@@ -10,7 +10,76 @@
   }
 </style>
 
+<ng-template #processToPayment let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirmation de la commande</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2>Montant total : <b>{{checkoutPrice}} .-</b></h2>
 
+    <p>Aide au rendu de monnaie</p>
+    <p>Pour un paiement cash, utilisez ce formulaire pour vous aider :</p>
+
+    <div class="form-row">
+      <div class="col-lg-4">
+        <input type="number" [(ngModel)]="givenAmount" class="form-control form-control-lg" style="text-align: center;">
+      </div>
+      <div class="col-lg-4" style="text-align: center">
+        <h3>=> rendre =></h3>
+      </div>
+      <div class="col-lg-4">
+        <input type="number" [value]="change" disabled class="form-control form-control-lg" style="text-align: center;">
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close(paymentOkModal)">Cash</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Carte</button>
+  </div>
+</ng-template>
+
+<ng-template #checkoutError let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Erreur de commande</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Une erreur s'est produite durant la commande. Si cela se reproduit, appelez un responsable.</p>
+    <ul>
+      <li *ngFor="let error of checkoutErrors">{{error}}</li>
+    </ul>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Compris</button>
+  </div>
+</ng-template>
+
+<ng-template #paymentOkModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Paiement confirmé !</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Le paiement a été confirmé. Voici les objets qui étaient commandés :</p>
+    <app-cart [displayMode]="true">
+      <p>Une fois les bracelets distribués, fermez la boite de dialogue.</p>
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">C'est tout bon!</button>
+    </app-cart>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">C'est tout bon!</button>
+  </div>
+</ng-template>
 
 
 <div class="row">
@@ -43,7 +112,7 @@
       <h2>Items demandés</h2>
 
       <app-cart>
-        <p>Ici un bouton pour acheter</p>
+        <button class="btn btn-success btn-lg" (click)="pay(processToPayment, checkoutError)">Paiement</button>
       </app-cart>
 
 

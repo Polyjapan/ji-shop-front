@@ -1,10 +1,10 @@
 <ng-container *ngIf="cart.items.length > 0">
   <table style="width: 100%;">
-    <app-cart-item-display *ngFor="let item of cart.items" [item]="item" style="width: 100%;"></app-cart-item-display>
+    <app-cart-item-display *ngFor="let item of cart.items" [displayMode]="displayMode" [item]="item" style="width: 100%;"></app-cart-item-display>
   </table>
 
   <hr>
-  <p>Prix total : <b>{{cart.total}}.&ndash;</b></p>
+  <p *ngIf="!displayMode">Prix total : <b>{{cart.total}}.&ndash;</b></p>
 
   <ng-content></ng-content>
 </ng-container>
