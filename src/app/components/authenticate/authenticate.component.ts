@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {BackendService} from '../../services/backend.service';
-import {ItemList, ItemsResponse} from '../../types/items';
 import {NgForm} from '@angular/forms';
-import {ApiError} from '../../types/api_result';
 import {Router} from '@angular/router';
 import * as Errors from '../../constants/errors';
 import {ErrorCodes} from '../../constants/errors';
+
 
 @Component({
   selector: 'app-authenticate',
@@ -38,7 +37,7 @@ export class AuthenticateComponent implements OnInit {
       res => {
         this.registerOk = true;
         this.registerSent = false;
-        },
+      },
       err => {
         this.registerErrors = Errors.replaceErrors(err.error.errors, new Map<string, string>([
           [ErrorCodes.USER_EXISTS, 'Un utilisateur avec cette adresse email existe déjà.'],
@@ -77,6 +76,7 @@ export class AuthenticateComponent implements OnInit {
       }
     );
   }
+
 
   ngOnInit(): void {
     if (this.auth.isAuthenticated()) {

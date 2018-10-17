@@ -23,6 +23,7 @@ import {ScanSelectComponent} from './components/scan/scan-select.component';
 import {PermissionAuthGuard} from './services/permission-auth-guard.service';
 import {AdminModule} from './components/admin/admin.module';
 import {PosModule} from './components/pos/pos.module';
+import {RecaptchaModule} from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {PosModule} from './components/pos/pos.module';
     HomeModule,
     AdminModule,
     PosModule,
+    RecaptchaModule.forRoot(),
 
     JwtModule.forRoot({
       config: {
