@@ -27,14 +27,14 @@ export class SumupService {
     this.load();
   }
 
-  public startPayment(orderId: number): boolean {
-    if (isNullOrUndefined(this.currentTransaction)) {
-      this.currentTransaction = orderId;
-      this.save();
-      return true;
-    }
-
-    return false; // a transaction is already in progress
+  public startPayment(orderId: number) {
+    this.currentTransaction = orderId;
+    this.save();
+    this.backend.sendPosLog(this.currentTransaction, {
+      paymentMethod: PaymentMethod.Card,
+      accepted: false,
+      cardTransactionMessage: 'Card transaction start.',
+    }).subscribe(() => {});
   }
 
   public abortTransaction() {
@@ -42,27 +42,31 @@ export class SumupService {
     this.save();
   }
 
-  public paymentCallback(status: string, message: string, receipt: boolean, transactionCode: string,
-                         failureCode?: string): Observable<boolean> {
+  public paymentCallback(status: string, message: string, receipt: string, transactionCode: string,
+                         failureCode?: string): Observable<CallbackReturn> {
 
     if (isNullOrUndefined(this.currentTransaction)) {
-      return Observable.of(false);
+      return Observable.of(CallbackReturn.NO_TRANSACTION);
     }
 
     const log: PosPaymentLog = {
       paymentMethod: PaymentMethod.Card,
-      accepted: status === 'accepted',
+      accepted: status === 'success',
       cardTransactionCode: transactionCode,
       cardTransactionFailureCause: failureCode,
       cardTransactionMessage: message,
-      cardReceiptSend: receipt
+      cardReceiptSend: receipt === 'true'
     };
 
     return this.backend.sendPosLog(this.currentTransaction, log).map(value => {
       this.currentTransaction = undefined;
       this.save();
 
-      return value.success;
+      return value.success ? CallbackReturn.SUCCESS : CallbackReturn.ERROR;
     });
   }
+}
+
+export enum CallbackReturn {
+  NO_TRANSACTION, SUCCESS, ERROR
 }

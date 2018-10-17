@@ -1,12 +1,10 @@
 import {NgModule} from '@angular/core';
-import {CartItemDisplayComponent} from './cart-item-display.component';
 import {CartComponent} from './cart.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {CartService} from './cart.service';
 
 @NgModule({
   declarations: [
-    CartItemDisplayComponent,
     CartComponent
   ],
   imports: [
@@ -19,4 +17,5 @@ import {CartService} from './cart.service';
     CartComponent
   ]
 })
-export class CartModule { }
+export class CartModule {
+}

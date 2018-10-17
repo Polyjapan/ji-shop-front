@@ -11,6 +11,7 @@ import {SumupService} from './sumup.service';
 import {environment} from '../../../environments/environment';
 import {isNullOrUndefined} from 'util';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import {PaymentMethod} from '../../types/pos_configuration';
 
 @Component({
   selector: 'app-pos',
@@ -111,6 +112,10 @@ export class PosComponent implements OnInit {
   paymentFinished(modal): void {
     // Open the "payment ok" modal
     this.modalService.dismissAll();
+    this.backend.sendPosLog(this.checkoutOrderId, {
+      paymentMethod: PaymentMethod.Cash,
+      accepted: true
+    }).subscribe(() => {});
     this.modalService.open(modal, {size: 'lg'}).result.then((result2) => {
       this.resetComponent();
     });
@@ -121,16 +126,11 @@ export class PosComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  payByCard(cardModal, errorModal): void {
+  payByCard(cardModal): void {
     this.modalService.dismissAll();
 
-    if (this.sumUp.startPayment(this.checkoutOrderId)) {
-      this.modalService.open(cardModal, {size: 'lg'}).result.then(() => {
-      }, () => this.sumUp.abortTransaction());
-    } else {
-      this.checkoutErrors = ['Un paiement par carte est déjà en cours. Ceci est un problème étrange.'];
-      this.modalService.open(errorModal, {size: 'lg'});
-    }
+    this.sumUp.startPayment(this.checkoutOrderId);
+    this.modalService.open(cardModal, {size: 'lg'});
   }
 
   pay(modalSuccess, modalError): void {

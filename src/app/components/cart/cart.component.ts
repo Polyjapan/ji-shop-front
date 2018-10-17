@@ -10,5 +10,12 @@ import {Permissions} from '../../constants/permissions';
 export class CartComponent {
   @Input() displayMode = false;
 
-  constructor(public cart: CartService) {}
+  constructor(public cart: CartService) {
+  }
+
+  removeItem(item: CartItem) {
+    this.cart.removeItem(item.baseItem, 1, item.price);
+
+    console.log('remove item ' + item.baseItem.id);
+  }
 }

@@ -1,16 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth.service';
 import {BackendService} from '../../services/backend.service';
-import {PosConfigItem} from '../../types/items';
 import {CartService} from '../cart/cart.service';
 import {ActivatedRoute} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import * as Errors from '../../constants/errors';
-import {ErrorCodes} from '../../constants/errors';
-import {SumupService} from './sumup.service';
-import {environment} from '../../../environments/environment';
-import {isNullOrUndefined} from 'util';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import {CallbackReturn, SumupService} from './sumup.service';
 
 @Component({
   selector: 'app-pos-callback',
@@ -19,6 +11,7 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 export class PosCallbackComponent implements OnInit {
   loading = true;
   accepted = false;
+  invalid = false;
   configId: number;
 
   constructor(public backend: BackendService, private cart: CartService,
@@ -33,12 +26,17 @@ export class PosCallbackComponent implements OnInit {
     this.sumUp.paymentCallback(
       queryParams['smp-status'],
       queryParams['smp-message'],
-      queryParams['smp-receipt-sent'] as boolean,
+      queryParams['smp-receipt-sent'],
       queryParams['smp-tx-code'],
       queryParams['smp-failure-cause']
     ).subscribe(accepted => {
-      this.accepted = accepted;
-      this.loading = false;
+      if (accepted === CallbackReturn.NO_TRANSACTION) {
+        this.invalid = true;
+        this.loading = false;
+      } else {
+        this.accepted = accepted === CallbackReturn.SUCCESS;
+        this.loading = false;
+      }
     }, err => {
       this.accepted = false;
       this.loading = false;
