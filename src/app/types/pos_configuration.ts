@@ -22,8 +22,11 @@ export enum PaymentMethod {
 export class PosPaymentLog {
   paymentMethod: PaymentMethod;
   accepted: boolean;
-  cardTransactionCode?: number;
-  cardTransactionResultCode?: number;
-  cardReceitSend?: boolean;
+  cardTransactionCode?: string;
+  cardTransactionFailureCause?: string;
+  cardReceiptSend?: boolean;
   cardTransactionMessage?: string;
+
+
+
 }

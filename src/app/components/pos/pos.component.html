@@ -10,6 +10,8 @@
   }
 </style>
 
+
+
 <ng-template #processToPayment let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Confirmation de la commande</h4>
@@ -37,8 +39,38 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close(paymentOkModal)">Cash</button>
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Carte</button>
+    <button type="button" class="btn btn-outline-dark" (click)="paymentFinished(paymentOkModal)">Cash</button>
+    <button type="button" class="btn btn-outline-dark" (click)="payByCard(cardPaymentStart, checkoutError)">Carte</button>
+  </div>
+</ng-template>
+
+<ng-template #cardPaymentStart let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Paiement par carte</h4>
+    <button type="button" class="close" aria-label="Close" (click)="cancelCardPayment()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Demander à l'utilisateur s'il veut un ticket de caisse <b>avant</b> de cliquer.</p>
+    <p>Si oui, remplir un des champs ci dessous :</p>
+
+    <form>
+      <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label">Email :</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="email" placeholder="Email" #receiptEmail>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="phoneNumber" class="col-sm-2 col-form-label">Natel :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="phoneNumber" placeholder="Natel" #receiptPhone>
+        </div>
+      </div>
+    </form>
+
+    <a [href]="sumUpURL(receiptEmail, receiptPhone)" class="btn btn-success btn-lg">Payer</a>
   </div>
 </ng-template>
 
