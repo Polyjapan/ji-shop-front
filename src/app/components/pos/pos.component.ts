@@ -154,20 +154,29 @@ export class PosComponent implements OnInit {
 
   }
 
-  sumUpURL(): SafeUrl {
+  sumUpURL(receiptEmail: HTMLInputElement, receiptPhone: HTMLInputElement): SafeUrl {
     if (this.configId === undefined) {
       return null;
     }
 
     const baseUrl = environment.baseUrl;
 
-    const url = 'sumupmerchant://pay/1.0?' +
+    let url = 'sumupmerchant://pay/1.0?' +
       'affiliate-key=' + environment.sumUpKey +
       '&app-id=' + environment.sumUpApp +
       '&total=' + this.checkoutPrice +
       '&currency=CHF' +
       '&title=PolyJapan AGEPoly' +
+      '&skipSuccessScreen=true' +
       '&callback=' + baseUrl + '/pos/' + this.configId + '/callback';
+
+    if (!isNullOrUndefined(receiptEmail.value) && receiptEmail.value !== '') {
+      url += '&receipt-email=' + receiptEmail.value;
+    }
+
+    if (!isNullOrUndefined(receiptPhone.value) && receiptPhone.value !== '') {
+      url += '&receipt-mobilephone=' + receiptPhone.value;
+    }
 
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }

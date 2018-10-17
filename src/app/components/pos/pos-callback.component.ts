@@ -34,7 +34,7 @@ export class PosCallbackComponent implements OnInit {
         this.invalid = true;
         this.loading = false;
       } else {
-        this.accepted = accepted === CallbackReturn.SUCCESS;
+        this.accepted = accepted === CallbackReturn.SUCCESS && queryParams['smp-status'] === 'success';
         this.loading = false;
       }
     }, err => {
