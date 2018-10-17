@@ -1,0 +1,21 @@
+<div *ngIf="loading">
+  <h1>Veuillez patienter...</h1>
+  <p>En attente de la réponse du serveur de traitement.</p>
+</div>
+
+<div *ngIf="!loading && !accepted">
+  <h1>Paiement refusé</h1>
+  <p>Le paiement a été refusé. Vous pouvez recommencer.</p>
+  <a class="btn btn-success" [routerLink]="['/pos', configId]" [queryParams]="{noClear: true}">Recommencer</a>
+</div>
+
+<div *ngIf="!loading && accepted">
+  <h1>Paiement accepté</h1>
+
+  <p>Le paiement a été confirmé. Voici les objets qui étaient commandés :</p>
+  <app-cart [displayMode]="true">
+    <p>Une fois les bracelets distribués, vous pouvez retourner à la caisse.</p>
+    <a class="btn btn-outline-dark" [routerLink]="['/pos', configId]">C'est tout bon!</a>
+  </app-cart>
+</div>
+

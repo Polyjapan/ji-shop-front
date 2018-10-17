@@ -8,6 +8,6 @@ export const environment = {
   apiurl: 'http://localhost:9000',
   tokenWhitelist: ['localhost:9000'],
   sumUpKey: 'a-wrong-key',
-  sumUpApp: 'ch.japan-impact.shop'
-
+  sumUpApp: 'japan_impact',
+  baseUrl: 'http://localhost:9000'
 };

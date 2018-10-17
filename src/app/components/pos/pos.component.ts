@@ -19,11 +19,13 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 export class PosComponent implements OnInit {
   items: PosConfigItem[][];
   loading = true;
+  configId: number;
 
   // Processing checkout
   checkoutPrice: number;
   checkoutOrderId: number;
   checkoutErrors: string[];
+
 
   givenAmount: number;
 
@@ -83,12 +85,18 @@ export class PosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.resetComponent(); // just in case
-
     const params = this.route.snapshot.paramMap;
-    const configId = parseInt(params.get('configId'), 10);
 
-    this.backend.getPosConfiguration(configId).subscribe(data => {
+    const queryParams = this.route.snapshot.queryParams;
+
+    if (isNullOrUndefined(queryParams.noClear) || queryParams.noClear === false) {
+      this.resetComponent(); // just in case
+      console.log('Resetting component');
+    }
+
+    this.configId = parseInt(params.get('configId'), 10) as number;
+
+    this.backend.getPosConfiguration(this.configId).subscribe(data => {
       this.items = this.buildRows(data.items);
       this.loading = false;
     }, err => {
@@ -147,13 +155,19 @@ export class PosComponent implements OnInit {
   }
 
   sumUpURL(receiptEmail: HTMLInputElement, receiptPhone: HTMLInputElement): SafeUrl {
+    if (this.configId === undefined) {
+      return null;
+    }
+
+    const baseUrl = environment.baseUrl;
+
     let url = 'sumupmerchant://pay/1.0?' +
       'affiliate-key=' + environment.sumUpKey +
       '&app-id=' + environment.sumUpApp +
       '&total=' + this.checkoutPrice +
       '&currency=CHF' +
       '&title=PolyJapan AGEPoly' +
-      '&callback=http://example.com/myapp/mycallback';
+      '&callback=' + baseUrl + '/pos/' + this.configId + '/callback';
 
     if (!isNullOrUndefined(receiptEmail.value) && receiptEmail.value !== '') {
       url += '&receipt-email=' + receiptEmail.value;

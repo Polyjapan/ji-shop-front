@@ -43,7 +43,7 @@ export class SumupService {
   }
 
   public paymentCallback(status: string, message: string, receipt: boolean, transactionCode: string,
-                         failureCode?: string): Observable<Boolean> {
+                         failureCode?: string): Observable<boolean> {
 
     if (isNullOrUndefined(this.currentTransaction)) {
       return Observable.of(false);
@@ -59,10 +59,8 @@ export class SumupService {
     };
 
     return this.backend.sendPosLog(this.currentTransaction, log).map(value => {
-      if (value.success === true) {
-        this.currentTransaction = undefined;
-        this.save();
-      }
+      this.currentTransaction = undefined;
+      this.save();
 
       return value.success;
     });

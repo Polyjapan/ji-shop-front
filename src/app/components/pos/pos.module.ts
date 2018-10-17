@@ -9,11 +9,13 @@ import {PosSelectComponent} from './pos-select.component';
 import {RouterModule} from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SumupService} from './sumup.service';
+import {PosCallbackComponent} from './pos-callback.component';
 
 @NgModule({
   declarations: [
     PosComponent,
-    PosSelectComponent
+    PosSelectComponent,
+    PosCallbackComponent
   ],
   imports: [
     BrowserModule,

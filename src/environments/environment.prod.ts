@@ -3,5 +3,6 @@ export const environment = {
   apiurl: 'https://shop.japan-impact.ch/api',
   tokenWhitelist: ['shop.japan-impact.ch'],
   sumUpKey: 'a-wrong-key',
-  sumUpApp: 'ch.japan-impact.shop'
+  sumUpApp: 'japan_impact',
+  baseUrl: 'https://shop.japan-impact.ch'
 };
