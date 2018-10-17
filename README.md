@@ -18,7 +18,7 @@
   -  [ ] Create and update products within events
   -  [ ] Update the default template
   -  [x] Create free tickets of any kind of item
-  -  [ ] Sell tickets with banknotes/physical money
+  -  [x] Sell tickets with banknotes/physical money
   -  [ ] Import tickets from resellers
   -  [x] Scan tickets
     -  [x] Feedback sonore  
