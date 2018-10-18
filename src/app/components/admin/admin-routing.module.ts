@@ -4,6 +4,7 @@ import {PermissionAuthGuard} from '../../services/permission-auth-guard.service'
 import {AdminHomeComponent} from './admin-home.component';
 import {AdminComponent} from './admin.component';
 import {Permissions} from '../../constants/permissions';
+import {AdminShowStatsComponent} from './admin-show-stats.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
         path: '',
         canActivateChild: [PermissionAuthGuard],
         children: [
-          { path: '', component: AdminHomeComponent }
+          { path: '', component: AdminHomeComponent },
+          { path: 'stats/:event', component: AdminShowStatsComponent },
         ]
       }
     ]

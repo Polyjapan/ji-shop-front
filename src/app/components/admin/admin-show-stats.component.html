@@ -1,0 +1,25 @@
+<h1>Statistiques d'un événement</h1>
+
+<table *ngIf="stats" class="table table-bordered table-striped">
+  <tr>
+    <th>Produit</th>
+    <th>Prix unitaire</th>
+    <th>Web</th>
+    <th>Sur place</th>
+    <th>Cadeaux</th>
+    <th>Import</th>
+    <th>Total</th>
+  </tr>
+
+  <tr *ngFor="let line of stats">
+    <td>{{line.product.name}}</td>
+    <td>{{line.product.price}}</td>
+    <td>{{priceStats(line.salesData.WEB)}}</td>
+    <td>{{priceStats(line.salesData.ONSITE)}}</td>
+    <td>{{priceStats(line.salesData.GIFT)}}</td>
+    <td>{{priceStats(line.salesData.RESELLER)}}</td>
+    <td>{{priceTotal(line.salesData)}}</td>
+  </tr>
+</table>
+
+<p *ngIf="!stats" class="text-muted"><i>Récupération des statustuqyes en cours...</i></p>

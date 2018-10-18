@@ -1,0 +1,6 @@
+
+<ul *ngIf="editions">
+  <li *ngFor="let event of editions"><a [routerLink]="['stats', event.id]">{{event.name}}</a> </li>
+</ul>
+
+<p *ngIf="!editions" class="text-muted"><i>Récupération des éditions en cours...</i></p>

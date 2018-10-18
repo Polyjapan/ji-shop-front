@@ -6,11 +6,12 @@ import {ItemsResponse} from '../types/items';
 import {CheckedOutItem, FullOrder, Order, Source} from '../types/order';
 import {LoginResponse} from './auth.service';
 import {ApiResult} from '../types/api_result';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ScanResult} from '../types/scan_result';
 import {ScanConfiguration} from '../types/scan_configuration';
 import {PosConfiguration, PosGetConfigResponse, PosOrderResponse, PosPaymentLog} from '../types/pos_configuration';
+import {StatsReturn} from '../types/stats';
 
 
 @Injectable()
@@ -24,6 +25,21 @@ export class BackendService {
   private _posUrl = this._baseApiUrl + '/pos';
 
   constructor(private http: HttpClient) {
+  }
+
+  getEditions(): Observable<Event[]> {
+    return this.http.get<Event[]>(this._adminUrl + '/stats');
+  }
+
+  getStats(event: number, start?: number, end?: number): Observable<StatsReturn[]> {
+    const params = new HttpParams();
+    if (start) {
+      params.append('start', start.toString(10));
+    }
+    if (end) {
+      params.append('end', end.toString(10))
+    }
+    return this.http.get<StatsReturn[]>(this._adminUrl + '/stats/' + event, {params: params})
   }
 
   getItems(): Observable<ItemsResponse> {
