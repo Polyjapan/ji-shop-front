@@ -162,6 +162,11 @@ export class BackendService {
     return this.http
       .post<ApiResult>(this._posUrl + '/paymentLog/' + orderId, log);
   }
+
+  importTickets(event: number, tickets: string): Observable<ApiResult> {
+    return this.http
+      .post<ApiResult>(this._adminUrl + '/orders/import/' + event, tickets);
+  }
 }
 
 export class CheckOutResponse extends ApiResult {

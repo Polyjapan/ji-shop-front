@@ -10,6 +10,7 @@ import {AdminEventParentComponent} from './admin-event-parent.component';
 import {AdminCreateEventComponent} from './admin-create-event.component';
 import {AdminListProductsComponent} from './admin-list-products.component';
 import {AdminCreateProductComponent} from './admin-create-product.component';
+import {AdminUploadImportComponent} from './admin-upload-import.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
               {path: '', component: AdminEventComponent, data: {name: 'Menu principal'}},
               {path: 'stats', component: AdminShowStatsComponent, data: {name: 'Statistiques'}},
               {path: 'update', component: AdminCreateEventComponent, data: {name: 'Edition'}},
+              {path: 'import', component: AdminUploadImportComponent, data: {name: 'Importation Fnac', permission: Permissions.IMPORT_EXTERNAL}},
               {
                 path: 'products', data: {name: 'Produits'},
                 children: [

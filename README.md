@@ -12,13 +12,13 @@
   -  [x] Select products and purchase them
   -  [x] Go to the payment page and pay
   -  [x] Display bought tickets on the user page
-- [ ] (Admin) Manage the shop
+- [x] (Admin) Manage the shop
   -  [x] Create and update events
   -  [x] Deep clone events
   -  [x] Create and update products within events
   -  [x] Create free tickets of any kind of item
   -  [x] Sell tickets with banknotes/physical money
-  -  [ ] Import tickets from resellers
+  -  [x] Import tickets from resellers
   -  [x] Scan tickets
     -  [x] Feedback sonore  
 - [ ] (Admin) Read data

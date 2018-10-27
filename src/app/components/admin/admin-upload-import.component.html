@@ -1,0 +1,22 @@
+<h2>Import FNAC</h2>
+
+<p>Utilisez ce formulaire pour uploader un fichier de billets fnac. Attention, un fichier ne peut être importé qu'une
+  seule fois.</p>
+
+
+<div class="alert alert-danger" role="alert" *ngIf="errors">
+  <p>Impossible d'envoyer le fichier !</p>
+  <ul>
+    <li *ngFor="let err of errors">{{err}}</li>
+  </ul>
+</div>
+<div *ngIf="success" class="alert alert-success"><b>Parfait !</b> La liste a bien été importée :)
+</div>
+<form>
+  <div class="form-group">
+    <label for="file">Fichier à importer</label>
+    <input type="file" class="form-control-file" name="file" id="file" #file>
+  </div>
+
+  <button type="submit" class="btn btn-success" (click)="submit(file)" [disabled]="sending">Envoi</button>
+</form>
