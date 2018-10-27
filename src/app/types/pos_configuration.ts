@@ -27,6 +27,6 @@ export class PosPaymentLog {
   cardReceiptSend?: boolean;
   cardTransactionMessage?: string;
 
-
-
+  logDate?: number;
+  orderId?: number;
 }

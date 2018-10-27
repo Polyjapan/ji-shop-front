@@ -8,6 +8,16 @@ export class Order {
   source: Source;
 }
 
+export class FullOrderData {
+  id: number;
+  clientId: number;
+  ticketsPrice: number;
+  totalPrice: number;
+  paymentConfirmed: number;
+  enterDate: number;
+  source: Source;
+}
+
 export class OrderedProduct {
   product: Item;
   paidPrice: number;
@@ -24,7 +34,6 @@ export class FullOrder {
 export enum Source {
   Web = 'WEB', OnSite = 'ONSITE', Reseller = 'RESELLER', Gift = 'GIFT'
 }
-
 
 export class CheckedOutItem {
   itemId: number;

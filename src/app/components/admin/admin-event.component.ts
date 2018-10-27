@@ -15,6 +15,7 @@ import {Source} from '../../types/order';
       <li><a routerLink="update">Modifier les paramètres de l'événement</a></li>
       <li><a routerLink="products">Gérer les produits vendus dans l'événement</a></li>
       <li><a routerLink="import">Import de billets FNAC</a></li>
+      <li><a routerLink="orders">Listing des commandes</a></li>
     </ul>
   `
 })

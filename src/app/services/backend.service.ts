@@ -3,7 +3,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import {environment} from '../../environments/environment';
 import {Item, ItemsResponse} from '../types/items';
-import {CheckedOutItem, FullOrder, Order, Source} from '../types/order';
+import {CheckedOutItem, FullOrder, FullOrderData, Order, Source} from '../types/order';
 import {LoginResponse} from './auth.service';
 import {ApiResult} from '../types/api_result';
 import {HttpClient, HttpParams} from '@angular/common/http';
@@ -13,6 +13,7 @@ import {ScanConfiguration} from '../types/scan_configuration';
 import {Event} from '../types/event';
 import {PosConfiguration, PosGetConfigResponse, PosOrderResponse, PosPaymentLog} from '../types/pos_configuration';
 import {StatsReturn} from '../types/stats';
+import {Client} from '../types/client';
 
 
 @Injectable()
@@ -38,6 +39,18 @@ export class BackendService {
 
   getEvent(id: number): Observable<Event> {
     return this.http.get<Event>(this._adminUrl + '/events/' + id);
+  }
+
+  getOrdersByEvent(id: number): Observable<FullOrderData[]> {
+    return this.http.get<FullOrderData[]>(this._adminUrl + '/orders/' + id);
+  }
+
+  getOrderClient(order: number): Observable<Client> {
+    return this.http.get<Client>(this._adminUrl + '/orders/userInfo/' + order);
+  }
+
+  getOrderLogs(order: number): Observable<PosPaymentLog[]> {
+    return this.http.get<PosPaymentLog[]>(this._adminUrl + '/orders/logs/' + order);
   }
 
   createOrUpdateEvent(event: Event): Observable<number> {

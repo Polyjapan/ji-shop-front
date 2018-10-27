@@ -27,9 +27,9 @@
   -  [x] Display sales stats 
   -  [ ] See all clients
   -  [ ] Update clients permissions
-  -  [ ] See all orders
+  -  [x] See all orders
   -  [ ] Re-send emails from an order view
-  -  [ ] Force acceptation of an order
+  -  [x] Force acceptation of an order
 
 ## Credits (audio)
 

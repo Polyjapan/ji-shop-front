@@ -1,7 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {BackendService} from './services/backend.service';
 import {AuthModule, tokenGetter} from './services/auth.module';
@@ -24,6 +24,8 @@ import {PermissionAuthGuard} from './services/permission-auth-guard.service';
 import {AdminModule} from './components/admin/admin.module';
 import {PosModule} from './components/pos/pos.module';
 import {RecaptchaModule} from 'ng-recaptcha';
+import {OrderContentComponent} from './components/members/order-content.component';
+import {OrderContentModule} from './components/members/order-content.module';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import {RecaptchaModule} from 'ng-recaptcha';
     HomeModule,
     AdminModule,
     PosModule,
+    OrderContentModule,
     RecaptchaModule.forRoot(),
 
     JwtModule.forRoot({
@@ -65,4 +68,5 @@ import {RecaptchaModule} from 'ng-recaptcha';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

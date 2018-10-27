@@ -15,6 +15,9 @@ import {EventService} from './event.service';
 import {AdminListProductsComponent} from './admin-list-products.component';
 import {AdminCreateProductComponent} from './admin-create-product.component';
 import {AdminUploadImportComponent} from './admin-upload-import.component';
+import {AdminListOrdersComponent} from './admin-list-orders.component';
+import {AdminViewOrderComponent} from './admin-view-order.component';
+import {OrderContentModule} from '../members/order-content.module';
 
 @NgModule({
   declarations: [
@@ -27,14 +30,17 @@ import {AdminUploadImportComponent} from './admin-upload-import.component';
     AdminCreateEventComponent,
     AdminListProductsComponent,
     AdminCreateProductComponent,
-    AdminUploadImportComponent
+    AdminUploadImportComponent,
+    AdminListOrdersComponent,
+    AdminViewOrderComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AuthModule,
     FormsModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    OrderContentModule
   ],
   providers: [ EventService ]
 })

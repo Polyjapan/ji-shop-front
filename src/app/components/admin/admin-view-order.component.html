@@ -1,0 +1,42 @@
+<h2>Commande #{{id}}</h2>
+
+<h3>Informations sur l'utilisateur</h3>
+
+<ng-container *ngIf="user">
+  <ul>
+    <li><b>Nom : </b>{{user.firstname}} {{user.lastname}}</li>
+    <li><b>Email : </b>{{user.email}}</li>
+    <li><b>ID : </b>{{user.id}}</li>
+  </ul>
+</ng-container>
+<p *ngIf="!user">Chargement...</p>
+
+<h3>Infos sur la commande</h3>
+
+<ng-container *ngIf="order">
+  <ul>
+    <li><b>Paiement validé : </b>{{order.order.paymentConfirmed ? 'Oui' : 'Non'}}
+
+      <button class="btn btn-danger btn-sm" *ngIf="!order.order.paymentConfirmed" (click)="forceAccept()" [disabled]="working">
+        {{working ? 'En cours d\'acceptation...' : 'Forcer acceptation'}}
+      </button>
+
+    </li>
+    <li><b>Date de création : </b>{{formatDate(order.order.createdAt)}}</li>
+    <li><b>Source : </b>{{order.order.source}}</li>
+  </ul>
+
+  <h4>Contenu</h4>
+  <app-order-content [order]="order"></app-order-content>
+</ng-container>
+<p *ngIf="!user">Chargement...</p>
+
+<ng-container *ngIf="logs && logs.length > 0">
+  <h3>Logs</h3>
+
+  <ul>
+    <li *ngFor="let log of logs">
+      <i>{{formatDate(log.logDate)}} : {{log.accepted ? '(vaut acceptation)' : '(info)'}} paiement={{log.paymentMethod}} reçu={{log.cardReceiptSend}} tr_id={{log.cardTransactionCode}} tr_msg={{log.cardTransactionMessage}} tr_err={{log.cardTransactionFailureCause}}</i>
+    </li>
+  </ul>
+</ng-container>

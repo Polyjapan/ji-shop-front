@@ -11,6 +11,8 @@ import {AdminCreateEventComponent} from './admin-create-event.component';
 import {AdminListProductsComponent} from './admin-list-products.component';
 import {AdminCreateProductComponent} from './admin-create-product.component';
 import {AdminUploadImportComponent} from './admin-upload-import.component';
+import {AdminListOrdersComponent} from './admin-list-orders.component';
+import {AdminViewOrderComponent} from './admin-view-order.component';
 
 const routes: Routes = [
   {
@@ -34,13 +36,24 @@ const routes: Routes = [
               {path: '', component: AdminEventComponent, data: {name: 'Menu principal'}},
               {path: 'stats', component: AdminShowStatsComponent, data: {name: 'Statistiques'}},
               {path: 'update', component: AdminCreateEventComponent, data: {name: 'Edition'}},
-              {path: 'import', component: AdminUploadImportComponent, data: {name: 'Importation Fnac', permission: Permissions.IMPORT_EXTERNAL}},
+              {
+                path: 'import',
+                component: AdminUploadImportComponent,
+                data: {name: 'Importation Fnac', permission: Permissions.IMPORT_EXTERNAL}
+              },
               {
                 path: 'products', data: {name: 'Produits'},
                 children: [
                   {path: '', component: AdminListProductsComponent, data: {name: 'Liste'}},
                   {path: 'create', component: AdminCreateProductComponent, data: {name: 'Création'}},
                   {path: 'update/:productId', component: AdminCreateProductComponent, data: {name: 'Edition'}},
+                ]
+              },
+              {
+                path: 'orders', data: {name: 'Commandes'},
+                children: [
+                  {path: '', component: AdminListOrdersComponent, data: {name: 'Liste'}},
+                  {path: ':id', component: AdminViewOrderComponent, data: {name: 'Contenu de la commande'}},
                 ]
               },
             ]
