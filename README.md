@@ -28,7 +28,7 @@
   -  [ ] See all clients
   -  [ ] Update clients permissions
   -  [x] See all orders
-  -  [ ] Re-send emails from an order view
+  -  [x] Re-send emails from an order view
   -  [x] Force acceptation of an order
 
 ## Credits (audio)
