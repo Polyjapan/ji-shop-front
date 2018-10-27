@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import {environment} from '../../environments/environment';
-import {ItemsResponse} from '../types/items';
+import {Item, ItemsResponse} from '../types/items';
 import {CheckedOutItem, FullOrder, Order, Source} from '../types/order';
 import {LoginResponse} from './auth.service';
 import {ApiResult} from '../types/api_result';
@@ -32,6 +32,10 @@ export class BackendService {
     return this.http.get<Event[]>(this._adminUrl + '/events');
   }
 
+  getProducts(event: number): Observable<Item[]> {
+    return this.http.get<Item[]>(this._adminUrl + '/events/' + event + '/products');
+  }
+
   getEvent(id: number): Observable<Event> {
     return this.http.get<Event>(this._adminUrl + '/events/' + id);
   }
@@ -41,6 +45,18 @@ export class BackendService {
       return this.http.put<number>(this._adminUrl + '/events/' + event.id.toString(10), event);
     } else {
       return this.http.post<number>(this._adminUrl + '/events', event);
+    }
+  }
+
+  getProduct(eventId: number, productId: number): Observable<Item> {
+    return this.http.get<Item>(this._adminUrl + '/events/' + eventId + '/products/' + productId);
+  }
+
+  createOrUpdateProduct(eventId: number, product: Item): Observable<ApiResult> {
+    if (product.id) {
+      return this.http.put<ApiResult>(this._adminUrl + '/events/' + eventId + '/products/' + product.id, product);
+    } else {
+      return this.http.post<ApiResult>(this._adminUrl + '/events/' + eventId + '/products', product);
     }
   }
 

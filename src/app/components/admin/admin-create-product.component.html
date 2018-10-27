@@ -1,0 +1,84 @@
+<h1 *ngIf="!loading && isNew">Créer un produit</h1>
+<h2 *ngIf="!isNew">Modification d'un produit</h2>
+<br>
+
+<div *ngIf="updatedName" class="alert alert-success"><b>Parfait !</b> Le produit <i>{{updatedName}}</i> a bien été
+  {{updatedWasNew ? 'créé' : 'modifié'}}
+</div>
+
+<form *ngIf="!loading">
+  <div class="form-group">
+    <label for="prodName">Nom du produit</label>
+    <input type="text" class="form-control" id="prodName" name="prodName" placeholder="Billet 1 Jour Adulte"
+           [(ngModel)]="product.name" required>
+  </div>
+
+  <div class="form-group">
+    <label for="prodPrice">Prix du produit</label>
+    <input type="number" class="form-control" id="prodPrice" name="prodPrice" placeholder="42"
+           [(ngModel)]="product.price" required>
+  </div>
+
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="freePrice" id="freePrice" [(ngModel)]="product.freePrice">
+    <label class="form-check-label" for="freePrice">
+      Prix libre (si oui, le prix ci dessus devient le prix minimum)
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label for="shortDescr">Description courte (affichée dans la boutique)</label>
+
+    <textarea class="form-control" rows="3" id="shortDescr" name="shortDesc"
+              [(ngModel)]="product.description"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="longDescr">Description longue (affichée sur le billet)</label>
+
+    <textarea class="form-control" rows="3" id="longDescr" name="shortDesc"
+              [(ngModel)]="product.longDescription"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="remaining">Stock restant (-1 pour illimité)</label>
+    <input type="number" class="form-control" id="remaining" name="remaining" placeholder="42"
+           [(ngModel)]="product.maxItems" required>
+  </div>
+
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="isTicket" id="isTicket" [(ngModel)]="product.isTicket">
+    <label class="form-check-label" for="isTicket">
+      Ce produit est un billet (si non : c'est un goodie)
+    </label>
+  </div>
+
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="isVisible" id="isVisible" [(ngModel)]="product.isVisible">
+    <label class="form-check-label" for="isVisible">
+      Ce produit doit être visible aux clients
+    </label>
+  </div>
+  <br>
+
+  <ng-container *ngIf="isNew">
+    <button type="submit" class="btn btn-success" (click)="submit('list')" [disabled]="sending">Créer puis retourner à
+      la liste
+    </button>
+    <button type="submit" class="btn btn-primary" (click)="submit('clear')" [disabled]="sending">Créer puis créer un
+      nouveau
+    </button>
+  </ng-container>
+  <ng-container *ngIf="!isNew">
+    <button type="submit" class="btn btn-success" (click)="submit('list')" [disabled]="sending">Modifier puis retourner
+      à la liste
+    </button>
+    <button type="submit" class="btn btn-info" (click)="submit('stay')" [disabled]="sending">Modifier puis rester ici
+    </button>
+    <button type="submit" class="btn btn-primary" (click)="submit('clear')" [disabled]="sending">Modifier puis créer un
+      nouveau
+    </button>
+  </ng-container>
+</form>
+
+<p *ngIf="loading">Chargement...</p>

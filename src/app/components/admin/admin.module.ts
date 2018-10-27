@@ -12,6 +12,8 @@ import {AdminEventComponent} from './admin-event.component';
 import {AdminEventParentComponent} from './admin-event-parent.component';
 import {AdminCreateEventComponent} from './admin-create-event.component';
 import {EventService} from './event.service';
+import {AdminListProductsComponent} from './admin-list-products.component';
+import {AdminCreateProductComponent} from './admin-create-product.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import {EventService} from './event.service';
     AdminShowStatsComponent,
     AdminEventComponent,
     AdminEventParentComponent,
-    AdminCreateEventComponent
+    AdminCreateEventComponent,
+    AdminListProductsComponent,
+    AdminCreateProductComponent
   ],
   imports: [
     BrowserModule,

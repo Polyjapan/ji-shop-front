@@ -8,6 +8,8 @@ import {AdminShowStatsComponent} from './admin-show-stats.component';
 import {AdminEventComponent} from './admin-event.component';
 import {AdminEventParentComponent} from './admin-event-parent.component';
 import {AdminCreateEventComponent} from './admin-create-event.component';
+import {AdminListProductsComponent} from './admin-list-products.component';
+import {AdminCreateProductComponent} from './admin-create-product.component';
 
 const routes: Routes = [
   {
@@ -27,9 +29,16 @@ const routes: Routes = [
             canActivateChild: [PermissionAuthGuard],
             component: AdminEventParentComponent,
             children: [
-              { path: '', component: AdminEventComponent },
-              { path: 'stats', component: AdminShowStatsComponent },
-              { path: 'update', component: AdminCreateEventComponent },
+              { path: '', component: AdminEventComponent, data: {name: 'Menu principal'}  },
+              { path: 'stats', component: AdminShowStatsComponent, data: {name: 'Statistiques'} },
+              { path: 'update', component: AdminCreateEventComponent, data: {name: 'Edition'} },
+              { path: 'products', data: {name: 'Produits'},
+                children: [
+                  { path: '', component: AdminListProductsComponent, data: {name: 'Liste'} },
+                  { path: 'create', component: AdminCreateProductComponent, data: {name: 'Création'} },
+                  { path: 'update/:productId', component: AdminCreateProductComponent, data: {name: 'Edition'} },
+                ]
+              },
             ]
           }
         ]

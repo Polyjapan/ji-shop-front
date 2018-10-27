@@ -1,0 +1,22 @@
+<h2>Produits</h2>
+
+<table class="table">
+  <tr>
+    <th>Type</th>
+    <th>Nom</th>
+    <th>Description</th>
+    <th>Description longue</th>
+    <th>Prix</th>
+    <th>Qté rest</th>
+  </tr>
+  <tr *ngFor="let item of items">
+    <td><span [class]="'badge badge-' + (item.isTicket ? 'info' : 'warning')">{{ item.isTicket ? 'Billet' : 'Goodie'}}</span> <i [class]="'fas ' + (item.isVisible ? 'fa-eye' : 'fa-eye-slash')"></i></td>
+    <td><a [routerLink]="['update', item.id]">{{item.name}}</a></td>
+    <td>{{item.description}}</td>
+    <td>{{item.longDescription}}</td>
+    <td>{{item.price}} <span class="badge badge-danger" *ngIf="item.freePrice">Prix libre</span></td>
+    <td>{{item.maxItems}}</td>
+  </tr>
+</table>
+
+<p *ngIf="!items" class="text-muted"><i>Récupération des produits en cours...</i></p>

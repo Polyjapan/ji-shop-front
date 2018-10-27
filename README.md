@@ -13,9 +13,9 @@
   -  [x] Go to the payment page and pay
   -  [x] Display bought tickets on the user page
 - [ ] (Admin) Manage the shop
-  -  [ ] Create and update events
+  -  [x] Create and update events
   -  [ ] Deep clone events
-  -  [ ] Create and update products within events
+  -  [x] Create and update products within events
   -  [ ] Update the default template
   -  [x] Create free tickets of any kind of item
   -  [x] Sell tickets with banknotes/physical money

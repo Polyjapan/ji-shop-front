@@ -20,9 +20,6 @@
     </label>
   </div>
 
-
-  <p>L'événement sera caché par défaut, pour vous laisser le temps d'y ajouter des produits.</p>
-
   <button *ngIf="!isNew" type="submit" class="btn btn-primary" (click)="submit()" [disabled]="sending">Modifier</button>
   <button *ngIf="isNew" type="submit" class="btn btn-primary" (click)="submit()" [disabled]="sending">Créer</button>
 </form>

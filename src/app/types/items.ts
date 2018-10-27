@@ -1,12 +1,5 @@
-export class ItemsResponse {
-  tickets: ItemList[];
-  goodies: ItemList[];
-}
+import { Event } from './event';
 
-export class ItemList {
-  event: Event;
-  items: Item[];
-}
 
 export class Item {
   id?: number;
@@ -19,6 +12,16 @@ export class Item {
   isTicket: boolean;
   freePrice: boolean;
   isVisible: boolean;
+}
+
+export class ItemList {
+  event: Event;
+  items: Item[];
+}
+
+export class ItemsResponse {
+  tickets: ItemList[];
+  goodies: ItemList[];
 }
 
 export class PosConfigItem {

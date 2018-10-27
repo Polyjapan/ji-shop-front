@@ -13,6 +13,7 @@ import {Source} from '../../types/order';
     <ul>
       <li><a routerLink="stats">Statistiques de l'événement</a></li>
       <li><a routerLink="update">Modifier les paramètres de l'événement</a></li>
+      <li><a routerLink="products">Gérer les produits vendus dans l'événement</a></li>
     </ul>
   `
 })
