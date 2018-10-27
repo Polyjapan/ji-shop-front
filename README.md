@@ -14,9 +14,8 @@
   -  [x] Display bought tickets on the user page
 - [ ] (Admin) Manage the shop
   -  [x] Create and update events
-  -  [ ] Deep clone events
+  -  [x] Deep clone events
   -  [x] Create and update products within events
-  -  [ ] Update the default template
   -  [x] Create free tickets of any kind of item
   -  [x] Sell tickets with banknotes/physical money
   -  [ ] Import tickets from resellers
@@ -24,7 +23,13 @@
     -  [x] Feedback sonore  
 - [ ] (Admin) Read data
   -  [ ] Export all tickets for a given edition to different lists
-  -  [ ] Display stats 
+  -  [ ] Display scan stats
+  -  [x] Display sales stats 
+  -  [ ] See all clients
+  -  [ ] Update clients permissions
+  -  [ ] See all orders
+  -  [ ] Re-send emails from an order view
+  -  [ ] Force acceptation of an order
 
 ## Credits (audio)
 

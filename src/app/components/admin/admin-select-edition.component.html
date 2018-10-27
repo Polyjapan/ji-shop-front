@@ -1,6 +1,6 @@
 
 <ul *ngIf="editions">
-  <li *ngFor="let event of editions"><a [routerLink]="[event.id]">{{event.name}}</a> </li>
+  <li *ngFor="let event of editions"><a [routerLink]="[event.id]">{{event.name}}</a> [<a [routerLink]="['clone', event.id]">cloner</a>] </li>
 </ul>
 <p *ngIf="!editions" class="text-muted"><i>Récupération des éditions en cours...</i></p>
 

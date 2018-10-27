@@ -7,6 +7,7 @@ import * as Errors from '../../constants/errors';
 import {ErrorCodes} from '../../constants/errors';
 import {Event} from '../../types/event';
 import {EventService} from './event.service';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-admin-create-event',
@@ -17,11 +18,20 @@ export class AdminCreateEventComponent implements OnInit {
   sending = false;
   loading = false;
   isNew = true;
+  cloneId: number;
 
   constructor(private backend: BackendService, private router: Router, private route: ActivatedRoute, private eventService: EventService) {}
 
   submit() {
-    this.backend.createOrUpdateEvent(this.event).subscribe(
+    let obs: Observable<number>;
+
+    if (!this.cloneId) {
+      obs = this.backend.createOrUpdateEvent(this.event);
+    } else {
+      obs = this.backend.cloneEvent(this.cloneId, this.event);
+    }
+
+    obs.subscribe(
       res => {
         this.eventService.invalidate();
         this.router.navigate(['admin', res]);
@@ -53,6 +63,17 @@ export class AdminCreateEventComponent implements OnInit {
             this.loading = false;
           });
         }
+      });
+    }
+
+    if (this.route.snapshot.paramMap.has('cloneId')) {
+      this.cloneId = Number(this.route.snapshot.paramMap.get('cloneId'));
+
+      // Still load the event
+      this.loading = true;
+      this.backend.getEvent(this.cloneId).subscribe(ev => {
+        this.event = ev;
+        this.loading = false;
       });
     }
 

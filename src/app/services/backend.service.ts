@@ -48,6 +48,10 @@ export class BackendService {
     }
   }
 
+  cloneEvent(toClone: number, event: Event): Observable<number> {
+    return this.http.post<number>(this._adminUrl + '/events/clone/' + toClone, event);
+  }
+
   getProduct(eventId: number, productId: number): Observable<Item> {
     return this.http.get<Item>(this._adminUrl + '/events/' + eventId + '/products/' + productId);
   }
@@ -68,7 +72,7 @@ export class BackendService {
     if (end) {
       params.append('end', end.toString(10));
     }
-    return this.http.get<StatsReturn[]>(this._adminUrl + '/stats/' + event, {params: params})
+    return this.http.get<StatsReturn[]>(this._adminUrl + '/stats/' + event, {params: params});
   }
 
   getItems(): Observable<ItemsResponse> {

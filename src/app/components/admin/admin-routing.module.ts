@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {PermissionAuthGuard} from '../../services/permission-auth-guard.service';
 import {AdminHomeComponent} from './admin-home.component';
 import {AdminComponent} from './admin.component';
@@ -16,27 +16,29 @@ const routes: Routes = [
     path: 'admin',
     component: AdminComponent,
     canActivate: [PermissionAuthGuard],
-    data: { permission: Permissions.ADMIN_ACCESS },
+    data: {permission: Permissions.ADMIN_ACCESS},
     children: [
       {
         path: '',
         canActivateChild: [PermissionAuthGuard],
         children: [
-          { path: '', component: AdminHomeComponent },
-          { path: 'create', component: AdminCreateEventComponent },
+          {path: '', component: AdminHomeComponent},
+          {path: 'create', component: AdminCreateEventComponent},
+          {path: 'clone/:cloneId', component: AdminCreateEventComponent},
           {
             path: ':event',
             canActivateChild: [PermissionAuthGuard],
             component: AdminEventParentComponent,
             children: [
-              { path: '', component: AdminEventComponent, data: {name: 'Menu principal'}  },
-              { path: 'stats', component: AdminShowStatsComponent, data: {name: 'Statistiques'} },
-              { path: 'update', component: AdminCreateEventComponent, data: {name: 'Edition'} },
-              { path: 'products', data: {name: 'Produits'},
+              {path: '', component: AdminEventComponent, data: {name: 'Menu principal'}},
+              {path: 'stats', component: AdminShowStatsComponent, data: {name: 'Statistiques'}},
+              {path: 'update', component: AdminCreateEventComponent, data: {name: 'Edition'}},
+              {
+                path: 'products', data: {name: 'Produits'},
                 children: [
-                  { path: '', component: AdminListProductsComponent, data: {name: 'Liste'} },
-                  { path: 'create', component: AdminCreateProductComponent, data: {name: 'Création'} },
-                  { path: 'update/:productId', component: AdminCreateProductComponent, data: {name: 'Edition'} },
+                  {path: '', component: AdminListProductsComponent, data: {name: 'Liste'}},
+                  {path: 'create', component: AdminCreateProductComponent, data: {name: 'Création'}},
+                  {path: 'update/:productId', component: AdminCreateProductComponent, data: {name: 'Edition'}},
                 ]
               },
             ]
@@ -48,7 +50,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AdminRoutingModule {}
+export class AdminRoutingModule {
+}

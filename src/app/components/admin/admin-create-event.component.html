@@ -1,6 +1,9 @@
-<h1 *ngIf="!loading && isNew">Créer un événement</h1>
+<h1 *ngIf="!loading && isNew && !cloneId">Créer un événement</h1>
+<h1 *ngIf="!loading && isNew && cloneId">Clonage d'un événement</h1>
 <h2 *ngIf="!isNew">Modification de l'événement</h2>
 <br>
+
+
 
 <form *ngIf="!loading">
   <div class="form-group">
@@ -19,6 +22,9 @@
       Visible au public
     </label>
   </div>
+
+  <p *ngIf="cloneId"><i>Vous êtes en mode clonage, ce qui signifie que tous les produits de l'événement cloné seront
+  copiés dans ce nouvel événement à sa création.</i></p>
 
   <button *ngIf="!isNew" type="submit" class="btn btn-primary" (click)="submit()" [disabled]="sending">Modifier</button>
   <button *ngIf="isNew" type="submit" class="btn btn-primary" (click)="submit()" [disabled]="sending">Créer</button>
