@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {BackendService} from '../../services/backend.service';
+import {BackendService} from '../../../services/backend.service';
 import {ActivatedRoute} from '@angular/router';
-import {AuthService} from '../../services/auth.service';
-import * as Errors from '../../constants/errors';
-import {ErrorCodes} from '../../constants/errors';
+import {AuthService} from '../../../services/auth.service';
+import * as Errors from '../../../constants/errors';
+import {ErrorCodes} from '../../../constants/errors';
 
 @Component({
   selector: 'app-admin-import',

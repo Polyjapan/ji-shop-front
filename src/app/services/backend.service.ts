@@ -53,6 +53,10 @@ export class BackendService {
     return this.http.get<PosPaymentLog[]>(this._adminUrl + '/orders/logs/' + order);
   }
 
+  resendEmail(order: number): Observable<ApiResult> {
+    return this.http.get<ApiResult>(this._adminUrl + '/orders/resend/' + order);
+  }
+
   createOrUpdateEvent(event: Event): Observable<number> {
     if (event.id) {
       return this.http.put<number>(this._adminUrl + '/events/' + event.id.toString(10), event);

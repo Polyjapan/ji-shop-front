@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {BackendService} from '../../services/backend.service';
+import {BackendService} from '../../../services/backend.service';
 import {ActivatedRoute} from '@angular/router';
-import {SalesData, StatsReturn} from '../../types/stats';
-import {FullOrder, FullOrderData, Order, Source} from '../../types/order';
-import {Item, ItemList} from '../../types/items';
-import {Event} from '../../types/event';
-import {Client} from '../../types/client';
-import {PosPaymentLog} from '../../types/pos_configuration';
+import {SalesData, StatsReturn} from '../../../types/stats';
+import {FullOrder, FullOrderData, Order, Source} from '../../../types/order';
+import {Item, ItemList} from '../../../types/items';
+import {Event} from '../../../types/event';
+import {Client} from '../../../types/client';
+import {PosPaymentLog} from '../../../types/pos_configuration';
 
 @Component({
   selector: 'app-admin-view-order',
@@ -18,6 +18,7 @@ export class AdminViewOrderComponent implements OnInit {
   logs: PosPaymentLog[];
   id: number;
   working = false;
+  sending = false;
 
 
   constructor(private backend: BackendService, private route: ActivatedRoute) {
@@ -45,5 +46,14 @@ export class AdminViewOrderComponent implements OnInit {
         this.backend.getOrder(this.id).subscribe(ord => this.order = ord);
       });
     }
+  }
+
+  resendEmail() {
+    this.sending = true;
+    this.backend.resendEmail(this.id).subscribe(res => {
+      this.sending = false;
+      alert('L\'Email a bien été renvoyé.');
+    });
+
   }
 }

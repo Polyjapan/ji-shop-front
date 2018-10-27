@@ -21,6 +21,10 @@
         {{working ? 'En cours d\'acceptation...' : 'Forcer acceptation'}}
       </button>
 
+
+      <button class="btn btn-warning btn-sm" *ngIf="order.order.paymentConfirmed" (click)="resendEmail()" [disabled]="sending">
+        {{sending ? 'En cours d\'envoi...' : 'Renvoyer les billets'}}
+      </button>
     </li>
     <li><b>Date de création : </b>{{formatDate(order.order.createdAt)}}</li>
     <li><b>Source : </b>{{order.order.source}}</li>

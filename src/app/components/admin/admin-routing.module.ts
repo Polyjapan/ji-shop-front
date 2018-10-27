@@ -4,15 +4,15 @@ import {PermissionAuthGuard} from '../../services/permission-auth-guard.service'
 import {AdminHomeComponent} from './admin-home.component';
 import {AdminComponent} from './admin.component';
 import {Permissions} from '../../constants/permissions';
-import {AdminShowStatsComponent} from './admin-show-stats.component';
+import {AdminShowStatsComponent} from './orders/admin-show-stats.component';
 import {AdminEventComponent} from './admin-event.component';
 import {AdminEventParentComponent} from './admin-event-parent.component';
 import {AdminCreateEventComponent} from './admin-create-event.component';
-import {AdminListProductsComponent} from './admin-list-products.component';
-import {AdminCreateProductComponent} from './admin-create-product.component';
-import {AdminUploadImportComponent} from './admin-upload-import.component';
-import {AdminListOrdersComponent} from './admin-list-orders.component';
-import {AdminViewOrderComponent} from './admin-view-order.component';
+import {AdminListProductsComponent} from './products/admin-list-products.component';
+import {AdminCreateProductComponent} from './products/admin-create-product.component';
+import {AdminUploadImportComponent} from './orders/admin-upload-import.component';
+import {AdminListOrdersComponent} from './orders/admin-list-orders.component';
+import {AdminViewOrderComponent} from './orders/admin-view-order.component';
 
 const routes: Routes = [
   {

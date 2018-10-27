@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {BackendService} from '../../services/backend.service';
+import {BackendService} from '../../../services/backend.service';
 import {ActivatedRoute} from '@angular/router';
-import {SalesData, StatsReturn} from '../../types/stats';
-import {Source} from '../../types/order';
+import {SalesData, StatsReturn} from '../../../types/stats';
+import {Source} from '../../../types/order';
 
 @Component({
   selector: 'app-admin-show-stats',

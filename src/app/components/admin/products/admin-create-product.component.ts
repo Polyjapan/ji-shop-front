@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {BackendService} from '../../services/backend.service';
+import {BackendService} from '../../../services/backend.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import {SalesData, StatsReturn} from '../../types/stats';
-import {Source} from '../../types/order';
-import * as Errors from '../../constants/errors';
-import {ErrorCodes} from '../../constants/errors';
-import {Event} from '../../types/event';
-import {EventService} from './event.service';
-import {Item} from '../../types/items';
+import {SalesData, StatsReturn} from '../../../types/stats';
+import {Source} from '../../../types/order';
+import * as Errors from '../../../constants/errors';
+import {ErrorCodes} from '../../../constants/errors';
+import {Event} from '../../../types/event';
+import {EventService} from '../event.service';
+import {Item} from '../../../types/items';
 
 @Component({
   selector: 'app-admin-create-product',

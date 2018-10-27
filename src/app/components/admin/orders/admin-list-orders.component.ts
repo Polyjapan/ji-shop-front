@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {BackendService} from '../../services/backend.service';
+import {BackendService} from '../../../services/backend.service';
 import {ActivatedRoute} from '@angular/router';
-import {SalesData, StatsReturn} from '../../types/stats';
-import {FullOrderData, Order, Source} from '../../types/order';
-import {Item, ItemList} from '../../types/items';
-import {Event} from '../../types/event';
+import {SalesData, StatsReturn} from '../../../types/stats';
+import {FullOrderData, Order, Source} from '../../../types/order';
+import {Item, ItemList} from '../../../types/items';
+import {Event} from '../../../types/event';
 
 @Component({
   selector: 'app-admin-list-orders',
