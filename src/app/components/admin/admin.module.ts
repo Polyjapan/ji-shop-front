@@ -8,13 +8,20 @@ import {FormsModule} from '@angular/forms';
 import {AdminRoutingModule} from './admin-routing.module';
 import {AdminSelectEditionComponent} from './admin-select-edition.component';
 import {AdminShowStatsComponent} from './admin-show-stats.component';
+import {AdminEventComponent} from './admin-event.component';
+import {AdminEventParentComponent} from './admin-event-parent.component';
+import {AdminCreateEventComponent} from './admin-create-event.component';
+import {EventService} from './event.service';
 
 @NgModule({
   declarations: [
     AdminComponent,
     AdminHomeComponent,
     AdminSelectEditionComponent,
-    AdminShowStatsComponent
+    AdminShowStatsComponent,
+    AdminEventComponent,
+    AdminEventParentComponent,
+    AdminCreateEventComponent
   ],
   imports: [
     BrowserModule,
@@ -22,6 +29,7 @@ import {AdminShowStatsComponent} from './admin-show-stats.component';
     AuthModule,
     FormsModule,
     AdminRoutingModule
-  ]
+  ],
+  providers: [ EventService ]
 })
 export class AdminModule { }

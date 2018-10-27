@@ -10,6 +10,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ScanResult} from '../types/scan_result';
 import {ScanConfiguration} from '../types/scan_configuration';
+import {Event} from '../types/event';
 import {PosConfiguration, PosGetConfigResponse, PosOrderResponse, PosPaymentLog} from '../types/pos_configuration';
 import {StatsReturn} from '../types/stats';
 
@@ -28,7 +29,19 @@ export class BackendService {
   }
 
   getEditions(): Observable<Event[]> {
-    return this.http.get<Event[]>(this._adminUrl + '/stats');
+    return this.http.get<Event[]>(this._adminUrl + '/events');
+  }
+
+  getEvent(id: number): Observable<Event> {
+    return this.http.get<Event>(this._adminUrl + '/events/' + id);
+  }
+
+  createOrUpdateEvent(event: Event): Observable<number> {
+    if (event.id) {
+      return this.http.put<number>(this._adminUrl + '/events/' + event.id.toString(10), event);
+    } else {
+      return this.http.post<number>(this._adminUrl + '/events', event);
+    }
   }
 
   getStats(event: number, start?: number, end?: number): Observable<StatsReturn[]> {
@@ -37,7 +50,7 @@ export class BackendService {
       params.append('start', start.toString(10));
     }
     if (end) {
-      params.append('end', end.toString(10))
+      params.append('end', end.toString(10));
     }
     return this.http.get<StatsReturn[]>(this._adminUrl + '/stats/' + event, {params: params})
   }
