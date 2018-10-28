@@ -18,6 +18,9 @@ import {AdminViewUserComponent} from './users/admin-view-user.component';
 import {AdminSelectConfigComponent} from './scan/admin-select-config.component';
 import {AdminCreateScanningConfigComponent} from './scan/admin-create-scanning-config.component';
 import {AdminViewScanningConfigComponent} from './scan/admin-view-scanning-config.component';
+import {AdminSelectPosConfigComponent} from './pos/admin-select-pos-config.component';
+import {AdminCreatePosConfigComponent} from './pos/admin-create-pos-config.component';
+import {AdminViewPosConfigComponent} from './pos/admin-view-pos-config.component';
 
 const routes: Routes = [
   {
@@ -43,6 +46,15 @@ const routes: Routes = [
               {path: 'create', component: AdminCreateScanningConfigComponent},
               {path: ':id', component: AdminViewScanningConfigComponent},
               {path: ':id/update', component: AdminCreateScanningConfigComponent},
+            ],
+          },
+          {
+            path: 'pos',
+            children: [
+              {path: '', component: AdminSelectPosConfigComponent},
+              {path: 'create', component: AdminCreatePosConfigComponent},
+              {path: ':id', component: AdminViewPosConfigComponent},
+              {path: ':id/update', component: AdminCreatePosConfigComponent},
             ],
           },
           {

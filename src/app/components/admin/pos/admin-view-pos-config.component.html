@@ -1,0 +1,47 @@
+<ng-container *ngIf="config">
+  <h1>Gestion de la configuration POS <i>{{config.name}}</i></h1>
+  <p><a routerLink="update">Modifier la configuration</a> | <a routerLink="..">Retour</a></p>
+
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          Produits :
+        </div>
+        <div class="card-body">
+          <p>Cliquez sur un produit pour le retirer.</p>
+          <ul>
+            <li *ngFor="let item of items" (click)="removeProduct(item.item)">
+              <b [class]="item.color + ' ' + item.fontColor">{{item.item.name}}</b> ({{item.item.description}}) <br>
+              <code>Ligne: {{item.row}} / Colonne: {{item.col}} / Event: {{getEventName(item.item.eventId)}}</code>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          Ajouter des produits :
+        </div>
+        <div class="card-body">
+          <p>Cliquez sur un produit pour l'ajouter.</p>
+
+          <ul>
+            <li *ngFor="let itemList of filteredAvailableItems"><b>{{itemList.event.name}}</b>
+              <ul>
+                <app-admin-view-pos-item *ngFor="let prod of itemList.items" [item]="prod" [configId]="id"
+                                         (finish)="reload()"></app-admin-view-pos-item>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!config">
+  <h1>Chargement...</h1>
+</ng-container>

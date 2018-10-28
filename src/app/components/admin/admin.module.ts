@@ -24,6 +24,10 @@ import {AdminViewUserComponent} from './users/admin-view-user.component';
 import {AdminCreateScanningConfigComponent} from './scan/admin-create-scanning-config.component';
 import {AdminSelectConfigComponent} from './scan/admin-select-config.component';
 import {AdminViewScanningConfigComponent} from './scan/admin-view-scanning-config.component';
+import {AdminCreatePosConfigComponent} from './pos/admin-create-pos-config.component';
+import {AdminSelectPosConfigComponent} from './pos/admin-select-pos-config.component';
+import {AdminViewPosConfigComponent} from './pos/admin-view-pos-config.component';
+import {AdminViewPosItemComponent} from './pos/admin-view-pos-item.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,11 @@ import {AdminViewScanningConfigComponent} from './scan/admin-view-scanning-confi
     AdminViewUserComponent,
     AdminCreateScanningConfigComponent,
     AdminSelectConfigComponent,
-    AdminViewScanningConfigComponent
+    AdminViewScanningConfigComponent,
+    AdminCreatePosConfigComponent,
+    AdminSelectPosConfigComponent,
+    AdminViewPosConfigComponent,
+    AdminViewPosItemComponent
   ],
   imports: [
     BrowserModule,

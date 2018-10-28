@@ -1,0 +1,8 @@
+<h1>Choix de la configuration Point de Vente à modifier</h1>
+
+<ul *ngIf="configs">
+  <li *ngFor="let config of configs"><a [routerLink]="[config.id]">{{config.name}}</a></li>
+</ul>
+<p *ngIf="!configs" class="text-muted"><i>Récupération des configurations en cours...</i></p>
+
+<a class="btn btn-success" routerLink="create"><i class="fas fa-plus"> </i> Créer une configuration</a>

@@ -73,6 +73,14 @@ export class BackendService {
     }
   }
 
+  createOrUpdatePosConfig(config: PosConfiguration): Observable<number> {
+    if (config.id) {
+      return this.http.put<number>(this._posUrl + '/configurations/' + config.id.toString(10), config);
+    } else {
+      return this.http.post<number>(this._posUrl + '/configurations', config);
+    }
+  }
+
   cloneEvent(toClone: number, event: Event): Observable<number> {
     return this.http.post<number>(this._adminUrl + '/events/clone/' + toClone, event);
   }
@@ -214,6 +222,19 @@ export class BackendService {
 
   getPosConfiguration(id: number): Observable<PosGetConfigResponse> {
     return this.http.get<PosGetConfigResponse>(this._posUrl + '/configurations/' + id);
+  }
+
+  addProductToPosConfiguration(config: number, item: Item, row: number, col: number, bgColor: string, fgColor: string): Observable<ApiResult> {
+    return this.http
+      .post<ApiResult>(this._posUrl + '/configurations/' + config + '/addProduct', {
+        productId: item.id,
+        row: row, col: col, color: bgColor, textColor: fgColor
+      });
+  }
+
+  removeProductFromPosConfiguration(config: number, item: Item): Observable<ApiResult> {
+    return this.http
+      .post<ApiResult>(this._posUrl + '/configurations/' + config + '/removeProduct', item.id.toString());
   }
 
   placePosOrder(items: CheckedOutItem[]): Observable<PosOrderResponse> {
