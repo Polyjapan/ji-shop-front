@@ -1,0 +1,19 @@
+
+<table class="table">
+  <tr>
+    <th>#</th>
+    <th>Prix tickets</th>
+    <th>Prix total</th>
+    <th>Source</th>
+    <th>Créée le</th>
+    <th>Payée le</th>
+  </tr>
+  <tr *ngFor="let order of orders">
+    <td><a [routerLink]="routerLink(order.id)">{{order.id}}</a></td>
+    <td>{{order.ticketsPrice}}</td>
+    <td>{{order.totalPrice}}</td>
+    <td>{{order.source}}</td>
+    <td>{{formatDate(order.enterDate)}}</td>
+    <td>{{formatDate(order.paymentConfirmed)}}</td>
+  </tr>
+</table>

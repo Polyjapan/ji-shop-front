@@ -18,6 +18,9 @@ import {AdminUploadImportComponent} from './orders/admin-upload-import.component
 import {AdminListOrdersComponent} from './orders/admin-list-orders.component';
 import {AdminViewOrderComponent} from './orders/admin-view-order.component';
 import {OrderContentModule} from '../members/order-content.module';
+import {AdminFullOrderListComponent} from './admin-full-order-list.component';
+import {AdminListUsersComponent} from './users/admin-list-users.component';
+import {AdminViewUserComponent} from './users/admin-view-user.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import {OrderContentModule} from '../members/order-content.module';
     AdminCreateProductComponent,
     AdminUploadImportComponent,
     AdminListOrdersComponent,
-    AdminViewOrderComponent
+    AdminViewOrderComponent,
+    AdminFullOrderListComponent,
+    AdminListUsersComponent,
+    AdminViewUserComponent
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,7 @@
   <ul>
     <li><b>Nom : </b>{{user.firstname}} {{user.lastname}}</li>
     <li><b>Email : </b>{{user.email}}</li>
-    <li><b>ID : </b>{{user.id}}</li>
+    <li><b>ID : </b>{{user.id}} <a [routerLink]="['/', 'admin', 'users', user.id]">Voir le profil</a></li>
   </ul>
 </ng-container>
 <p *ngIf="!user">Chargement...</p>

@@ -13,7 +13,7 @@ import {ScanConfiguration} from '../types/scan_configuration';
 import {Event} from '../types/event';
 import {PosConfiguration, PosGetConfigResponse, PosOrderResponse, PosPaymentLog} from '../types/pos_configuration';
 import {StatsReturn} from '../types/stats';
-import {Client} from '../types/client';
+import {Client, ClientAndPermissions} from '../types/client';
 
 
 @Injectable()
@@ -108,6 +108,10 @@ export class BackendService {
     return this.http.get<Order[]>(this._ordersUrl + '/view');
   }
 
+  getOrdersByUser(user: number): Observable<FullOrderData[]> {
+    return this.http.get<FullOrderData[]>(this._adminUrl + '/orders/byUser/' + user);
+  }
+
   getOrder(id: number): Observable<FullOrder> {
     return this.http.get<FullOrder>(this._ordersUrl + '/view/' + id);
   }
@@ -183,6 +187,26 @@ export class BackendService {
   importTickets(event: number, tickets: string): Observable<ApiResult> {
     return this.http
       .post<ApiResult>(this._adminUrl + '/orders/import/' + event, tickets);
+  }
+
+  getClients(): Observable<Client[]> {
+    return this.http.get<Client[]>(this._adminUrl + '/users');
+  }
+
+  getClient(id: number): Observable<ClientAndPermissions> {
+    return this.http.get<ClientAndPermissions>(this._adminUrl + '/users/' + id);
+  }
+
+  forceEmailConfirm(id: number): Observable<ApiResult> {
+    return this.http.get<ApiResult>(this._adminUrl + '/users/' + id + '/acceptEmail');
+  }
+
+  addPermission(client: number, permission: string): Observable<ApiResult> {
+    return this.http.post<ApiResult>(this._adminUrl + '/users/' + client + '/permissions/add', permission);
+  }
+
+  removePermission(client: number, permission: string): Observable<ApiResult> {
+    return this.http.post<ApiResult>(this._adminUrl + '/users/' + client + '/permissions/remove', permission);
   }
 }
 

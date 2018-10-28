@@ -13,6 +13,8 @@ import {AdminCreateProductComponent} from './products/admin-create-product.compo
 import {AdminUploadImportComponent} from './orders/admin-upload-import.component';
 import {AdminListOrdersComponent} from './orders/admin-list-orders.component';
 import {AdminViewOrderComponent} from './orders/admin-view-order.component';
+import {AdminListUsersComponent} from './users/admin-list-users.component';
+import {AdminViewUserComponent} from './users/admin-view-user.component';
 
 const routes: Routes = [
   {
@@ -28,6 +30,9 @@ const routes: Routes = [
           {path: '', component: AdminHomeComponent},
           {path: 'create', component: AdminCreateEventComponent},
           {path: 'clone/:cloneId', component: AdminCreateEventComponent},
+          {path: 'users', component: AdminListUsersComponent},
+          {path: 'users/:id', component: AdminViewUserComponent},
+          {path: 'orders/:id', component: AdminViewOrderComponent},
           {
             path: ':event',
             canActivateChild: [PermissionAuthGuard],

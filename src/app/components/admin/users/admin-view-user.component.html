@@ -1,0 +1,42 @@
+<h2>Utilisateur #{{id}} <small><a routerLink="..">Retour</a> </small></h2>
+
+<h3>Informations sur l'utilisateur</h3>
+
+<ng-container *ngIf="user">
+  <ul>
+    <li><b>Nom : </b>{{user[0].firstname}} {{user[0].lastname}}</li>
+    <li><b>Email : </b>{{user[0].email}} ({{user[0].emailConfirmed ? 'Vérifié' : 'Non vérifié'}})
+      <button class="btn btn-danger btn-sm" *ngIf="!user[0].emailConfirmed" (click)="forceEmailConfirm()">Marquer comme vérifié</button></li>
+    <li><b>ID : </b>{{user[0].id}}</li>
+    <li><b>Newsletter : </b>{{user[0].acceptNewsletter ? 'Acceptée' : 'Refusée'}}</li>
+    <li><b>Algo de hash de mot de passe : </b>{{user[0].passwordAlgo}}</li>
+    <li><b>Réinitialisation de mot de passe : </b>{{formatDate(user[0].passwordResetEnd)}}</li>
+    <li><b>Permissions : </b>
+      <ul>
+        <li *ngFor="let perm of user[1]">
+          <code>{{perm}}</code> |
+          <button class="btn btn-danger btn-sm" (click)="deletePermission(perm)">Retirer</button>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>Ajouter des permissions :</p>
+
+  <form>
+    <div class="form-group">
+      <label for="perm">Permission à ajouter</label>
+      <input type="text" class="form-control" id="perm" name="perm" placeholder="staff.*" required #perm>
+    </div>
+
+    <button type="submit" class="btn btn-success" (click)="addPermission(perm)">Ajouter</button>
+  </form>
+
+</ng-container>
+<p *ngIf="!user">Chargement...</p>
+
+<hr>
+
+<h3>Commandes</h3>
+
+<app-admin-full-order-list [orders]="orders" *ngIf="orders" [routerLinkBase]="['/', 'admin', 'orders']"></app-admin-full-order-list>

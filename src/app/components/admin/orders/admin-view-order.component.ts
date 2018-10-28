@@ -1,10 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BackendService} from '../../../services/backend.service';
 import {ActivatedRoute} from '@angular/router';
-import {SalesData, StatsReturn} from '../../../types/stats';
-import {FullOrder, FullOrderData, Order, Source} from '../../../types/order';
-import {Item, ItemList} from '../../../types/items';
-import {Event} from '../../../types/event';
+import {FullOrder} from '../../../types/order';
 import {Client} from '../../../types/client';
 import {PosPaymentLog} from '../../../types/pos_configuration';
 
