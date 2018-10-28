@@ -15,6 +15,9 @@ import {AdminListOrdersComponent} from './orders/admin-list-orders.component';
 import {AdminViewOrderComponent} from './orders/admin-view-order.component';
 import {AdminListUsersComponent} from './users/admin-list-users.component';
 import {AdminViewUserComponent} from './users/admin-view-user.component';
+import {AdminSelectConfigComponent} from './scan/admin-select-config.component';
+import {AdminCreateScanningConfigComponent} from './scan/admin-create-scanning-config.component';
+import {AdminViewScanningConfigComponent} from './scan/admin-view-scanning-config.component';
 
 const routes: Routes = [
   {
@@ -33,6 +36,15 @@ const routes: Routes = [
           {path: 'users', component: AdminListUsersComponent},
           {path: 'users/:id', component: AdminViewUserComponent},
           {path: 'orders/:id', component: AdminViewOrderComponent},
+          {
+            path: 'scan',
+            children: [
+              {path: '', component: AdminSelectConfigComponent},
+              {path: 'create', component: AdminCreateScanningConfigComponent},
+              {path: ':id', component: AdminViewScanningConfigComponent},
+              {path: ':id/update', component: AdminCreateScanningConfigComponent},
+            ],
+          },
           {
             path: ':event',
             canActivateChild: [PermissionAuthGuard],

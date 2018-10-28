@@ -1,0 +1,53 @@
+<ng-container *ngIf="config">
+  <h1>Gestion de la configuration <i>{{config.name}}</i></h1>
+  <p>Goodies : {{config.acceptOrderTickets ? 'Acceptés' : 'Refusés'}}</p>
+  <p><a routerLink="update">Modifier la configuration</a> | <a routerLink="..">Retour</a></p>
+
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          Produits acceptés :
+        </div>
+        <div class="card-body">
+          <p>Cliquez sur un produit pour le retirer.</p>
+          <ul>
+            <li *ngFor="let itemList of config.items"><b>{{itemList.event.name}}</b>
+              <ul>
+                <li *ngFor="let prod of itemList.items" (click)="removeProduct(prod)">
+                  <b>{{prod.name}}</b> ({{prod.description}})
+                </li>
+              </ul>
+            </li>
+            <li *ngIf="config.acceptOrderTickets"><i>Tous les goodies</i></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          Ajouter des produits :
+        </div>
+        <div class="card-body">
+          <p>Cliquez sur un produit pour l'ajouter.</p>
+
+          <ul>
+            <li *ngFor="let itemList of filteredAvailableItems"><b>{{itemList.event.name}}</b>
+              <ul>
+                <li *ngFor="let prod of itemList.items" (click)="addProduct(prod)">
+                  <b>{{prod.name}}</b> ({{prod.description}})
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!config">
+  <h1>Chargement...</h1>
+</ng-container>

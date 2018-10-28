@@ -21,6 +21,9 @@ import {OrderContentModule} from '../members/order-content.module';
 import {AdminFullOrderListComponent} from './admin-full-order-list.component';
 import {AdminListUsersComponent} from './users/admin-list-users.component';
 import {AdminViewUserComponent} from './users/admin-view-user.component';
+import {AdminCreateScanningConfigComponent} from './scan/admin-create-scanning-config.component';
+import {AdminSelectConfigComponent} from './scan/admin-select-config.component';
+import {AdminViewScanningConfigComponent} from './scan/admin-view-scanning-config.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import {AdminViewUserComponent} from './users/admin-view-user.component';
     AdminViewOrderComponent,
     AdminFullOrderListComponent,
     AdminListUsersComponent,
-    AdminViewUserComponent
+    AdminViewUserComponent,
+    AdminCreateScanningConfigComponent,
+    AdminSelectConfigComponent,
+    AdminViewScanningConfigComponent
   ],
   imports: [
     BrowserModule,

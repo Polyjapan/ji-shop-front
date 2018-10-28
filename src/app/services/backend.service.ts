@@ -2,14 +2,14 @@ import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import {environment} from '../../environments/environment';
-import {Item, ItemsResponse} from '../types/items';
+import {Item, ItemList, ItemsResponse} from '../types/items';
 import {CheckedOutItem, FullOrder, FullOrderData, Order, Source} from '../types/order';
 import {LoginResponse} from './auth.service';
 import {ApiResult} from '../types/api_result';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ScanResult} from '../types/scan_result';
-import {ScanConfiguration} from '../types/scan_configuration';
+import {ScanConfiguration, ScanConfigurationWithItems} from '../types/scan_configuration';
 import {Event} from '../types/event';
 import {PosConfiguration, PosGetConfigResponse, PosOrderResponse, PosPaymentLog} from '../types/pos_configuration';
 import {StatsReturn} from '../types/stats';
@@ -65,12 +65,24 @@ export class BackendService {
     }
   }
 
+  createOrUpdateConfig(config: ScanConfiguration): Observable<number> {
+    if (config.id) {
+      return this.http.put<number>(this._scanUrl + '/configurations/' + config.id.toString(10), config);
+    } else {
+      return this.http.post<number>(this._scanUrl + '/configurations', config);
+    }
+  }
+
   cloneEvent(toClone: number, event: Event): Observable<number> {
     return this.http.post<number>(this._adminUrl + '/events/clone/' + toClone, event);
   }
 
   getProduct(eventId: number, productId: number): Observable<Item> {
     return this.http.get<Item>(this._adminUrl + '/events/' + eventId + '/products/' + productId);
+  }
+
+  getScanningConfigurationsAcceptingProduct(product: number, event: number): Observable<ScanConfiguration[]> {
+    return this.http.get<ScanConfiguration[]>(this._adminUrl + '/events/' + event + '/products/' + product + '/acceptedBy');
   }
 
   createOrUpdateProduct(eventId: number, product: Item): Observable<ApiResult> {
@@ -98,6 +110,10 @@ export class BackendService {
 
   getAllItems(): Observable<ItemsResponse> {
     return this.http.get<ItemsResponse>(this._shopUrl + '/items/all');
+  }
+
+  getInvisibleItems(): Observable<ItemsResponse> {
+    return this.http.get<ItemsResponse>(this._shopUrl + '/items/invisible');
   }
 
   getPdf(barcode: string): Observable<Blob> {
@@ -164,6 +180,32 @@ export class BackendService {
 
   getScanningConfigurations(): Observable<ScanConfiguration[]> {
     return this.http.get<ScanConfiguration[]>(this._scanUrl + '/configurations');
+  }
+
+  getScanningConfiguration(id: number): Observable<ScanConfiguration> {
+    return this.http.get<ScanConfiguration>(this._scanUrl + '/configurations/' + id);
+  }
+
+  addProductToScanningConfiguration(config: number, item: Item): Observable<ApiResult> {
+    return this.http
+      .post<ApiResult>(this._scanUrl + '/configurations/' + config + '/addProduct', item.id.toString());
+  }
+
+  removeProductFromScanningConfiguration(config: number, item: Item): Observable<ApiResult> {
+    return this.http
+      .post<ApiResult>(this._scanUrl + '/configurations/' + config + '/removeProduct', item.id.toString());
+  }
+
+  getFullScanningConfiguration(id: number): Observable<ScanConfigurationWithItems> {
+    return this.http.get<any[]>(this._scanUrl + '/configurations/' + id + '/full')
+      .map(val => {
+        console.log(val);
+
+        const config = val[0] as ScanConfiguration;
+        config['items'] = val[1] as ItemList[];
+
+        return config as ScanConfigurationWithItems;
+      });
   }
 
   getPosConfigurations(): Observable<PosConfiguration[]> {
