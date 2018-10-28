@@ -60,7 +60,7 @@ export class AdminViewPosConfigComponent implements OnInit {
 
       this.reload();
       this.backend.getInvisibleItems().subscribe(res => {
-        this.availableItems = res.tickets;
+        this.availableItems = res.tickets.concat(res.goodies);
         this.filterAvailableItems();
       });
     });

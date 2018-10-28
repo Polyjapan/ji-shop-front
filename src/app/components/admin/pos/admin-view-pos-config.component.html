@@ -13,7 +13,7 @@
           <p>Cliquez sur un produit pour le retirer.</p>
           <ul>
             <li *ngFor="let item of items" (click)="removeProduct(item.item)">
-              <b [class]="item.color + ' ' + item.fontColor">{{item.item.name}}</b> ({{item.item.description}}) <br>
+              <b [class]="item.color + ' ' + item.fontColor">{{item.item.name}}</b> ({{item.item.description}}) [prix = {{item.item.price}}]<br>
               <code>Ligne: {{item.row}} / Colonne: {{item.col}} / Event: {{getEventName(item.item.eventId)}}</code>
             </li>
           </ul>
