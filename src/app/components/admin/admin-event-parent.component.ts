@@ -43,7 +43,6 @@ export class AdminEventParentComponent implements OnInit {
   }
 
   get firstChildren() {
-    console.log(this.children);
     if (this.children === null) {
       return [];
     }
@@ -85,14 +84,26 @@ export class AdminEventParentComponent implements OnInit {
       child = child.firstChild;
     }
 
-    console.log(children);
-
     this.children = children.length === 0 ? null : children;
     this.paths = paths;
   }
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('event'));
+    this.route.paramMap.subscribe(map => {
+      if (!map.has('event') || !map.get('event')) {
+        return;
+      }
+
+      const id = Number(map.get('event'));
+
+      this.eventService.clear();
+
+      this.eventService.get(id).subscribe(ev => {
+        console.log(ev);
+        this.event = ev;
+      });
+    });
+
 
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
@@ -101,13 +112,9 @@ export class AdminEventParentComponent implements OnInit {
         return route.snapshot;
       })).subscribe(path => this.buildChildrenArray(path));
 
+
     if (this.route.firstChild) {
       this.buildChildrenArray(this.route.snapshot);
     }
-
-    this.eventService.get(id).subscribe(ev => {
-      console.log(ev);
-      this.event = ev;
-    });
   }
 }

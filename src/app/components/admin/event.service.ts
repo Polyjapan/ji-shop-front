@@ -16,6 +16,10 @@ export class EventService {
     this.query();
   }
 
+  public clear() {
+    this.current = undefined;
+  }
+
   private query() {
     this.backend.getEvent(this.current).subscribe(ev => this.observable.next(ev));
   }
