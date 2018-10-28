@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
 import {filter, map} from 'rxjs/operators';
-import {EventService} from './event.service';
+import {EventService} from '../event.service';
 
 @Component({
   selector: 'app-admin-event-parent',

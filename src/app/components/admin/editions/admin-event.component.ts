@@ -1,8 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {BackendService} from '../../services/backend.service';
-import {ActivatedRoute} from '@angular/router';
-import {SalesData, StatsReturn} from '../../types/stats';
-import {Source} from '../../types/order';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-admin-event',
