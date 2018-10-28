@@ -7,6 +7,8 @@
     margin: 5px;
     box-sizing: border-box;
     padding: 0.5rem;
+    word-break: break-word;
+    position: relative;
   }
 </style>
 
@@ -131,7 +133,13 @@
       <div class="row" *ngFor="let row of items">
         <ng-container *ngFor="let item of row">
           <div *ngIf="item" [class]="getItemClasses(item)" (click)="addItem(item)">
-            <h2>{{item.item.name}}</h2>
+            <h4 style="display: inline-block; width: 100%;"><strong>{{item.item.name}}</strong></h4>
+
+            <div style="bottom: 0; right: 0; padding-right: 0.5rem; position: absolute;">
+              <h4>
+                {{item.item.price}}.-</h4>
+            </div>
+
           </div>
           <div *ngIf="!item" class="pos-item"></div>
         </ng-container>
