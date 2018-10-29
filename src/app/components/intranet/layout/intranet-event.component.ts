@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {NavigationComponent} from '../../abstraction/navigation-component';
+import {NavigationComponent} from '../../../abstraction/navigation-component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MenuItem} from '../sidebar/menuitem';
+import {MenuItem} from '../../sidebar/menuitem';
 
 @Component({
   selector: 'app-intranet-event',

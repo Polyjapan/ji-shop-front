@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {PartialIntranetTask, TaskPriority, TaskPriorityUtils} from '../../types/intranet';
+import {PartialIntranetTask, TaskPriority, TaskPriorityUtils} from '../../../types/intranet';
 
 @Component({
   selector: 'app-tasklist',

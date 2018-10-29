@@ -1,21 +1,8 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
-import {environment} from '../../../environments/environment';
-import {Item, ItemList, ItemsResponse} from '../../types/items';
-import {CheckedOutItem, FullOrder, FullOrderData, Order, Source} from '../../types/order';
-import {LoginResponse} from '../../services/auth.service';
-import {ApiResult} from '../../types/api_result';
-import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ScanResult} from '../../types/scan_result';
-import {ScanConfiguration, ScanConfigurationWithItems} from '../../types/scan_configuration';
-import {Event} from '../../types/event';
-import {PosConfiguration, PosGetConfigResponse, PosOrderResponse, PosPaymentLog} from '../../types/pos_configuration';
-import {StatsReturn} from '../../types/stats';
-import {Client, ClientAndPermissions} from '../../types/client';
-import {Permissions} from '../../constants/permissions';
-import {PartialIntranetTask, TaskPriority, TaskState, TaskStateUtils} from '../../types/intranet';
+import {PartialIntranetTask, TaskState, TaskStateUtils} from '../../types/intranet';
 import {IntranetService} from './intranet.service';
 import {Subject} from 'rxjs/Rx';
 

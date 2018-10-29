@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {BackendService} from '../../services/backend.service';
-import {Event} from '../../types/event';
+import {BackendService} from '../../../services/backend.service';
+import {Event} from '../../../types/event';
 
 @Component({
   selector: 'app-select-event',

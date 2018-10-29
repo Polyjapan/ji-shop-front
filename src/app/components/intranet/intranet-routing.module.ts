@@ -2,11 +2,11 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {PermissionAuthGuard} from '../../services/permission-auth-guard.service';
 import {Permissions} from '../../constants/permissions';
-import {IntranetComponent} from './intranet.component';
-import {TasklistsComponent} from './tasklists.component';
+import {IntranetComponent} from './selection/intranet.component';
+import {TasklistsComponent} from './tasklists/tasklists.component';
 import {TaskState} from '../../types/intranet';
-import {IntranetEventComponent} from './intranet-event.component';
-import {SelectEventComponent} from './select-event.component';
+import {IntranetEventComponent} from './layout/intranet-event.component';
+import {SelectEventComponent} from './selection/select-event.component';
 
 const routes: Routes = [
   {
