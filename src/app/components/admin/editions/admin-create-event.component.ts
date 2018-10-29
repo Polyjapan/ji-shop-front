@@ -31,7 +31,7 @@ export class AdminCreateEventComponent implements OnInit {
     obs.subscribe(
       res => {
         this.eventService.invalidate();
-        this.router.navigate(['admin', res]);
+        this.router.navigate(['admin', 'events', res]);
       },
       err => {
         const errors = Errors.replaceErrors(err.error.errors, undefined, new Map<string, string>([

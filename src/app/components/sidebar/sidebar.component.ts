@@ -1,16 +1,23 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {filter, map} from 'rxjs/operators';
-import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
-import {isNullOrUndefined} from 'util';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
+import {MenuItem} from './menuitem';
 
 @Component({
   selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
+  template: `
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <app-sidebar-menu [menu]="menu" (childChange)="onChildChange($event)" (childDestroy)="onChildDestroy()"></app-sidebar-menu>
+
+        <ng-content></ng-content>
+      </div>
+    </nav>
+
+
+  `,
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
-  firstChild: string;
-
+export class SidebarComponent {
   @Input() menu: MenuItem[];
   @Output() childChange = new EventEmitter<ActivatedRouteSnapshot>();
   @Output() childDestroy = new EventEmitter();
@@ -20,66 +27,12 @@ export class SidebarComponent implements OnInit {
     this.menu = [];
   }
 
-  getActive(tag: string) {
-    if (this.isActive(tag)) {
-      return 'nav-link active';
-    } else {
-      return 'nav-link';
-    }
+  onChildChange($event) {
+    this.childChange.emit($event);
   }
 
-  isActive(tag: string) {
-    return this.firstChild === tag;
-  }
-
-  protected parseChild(path: ActivatedRouteSnapshot) {
-    this.firstChild = (path.data && path.data.tag) ? path.data.tag : undefined;
-
-    this.childChange.emit(path);
-  }
-
-  ngOnInit(): void {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-      map(() => this.route),
-      map((route) => {
-        return route.snapshot;
-      }),
-      filter(route => !isNullOrUndefined(route.firstChild)),
-      map((route) => route.firstChild)
-    ).subscribe(child => this.parseChild(child));
-
-
-    if (this.route.firstChild && this.route.snapshot.firstChild.data && this.route.snapshot.firstChild.data.tag) {
-      this.parseChild(this.route.snapshot.firstChild);
-    } else {
-      this.noFirstChild();
-    }
-  }
-
-  protected noFirstChild() {
-    this.firstChild = undefined;
+  onChildDestroy() {
     this.childDestroy.emit();
   }
-
 }
 
-export class MenuItem {
-
-
-  constructor(routerLink: string, tag: string, text: string, icon: string) {
-    this.routerLink = routerLink;
-    this.tag = tag;
-    this.text = text;
-    this.icon = icon;
-  }
-
-  routerLink: string;
-  tag: string;
-  text: string;
-  icon: string;
-
-  get iconClass() {
-    return 'feather fas fa-' + this.icon;
-  }
-}

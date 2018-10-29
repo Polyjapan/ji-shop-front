@@ -6,6 +6,7 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class EventService {
   observable: Subject<Event>;
+  event: Event;
   current: number;
 
   constructor(private backend: BackendService) {
@@ -21,7 +22,10 @@ export class EventService {
   }
 
   private query() {
-    this.backend.getEvent(this.current).subscribe(ev => this.observable.next(ev));
+    this.backend.getEvent(this.current).subscribe(ev => {
+      this.observable.next(ev);
+      this.event = ev;
+    });
   }
 
   public get(id: number): Observable<Event> {
@@ -33,4 +37,11 @@ export class EventService {
     return this.observable.asObservable();
   }
 
+  getNow(id: number) {
+    if (this.current === id) {
+      return this.event;
+    } else {
+      return null;
+    }
+  }
 }

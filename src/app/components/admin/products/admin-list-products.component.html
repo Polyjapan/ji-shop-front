@@ -1,4 +1,7 @@
-<h2>Produits</h2>
+<h2>Produits
+  <small class="margin-left: .5rem;"><a class="btn btn-success" routerLink="create">Ajouter un produit</a>
+  </small>
+</h2>
 
 <table class="table">
   <tr>
@@ -10,7 +13,9 @@
     <th>Qté rest</th>
   </tr>
   <tr *ngFor="let item of items">
-    <td><span [class]="'badge badge-' + (item.isTicket ? 'info' : 'warning')">{{ item.isTicket ? 'Billet' : 'Goodie'}}</span> <i [class]="'fas ' + (item.isVisible ? 'fa-eye' : 'fa-eye-slash')"></i></td>
+    <td><span
+      [class]="'badge badge-' + (item.isTicket ? 'info' : 'warning')">{{ item.isTicket ? 'Billet' : 'Goodie'}}</span> <i
+      [class]="'fas ' + (item.isVisible ? 'fa-eye' : 'fa-eye-slash')"></i></td>
     <td><a [routerLink]="['update', item.id]">{{item.name}}</a></td>
     <td>{{item.description}}</td>
     <td>{{item.longDescription}}</td>

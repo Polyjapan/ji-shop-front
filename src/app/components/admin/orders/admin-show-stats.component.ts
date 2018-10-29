@@ -15,12 +15,15 @@ export class AdminShowStatsComponent implements OnInit {
   constructor(private backend: BackendService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.parent.paramMap.get('event');
+    this.route.parent.paramMap.subscribe(map => {
+      const id = map.get('event');
 
-    this.backend.getStats(Number(id)).subscribe(stats => {
-      this.stats = stats;
-      console.log(stats);
+      this.backend.getStats(Number(id)).subscribe(stats => {
+        this.stats = stats;
+        console.log(stats);
+      });
     });
+
   }
 
   priceStats(data: SalesData) {

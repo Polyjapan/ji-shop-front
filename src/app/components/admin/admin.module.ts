@@ -8,7 +8,7 @@ import {FormsModule} from '@angular/forms';
 import {AdminRoutingModule} from './admin-routing.module';
 import {AdminSelectEditionComponent} from './editions/admin-select-edition.component';
 import {AdminShowStatsComponent} from './orders/admin-show-stats.component';
-import {AdminEventComponent} from './editions/admin-event.component';
+import {AdminEventSidebarComponent} from './editions/admin-event-sidebar.component';
 import {AdminEventParentComponent} from './editions/admin-event-parent.component';
 import {AdminCreateEventComponent} from './editions/admin-create-event.component';
 import {EventService} from './event.service';
@@ -36,7 +36,7 @@ import {SidebarModule} from '../sidebar/sidebar.module';
     AdminHomeComponent,
     AdminSelectEditionComponent,
     AdminShowStatsComponent,
-    AdminEventComponent,
+    AdminEventSidebarComponent,
     AdminEventParentComponent,
     AdminCreateEventComponent,
     AdminListProductsComponent,

@@ -36,7 +36,7 @@ export class AdminCreateProductComponent implements OnInit {
         // noinspection TsLint FallThroughInSwitchStatementJS
         switch (next) {
           case 'list':
-            this.router.navigate(['admin', this.eventId, 'products']);
+            this.router.navigate(['admin', 'events', this.eventId, 'products']);
             break;
 
           case 'clear':

@@ -1,9 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NavigationComponent} from '../../abstraction/navigation-component';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MenuItem} from '../admin/admin.component';
-import {PartialIntranetTask, TaskPriority, TaskPriorityUtils, TaskState} from '../../types/intranet';
-import {TasksService} from './tasks.service';
+import {Component, Input} from '@angular/core';
+import {PartialIntranetTask, TaskPriority, TaskPriorityUtils} from '../../types/intranet';
 
 @Component({
   selector: 'app-tasklist',

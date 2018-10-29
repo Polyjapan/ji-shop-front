@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavigationComponent} from '../../abstraction/navigation-component';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MenuItem} from '../admin/admin.component';
+import {ActivatedRoute} from '@angular/router';
 import {PartialIntranetTask, TaskState, TaskStateUtils} from '../../types/intranet';
 import {TasksService} from './tasks.service';
 

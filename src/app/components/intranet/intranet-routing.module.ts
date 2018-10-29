@@ -87,7 +87,7 @@ const routes: Routes = [
              canActivateChild: [PermissionAuthGuard],
              component: AdminEventParentComponent,
              children: [
-               {path: '', component: AdminEventComponent, data: {name: 'Menu principal'}},
+               {path: '', component: AdminEventSidebarComponent, data: {name: 'Menu principal'}},
                {path: 'stats', component: AdminShowStatsComponent, data: {name: 'Statistiques'}},
                {path: 'update', component: AdminCreateEventComponent, data: {name: 'Edition'}},
                {

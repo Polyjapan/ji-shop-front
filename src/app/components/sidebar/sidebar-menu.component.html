@@ -1,0 +1,11 @@
+<ul class="nav flex-column">
+  <li class="nav-item" *ngFor="let item of menu">
+    <a [class]="getActive(item.getTag())" [routerLink]="getPath(item)">
+      <i [class]="item.iconClass"></i>
+
+      <span data-feather="home"></span>
+      {{item.text}} <span class="sr-only" *ngIf="isActive(item.getTag())">(current)</span>
+    </a>
+  </li>
+</ul>
+
