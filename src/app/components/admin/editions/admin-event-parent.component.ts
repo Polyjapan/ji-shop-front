@@ -13,7 +13,7 @@ import {EventService} from '../event.service';
 
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a routerLink="..">Admin</a></li>
+          <li class="breadcrumb-item"><a routerLink="../..">Admin</a></li>
           <li *ngIf="!children" class="breadcrumb-item" aria-current="page">{{event.name}}</li>
           <li *ngIf="children" class="breadcrumb-item"><a routerLink=".">{{event.name}}</a></li>
 

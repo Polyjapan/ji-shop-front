@@ -1,7 +1,35 @@
+<ng-container *ngIf="theme === 'def'">
 
-<ul *ngIf="editions">
-  <li *ngFor="let event of editions"><a [routerLink]="[event.id]">{{event.name}}</a> [<a [routerLink]="['clone', event.id]">cloner</a>] </li>
-</ul>
-<p *ngIf="!editions" class="text-muted"><i>Récupération des éditions en cours...</i></p>
+  <ul *ngIf="editions">
+    <li *ngFor="let event of editions"><a [routerLink]="['events', event.id]">{{event.name}}</a> [<a [routerLink]="['events', 'clone', event.id]">cloner</a>] </li>
+  </ul>
+  <p *ngIf="!editions" class="text-muted"><i>Récupération des éditions en cours...</i></p>
 
-<a class="btn btn-success" routerLink="create"><i class="fas fa-plus"> </i> Créer un événement</a>
+  <a class="btn btn-success" routerLink="events/create"><i class="fas fa-plus"> </i> Créer un événement</a>
+
+</ng-container>
+
+<ng-container *ngIf="theme === 'lateral'">
+  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+    <span>Événements</span>
+    <a class="d-flex align-items-center text-muted" routerLink="events/create">
+      <i class="fas fa-plus-circle"></i>
+    </a>
+  </h6>
+  <ul class="nav flex-column mb-2" *ngIf="editions">
+    <li [class]="'nav-item' " *ngFor="let event of editions">
+      <a [routerLink]="['events', event.id]" [class]="'nav-link' + (active === event.id ? ' active':'')">
+        <i class="feather far fa-file"></i>
+        {{event.name}}
+      </a>
+    </li>
+  </ul>
+  <ul class="nav flex-column mb-2" *ngIf="!editions">
+    <li class="nav-item">
+      <a class="nav-link disabled" routerLink=".">
+        <i class="feather fas fa-spinner"></i>
+        Chargement...
+      </a>
+    </li>
+  </ul>
+</ng-container>

@@ -30,33 +30,34 @@ const routes: Routes = [
     data: {permission: Permissions.ADMIN_ACCESS},
     children: [
       {
-        path: '',
-        canActivateChild: [PermissionAuthGuard],
+        path: '', component: AdminHomeComponent,
+        data: {tag: 'home'}
+      },
+      {path: 'users', component: AdminListUsersComponent, data: {tag: 'users'}},
+      {path: 'users/:id', component: AdminViewUserComponent, data: {tag: 'users'}},
+      {path: 'orders/:id', component: AdminViewOrderComponent},
+      {
+        path: 'scan', data: {tag: 'scan'},
         children: [
-          {path: '', component: AdminHomeComponent},
+          {path: '', component: AdminSelectConfigComponent},
+          {path: 'create', component: AdminCreateScanningConfigComponent},
+          {path: ':id', component: AdminViewScanningConfigComponent},
+          {path: ':id/update', component: AdminCreateScanningConfigComponent},
+        ],
+      },
+      {
+        path: 'pos', data: {tag: 'pos'},
+        children: [
+          {path: '', component: AdminSelectPosConfigComponent},
+          {path: 'create', component: AdminCreatePosConfigComponent},
+          {path: ':id', component: AdminViewPosConfigComponent},
+          {path: ':id/update', component: AdminCreatePosConfigComponent},
+        ],
+      }, {
+        path: 'events', data: {tag: 'events'},
+        children: [
           {path: 'create', component: AdminCreateEventComponent},
           {path: 'clone/:cloneId', component: AdminCreateEventComponent},
-          {path: 'users', component: AdminListUsersComponent},
-          {path: 'users/:id', component: AdminViewUserComponent},
-          {path: 'orders/:id', component: AdminViewOrderComponent},
-          {
-            path: 'scan',
-            children: [
-              {path: '', component: AdminSelectConfigComponent},
-              {path: 'create', component: AdminCreateScanningConfigComponent},
-              {path: ':id', component: AdminViewScanningConfigComponent},
-              {path: ':id/update', component: AdminCreateScanningConfigComponent},
-            ],
-          },
-          {
-            path: 'pos',
-            children: [
-              {path: '', component: AdminSelectPosConfigComponent},
-              {path: 'create', component: AdminCreatePosConfigComponent},
-              {path: ':id', component: AdminViewPosConfigComponent},
-              {path: ':id/update', component: AdminCreatePosConfigComponent},
-            ],
-          },
           {
             path: ':event',
             canActivateChild: [PermissionAuthGuard],
