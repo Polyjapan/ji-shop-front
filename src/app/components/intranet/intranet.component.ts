@@ -2,9 +2,8 @@ import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-intranet',
-  template: `
-    <router-outlet></router-outlet>
-  `
+  templateUrl: './intranet.component.html',
+  styleUrls: ['./intranet.component.css']
 })
 export class IntranetComponent {
 }

@@ -6,10 +6,20 @@ import {HttpClientModule} from '@angular/common/http';
 import {AuthModule} from '../../services/auth.module';
 import {FormsModule} from '@angular/forms';
 import {IntranetComponent} from './intranet.component';
+import {SidebarModule} from '../sidebar/sidebar.module';
+import {TasksService} from './tasks.service';
+import {TasklistComponent} from './tasklist.component';
+import {TasklistsComponent} from './tasklists.component';
+import {IntranetEventComponent} from './intranet-event.component';
+import {SelectEventComponent} from './select-event.component';
 
 @NgModule({
   declarations: [
-    IntranetComponent
+    IntranetComponent,
+    TasklistComponent,
+    TasklistsComponent,
+    IntranetEventComponent,
+    SelectEventComponent
   ],
   imports: [
     BrowserModule,
@@ -17,7 +27,8 @@ import {IntranetComponent} from './intranet.component';
     AuthModule,
     FormsModule,
     IntranetRoutingModule,
+    SidebarModule
   ],
-  providers: [ IntranetService ]
+  providers: [ IntranetService, TasksService ]
 })
 export class IntranetModule { }

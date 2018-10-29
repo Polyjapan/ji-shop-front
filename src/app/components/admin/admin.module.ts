@@ -28,6 +28,7 @@ import {AdminCreatePosConfigComponent} from './pos/admin-create-pos-config.compo
 import {AdminSelectPosConfigComponent} from './pos/admin-select-pos-config.component';
 import {AdminViewPosConfigComponent} from './pos/admin-view-pos-config.component';
 import {AdminViewPosItemComponent} from './pos/admin-view-pos-item.component';
+import {SidebarModule} from '../sidebar/sidebar.module';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import {AdminViewPosItemComponent} from './pos/admin-view-pos-item.component';
     AuthModule,
     FormsModule,
     AdminRoutingModule,
-    OrderContentModule
+    OrderContentModule,
+    SidebarModule
   ],
   providers: [ EventService ]
 })

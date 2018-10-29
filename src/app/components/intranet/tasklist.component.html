@@ -1,0 +1,19 @@
+<div class="card" style="width: 100%;">
+  <div class="card-header">
+    {{title}}
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let task of tasks">
+
+      <h4>
+        <span class="text-muted">#{{task.id}}</span>
+        {{task.name}}
+        <span [class]="priorityClass(task.priority)" style="margin-left: 0.5rem;">
+          {{priorityString(task.priority)}}
+        </span>
+      </h4>
+      <small>par {{task.createdBy.firstname}} {{task.createdBy.lastname}} - {{getTime(task.createdAt)}}</small>
+
+    </li>
+  </ul>
+</div>

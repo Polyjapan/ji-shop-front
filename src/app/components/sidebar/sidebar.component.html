@@ -1,0 +1,16 @@
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item" *ngFor="let item of menu">
+        <a [class]="getActive(item.tag)" [routerLink]="item.routerLink">
+          <i [class]="item.iconClass"></i>
+
+          <span data-feather="home"></span>
+          {{item.text}} <span class="sr-only" *ngIf="isActive(item.tag)">(current)</span>
+        </a>
+      </li>
+    </ul>
+
+    <ng-content></ng-content>
+  </div>
+</nav>
