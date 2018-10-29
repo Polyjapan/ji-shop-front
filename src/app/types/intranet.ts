@@ -24,7 +24,6 @@ export class PartialIntranetTask {
   state: TaskState;
   createdBy: Client;
   createdAt: number;
-  event: Event;
   tags: string[];
 }
 
@@ -53,7 +52,6 @@ export class CompleteIntranetTask {
   state: TaskState;
   createdBy: Client;
   createdAt: number;
-  event: Event;
   comments: CompleteTaskComment[];
   logs: CompleteTaskLog[];
   assignationLogs: CompleteTaskAssignationLog[];
