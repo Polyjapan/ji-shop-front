@@ -26,6 +26,8 @@ import {PosModule} from './components/pos/pos.module';
 import {RecaptchaModule} from 'ng-recaptcha';
 import {OrderContentComponent} from './components/members/order-content.component';
 import {OrderContentModule} from './components/members/order-content.module';
+import {IntranetModule} from './components/intranet/intranet.module';
+import {MainComponent} from './main.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import {OrderContentModule} from './components/members/order-content.module';
     ForgottenPasswordComponent,
     ScanComponent,
     ScanSelectComponent,
+    MainComponent,
 
     AuthenticateComponent
   ],
@@ -49,6 +52,7 @@ import {OrderContentModule} from './components/members/order-content.module';
     FormsModule,
     HomeModule,
     AdminModule,
+    IntranetModule,
     PosModule,
     OrderContentModule,
     RecaptchaModule.forRoot(),

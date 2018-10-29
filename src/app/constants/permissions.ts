@@ -60,5 +60,46 @@ export enum Permissions {
   /**
    * Permission to modify POS configurations
    */
-  CHANGE_POS_CONFIGURATIONS = 'admin.change_pos_configurations'
+  CHANGE_POS_CONFIGURATIONS = 'admin.change_pos_configurations',
+
+  /**
+   * Access the intranet data
+   */
+  INTRANET_VIEW = 'intranet.staff.view',
+
+  /**
+   * Post a new task to the intranet
+   */
+  INTRANET_TASK_POST = 'intranet.staff.post_task',
+
+  /**
+   * Accept tasks in the intranet
+   */
+  INTRANET_TASK_ACCEPT = 'intranet.admin.accept_task',
+
+  /**
+   * Assign tasks to self
+   */
+  INTRANET_TASK_TAKE = 'intranet.staff.self_assign',
+
+
+  /**
+   * Unassign tasks to self
+   */
+  INTRANET_TASK_LEAVE = 'intranet.staff.self_unassign',
+
+  /**
+   * Assign or unassign tasks to other
+   */
+  INTRANET_TASK_GIVE = 'intranet.admin.assign_other',
+
+  /**
+   * Change the state of a task
+   */
+  INTRANET_TASK_CHANGE_STATE = 'intranet.admin.change_task_state',
+
+  /**
+   * Edit a tasks created by someone else
+   */
+  INTRANET_TASK_EDIT = 'intranet.admin.task_edit',
 }
