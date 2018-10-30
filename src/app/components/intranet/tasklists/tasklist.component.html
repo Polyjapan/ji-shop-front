@@ -6,8 +6,8 @@
     <li class="list-group-item" *ngFor="let task of tasks">
 
       <h4>
-        <span class="text-muted">#{{task.id}}</span>
-        {{task.name}}
+        <a [routerLink]="['..', 'task', task.id]"><span class="text-muted">#{{task.id}}</span>
+          {{task.name}}</a>
         <span [class]="priorityClass(task.priority)" style="margin-left: 0.5rem;">
           {{priorityString(task.priority)}}
         </span>

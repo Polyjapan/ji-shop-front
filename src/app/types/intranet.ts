@@ -65,6 +65,16 @@ export enum TaskPriority {
 }
 
 export class TaskPriorityUtils {
+  static allPriorities() {
+    return [
+      TaskPriority.Critical,
+      TaskPriority.VeryUrgent,
+      TaskPriority.Urgent,
+      TaskPriority.Normal,
+      TaskPriority.Low
+    ];
+  }
+
   static priorityClass(prio: TaskPriority) {
     switch (prio) {
       case TaskPriority.Critical:
@@ -96,6 +106,14 @@ export class TaskPriorityUtils {
   }
 }
 
+export class TaskUtils {
+  static getTime(time: number) {
+    const date = new Date(time);
+    return date.getDate() + '/' + (date.getUTCMonth() + 1) + '/' + date.getFullYear() + ' à ' + date.getHours() + ':' +
+      date.getMinutes() + ':' + date.getSeconds();
+  }
+}
+
 export class PartialIntranetTask {
   id: number;
   name: string;
@@ -106,23 +124,22 @@ export class PartialIntranetTask {
   tags: string[];
 }
 
-export class CompleteTaskLog {
-  targetState: TaskState;
+export class HistoryElement {
   createdBy: Client;
   createdAt: number;
 }
 
-export class CompleteTaskAssignationLog {
+export class CompleteTaskLog extends HistoryElement {
+  targetState: TaskState;
+}
+
+export class CompleteTaskAssignationLog extends HistoryElement  {
   assignee: Client;
   deleted: boolean;
-  createdBy: Client;
-  createdAt: number;
 }
 
-export class CompleteTaskComment {
+export class CompleteTaskComment extends HistoryElement  {
   content: string;
-  createdBy: Client;
-  createdAt: number;
 }
 
 export class CompleteIntranetTask {

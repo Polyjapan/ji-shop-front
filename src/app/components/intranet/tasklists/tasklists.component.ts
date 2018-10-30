@@ -6,6 +6,13 @@ import {TasksService} from '../tasks.service';
 @Component({
   selector: 'app-tasklists',
   template: `
+
+    <div
+      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+      <h1 class="h2">Liste des tâches</h1>
+    </div>
+
     <div class="row" *ngIf="taskMap">
       <div class="col-md-4" *ngFor="let state of acceptedStates">
         <app-tasklist [title]="colName(state)" [tasks]="taskMap.get(state)"></app-tasklist>

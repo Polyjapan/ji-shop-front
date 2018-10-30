@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {PartialIntranetTask, TaskPriority, TaskPriorityUtils} from '../../../types/intranet';
+import {PartialIntranetTask, TaskPriority, TaskPriorityUtils, TaskUtils} from '../../../types/intranet';
 
 @Component({
   selector: 'app-tasklist',
@@ -10,8 +10,7 @@ export class TasklistComponent {
   @Input() tasks: PartialIntranetTask[];
 
   getTime(time: number) {
-    const date = new Date(time);
-    return date.getDate() + '/' + (date.getUTCMonth() + 1) + '/' + date.getFullYear() + ' à ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+    return TaskUtils.getTime(time);
   }
 
   priorityClass(prio: TaskPriority) {

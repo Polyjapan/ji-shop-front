@@ -1,0 +1,77 @@
+<ng-container *ngIf="task">
+
+  <div
+    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+    <h1 class="h2"><span class="text-muted">#{{task.id}}</span> {{task.name}}</h1>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-9">
+      <div class="card" *ngFor="let elem of elements" style="margin-bottom: 1rem;">
+
+        <div class="card-header text-white bg-info" *ngIf="elem.content">
+          Commentaire
+        </div>
+        <div class="card-header text-white bg-warning" *ngIf="elem.targetState">
+          Changement d'état
+        </div>
+        <div [class]="'card-header text-white ' + (elem.deleted ? 'bg-danger' : 'bg-success')" *ngIf="elem.assignee">
+          Modification d'assignation
+        </div>
+
+        <div class="card-body" *ngIf="elem.content">
+          <p>{{elem.content}}</p>
+        </div>
+        <div class="card-body" *ngIf="elem.targetState">
+          <p>L'état a été changé vers
+            <span [class]="stateClass(elem.targetState)">{{TaskStateUtils.stateString(elem.targetState)}}</span>
+          </p>
+        </div>
+        <div class="card-body" *ngIf="elem.assignee">
+          <p>L'utilisateur
+            {{elem.assignee.firstname}} {{elem.assignee.lastname}}
+            a été {{elem.deleted ? 'retiré de':'assigné à'}} la tâche
+          </p>
+        </div>
+        <div class="card-footer text-muted">
+          {{TaskUtils.getTime(elem.createdAt)}} par {{elem.createdBy.firstname}} {{elem.createdBy.lastname}}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          Ajout de commentaire
+        </div>
+        <div class="card-body">
+          <p>Ici un joli formulaire</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header">
+          Propriétés
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><b>Créée par :</b> {{task.createdBy.firstname}} {{task.createdBy.lastname}}</li>
+          <li class="list-group-item"><b>Créée le :</b> {{TaskUtils.getTime(task.createdAt)}}</li>
+          <li class="list-group-item"><b>État : </b>
+            <span [class]="stateClass(task.state)">{{TaskStateUtils.stateString(task.state)}}</span>
+          </li>
+          <li class="list-group-item">
+            <b>Priorité : </b>
+            <span [class]="priorityClass(task.priority)">{{TaskPriorityUtils.priorityString(task.priority)}}</span>
+          </li>
+          <li class="list-group-item"><b>Tags : </b> <span class="badge badge-primary" style="margin-right: 2px;"
+                                                           *ngFor="let tag of task.tags">{{tag}}</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</ng-container>
+
+<p *ngIf="!task">Chargement...</p>

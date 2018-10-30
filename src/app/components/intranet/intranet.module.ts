@@ -12,6 +12,8 @@ import {TasklistComponent} from './tasklists/tasklist.component';
 import {TasklistsComponent} from './tasklists/tasklists.component';
 import {IntranetEventComponent} from './layout/intranet-event.component';
 import {SelectEventComponent} from './selection/select-event.component';
+import {CreateTaskComponent} from './create/create-task.component';
+import {ViewTaskComponent} from './view/view-task.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import {SelectEventComponent} from './selection/select-event.component';
     TasklistComponent,
     TasklistsComponent,
     IntranetEventComponent,
-    SelectEventComponent
+    SelectEventComponent,
+    CreateTaskComponent,
+    ViewTaskComponent
   ],
   imports: [
     BrowserModule,

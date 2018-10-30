@@ -12,9 +12,9 @@ export class IntranetEventComponent {
   menu: MenuItem[] = [];
 
   constructor(private router: Router, private route: ActivatedRoute) {
-    this.menu.push(new MenuItem('.', 'Vue générale', 'home'));
-    this.menu.push(new MenuItem('my', 'Mes tâches', 'user'));
+    this.menu.push(new MenuItem('opened', 'Tâches ouvertes', 'folder-open'));
     this.menu.push(new MenuItem('closed', 'Tâches fermées', 'folder'));
+    this.menu.push(new MenuItem('my', 'Mes tâches', 'user'));
     this.menu.push(new MenuItem('create', 'Créer une tâche', 'plus-circle'));
   }
 

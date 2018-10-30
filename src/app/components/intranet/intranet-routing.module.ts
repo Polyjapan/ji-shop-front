@@ -7,6 +7,8 @@ import {TasklistsComponent} from './tasklists/tasklists.component';
 import {TaskState} from '../../types/intranet';
 import {IntranetEventComponent} from './layout/intranet-event.component';
 import {SelectEventComponent} from './selection/select-event.component';
+import {CreateTaskComponent} from './create/create-task.component';
+import {ViewTaskComponent} from './view/view-task.component';
 
 const routes: Routes = [
   {
@@ -26,13 +28,26 @@ const routes: Routes = [
         children: [
           {
             path: '',
+            redirectTo: 'opened',
+            pathMatch: 'full'
+          },
+          {
+            path: 'opened',
             component: TasklistsComponent,
-            data: {tag: 'home', acceptedStates: [TaskState.Sent, TaskState.Waiting, TaskState.InProgress]}
+            data: {acceptedStates: [TaskState.Sent, TaskState.Waiting, TaskState.InProgress]}
           },
           {
             path: 'closed',
             component: TasklistsComponent,
-            data: {tag: 'closed', acceptedStates: [TaskState.Refused, TaskState.Done, TaskState.Dropped]}
+            data: {acceptedStates: [TaskState.Refused, TaskState.Done, TaskState.Dropped]}
+          },
+          {
+            path: 'create',
+            component: CreateTaskComponent
+          },
+          {
+            path: 'task/:id',
+            component: ViewTaskComponent,
           }
         ]
       }

@@ -15,7 +15,7 @@ import {PosConfiguration, PosGetConfigResponse, PosOrderResponse, PosPaymentLog}
 import {StatsReturn} from '../../types/stats';
 import {Client, ClientAndPermissions} from '../../types/client';
 import {Permissions} from '../../constants/permissions';
-import {PartialIntranetTask, TaskPriority, TaskState} from '../../types/intranet';
+import {CompleteIntranetTask, PartialIntranetTask, TaskPriority, TaskState} from '../../types/intranet';
 
 
 @Injectable()
@@ -27,18 +27,22 @@ export class IntranetService {
   constructor(private http: HttpClient) {
   }
 
-  createTask(event: number, name: string, description: string, priority: TaskPriority, tags: string[]): Observable<number> {
-    return this.http.post<number>(this._intraUrl + '/byEvent/' + event, {
+  createTaskHelper(event: number, name: string, description: string, priority: TaskPriority, tags: string): Observable<number> {
+    return this.createTask(event, {
       name: name, initialComment: description, tags: tags, priority: priority.valueOf()
     });
+  }
+
+  createTask(event: number, task): Observable<number> {
+    return this.http.post<number>(this._intraUrl + '/byEvent/' + event, task);
   }
 
   getTasks(event: number): Observable<PartialIntranetTask[]> {
     return this.http.get<PartialIntranetTask[]>(this._intraUrl + '/byEvent/' + event);
   }
 
-  getTask(task: number): Observable<PartialIntranetTask> {
-    return this.http.get<PartialIntranetTask>(this._intraUrl + '/byId/' + task);
+  getTask(task: number): Observable<CompleteIntranetTask> {
+    return this.http.get<CompleteIntranetTask>(this._intraUrl + '/byId/' + task);
   }
 
   updatePriority(task: number, priority: TaskPriority): Observable<ApiResult> {
