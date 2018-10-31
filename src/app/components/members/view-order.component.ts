@@ -32,7 +32,7 @@ export class ViewOrderComponent implements OnInit {
         this.order = order;
       }
     }, errors => {
-      this.errors = Errors.replaceErrorsInResponse(error,
+      this.errors = Errors.replaceErrorsInResponse(errors,
         new Map<string, string>([[ErrorCodes.NOT_FOUND, 'Cette commande n\'existe pas.']]));
     });
   }
