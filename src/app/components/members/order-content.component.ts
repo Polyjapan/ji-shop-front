@@ -35,7 +35,7 @@ export class OrderContentComponent {
         FileSaver.saveAs(blob, 'ticket-' + barcode + '.pdf');
       }
     }, error => {
-      const errors = Errors.replaceErrorsInResponse(err, new Map<string, string>(
+      const errors = Errors.replaceErrorsInResponse(error, new Map<string, string>(
         [[ErrorCodes.NOT_FOUND, 'Ce billet n\'existe pas ou ne peut pas être consulté par vous.']]));
 
       alert('Impossible de télécharger le billet : \n' + errors.join('\n'));

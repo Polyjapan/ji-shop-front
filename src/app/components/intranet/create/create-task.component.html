@@ -1,0 +1,35 @@
+
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+  <h1 class="h2">Créer une tâche</h1>
+</div>
+
+<form #create="ngForm" (submit)="submit(create)">
+  <div class="form-group">
+    <label for="taskName">Description rapide de la tâche <small>(<140 caractères)</small></label>
+    <input type="text" class="form-control" id="taskName" name="name" maxlength="140" placeholder="Ranger les caisses CFF" ngModel required>
+  </div>
+
+  <div class="form-group">
+    <label for="longDescr">Description longue <small>(Donnez ici les détails)</small></label>
+
+    <textarea class="form-control" rows="3" id="longDescr" name="initialComment" ngModel required></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="tags">Tags <small>(Séparés par des <code>;</code>)</small></label>
+    <input type="text" class="form-control" id="tags" name="tags" placeholder="logistique;rangement" ngModel>
+  </div>
+
+  <div class="form-group">
+    <label for="priority">Priorité <small>(N'abusez pas du <em>Critique</em>)</small></label>
+
+    <select id="priority" class="form-control" name="priority" ngModel required>
+      <option *ngFor="let prio of priorities" [value]="prio">{{getText(prio)}}</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="sending">Créer la tâche <i class="fas fa-spinner" *ngIf="sending"></i></button>
+</form>
+

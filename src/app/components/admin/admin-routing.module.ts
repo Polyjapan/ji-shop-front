@@ -5,7 +5,7 @@ import {AdminHomeComponent} from './admin-home.component';
 import {AdminComponent} from './admin.component';
 import {Permissions} from '../../constants/permissions';
 import {AdminShowStatsComponent} from './orders/admin-show-stats.component';
-import {AdminEventComponent} from './editions/admin-event.component';
+import {AdminEventSidebarComponent} from './editions/admin-event-sidebar.component';
 import {AdminEventParentComponent} from './editions/admin-event-parent.component';
 import {AdminCreateEventComponent} from './editions/admin-create-event.component';
 import {AdminListProductsComponent} from './products/admin-list-products.component';
@@ -63,7 +63,7 @@ const routes: Routes = [
             canActivateChild: [PermissionAuthGuard],
             component: AdminEventParentComponent,
             children: [
-              {path: '', component: AdminEventComponent, data: {name: 'Menu principal'}},
+              {path: '', redirectTo: 'stats', pathMatch: 'full'},
               {path: 'stats', component: AdminShowStatsComponent, data: {name: 'Statistiques'}},
               {path: 'update', component: AdminCreateEventComponent, data: {name: 'Edition'}},
               {

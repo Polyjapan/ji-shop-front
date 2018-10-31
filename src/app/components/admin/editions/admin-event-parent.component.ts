@@ -7,21 +7,6 @@ import {EventService} from '../event.service';
   selector: 'app-admin-event-parent',
   template: `
     <ng-container *ngIf="event">
-      <h1>Gestion de l'événement <i>{{event.name}}
-        <i *ngIf="event.visible" class="fas fa-eye"></i><i *ngIf="!event.visible" class="fas fa-eye-slash"></i></i>
-      </h1>
-
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a routerLink="../..">Admin</a></li>
-          <li *ngIf="!children" class="breadcrumb-item" aria-current="page">{{event.name}}</li>
-          <li *ngIf="children" class="breadcrumb-item"><a routerLink=".">{{event.name}}</a></li>
-
-          <li *ngFor="let child of firstChildren" class="breadcrumb-item"><a [routerLink]="getLink(child)">{{childName(child)}}</a></li>
-          <li *ngIf="children" class="breadcrumb-item active" aria-current="page">{{childName(lastChild)}}</li>
-        </ol>
-      </nav>
-
       <router-outlet></router-outlet>
     </ng-container>
 
