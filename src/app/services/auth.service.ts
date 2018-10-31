@@ -76,11 +76,9 @@ export class AuthService {
           currentGroup = currentGroup + groups.pop() + '.';
         }
 
-        console.log('Permission missing ' + perm);
         return false;
       }
     } else {
-      console.log('Perm check: not online');
       return false;
     }
   }

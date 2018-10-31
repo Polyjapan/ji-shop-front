@@ -34,7 +34,7 @@ export class AdminUploadImportComponent implements OnInit {
       me.backend.importTickets(me.id, reader.result).subscribe(success => {
         me.success = true;
       }, err => {
-        me.errors = Errors.replaceErrors(err.error.errors, new Map<string, string>([
+        me.errors = Errors.replaceErrorsInResponse(err, new Map<string, string>([
           [ErrorCodes.MISSING_FIELDS, 'Certains champs sont manquants dans le fichier CSV.'],
           [ErrorCodes.DATABASE, 'Erreur de base de données. Certains billets sont peut être dupliqués.']
         ]));

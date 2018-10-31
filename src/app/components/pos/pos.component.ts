@@ -143,7 +143,7 @@ export class PosComponent implements OnInit {
       // Open the "payment method" modal
       this.modalService.open(modalSuccess, {size: 'lg'});
     }, err => {
-      this.checkoutErrors = Errors.replaceErrors(err.error.errors, new Map<string, string>([
+      this.checkoutErrors = Errors.replaceErrorsInResponse(err, new Map<string, string>([
         [ErrorCodes.OUT_OF_STOCK, 'Certains produits de votre commande ne sont plus disponibles.'],
         [ErrorCodes.MISSING_ITEM, 'Certains produits de votre commande n\'existent pas.'],
         [ErrorCodes.NO_REQUESTED_ITEM, 'Votre commande est vide.'],

@@ -29,7 +29,7 @@ export class MyOrdersComponent implements OnInit {
         return b.createdAt - a.createdAt;
       }).filter(order => order.paymentConfirmed); // only display paid orders
     }, error => {
-      this.errors = Errors.replaceErrors(error.error.errors);
+      this.errors = Errors.replaceErrorsInResponse(err);
     });
   }
 

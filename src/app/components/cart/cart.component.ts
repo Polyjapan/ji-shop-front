@@ -9,6 +9,7 @@ import {Permissions} from '../../constants/permissions';
 })
 export class CartComponent {
   @Input() displayMode = false;
+  @Input() theme = 'table';
 
   constructor(public cart: CartService) {
   }

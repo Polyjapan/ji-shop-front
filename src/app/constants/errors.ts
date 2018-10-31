@@ -1,4 +1,15 @@
 import {ApiError} from '../types/api_result';
+import {HttpErrorResponse} from '@angular/common/http';
+
+export function replaceErrorsInResponse
+(err: HttpErrorResponse, codeMap?: Map<string, string>, fieldsNames?: Map<string, string>): string[] {
+  if (err.error.errors) {
+    return replaceErrors(err.error.errors, codeMap, fieldsNames);
+  }
+
+  return ['Erreur réseau'];
+}
+
 
 export function replaceErrors(errors: ApiError[], codeMap?: Map<string, string>, fieldsNames?: Map<string, string>): string[] {
   const ret = [];

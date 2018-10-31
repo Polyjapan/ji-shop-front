@@ -33,7 +33,7 @@ export class ForgottenPasswordComponent implements OnInit {
         }
       },
       err => {
-        this.errors = Errors.replaceErrors(err.error.errors);
+        this.errors = Errors.replaceErrorsInResponse(err);
         this.sending = false;
       });
   }

@@ -37,7 +37,7 @@ export class RecoverPasswordComponent implements OnInit {
         }
       },
       err => {
-        this.errors = Errors.replaceErrors(err.error.errors,
+        this.errors = Errors.replaceErrorsInResponse(err,
           new Map([[ErrorCodes.NOT_FOUND, 'Cette demande de réinitialisation de mot de passe n\'a pas été trouvée']],),
           new Map([['password', 'Mot de passe']])
         );

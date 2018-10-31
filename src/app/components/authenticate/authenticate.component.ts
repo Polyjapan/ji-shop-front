@@ -39,7 +39,7 @@ export class AuthenticateComponent implements OnInit {
         this.registerSent = false;
       },
       err => {
-        this.registerErrors = Errors.replaceErrors(err.error.errors, new Map<string, string>([
+        this.registerErrors = Errors.replaceErrorsInResponse(err, new Map<string, string>([
           [ErrorCodes.USER_EXISTS, 'Un utilisateur avec cette adresse email existe déjà.'],
         ]), new Map<string, string>([
           ['firstname', 'Prénom'],
@@ -64,7 +64,8 @@ export class AuthenticateComponent implements OnInit {
         this.loginSent = false;
       },
       err => {
-        this.loginErrors = Errors.replaceErrors(err.error.errors, new Map<string, string>([
+        console.log(err);
+        this.loginErrors = Errors.replaceErrorsInResponse(err, new Map<string, string>([
           [ErrorCodes.NOT_FOUND, 'Cette combinaison email/mot de passe n\'existe pas.'],
           [ErrorCodes.EMAIL_NOT_CONFIRMED, 'Vous devez confirmer votre adresse email pour continuer.'],
         ]), new Map<string, string>([

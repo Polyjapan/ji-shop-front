@@ -51,7 +51,7 @@ export class AdminCreateProductComponent implements OnInit {
 
       },
       err => {
-        const errors = Errors.replaceErrors(err.error.errors);
+        const errors = Errors.replaceErrorsInResponse(err);
 
         alert('Des erreurs se sont produites durant l\'envoi : ' + errors.join('; '));
         this.sending = false;

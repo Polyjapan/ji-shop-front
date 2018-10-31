@@ -41,8 +41,8 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="paymentFinished(paymentOkModal)">Cash</button>
-    <button type="button" class="btn btn-outline-dark" (click)="payByCard(cardPaymentStart)">Carte</button>
+    <button type="button" class="btn btn-outline-dark btn-lg" (click)="paymentFinished(paymentOkModal)">Cash</button>
+    <button type="button" class="btn btn-outline-dark btn-lg" (click)="payByCard(cardPaymentStart)">Carte</button>
   </div>
 </ng-template>
 
@@ -148,7 +148,7 @@
   </div>
 
   <div class="col-sm-3" *ngIf="items">
-    <div class="border p-2 mt-1 pb-2">
+    <div class="card p-2 mt-1 pb-2">
       <h2>Items demandés</h2>
 
       <app-cart>

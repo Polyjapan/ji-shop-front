@@ -46,7 +46,7 @@ export class EmailcheckComponent implements OnInit {
         },
         error => {
           this.loading = false;
-          this.errors = Errors.replaceErrors(error.error.errors, new Map<string, string>([
+          this.errors = Errors.replaceErrorsInResponse(err, new Map<string, string>([
             [ErrorCodes.NOT_FOUND, '{key} n\'a pas été trouvé.'],
           ]), new Map<string, string>([
             ['email', 'Cet email'],

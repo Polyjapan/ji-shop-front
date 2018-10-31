@@ -34,7 +34,7 @@ export class AdminCreateEventComponent implements OnInit {
         this.router.navigate(['admin', res]);
       },
       err => {
-        const errors = Errors.replaceErrors(err.error.errors, undefined, new Map<string, string>([
+        const errors = Errors.replaceErrorsInResponse(err, undefined, new Map<string, string>([
           ['name', 'Nom'],
           ['location', 'Emplacement'],
         ]));
