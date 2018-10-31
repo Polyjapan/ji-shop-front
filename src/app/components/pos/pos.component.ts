@@ -165,6 +165,7 @@ export class PosComponent implements OnInit {
       'affiliate-key=' + environment.sumUpKey +
       '&app-id=' + environment.sumUpApp +
       '&total=' + this.checkoutPrice +
+      '&amount=' + this.checkoutPrice +
       '&currency=CHF' +
       '&title=PolyJapan AGEPoly' +
       '&skipSuccessScreen=true' +
