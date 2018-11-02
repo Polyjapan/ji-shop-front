@@ -1,6 +1,6 @@
 <h2>Statistiques</h2>
 
-<table *ngIf="stats" class="table table-bordered table-striped">
+<table *ngIf="stats" class="table table-striped">
   <tr>
     <th>Produit</th>
     <th>Prix unitaire</th>
@@ -19,6 +19,15 @@
     <td>{{priceStats(line.salesData.GIFT)}}</td>
     <td>{{priceStats(line.salesData.RESELLER)}}</td>
     <td>{{priceTotal(line.salesData)}}</td>
+  </tr>
+
+  <tr>
+    <td colspan="2"><b>Total</b></td>
+    <td>{{priceTotalForSource('WEB')}}</td>
+    <td>{{priceTotalForSource('ONSITE')}}</td>
+    <td>{{priceTotalForSource('GIFT')}}</td>
+    <td>{{priceTotalForSource('RESELLER')}}</td>
+    <td>{{priceTotalForSource()}}</td>
   </tr>
 </table>
 
