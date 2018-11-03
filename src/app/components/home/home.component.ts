@@ -4,6 +4,7 @@ import {BackendService} from '../../services/backend.service';
 import {ItemList, ItemsResponse} from '../../types/items';
 import {Observable} from 'rxjs/Rx';
 import {Permissions} from '../../constants/permissions';
+import {replaceErrorsInResponse} from '../../constants/errors';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
   goodies: ItemList[] = null;
   tickets: ItemList[] = null;
   loading = true;
+  errors: string[];
 
   constructor(public backend: BackendService, private auth: AuthService) {
   }
@@ -32,6 +34,8 @@ export class HomeComponent implements OnInit {
         this.goodies = resp.goodies;
         this.tickets = resp.tickets;
         this.loading = false;
+      }, err => {
+        this.errors = replaceErrorsInResponse(err);
       }
     );
   }

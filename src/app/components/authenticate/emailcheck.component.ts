@@ -16,7 +16,7 @@ export class EmailcheckComponent implements OnInit {
   loading = true;
   success: boolean;
   errors: string[] = [];
-  returnUrl: string;
+  returnUrl = '/';
 
   constructor(private route: ActivatedRoute, private backend: BackendService, private router: Router, private auth: AuthService) {
 
@@ -42,7 +42,7 @@ export class EmailcheckComponent implements OnInit {
             }
           }
 
-          this.auth.login(result.token, false);
+          this.returnUrl = this.auth.login(result.token, false);
         },
         error => {
           this.loading = false;

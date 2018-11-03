@@ -1,4 +1,4 @@
-<ng-container *ngIf="loading">
+<ng-container *ngIf="loading && !errors">
   <h1>Chargement...</h1>
 
   <p>Un petit instant, nous récupérons la liste des articles en vente...</p>
@@ -9,6 +9,15 @@
   <p class="lead">Nous sommes ravis de voir que notre événement vous intéresse, mais notre boutique n'est pas encore ouverte. Revenez bientôt !</p>
   <hr class="my-4">
   <p>Notre boutique ouvre en général 3 mois avant Japan Impact. Vous y trouverez vos places pour la convention, ainsi que des goodies que vous pourrez y retirer !</p>
+</div>
+
+<div class="alert alert-danger" *ngIf="errors">
+  <h1>Une erreur s'est produite</h1>
+  <p>Impossible de charger les données... Merci de réessayer plus tard !</p>
+  <hr>
+  <ul>
+    <li *ngFor="let err of errors">{{err}}</li>
+  </ul>
 </div>
 
 <ng-container *ngIf="hasContent()">
