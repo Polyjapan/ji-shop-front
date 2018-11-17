@@ -3,14 +3,15 @@ import {Observable, Subject} from 'rxjs/Rx';
 import {BackendService} from '../../services/backend.service';
 import {Injectable} from '@angular/core';
 import {query} from '@angular/animations';
+import {BetterSubject} from '../../abstraction/BetterSubject';
 
 @Injectable()
 export class EventListService {
-  observable: Subject<Event[]>;
+  observable: BetterSubject<Event[]>;
   valid = false;
 
   constructor(private backend: BackendService) {
-    this.observable = new Subject<Event[]>();
+    this.observable = new BetterSubject<Event[]>();
   }
 
   public invalidate() {

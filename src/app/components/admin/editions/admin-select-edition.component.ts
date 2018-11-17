@@ -18,7 +18,6 @@ export class AdminSelectEditionComponent implements OnInit {
   ngOnInit(): void {
     this.events.get().subscribe(ev => {
       this.editions = ev;
-      console.log(ev);
     });
   }
 
