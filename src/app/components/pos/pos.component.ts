@@ -43,6 +43,7 @@ export class PosComponent implements OnInit {
     this.cart.clear();
 
     this.checkoutPrice = undefined;
+    this.givenAmount = undefined;
     this.checkoutOrderId = undefined;
     this.checkoutErrors = undefined;
   }
@@ -116,23 +117,40 @@ export class PosComponent implements OnInit {
     this.modalService.dismissAll();
     this.backend.sendPosLog(this.checkoutOrderId, {
       paymentMethod: PaymentMethod.Cash,
-      accepted: true
+      accepted: true,
+      cardTransactionMessage: 'Cash transaction success.'
     }).subscribe(() => {});
     this.modalService.open(modal, {size: 'lg'}).result.then((result2) => {
       this.resetComponent();
     });
   }
 
-  cancelCardPayment() {
+  openModal(modal) {
+    this.modalService.dismissAll();
+    this.modalService.open(modal, {size: 'lg'});
+  }
+
+  cancelCardPayment(modal) {
     this.sumUp.abortTransaction();
     this.modalService.dismissAll();
+
+    if (modal) {
+      this.openModal(modal);
+    }
   }
 
   payByCard(cardModal): void {
-    this.modalService.dismissAll();
-
     this.sumUp.startPayment(this.checkoutOrderId);
-    this.modalService.open(cardModal, {size: 'lg'});
+    this.openModal(cardModal);
+  }
+
+  payByCash(cashModal): void {
+    this.backend.sendPosLog(this.checkoutOrderId, {
+      paymentMethod: PaymentMethod.Cash,
+      accepted: false,
+      cardTransactionMessage: 'Cash payment start.',
+    }).subscribe(() => {});
+    this.openModal(cashModal);
   }
 
   pay(modalSuccess, modalError): void {
@@ -143,7 +161,7 @@ export class PosComponent implements OnInit {
       this.checkoutOrderId = response.orderId;
 
       // Open the "payment method" modal
-      this.modalService.open(modalSuccess, {size: 'lg'});
+      this.openModal(modalSuccess);
     }, err => {
       this.checkoutErrors = Errors.replaceErrorsInResponse(err, new Map<string, string>([
         [ErrorCodes.OUT_OF_STOCK, 'Certains produits de votre commande ne sont plus disponibles.'],
@@ -151,7 +169,7 @@ export class PosComponent implements OnInit {
         [ErrorCodes.NO_REQUESTED_ITEM, 'Votre commande est vide.'],
       ]));
 
-      this.modalService.open(modalError, {size: 'lg'});
+      this.openModal(modalError);
     });
 
   }

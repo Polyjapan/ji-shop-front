@@ -12,8 +12,6 @@
   }
 </style>
 
-
-
 <ng-template #processToPayment let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Confirmation de la commande</h4>
@@ -23,6 +21,28 @@
   </div>
   <div class="modal-body">
     <h2>Montant total : <b>{{checkoutPrice}} .-</b></h2>
+
+    <p>Quel mode de paiement utiliser ?</p>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark btn-lg" (click)="payByCash(cashPaymentStart)">Cash</button>
+    <button type="button" class="btn btn-outline-dark btn-lg" (click)="payByCard(cardPaymentStart)">Carte</button>
+  </div>
+</ng-template>
+
+<ng-template #cashPaymentStart let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Paiement Cash</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2>Montant total : <b>{{checkoutPrice}} .-</b></h2>
+
+    <b>ATTENTION! Une fois le bouton "Paiement Validé" enclanché, il est impossible d'annuler la transaction.</b>
 
     <p>Aide au rendu de monnaie</p>
     <p>Pour un paiement cash, utilisez ce formulaire pour vous aider :</p>
@@ -41,10 +61,11 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark btn-lg" (click)="paymentFinished(paymentOkModal)">Cash</button>
-    <button type="button" class="btn btn-outline-dark btn-lg" (click)="payByCard(cardPaymentStart)">Carte</button>
+    <button type="button" class="btn btn-outline-success btn-lg" (click)="paymentFinished(paymentOkModal)">Paiement Validé</button>
+    <button type="button" class="btn btn-outline-warning btn-lg" (click)="openModal(processToPayment)">Retour</button>
   </div>
 </ng-template>
+
 
 <ng-template #cardPaymentStart let-modal>
   <div class="modal-header">
@@ -72,9 +93,15 @@
       </div>
     </form>
 
-    <a [href]="sumUpURL(receiptEmail, receiptPhone)" class="btn btn-success btn-lg">Payer</a>
+    <div class="modal-footer">
+      <a [href]="sumUpURL(receiptEmail, receiptPhone)" class="btn btn-outline-success btn-lg">Payer</a>
+
+      <button type="button" class="btn btn-outline-warning btn-lg" (click)="cancelCardPayment(processToPayment)">Retour</button>
+    </div>
   </div>
 </ng-template>
+
+
 
 <ng-template #checkoutError let-modal>
   <div class="modal-header">
