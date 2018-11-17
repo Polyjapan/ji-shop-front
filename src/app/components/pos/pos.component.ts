@@ -120,7 +120,9 @@ export class PosComponent implements OnInit {
       accepted: true,
       cardTransactionMessage: 'Cash transaction success.'
     }).subscribe(() => {});
-    this.modalService.open(modal, {size: 'lg'}).result.then((result2) => {
+    this.modalService.open(modal, {size: 'lg'}).result.then(() => {
+      this.resetComponent();
+    }, () => {
       this.resetComponent();
     });
   }
