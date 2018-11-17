@@ -15,7 +15,7 @@
     <td>{{line.product.name}}</td>
     <td>{{line.product.price}}</td>
     <td *ngIf="shouldDisplay('WEB')">{{priceStats(line.salesData.WEB)}}</td>
-    <td *ngIf="shouldDisplay('ONSITE')">{{priceStats(line.salesData.ONSITE)}}<br><i>{{paymentMethodData(line.salesData.ONSITE.moneyGeneratedCash, line.salesData.ONSITE.moneyGeneratedCard)}}</i></td>
+    <td *ngIf="shouldDisplay('ONSITE')">{{priceStats(line.salesData.ONSITE)}}<br><i>{{paymentMethodSalesData(line.salesData.ONSITE)}}</i></td>
     <td *ngIf="shouldDisplay('GIFT')">{{priceStats(line.salesData.GIFT)}}</td>
     <td *ngIf="shouldDisplay('RESELLER')">{{priceStats(line.salesData.RESELLER)}}</td>
     <td>{{priceTotal(line.salesData)}}</td>

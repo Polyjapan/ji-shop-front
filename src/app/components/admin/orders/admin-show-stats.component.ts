@@ -22,6 +22,7 @@ export class AdminShowStatsComponent implements OnInit {
   ngOnInit(): void {
     this.route.parent.paramMap.subscribe(map => {
       const id = map.get('event');
+      this.stats = undefined;
       this.totalItemsForSource.clear();
       this.totalAmountForSource.clear();
       this.cashAmount = undefined;
@@ -61,6 +62,13 @@ export class AdminShowStatsComponent implements OnInit {
     return this.totalItemsForSource.get(source) > 0;
   }
 
+  paymentMethodSalesData(salesData: SalesData) {
+    const cash = salesData ? salesData.moneyGeneratedCash : undefined;
+    const card = salesData ? salesData.moneyGeneratedCard : undefined;
+
+    return this.paymentMethodData(cash, card);
+  }
+
   paymentMethodData(cash?: number, card?: number) {
     cash = cash ? cash : 0;
     card = card ? card : 0;
@@ -79,12 +87,14 @@ export class AdminShowStatsComponent implements OnInit {
     for (const stat of this.stats) {
       const data = stat.salesData;
       for (const key in data) {
-        if (data[key].moneyGeneratedCard) {
-          card += data[key].moneyGeneratedCard;
-        }
+        if (data[key]) {
+          if (data[key].moneyGeneratedCard) {
+            card += data[key].moneyGeneratedCard;
+          }
 
-        if (data[key].moneyGeneratedCash) {
-          cash += data[key].moneyGeneratedCash;
+          if (data[key].moneyGeneratedCash) {
+            cash += data[key].moneyGeneratedCash;
+          }
         }
       }
     }
@@ -106,7 +116,6 @@ export class AdminShowStatsComponent implements OnInit {
     for (const stat of this.stats) {
       if (source) {
         const data = stat.salesData[source];
-
         if (data) {
           total += data.amountSold;
           money += data.moneyGenerated;
