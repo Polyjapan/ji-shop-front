@@ -4,29 +4,29 @@
   <tr>
     <th>Produit</th>
     <th>Prix unitaire</th>
-    <th>Web</th>
-    <th>Sur place</th>
-    <th>Cadeaux</th>
-    <th>Import</th>
+    <th *ngIf="shouldDisplay('WEB')">Web</th>
+    <th *ngIf="shouldDisplay('ONSITE')">Sur place</th>
+    <th *ngIf="shouldDisplay('GIFT')">Cadeaux</th>
+    <th *ngIf="shouldDisplay('RESELLER')">Import</th>
     <th>Total</th>
   </tr>
 
   <tr *ngFor="let line of stats">
     <td>{{line.product.name}}</td>
     <td>{{line.product.price}}</td>
-    <td>{{priceStats(line.salesData.WEB)}}</td>
-    <td>{{priceStats(line.salesData.ONSITE)}}</td>
-    <td>{{priceStats(line.salesData.GIFT)}}</td>
-    <td>{{priceStats(line.salesData.RESELLER)}}</td>
+    <td *ngIf="shouldDisplay('WEB')">{{priceStats(line.salesData.WEB)}}</td>
+    <td *ngIf="shouldDisplay('ONSITE')">{{priceStats(line.salesData.ONSITE)}}<br><i>{{paymentMethodData(line.salesData.ONSITE.moneyGeneratedCash, line.salesData.ONSITE.moneyGeneratedCard)}}</i></td>
+    <td *ngIf="shouldDisplay('GIFT')">{{priceStats(line.salesData.GIFT)}}</td>
+    <td *ngIf="shouldDisplay('RESELLER')">{{priceStats(line.salesData.RESELLER)}}</td>
     <td>{{priceTotal(line.salesData)}}</td>
   </tr>
 
   <tr>
     <td colspan="2"><b>Total</b></td>
-    <td>{{priceTotalForSource('WEB')}}</td>
-    <td>{{priceTotalForSource('ONSITE')}}</td>
-    <td>{{priceTotalForSource('GIFT')}}</td>
-    <td>{{priceTotalForSource('RESELLER')}}</td>
+    <td *ngIf="shouldDisplay('WEB')">{{priceTotalForSource('WEB')}}</td>
+    <td *ngIf="shouldDisplay('ONSITE')">{{priceTotalForSource('ONSITE')}}<br><i>{{paymentMethodData(cashAmount, cardAmount)}}</i></td>
+    <td *ngIf="shouldDisplay('GIFT')">{{priceTotalForSource('GIFT')}}</td>
+    <td *ngIf="shouldDisplay('RESELLER')">{{priceTotalForSource('RESELLER')}}</td>
     <td>{{priceTotalForSource()}}</td>
   </tr>
 </table>

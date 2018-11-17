@@ -9,4 +9,6 @@ export class StatsReturn {
 export class SalesData {
   amountSold: number;
   moneyGenerated: number;
+  moneyGeneratedCash?: number; // SPECIAL for ONSITE: amount sold by cash
+  moneyGeneratedCard?: number; // SPECIAL for ONSITE: amount sold by card
 }

@@ -36,10 +36,13 @@ const routes: Routes = [
       { path: 'orders/:id', component: ViewOrderComponent, canActivate: [PermissionAuthGuard] },
       { path: 'scan/:configId', component: ScanComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SCAN_TICKET} },
       { path: 'scan', component: ScanSelectComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SCAN_TICKET} },
+      { path: 'pos/:configId', component: PosComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SELL_ON_SITE} },
+      { path: 'pos/:configId/callback', component: PosCallbackComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SELL_ON_SITE} },
       { path: 'pos', component: PosSelectComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SELL_ON_SITE} },
       { path: '**', component: PageNotFoundComponent }
     ]
-  }];
+  }
+];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],

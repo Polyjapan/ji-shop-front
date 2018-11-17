@@ -10,6 +10,10 @@ import {Source} from '../../../types/order';
 })
 export class AdminShowStatsComponent implements OnInit {
   stats: StatsReturn[];
+  totalAmountForSource: Map<string, number> = new Map();
+  totalItemsForSource: Map<string, number> = new Map();
+  cashAmount: number;
+  cardAmount: number;
   Source = Source;
 
   constructor(private backend: BackendService, private route: ActivatedRoute) {
@@ -18,10 +22,16 @@ export class AdminShowStatsComponent implements OnInit {
   ngOnInit(): void {
     this.route.parent.paramMap.subscribe(map => {
       const id = map.get('event');
+      this.totalItemsForSource.clear();
+      this.totalAmountForSource.clear();
+      this.cashAmount = undefined;
+      this.cardAmount = undefined;
 
       this.backend.getStats(Number(id)).subscribe(stats => {
         this.stats = stats;
         console.log(stats);
+
+        this.computeCashCard();
       });
     });
 
@@ -36,6 +46,60 @@ export class AdminShowStatsComponent implements OnInit {
   }
 
   priceTotalForSource(source?: string) {
+    this.computePriceTotalForSource(source);
+
+    if (!source) {
+      source = '__global';
+    }
+
+    return this.totalAmountForSource.get(source) + '  CHF (' + this.totalAmountForSource.get(source) + ')';
+  }
+
+  shouldDisplay(source: string): boolean {
+    this.computePriceTotalForSource(source);
+
+    return this.totalItemsForSource.get(source) > 0;
+  }
+
+  paymentMethodData(cash?: number, card?: number) {
+    cash = cash ? cash : 0;
+    card = card ? card : 0;
+
+    return 'Cash: ' + cash + ' CHF, card: ' + card + ' CHF';
+  }
+
+  private computeCashCard() {
+    if (this.cardAmount && this.cashAmount) {
+      return;
+    }
+
+    let card = 0, cash = 0;
+
+
+    for (const stat of this.stats) {
+      const data = stat.salesData;
+      for (const key in data) {
+        if (data[key].moneyGeneratedCard) {
+          card += data[key].moneyGeneratedCard;
+        }
+
+        if (data[key].moneyGeneratedCash) {
+          cash += data[key].moneyGeneratedCash;
+        }
+      }
+    }
+
+    this.cardAmount = card;
+    this.cashAmount = cash;
+  }
+
+  private computePriceTotalForSource(source?: string) {
+    const src = source ? source : '__global';
+
+    if (this.totalAmountForSource.has(src) && this.totalItemsForSource.has(src)) {
+      return;
+    }
+
     let total = 0;
     let money = 0;
 
@@ -57,9 +121,8 @@ export class AdminShowStatsComponent implements OnInit {
 
     }
 
-
-    return money + '  CHF (' + total + ')';
-
+    this.totalAmountForSource.set(src, money);
+    this.totalItemsForSource.set(src, total);
   }
 
   priceTotal(data: Map<Source, SalesData>) {
