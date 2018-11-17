@@ -69,8 +69,8 @@ export class TasksService {
     }
   }
 
-  /*getTasks(event: number) {
-    this.checkId(event);
+  /*getTasks(events: number) {
+    this.checkId(events);
 
     const observable: Subject<PartialIntranetTask[]> = new Subject<PartialIntranetTask[]>();
     this.observables.push(observable);

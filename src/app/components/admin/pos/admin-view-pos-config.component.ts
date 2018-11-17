@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ScanConfigurationWithItems} from '../../../types/scan_configuration';
 import {BackendService} from '../../../services/backend.service';
 import {Item, ItemList, PosConfigItem} from '../../../types/items';
@@ -21,7 +21,7 @@ export class AdminViewPosConfigComponent implements OnInit {
 
   id: number;
 
-  constructor(private backend: BackendService, public route: ActivatedRoute) {
+  constructor(private backend: BackendService, public route: ActivatedRoute, private router: Router) {
   }
 
   private buildAddedItems() {
@@ -87,5 +87,18 @@ export class AdminViewPosConfigComponent implements OnInit {
 
   removeProduct(product: Item) {
     this.backend.removeProductFromPosConfiguration(this.id, product).subscribe(res => this.reload());
+  }
+
+  delete(): void {
+    const conf = confirm('Voulez vous vraiment supprimer cette configuration ? Elle sera définitivement perdue.');
+
+    if (conf) {
+      this.backend.deletePosConfig(this.id).subscribe(res => {
+        this.router.navigate(['admin', 'pos']);
+      }, err => {
+        alert('Une erreur s\'est produite.');
+        this.reload();
+      });
+    }
   }
 }

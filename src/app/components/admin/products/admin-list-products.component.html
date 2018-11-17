@@ -1,7 +1,12 @@
-<h2>Produits
-  <small class="margin-left: .5rem;"><a class="btn btn-success" routerLink="create">Ajouter un produit</a>
-  </small>
-</h2>
+
+<div class="row">
+  <div class="col-md-2"><h2>Produits</h2></div>
+  <div class="col-md-4 offset-md-6" style="text-align: right;">
+    <a class="btn btn-outline-success" routerLink="create">Ajouter un produit</a>
+    <button class="btn btn-outline-warning" style="margin-left: 0.5rem;" (click)="purge()" *ngIf="items && items.length > 0">Vider les produits non utilisés</button>
+    <button class="btn btn-outline-danger" style="margin-left: 0.5rem;" (click)="delete()" *ngIf="items && items.length == 0">Supprimer l'événement</button>
+  </div>
+</div>
 
 <table class="table">
   <tr>

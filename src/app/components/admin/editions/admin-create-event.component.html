@@ -23,6 +23,13 @@
     </label>
   </div>
 
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="eventArchived" id="eventArchived" [(ngModel)]="event.archived">
+    <label class="form-check-label" for="eventArchived">
+      Archivé
+    </label>
+  </div>
+
   <p *ngIf="cloneId"><i>Vous êtes en mode clonage, ce qui signifie que tous les produits de l'événement cloné seront
   copiés dans ce nouvel événement à sa création.</i></p>
 

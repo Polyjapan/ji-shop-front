@@ -23,7 +23,7 @@ const routes: Routes = [
         component: SelectEventComponent,
       },
       {
-        path: ':event',
+        path: ':events',
         component: IntranetEventComponent,
         children: [
           {
@@ -98,7 +98,7 @@ const routes: Routes = [
              ],
            },
            {
-             path: ':event',
+             path: ':events',
              canActivateChild: [PermissionAuthGuard],
              component: AdminEventParentComponent,
              children: [

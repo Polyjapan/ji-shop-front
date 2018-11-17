@@ -66,7 +66,7 @@ export class AdminCreateEventComponent implements OnInit {
     if (this.route.snapshot.paramMap.has('cloneId')) {
       this.cloneId = Number(this.route.snapshot.paramMap.get('cloneId'));
 
-      // Still load the event
+      // Still load the events
       this.loading = true;
       this.backend.getEvent(this.cloneId).subscribe(ev => {
         this.event = ev;

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ScanConfigurationWithItems} from '../../../types/scan_configuration';
 import {BackendService} from '../../../services/backend.service';
 import {Item, ItemList} from '../../../types/items';
@@ -15,7 +15,7 @@ export class AdminViewScanningConfigComponent implements OnInit {
   filteredAvailableItems: ItemList[];
   private id: number;
 
-  constructor(private backend: BackendService, public route: ActivatedRoute) {
+  constructor(private backend: BackendService, public route: ActivatedRoute, private router: Router) {
   }
 
   private buildAddedItems() {
@@ -74,5 +74,18 @@ export class AdminViewScanningConfigComponent implements OnInit {
 
   removeProduct(product: Item) {
     this.backend.removeProductFromScanningConfiguration(this.id, product).subscribe(res => this.reload());
+  }
+
+  delete(): void {
+    const conf = confirm('Voulez vous vraiment supprimer cette configuration ? Elle sera définitivement perdue.');
+
+    if (conf) {
+      this.backend.deleteScanConfig(this.id).subscribe(res => {
+        this.router.navigate(['admin', 'scan']);
+      }, err => {
+        alert('Une erreur s\'est produite.');
+        this.reload();
+      });
+    }
   }
 }

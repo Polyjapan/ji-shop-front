@@ -101,6 +101,22 @@ export class BackendService {
     }
   }
 
+  purgeProducts(eventId: number): Observable<ApiResult> {
+    return this.http.get<ApiResult>(this._adminUrl + '/events/' + eventId + '/products/purge');
+  }
+
+  deleteEvent(eventId: number): Observable<ApiResult> {
+    return this.http.delete<ApiResult>(this._adminUrl + '/events/' + eventId);
+  }
+
+  deletePosConfig(configId: number): Observable<ApiResult> {
+    return this.http.delete<ApiResult>(this._posUrl + '/configurations/' + configId);
+  }
+
+  deleteScanConfig(configId: number): Observable<ApiResult> {
+    return this.http.delete<ApiResult>(this._scanUrl + '/configurations/' + configId);
+  }
+
   getStats(event: number, start?: number, end?: number): Observable<StatsReturn[]> {
     const params = new HttpParams();
     if (start) {

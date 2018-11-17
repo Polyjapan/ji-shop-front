@@ -4,4 +4,5 @@ export class Event {
   name: string;
   location: string;
   visible: boolean;
+  archived: boolean;
 }

@@ -2,6 +2,7 @@ import {Event} from '../../types/event';
 import {Observable, Subject} from 'rxjs/Rx';
 import {BackendService} from '../../services/backend.service';
 import {Injectable} from '@angular/core';
+import {EventListService} from './event-list.service';
 
 @Injectable()
 export class EventService {
@@ -9,11 +10,12 @@ export class EventService {
   event: Event;
   current: number;
 
-  constructor(private backend: BackendService) {
+  constructor(private backend: BackendService, private eventListService: EventListService) {
     this.observable = new Subject<Event>();
   }
 
   public invalidate() {
+    this.eventListService.invalidate();
     this.query();
   }
 

@@ -19,7 +19,8 @@
   <ul class="nav flex-column mb-2" *ngIf="editions">
     <li [class]="'nav-item' " *ngFor="let event of editions">
       <a [routerLink]="['events', event.id]" [class]="'nav-link' + (active === event.id ? ' active':'')">
-        <i class="feather far fa-file"></i>
+        <i class="feather fas fa-file" *ngIf="!event.archived"></i>
+        <i class="feather fas fa-archive" *ngIf="event.archived"></i>
         {{event.name}}
       </a>
     </li>

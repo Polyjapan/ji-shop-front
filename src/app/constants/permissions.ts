@@ -48,7 +48,7 @@ export enum Permissions {
   SEE_INVISIBLE_ITEMS = 'admin.see_invisible_items',
 
   /**
-   * Permission to export all tickets for an event to a FNAC-compatible list
+   * Permission to export all tickets for an events to a FNAC-compatible list
    */
   EXPORT_TICKETS = 'admin.export_tickets',
 
@@ -60,7 +60,22 @@ export enum Permissions {
   /**
    * Permission to modify POS configurations
    */
-  CHANGE_POS_CONFIGURATIONS = 'admin.change_pos_configurations',
+  ADMIN_POS_MANAGE = 'admin.change_pos_configurations',
+
+  /**
+   * Permission to modify scanning configurations
+   */
+  ADMIN_SCAN_MANAGE = 'admin.change_scanning_configurations',
+
+  /**
+   * Permission to manage the events
+   */
+  ADMIN_EVENT_MANAGE = 'admin.event_manage',
+
+  /**
+   * Permission to manage the products
+   */
+  ADMIN_PRODUCTS_MANAGE = 'admin.products_manage',
 
   /**
    * Access the intranet data
