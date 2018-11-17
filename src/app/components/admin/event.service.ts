@@ -3,15 +3,16 @@ import {Observable, Subject} from 'rxjs/Rx';
 import {BackendService} from '../../services/backend.service';
 import {Injectable} from '@angular/core';
 import {EventListService} from './event-list.service';
+import {BetterSubject} from '../../abstraction/BetterSubject';
 
 @Injectable()
 export class EventService {
-  observable: Subject<Event>;
+  observable: BetterSubject<Event>;
   event: Event;
   current: number;
 
   constructor(private backend: BackendService, private eventListService: EventListService) {
-    this.observable = new Subject<Event>();
+    this.observable = new BetterSubject<Event>();
   }
 
   public invalidate() {
