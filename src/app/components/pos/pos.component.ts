@@ -10,7 +10,7 @@ import {ErrorCodes} from '../../constants/errors';
 import {SumupService} from './sumup.service';
 import {environment} from '../../../environments/environment';
 import {isNullOrUndefined} from 'util';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import {DomSanitizer, Meta, SafeUrl} from '@angular/platform-browser';
 import {PaymentMethod} from '../../types/pos_configuration';
 
 @Component({
@@ -32,7 +32,7 @@ export class PosComponent implements OnInit {
 
   constructor(public backend: BackendService, private auth: AuthService, private cart: CartService,
               private route: ActivatedRoute, private modalService: NgbModal, private sumUp: SumupService,
-              private sanitizer: DomSanitizer) {
+              private sanitizer: DomSanitizer, private meta: Meta) {
   }
 
   get change(): number {
@@ -86,6 +86,8 @@ export class PosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.meta.updateTag({ name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' });
+
     const params = this.route.snapshot.paramMap;
 
     const queryParams = this.route.snapshot.queryParams;
@@ -169,7 +171,10 @@ export class PosComponent implements OnInit {
       '&currency=CHF' +
       '&title=PolyJapan AGEPoly' +
       '&skipSuccessScreen=true' +
-      '&callback=' + baseUrl + '/pos/' + this.configId + '/callback';
+      '&skip-success-screen=true' +
+      '&callback=' + baseUrl + '/pos/' + this.configId + '/callback' +
+      '&callbackfail=' + baseUrl + '/pos/' + this.configId + '/callback' +
+      '&callbacksuccess=' + baseUrl + '/pos/' + this.configId + '/callback';
 
     if (!isNullOrUndefined(receiptEmail.value) && receiptEmail.value !== '') {
       url += '&receipt-email=' + receiptEmail.value;
