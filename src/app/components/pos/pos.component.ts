@@ -11,7 +11,7 @@ import {SumupService} from './sumup.service';
 import {environment} from '../../../environments/environment';
 import {isNullOrUndefined} from 'util';
 import {DomSanitizer, Meta, SafeUrl} from '@angular/platform-browser';
-import {PaymentMethod} from '../../types/pos_configuration';
+import {PaymentMethod, PosConfiguration} from '../../types/pos_configuration';
 
 @Component({
   selector: 'app-pos',
@@ -19,6 +19,7 @@ import {PaymentMethod} from '../../types/pos_configuration';
 })
 export class PosComponent implements OnInit {
   items: PosConfigItem[][];
+  config: PosConfiguration;
   loading = true;
   configId: number;
 
@@ -62,10 +63,10 @@ export class PosComponent implements OnInit {
     }
 
     const items: PosConfigItem[][] = [];
-    for (let col = 0; col <= maxCol; col++) {
+    for (let row = 0; row <= maxRow; row++) {
       items.push([]);
-      for (let row = 0; row <= maxRow; row++) {
-        items[col].push(null);
+      for (let col = 0; col <= maxCol; col++) {
+        items[row].push(null);
       }
     }
 
@@ -102,6 +103,7 @@ export class PosComponent implements OnInit {
 
     this.backend.getPosConfiguration(this.configId).subscribe(data => {
       this.items = this.buildRows(data.items);
+      this.config = data.config;
       this.loading = false;
     }, err => {
       this.loading = false;

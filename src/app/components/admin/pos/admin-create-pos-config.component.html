@@ -10,6 +10,14 @@
     <input type="text" class="form-control" id="configName" name="configName" placeholder="Billets 2019" [(ngModel)]="config.name" required>
   </div>
 
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="acceptCards" id="acceptCards" [(ngModel)]="config.acceptCards">
+    <label class="form-check-label" for="acceptCards">
+      Accepte les cartes bancaires
+    </label>
+  </div>
+
+
   <button *ngIf="!isNew" type="submit" class="btn btn-primary" (click)="submit()" [disabled]="sending">Modifier</button>
   <button *ngIf="isNew" type="submit" class="btn btn-primary" (click)="submit()" [disabled]="sending">Créer</button>
 </form>

@@ -3,6 +3,7 @@ import {PosConfigItem} from './items';
 export class PosConfiguration {
   id: number;
   name: string;
+  acceptCards: boolean;
 }
 
 export class PosGetConfigResponse {
