@@ -12,6 +12,7 @@ export class Item {
   isTicket: boolean;
   freePrice: boolean;
   isVisible: boolean;
+  image?: string;
 }
 
 export class ItemList {

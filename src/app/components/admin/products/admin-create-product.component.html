@@ -27,6 +27,12 @@
   </div>
 
   <div class="form-group">
+    <label for="prodImage">URL d'une image</label>
+    <input type="text" class="form-control" id="prodImage" name="prodImage" placeholder="https://static.zyuiop.net/image.png"
+           [(ngModel)]="product.image">
+  </div>
+
+  <div class="form-group">
     <label for="shortDescr">Description courte (affichée dans la boutique)</label>
 
     <textarea class="form-control" rows="3" id="shortDescr" name="shortDesc"
@@ -59,6 +65,8 @@
       Ce produit doit être visible aux clients
     </label>
   </div>
+
+
   <br>
 
   <ng-container *ngIf="isNew">
