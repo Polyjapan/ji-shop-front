@@ -1,7 +1,7 @@
 <tr>
   <td><strong [class]="item.isVisible ? '' : 'text-muted'">{{item.name}}</strong><br>{{item.description}}</td>
-  <td width="17%" *ngIf="!item.freePrice">{{item.price}}.&ndash;</td>
-  <td width="17%" *ngIf="item.freePrice">
+  <td width="17%" *ngIf="!item.freePrice" style="padding-left: 0.8rem;"><b>{{item.price}}.&ndash;</b></td>
+  <td width="17%" *ngIf="item.freePrice" style="padding-left: 0.8rem;">
     <div class="input-group">
 
       <input type="number" class="form-control" [(ngModel)]="price" min="{{item.price}}" max="{{3 * item.price}}" aria-describedby="basic-addon2" title="Prix">
