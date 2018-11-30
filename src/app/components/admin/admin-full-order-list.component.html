@@ -14,6 +14,7 @@
     <td>{{order.totalPrice}}</td>
     <td>{{order.source}}</td>
     <td>{{formatDate(order.enterDate)}}</td>
-    <td>{{formatDate(order.paymentConfirmed)}}</td>
+    <td *ngIf="order.paymentConfirmed">{{formatDate(order.paymentConfirmed)}}</td>
+    <td *ngIf="!order.paymentConfirmed"><span class="badge badge-danger">Non payée</span></td>
   </tr>
 </table>
