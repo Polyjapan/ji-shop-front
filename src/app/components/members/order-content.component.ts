@@ -41,4 +41,12 @@ export class OrderContentComponent {
       alert('Impossible de télécharger le billet : \n' + errors.join('\n'));
     });
   }
+
+  offTax(paidPrice: number) {
+    return (paidPrice / 1.077).toFixed(2);
+  }
+
+  tax(paidPrice: number) {
+    return (paidPrice * (.077 / 1.077)).toFixed(2);
+  }
 }
