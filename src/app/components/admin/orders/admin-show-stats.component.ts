@@ -53,7 +53,7 @@ export class AdminShowStatsComponent implements OnInit {
       source = '__global';
     }
 
-    return this.totalAmountForSource.get(source) + '  CHF (' + this.totalAmountForSource.get(source) + ')';
+    return this.totalAmountForSource.get(source) + '  CHF (' + this.totalItemsForSource.get(source) + ')';
   }
 
   shouldDisplay(source: string): boolean {
