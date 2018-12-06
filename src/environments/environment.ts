@@ -5,11 +5,11 @@
 
 export const environment = {
   production: false,
-  // apiurl: 'http://localhost:9000',
-  // tokenWhitelist: ['localhost:9000'],
+  apiurl: 'http://localhost:9000',
+  tokenWhitelist: ['localhost:9000'],
 
-  apiurl: 'https://shop.japan-impact.ch/api',
-  tokenWhitelist: ['shop.japan-impact.ch'],
+  // apiurl: 'https://shop.japan-impact.ch/api',
+  // tokenWhitelist: ['shop.japan-impact.ch'],
   sumUpKey: 'a-wrong-key',
   sumUpApp: 'japan_impact',
   baseUrl: 'http://localhost:9000'

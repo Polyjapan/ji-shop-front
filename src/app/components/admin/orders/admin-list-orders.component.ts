@@ -20,7 +20,7 @@ export class AdminListOrdersComponent implements OnInit {
     const id = Number(this.route.snapshot.parent.parent.paramMap.get('event'));
 
     this.backend.getOrdersByEvent(id).subscribe(orders => {
-      this.orders = orders;
+      this.orders = orders.sort((a, b) => a.id - b.id);
     });
   }
 

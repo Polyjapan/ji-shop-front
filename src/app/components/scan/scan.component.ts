@@ -39,11 +39,11 @@ export class ScanComponent implements OnInit {
     this.configId = parseInt(params.get('configId'), 10);
 
     this.okAudio = new Audio();
-    this.okAudio.src = '../../../assets/sounds/ok.mp3';
+    this.okAudio.src = '../../../assets/sounds/ok.ogg';
     this.okAudio.load();
 
     this.nopeAudio = new Audio();
-    this.nopeAudio.src = '../../../assets/sounds/nope.mp3';
+    this.nopeAudio.src = '../../../assets/sounds/nope.ogg';
     this.nopeAudio.load();
   }
 
