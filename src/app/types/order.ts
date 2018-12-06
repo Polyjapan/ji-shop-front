@@ -32,7 +32,7 @@ export class FullOrder {
 }
 
 export enum Source {
-  Web = 'WEB', OnSite = 'ONSITE', Reseller = 'RESELLER', Gift = 'GIFT'
+  Web = 'WEB', OnSite = 'ONSITE', Reseller = 'RESELLER', Gift = 'GIFT', Physical = 'PHYSICAL'
 }
 
 export class CheckedOutItem {

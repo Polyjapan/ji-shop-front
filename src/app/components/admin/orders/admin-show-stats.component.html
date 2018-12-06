@@ -8,6 +8,7 @@
     <th *ngIf="shouldDisplay('ONSITE')">Sur place</th>
     <th *ngIf="shouldDisplay('GIFT')">Cadeaux</th>
     <th *ngIf="shouldDisplay('RESELLER')">Import</th>
+    <th *ngIf="shouldDisplay('PHYSICAL')">Physiques</th>
     <th>Total</th>
   </tr>
 
@@ -18,6 +19,7 @@
     <td *ngIf="shouldDisplay('ONSITE')">{{priceStats(line.salesData.ONSITE)}}<br><i>{{paymentMethodSalesData(line.salesData.ONSITE)}}</i></td>
     <td *ngIf="shouldDisplay('GIFT')">{{priceStats(line.salesData.GIFT)}}</td>
     <td *ngIf="shouldDisplay('RESELLER')">{{priceStats(line.salesData.RESELLER)}}</td>
+    <td *ngIf="shouldDisplay('PHYSICAL')">{{priceStats(line.salesData.PHYSICAL)}}</td>
     <td>{{priceTotal(line.salesData)}}</td>
   </tr>
 
@@ -27,6 +29,7 @@
     <td *ngIf="shouldDisplay('ONSITE')">{{priceTotalForSource('ONSITE')}}<br><i>{{paymentMethodData(cashAmount, cardAmount)}}</i></td>
     <td *ngIf="shouldDisplay('GIFT')">{{priceTotalForSource('GIFT')}}</td>
     <td *ngIf="shouldDisplay('RESELLER')">{{priceTotalForSource('RESELLER')}}</td>
+    <td *ngIf="shouldDisplay('PHYSICAL')">{{priceTotalForSource('PHYSICAL')}}</td>
     <td>{{priceTotalForSource()}}</td>
   </tr>
 </table>

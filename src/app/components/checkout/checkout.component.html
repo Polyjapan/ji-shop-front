@@ -14,6 +14,7 @@
   <h1>Récapitulatif de commande</h1>
   <p>Vérifiez que votre commande est correcte.</p>
   <p *ngIf="isGift">Cette commande sera générée comme <b>un cadeau</b>.</p>
+  <p *ngIf="isSale">Cette commande sera générée comme <b>une vente en avance</b>.</p>
 
   <div *ngIf="checkoutRemoved" class="alert alert-warning">
     <h2>Attention !</h2>
@@ -81,6 +82,20 @@
 
     <button (click)="sendToMultiple(emails)" class="btn btn-success">Envoyer</button>
 
+  </div>
+
+  <div *ngIf="isSale">
+    <h3>Paiement & envoi des billets</h3>
+    <p>La personne indiquée recevra les billets directement par email.</p>
+
+    <p><b>Merci d'encaisser avant de continuer.</b> Une fois que c'est fait, relevez l'email et cliquez sur le bouton.</p>
+
+    <div class="form-group">
+      <label for="inputEmail2">Envoyer les billets à</label>
+      <input type="email" name="email" class="form-control" id="inputEmail2" placeholder="Email" #email>
+    </div>
+
+    <button (click)="sendTo(email)" class="btn btn-success">Envoyer les billets</button>
   </div>
 </div>
 

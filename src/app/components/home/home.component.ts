@@ -55,4 +55,8 @@ export class HomeComponent implements OnInit {
   get isAdmin() {
     return this.auth.hasPermission(Permissions.GIVE_FOR_FREE);
   }
+
+  get canSell() {
+    return this.auth.hasPermission(Permissions.SELL_IN_ADVANCE);
+  }
 }

@@ -51,6 +51,7 @@
         <app-cart>
           <a href="checkout" class="btn btn-primary">Passer commande</a> <!-- Why routerLink doesnt work? -->
           <a href="checkout/gift" class="btn btn-success" *ngIf="isAdmin">Générer un cadeau</a> <!-- Why routerLink doesnt work? -->
+          <a href="checkout/physical" class="btn btn-success" *ngIf="canSell">Vendre à un tiers</a> <!-- Why routerLink doesnt work? -->
         </app-cart>
 
       </div>

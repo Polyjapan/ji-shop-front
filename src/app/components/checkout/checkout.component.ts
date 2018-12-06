@@ -48,6 +48,10 @@ export class CheckoutComponent implements OnInit {
     return this.source === Source.Gift;
   }
 
+  get isSale(): boolean {
+    return this.source === Source.Physical;
+  }
+
   private placeOrder(source: Source) {
 
     const order = this.cart.getOrder();
@@ -94,6 +98,10 @@ export class CheckoutComponent implements OnInit {
         if (this.auth.hasPermission(Permissions.GIVE_FOR_FREE)) {
           source = Source.Gift; // the server will check the perm
           this.cart.zeroPrices();
+        }
+      } else if (type === 'physical') {
+        if (this.auth.hasPermission(Permissions.SELL_IN_ADVANCE)) {
+          source = Source.Physical; // the server will check the perm
         }
       }
     }

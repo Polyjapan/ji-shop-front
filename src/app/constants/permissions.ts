@@ -117,4 +117,9 @@ export enum Permissions {
    * Edit a tasks created by someone else
    */
   INTRANET_TASK_EDIT = 'intranet.admin.task_edit',
+
+  /**
+   * Permission to sell tickets in advance on a polyjapan controlled sales point
+   */
+  SELL_IN_ADVANCE = 'admin.sell_in_advance',
 }
