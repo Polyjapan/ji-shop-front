@@ -1,11 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FullOrderData} from '../../types/order';
 
 @Component({
   selector: 'app-admin-full-order-list',
   templateUrl: './admin-full-order-list.component.html'
 })
-export class AdminFullOrderListComponent {
+export class AdminFullOrderListComponent implements OnInit, OnDestroy {
   @Input() orders: FullOrderData[];
   @Input() routerLinkBase: string[] = [];
   displayRemoved: boolean = false;
@@ -40,5 +40,19 @@ export class AdminFullOrderListComponent {
     const date = new Date(time);
 
     return date.toLocaleString();
+  }
+
+  ngOnDestroy(): void {
+    localStorage.setItem('preferences.displayRemoved', this.displayRemoved ? 'true' : 'false');
+    localStorage.setItem('preferences.displayUnpaid', this.displayUnpaid ? 'true' : 'false');
+  }
+
+  ngOnInit(): void {
+    if (localStorage.getItem('preferences.displayRemoved') === 'true') {
+      this.displayRemoved = true;
+    }
+    if (localStorage.getItem('preferences.displayUnpaid') === 'false') {
+      this.displayUnpaid = false;
+    }
   }
 }
