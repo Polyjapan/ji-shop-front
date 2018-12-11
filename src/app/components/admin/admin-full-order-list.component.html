@@ -1,4 +1,15 @@
 
+
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="displayUnpaid" [(ngModel)]="displayUnpaid">
+  <label class="form-check-label" for="displayUnpaid">Voir non payées</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="displayRemoved" [(ngModel)]="displayRemoved">
+  <label class="form-check-label" for="displayRemoved">Voir supprimées</label>
+</div>
+
 <table class="table">
   <tr>
     <th>#</th>
@@ -8,13 +19,14 @@
     <th>Créée le</th>
     <th>Payée le</th>
   </tr>
-  <tr *ngFor="let order of orders">
+  <tr *ngFor="let order of filteredOrders">
     <td><a [routerLink]="routerLink(order.id)">{{order.id}}</a></td>
     <td>{{order.ticketsPrice}}</td>
     <td>{{order.totalPrice}}</td>
     <td>{{order.source}}</td>
     <td>{{formatDate(order.enterDate)}}</td>
-    <td *ngIf="order.paymentConfirmed">{{formatDate(order.paymentConfirmed)}}</td>
-    <td *ngIf="!order.paymentConfirmed"><span class="badge badge-danger">Non payée</span></td>
+    <td *ngIf="order.paymentConfirmed && !order.removed">{{formatDate(order.paymentConfirmed)}}</td>
+    <td *ngIf="!order.paymentConfirmed && !order.removed"><span class="badge badge-danger">Non payée</span></td>
+    <td *ngIf="order.removed"><span class="badge badge-danger">Supprimée</span></td>
   </tr>
 </table>
