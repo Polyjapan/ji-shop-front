@@ -25,7 +25,7 @@ export class MyOrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.backend.getOrders().subscribe(orders => {
-      this.orders = orders.sort((a, b) => {
+      this.orders = orders.filter(order => !order.removed).sort((a, b) => {
         return b.createdAt - a.createdAt;
       }).filter(order => order.paymentConfirmed); // only display paid orders
     }, error => {

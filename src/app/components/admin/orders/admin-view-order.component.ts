@@ -15,6 +15,7 @@ export class AdminViewOrderComponent implements OnInit {
   logs: PosPaymentLog[];
   id: number;
   working = false;
+  deleting = false;
   sending = false;
 
 
@@ -40,6 +41,21 @@ export class AdminViewOrderComponent implements OnInit {
 
       this.working = true;
       this.backend.confirmOrder(this.id).subscribe(res => {
+        this.backend.getOrder(this.id).subscribe(ord => this.order = ord);
+      });
+    }
+  }
+
+  deleteOrder() {
+    if (
+      confirm('Voulez vous vraiment supprimer cette commande ? L\'action est irréversible et tous les billets associés seront invalidés ' +
+      'définitivement.') && confirm('ATTENTION ? Vous êtes vraiment vraiment certain de vouloir faire ça ? C\'est définitif on a dit.')
+      && confirm('DERNIER AVERTISSEMENT ! J\'ai pas envie que tu fasses une bêtise, vraiment, mais si tu es sûr de vouloir ' +
+      'SUPPRIMER cette commande pour toujours toujours alors tu peux cliquer.')
+    ) {
+
+      this.deleting = true;
+      this.backend.removeOrder(this.id).subscribe(res => {
         this.backend.getOrder(this.id).subscribe(ord => this.order = ord);
       });
     }

@@ -8,8 +8,20 @@ import {FullOrderData} from '../../types/order';
 export class AdminFullOrderListComponent {
   @Input() orders: FullOrderData[];
   @Input() routerLinkBase: string[] = [];
+  displayRemoved: boolean = false;
+  displayUnpaid: boolean = true;
 
   constructor() {
+  }
+
+  get filteredOrders(): FullOrderData[] {
+    return this.orders.filter(order => {
+      if (order.removed && !this.displayRemoved) {
+        return false;
+      }
+
+      return order.paymentConfirmed || this.displayUnpaid;
+    });
   }
 
   routerLink(id: number) {

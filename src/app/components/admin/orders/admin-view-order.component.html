@@ -28,6 +28,14 @@
     </li>
     <li><b>Date de création : </b>{{formatDate(order.order.createdAt)}}</li>
     <li><b>Source : </b>{{order.order.source}}</li>
+    <li><b>Supprimée ? </b>{{order.order.removed ? "Oui" : "Non"}}
+
+
+      <button class="btn btn-danger btn-sm" *ngIf="!order.order.removed" (click)="deleteOrder()" [disabled]="deleting">
+        {{deleting ? 'Suppression...' : 'Supprimer'}}
+      </button>
+
+    </li>
   </ul>
 
   <h4>Contenu</h4>

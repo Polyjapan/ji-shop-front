@@ -6,6 +6,7 @@ export class Order {
   paymentConfirmed: boolean;
   createdAt: number;
   source: Source;
+  removed: boolean;
 }
 
 export class FullOrderData {
@@ -16,6 +17,7 @@ export class FullOrderData {
   paymentConfirmed: number;
   enterDate: number;
   source: Source;
+  removed: boolean;
 }
 
 export class OrderedProduct {

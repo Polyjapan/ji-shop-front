@@ -45,6 +45,10 @@ export class BackendService {
     return this.http.get<FullOrderData[]>(this._adminUrl + '/orders/' + id);
   }
 
+  removeOrder(orderId: number): Observable<ApiResult> {
+    return this.http.delete<ApiResult>(this._adminUrl + '/orders/' + orderId);
+  }
+
   getOrderClient(order: number): Observable<Client> {
     return this.http.get<Client>(this._adminUrl + '/orders/userInfo/' + order);
   }
