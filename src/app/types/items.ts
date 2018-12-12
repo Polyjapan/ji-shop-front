@@ -13,6 +13,8 @@ export class Item {
   freePrice: boolean;
   isVisible: boolean;
   image?: string;
+  isWebExclusive: boolean;
+  estimatedRealPrice: number;
 }
 
 export class ItemList {

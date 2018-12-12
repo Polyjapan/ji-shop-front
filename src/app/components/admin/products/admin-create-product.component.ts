@@ -79,6 +79,7 @@ export class AdminCreateProductComponent implements OnInit {
 
     this.product = new Item();
     this.product.maxItems = -1; // Default max items
+    this.product.estimatedRealPrice = -1;
     this.product.eventId = this.eventId;
   }
 }

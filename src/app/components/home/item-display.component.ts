@@ -4,7 +4,26 @@ import {CartService} from '../cart/cart.service';
 
 @Component({
   selector: 'app-item-display',
-  templateUrl: './item-display.component.html'
+  templateUrl: './item-display.component.html',
+  styles: [
+    `.strikethrough {position:relative}
+
+    .strikethrough:before {
+      position: absolute;
+      content: "";
+      left: -2px;
+      top: 50%;
+      right: -5px;
+      border-top: 2px solid;
+      border-color: red;
+
+      -webkit-transform:rotate(-17deg);
+      -moz-transform:rotate(-17deg);
+      -ms-transform:rotate(-17deg);
+      -o-transform:rotate(-17deg);
+      transform:rotate(-17deg);
+    }`
+  ]
 })
 export class ItemDisplayComponent implements OnInit {
   @Input() item: Item = null;
@@ -36,5 +55,12 @@ export class ItemDisplayComponent implements OnInit {
 
   ngOnInit(): void {
     this.price = this.item.price;
+  }
+
+  computePriceReduction(item: Item) {
+    const reduc = 100 * (item.estimatedRealPrice - item.price) / item.estimatedRealPrice;
+
+
+    return '(- ' + reduc.toFixed(0) + ' %)';
   }
 }

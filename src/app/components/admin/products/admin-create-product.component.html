@@ -27,6 +27,12 @@
   </div>
 
   <div class="form-group">
+    <label for="prodPrice">Prix réel estimé (pour afficher le "vous économisez xx.-")</label>
+    <input type="number" class="form-control" id="estimatedRealPrice" name="estimatedRealPrice" placeholder="-1"
+           [(ngModel)]="product.estimatedRealPrice" required>
+  </div>
+
+  <div class="form-group">
     <label for="prodImage">URL d'une image</label>
     <input type="text" class="form-control" id="prodImage" name="prodImage" placeholder="https://static.zyuiop.net/image.png"
            [(ngModel)]="product.image">
@@ -63,6 +69,13 @@
     <input class="form-check-input" type="checkbox" name="isVisible" id="isVisible" [(ngModel)]="product.isVisible">
     <label class="form-check-label" for="isVisible">
       Ce produit doit être visible aux clients
+    </label>
+  </div>
+
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="isWebExclusive" id="isWebExclusive" [(ngModel)]="product.isWebExclusive">
+    <label class="form-check-label" for="isWebExclusive">
+      Ce produit doit être affiché comme une "exclu Web"
     </label>
   </div>
 
