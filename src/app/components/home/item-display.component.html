@@ -5,7 +5,6 @@
   <td width="17%" *ngIf="!item.freePrice" style="padding-left: 0.8rem;">
     <span *ngIf="item.estimatedRealPrice && item.estimatedRealPrice > item.price" class="strikethrough" style="margin-right: .5rem;">{{item.estimatedRealPrice}}.&ndash;</span>
     <b>{{item.price}}.&ndash;</b>
-    <small *ngIf="item.estimatedRealPrice && item.estimatedRealPrice > item.price" class="text-danger"><br>{{computePriceReduction(item)}}</small>
   </td>
   <td width="17%" *ngIf="item.freePrice" style="padding-left: 0.8rem;">
     <div class="input-group">

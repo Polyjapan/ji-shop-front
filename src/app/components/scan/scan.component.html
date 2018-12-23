@@ -45,6 +45,23 @@
   <ng-container *ngIf="errorType === ErrorCodes.ALREADY_SCANNED">
     <hr>
     <p>Ce billet a été validé par {{errorData['scannedBy']}} le {{parseDate(errorData['scannedAt'])}}</p>
+
+    <ng-container *ngIf="errorData['ticketData'] && errorData['ticketData'].products">
+      <h3>Liste des items :</h3>
+      <b>Cette liste est fournie à titre d'information uniquement. Ne distribuez pas ces objets si
+        vous n'êtes pas 100% certain que le client ne les a pas eu.</b>
+      <table class="table table-bordered">
+        <tr>
+          <th>Type d'objet</th>
+          <th>Quantité</th>
+        </tr>
+
+        <tr *ngFor="let pair of errorData['ticketData'].products">
+          <td>{{pair[0].name}}</td>
+          <td>{{pair[1]}}</td>
+        </tr>
+      </table>
+    </ng-container>
   </ng-container>
 
   <ng-container *ngIf="errorType === ErrorCodes.PRODUCT_NOT_ALLOWED">
