@@ -3,7 +3,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import {environment} from '../../environments/environment';
 import {Item, ItemList, ItemsResponse} from '../types/items';
-import {CheckedOutItem, FullOrder, FullOrderData, Order, Source} from '../types/order';
+import {CheckedOutItem, FullOrder, FullOrderData, Order, OrderLog, Source} from '../types/order';
 import {LoginResponse} from './auth.service';
 import {ApiResult} from '../types/api_result';
 import {HttpClient, HttpParams} from '@angular/common/http';
@@ -53,8 +53,12 @@ export class BackendService {
     return this.http.get<Client>(this._adminUrl + '/orders/userInfo/' + order);
   }
 
-  getOrderLogs(order: number): Observable<PosPaymentLog[]> {
-    return this.http.get<PosPaymentLog[]>(this._adminUrl + '/orders/logs/' + order);
+  getOrderPosLogs(order: number): Observable<PosPaymentLog[]> {
+    return this.http.get<PosPaymentLog[]>(this._adminUrl + '/orders/posLogs/' + order);
+  }
+
+  getOrderLogs(order: number): Observable<OrderLog[]> {
+    return this.http.get<OrderLog[]>(this._adminUrl + '/orders/logs/' + order);
   }
 
   resendEmail(order: number): Observable<ApiResult> {

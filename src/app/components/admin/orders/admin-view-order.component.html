@@ -48,6 +48,16 @@
 
   <ul>
     <li *ngFor="let log of logs">
+      <i>{{formatDate(log.logDate)}} : {{log.accepted ? '(vaut acceptation)' : '(info)'}} {{log.name}} data: {{log.details}}</i>
+    </li>
+  </ul>
+</ng-container>
+
+<ng-container *ngIf="orderLogs && orderLogs.length > 0">
+  <h3>POS Logs</h3>
+
+  <ul>
+    <li *ngFor="let log of orderLogs">
       <i>{{formatDate(log.logDate)}} : {{log.accepted ? '(vaut acceptation)' : '(info)'}} paiement={{log.paymentMethod}} reçu={{log.cardReceiptSend}} tr_id={{log.cardTransactionCode}} tr_msg={{log.cardTransactionMessage}} tr_err={{log.cardTransactionFailureCause}}</i>
     </li>
   </ul>

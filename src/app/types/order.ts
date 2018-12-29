@@ -42,3 +42,13 @@ export class CheckedOutItem {
   itemAmount: number;
   itemPrice?: number;
 }
+
+
+export class OrderLog {
+  id?: number;
+  orderId: number;
+  logDate: number;
+  name: String;
+  details?: String;
+  accepted: String;
+}

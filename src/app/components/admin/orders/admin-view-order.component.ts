@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BackendService} from '../../../services/backend.service';
 import {ActivatedRoute} from '@angular/router';
-import {FullOrder} from '../../../types/order';
+import {FullOrder, OrderLog} from '../../../types/order';
 import {Client} from '../../../types/client';
 import {PosPaymentLog} from '../../../types/pos_configuration';
 
@@ -12,7 +12,8 @@ import {PosPaymentLog} from '../../../types/pos_configuration';
 export class AdminViewOrderComponent implements OnInit {
   order: FullOrder;
   user: Client;
-  logs: PosPaymentLog[];
+  orderLogs: PosPaymentLog[];
+  logs: OrderLog[];
   id: number;
   working = false;
   deleting = false;
@@ -27,6 +28,7 @@ export class AdminViewOrderComponent implements OnInit {
 
     this.backend.getOrder(this.id).subscribe(ord => this.order = ord);
     this.backend.getOrderClient(this.id).subscribe(client => this.user = client);
+    this.backend.getOrderPosLogs(this.id).subscribe(orderLogs => this.orderLogs = orderLogs);
     this.backend.getOrderLogs(this.id).subscribe(logs => this.logs = logs);
   }
 
