@@ -1,13 +1,13 @@
 <div *ngIf="accepted">
-  <h1>Merci pour vos achats !</h1>
-  <p>Votre commande a bien été acceptée. Vos billets vous seront envoyés par email dès que nous aurons reçu votre
+  <h1 i18n>Merci pour vos achats !</h1>
+  <p i18n>Votre commande a bien été acceptée. Vos billets vous seront envoyés par email dès que nous aurons reçu votre
   paiement. Vous pourrez également les retrouver dans votre espace client. <!-- TODO insert link -->
     <br>A bientôt sur le festival !</p>
 </div>
 
 <div *ngIf="!accepted">
-  <h1>Votre paiement est en route !</h1>
-  <p>Votre paiement est encore en cours de traitement par PostFinance... Si tout va bien, vous devriez recevoir vos billets
+  <h1 i18n>Votre paiement est en route !</h1>
+  <p i18n>Votre paiement est encore en cours de traitement par PostFinance... Si tout va bien, vous devriez recevoir vos billets
   par e-mail d'ici moins d'une heure. Dans le cas contraire, écrivez nous à <a href="mailto:ticket@japan-impact-ch">ticket@japan-impact.ch</a>.<br>A bientôt sur le festival !<br>
   <a routerLink="/">Retour à l'accueil</a></p>
 </div>

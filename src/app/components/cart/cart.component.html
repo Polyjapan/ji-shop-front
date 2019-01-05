@@ -12,9 +12,9 @@
   </table>
 
   <hr>
-  <p *ngIf="!displayMode">Prix total : <b>{{cart.total}}.&ndash;</b></p>
+  <p *ngIf="!displayMode" i18n>Prix total : <b>{{cart.total}}.&ndash;</b></p>
 
   <ng-content></ng-content>
 </ng-container>
 
-<p *ngIf="cart.items.length === 0">Vous n'avez rien mis dans votre panier pour le moment.</p>
+<p *ngIf="cart.items.length === 0" i18n>Vous n'avez rien mis dans votre panier pour le moment.</p>

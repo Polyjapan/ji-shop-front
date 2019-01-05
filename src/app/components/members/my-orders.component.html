@@ -1,33 +1,33 @@
-<h1>Mes commandes</h1>
+<h1 i18n>Mes commandes</h1>
 
-<p>Voici l'historique des commandes que vous avez passées sur notre boutique.</p>
+<p i18n>Voici l'historique des commandes que vous avez passées sur notre boutique.</p>
 
-<p class="text-muted" *ngIf="!orders && !errors">Veuillez patienter, chargement en cours...</p>
+<p class="text-muted" *ngIf="!orders && !errors" i18n>Veuillez patienter, chargement en cours...</p>
 
 <div *ngIf="errors" class="alert alert-danger">
-  <h2>Impossible de charger vos commandes</h2>
+  <h2 i18n>Impossible de charger vos commandes</h2>
   <ul>
     <li *ngFor="let err of errors">{{err}}</li>
   </ul>
 </div>
 
 
-<p class="text-muted" *ngIf="orders && orders.length === 0">Vous n'avez passé aucune commande sur le site.</p>
+<p class="text-muted" *ngIf="orders && orders.length === 0" i18n>Vous n'avez passé aucune commande sur le site.</p>
 
-<p class="text-muted">Votre commande n'apparaît pas encore ? Patientez quelques minutes, le traîtement de votre paiement peut
+<p class="text-muted" i18n>Votre commande n'apparaît pas encore ? Patientez quelques minutes, le traîtement de votre paiement peut
   prendre un peu de temps.</p>
 
 <table *ngIf="orders && orders.length > 0" class="table table-bordered">
   <tr>
-    <th>Date de la commande</th>
-    <th>Montant</th>
-    <th>Détails</th>
+    <th i18n>Date de la commande</th>
+    <th i18n>Montant</th>
+    <th i18n>Détails</th>
   </tr>
 
   <tr *ngFor="let order of orders">
     <td>{{formatDate(order)}}</td>
     <td>{{order.price}}.&ndash;</td>
-    <td><a [routerLink]="[order.id]" class="btn btn-primary">Voir la commande</a></td>
+    <td><a [routerLink]="[order.id]" class="btn btn-primary" i18n>Voir la commande</a></td>
   </tr>
 </table>
 

@@ -1,10 +1,10 @@
 <div *ngIf="loading">
-  <h1>Veuillez patienter...</h1>
-  <p>Merci de patienter quelques instants, nous recherchons votre commande.</p>
+  <h1 i18n>Veuillez patienter...</h1>
+  <p i18n>Merci de patienter quelques instants, nous recherchons votre commande.</p>
 </div>
 
 <div *ngIf="errors && errors.length > 0" class="alert alert-danger">
-  <h2>Une erreur s'est produite</h2>
+  <h2 i18n>Une erreur s'est produite</h2>
   <ul>
     <li *ngFor="let error of errors">
       {{error}}
@@ -13,10 +13,10 @@
 </div>
 
 <div *ngIf="order">
-  <h1>Commande #{{order.order.id}}</h1>
-  <p>Passée le {{date}}</p>
+  <h1 i18n>Commande #{{order.order.id}}</h1>
+  <p i18n>Passée le {{date}}</p>
   <hr>
-  <h3>Récapitulatif de la commande</h3>
+  <h3 i18n>Récapitulatif de la commande</h3>
 
   <app-order-content [order]="order"></app-order-content>
 </div>

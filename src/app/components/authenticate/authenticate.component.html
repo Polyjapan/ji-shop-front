@@ -1,26 +1,26 @@
 <ng-container *ngIf="registerOk">
-  <h1>Confirmation de l'email</h1>
+  <h1 i18n>Confirmation de l'email</h1>
 
-  <p>Nous avons bien enregistré votre inscription. Vous devriez d'ici quelques instants recevoir un email permettant
+  <p i18n>Nous avons bien enregistré votre inscription. Vous devriez d'ici quelques instants recevoir un email permettant
     de valider votre adresse. Lorsque vous le recevez, cliquez simplement sur le lien pour continuer vos achats.</p>
 </ng-container>
 
 <ng-container *ngIf="!registerOk">
 
 
-  <h1>Identifiez vous pour continuer</h1>
-  <p>Notre boutique a été entièrement revue en 2018, aussi les comptes de l'ancienne billetterie ne sont plus valables. Désolés !</p>
+  <h1 i18n>Identifiez vous pour continuer</h1>
+  <p i18n>Notre boutique a été entièrement revue en 2018, aussi les comptes de l'ancienne billetterie ne sont plus valables. Désolés !</p>
   <hr class="mb-4">
 
   <div class="row">
     <div class="col-md-6">
-      <h2>Nouveau client</h2>
-      <p class="text-muted">Inscrivez vous en quelques instants !</p>
+      <h2 i18n>Nouveau client</h2>
+      <p class="text-muted" i18n>Inscrivez vous en quelques instants !</p>
       <br>
 
 
       <div class="alert alert-danger" role="alert" *ngIf="registerErrors && registerErrors.length > 0">
-        <p>Impossible de vous inscrire !</p>
+        <p i18n>Impossible de vous inscrire !</p>
         <ul>
           <li *ngFor="let err of registerErrors">{{err}}</li>
         </ul>
@@ -29,36 +29,36 @@
       <form #register="ngForm" class="form" (ngSubmit)="onRegister(register)" action="#">
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="inputFirstName">Prénom</label>
-            <input type="text" name="firstname" class="form-control" id="inputFirstName" placeholder="Prénom" required
+            <label for="inputFirstName" i18n>Prénom</label>
+            <input type="text" name="firstname" class="form-control" id="inputFirstName" i18n-placeholder placeholder="Prénom" required
                    ngModel>
           </div>
           <div class="form-group col-md-6">
-            <label for="inputLastName">Nom</label>
-            <input type="text" name="lastname" class="form-control" id="inputLastName" placeholder="Nom" required
+            <label for="inputLastName" i18n>Nom</label>
+            <input type="text" name="lastname" class="form-control" id="inputLastName" i18n-placeholder placeholder="Nom" required
                    ngModel>
           </div>
         </div>
         <div class="form-group">
-          <label for="inputEmail">Email</label>
-          <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" required ngModel>
+          <label for="inputEmail" i18n>Email</label>
+          <input type="email" name="email" class="form-control" id="inputEmail" i18n-placeholder placeholder="Email" required ngModel>
         </div>
         <div class="form-group">
-          <label for="inputPassword">Mot de passe</label>
-          <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Mot de passe"
+          <label for="inputPassword" i18n>Mot de passe</label>
+          <input type="password" name="password" class="form-control" id="inputPassword" i18n-placeholder placeholder="Mot de passe"
                  required ngModel>
         </div>
 
         <div class="form-check">
           <input class="form-check-input" type="checkbox" name="acceptNews" value="true" id="acceptNewsletter" ngModel>
-          <label class="form-check-label" for="acceptNewsletter">
+          <label class="form-check-label" for="acceptNewsletter" i18n>
             J'accepte de recevoir la newsletter bimensuelle de Japan Impact
           </label>
         </div>
 
         <hr>
 
-        <p>En vous inscrivant sur ce site, vous acceptez que PolyJapan (AGEPoly) conserve les informations que vous lui
+        <p i18n>En vous inscrivant sur ce site, vous acceptez que PolyJapan (AGEPoly) conserve les informations que vous lui
           transmettez.
           Ces informations ne seront pas transmises à des tiers ou utilisées à des fins publicitaires.</p>
 
@@ -68,20 +68,20 @@
 
         <br>
 
-        <button type="submit" class="btn btn-primary" [disabled]="!register.valid || registerSent">Inscription
+        <button type="submit" class="btn btn-primary" [disabled]="!register.valid || registerSent" i18n>Inscription
           <i class="fas fa-spinner" *ngIf="registerSent"></i>
         </button>
       </form>
     </div>
 
     <div class="col-md-6 border-left text-right">
-      <h2>Déjà client</h2>
-      <p class="text-muted">Indiquez simplement votre email et votre mot de passe pour poursuivre.</p>
+      <h2 i18n>Déjà client</h2>
+      <p class="text-muted" i18n>Indiquez simplement votre email et votre mot de passe pour poursuivre.</p>
 
       <br>
 
       <div class="alert alert-danger" role="alert" *ngIf="loginErrors && loginErrors.length > 0">
-        <p>Impossible de vous connecter !</p>
+        <p i18n>Impossible de vous connecter !</p>
         <ul>
           <li *ngFor="let err of loginErrors">{{err}}</li>
         </ul>
@@ -89,22 +89,22 @@
 
       <form #login="ngForm" class="form" (ngSubmit)="onLogin(login)" action="#">
         <div class="form-group">
-          <label for="inputLoginEmail">Email</label>
-          <input type="email" name="email" class="form-control" id="inputLoginEmail" placeholder="Email" required
+          <label for="inputLoginEmail" i18n>Email</label>
+          <input type="email" name="email" class="form-control" id="inputLoginEmail" i18n-placeholder placeholder="Email" required
                  ngModel>
         </div>
         <div class="form-group">
-          <label for="inputLoginPassword">Mot de passe</label>
-          <input type="password" name="password" class="form-control" id="inputLoginPassword" placeholder="Mot de passe"
+          <label for="inputLoginPassword" i18n>Mot de passe</label>
+          <input type="password" name="password" class="form-control" id="inputLoginPassword" i18n-placeholder placeholder="Mot de passe"
                  required ngModel>
         </div>
 
         <br>
-        <a routerLink="/passwordForget">Mot de passe oublié</a>
+        <a routerLink="/passwordForget" i18n>Mot de passe oublié</a>
 
         <hr>
 
-        <button type="submit" class="btn btn-primary" [disabled]="!login.valid || loginSent">Connexion
+        <button type="submit" class="btn btn-primary" [disabled]="!login.valid || loginSent" i18n>Connexion
           <i class="fas fa-spinner" *ngIf="loginSent"></i>
         </button>
       </form>

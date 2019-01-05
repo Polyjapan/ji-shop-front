@@ -1,18 +1,18 @@
 <div *ngIf="loading">
-  <h1>Veuillez patienter...</h1>
-  <p>Merci de patienter quelques instants, nous vérifions votre email.</p>
+  <h1 i18n>Veuillez patienter...</h1>
+  <p i18n>Merci de patienter quelques instants, nous vérifions votre email.</p>
 </div>
 
 <div *ngIf="!loading && errors.length > 0" class="alert alert-danger">
-  <h2>Impossible de vérifier votre adresse</h2>
+  <h2 i18n>Impossible de vérifier votre adresse</h2>
   <ul>
     <li *ngFor="let err of errors">{{err}}</li>
   </ul>
 </div>
 
 <div *ngIf="!loading && success">
-  <h1>Email vérifié !</h1>
+  <h1 i18n>Email vérifié !</h1>
 
-  <p>Votre adresse email a bien été vérifiée ! Vous pouvez désormais poursuivre vos achats en cliquant sur le bouton ci dessous.</p>
-  <a class="btn btn-success" [routerLink]="returnUrl">Poursuivre mes achats</a>
+  <p i18n>Votre adresse email a bien été vérifiée ! Vous pouvez désormais poursuivre vos achats en cliquant sur le bouton ci dessous.</p>
+  <a class="btn btn-success" [routerLink]="returnUrl" i18n>Poursuivre mes achats</a>
 </div>

@@ -1,11 +1,11 @@
 <table class="table table-bordered">
   <tr>
-    <th width="40%">Article</th>
-    <th>Prix unit. H.T.</th>
-    <th>Quantité</th>
-    <th>Prix total H.T.</th>
-    <th>Prix total TTC</th>
-    <th width="25%">Billets</th>
+    <th width="40%" i18n>Article</th>
+    <th i18n>Prix unit. H.T.</th>
+    <th i18n>Quantité</th>
+    <th i18n>Prix total H.T.</th>
+    <th i18n>Prix total TTC</th>
+    <th width="25%" i18n>Billets</th>
   </tr>
   <tr *ngFor="let item of order.products">
     <td>{{item.product.name}}</td>
@@ -34,15 +34,15 @@
 
 
   <tr>
-    <td colspan="4" style="text-align: right;"><b>Total HT</b></td>
+    <td colspan="4" style="text-align: right;"><b i18n>Total HT</b></td>
     <td colspan="3">{{offTax(totalAmount)}}</td>
   </tr>
   <tr>
-    <td colspan="4" style="text-align: right;"><b>TVA 7.7%</b></td>
+    <td colspan="4" style="text-align: right;"><b i18n>TVA 7.7%</b></td>
     <td colspan="3">{{tax(totalAmount)}}</td>
   </tr>
   <tr>
-    <td colspan="4" style="text-align: right;"><b>Total TTC</b></td>
+    <td colspan="4" style="text-align: right;"><b i18n>Total TTC</b></td>
     <td colspan="3">{{totalAmount}}.&ndash;</td>
   </tr>
 </table>

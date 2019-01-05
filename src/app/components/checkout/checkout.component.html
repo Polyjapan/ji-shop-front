@@ -1,24 +1,24 @@
 <div *ngIf="!checkoutErrors && !done">
-  <h1>Veuillez patienter...</h1>
-  <p>Merci de patienter quelques instants, nous vérifions votre commande.</p>
+  <h1 i18n>Veuillez patienter...</h1>
+  <p i18n>Merci de patienter quelques instants, nous vérifions votre commande.</p>
 </div>
 
 <div *ngIf="checkoutErrors" class="alert alert-danger">
-  <h2>Impossible de passer la commande</h2>
+  <h2 i18n>Impossible de passer la commande</h2>
   <ul>
     <li *ngFor="let err of checkoutErrors">{{err}}</li>
   </ul>
 </div>
 
 <div *ngIf="done && !multiSendStart">
-  <h1>Récapitulatif de commande</h1>
-  <p>Vérifiez que votre commande est correcte.</p>
+  <h1 i18n>Récapitulatif de commande</h1>
+  <p i18n>Vérifiez que votre commande est correcte.</p>
   <p *ngIf="isGift">Cette commande sera générée comme <b>un cadeau</b>.</p>
   <p *ngIf="isSale">Cette commande sera générée comme <b>une vente en avance</b>.</p>
 
   <div *ngIf="checkoutRemoved" class="alert alert-warning">
-    <h2>Attention !</h2>
-    <p>Les éléments suivants se trouvaient dans votre panier et ont été supprimés.</p>
+    <h2 i18n>Attention !</h2>
+    <p i18n>Les éléments suivants se trouvaient dans votre panier et ont été supprimés.</p>
     <table>
       <tr *ngFor="let item of checkoutRemoved">
         <td>{{item.amount}} * {{item.baseItem.name}} ({{item.price}}.&ndash;)</td>
@@ -29,11 +29,11 @@
 
   <table class="table table-bordered">
     <tr>
-      <th>Article</th>
-      <th>Prix unitaire</th>
-      <th>Quantité</th>
-      <th>Prix total</th>
-      <th *ngIf="checkoutUpdated">Particularités</th>
+      <th i18n>Article</th>
+      <th i18n>Prix unitaire</th>
+      <th i18n>Quantité</th>
+      <th i18n>Prix total</th>
+      <th *ngIf="checkoutUpdated" i18n>Particularités</th>
     </tr>
     <tr *ngFor="let item of cart.items">
       <td>{{item.baseItem.name}}</td>
@@ -41,20 +41,20 @@
       <td *ngIf="wasUpdated(item)">{{item.amount}} <s>{{previousAmount(item)}}</s></td>
       <td *ngIf="!wasUpdated(item)">{{item.amount}}</td>
       <td>{{item.amount * item.price}}.&ndash;</td>
-      <td *ngIf="checkoutUpdated && wasUpdated(item)">Quantité modifiée !</td>
+      <td *ngIf="checkoutUpdated && wasUpdated(item)" i18n>Quantité modifiée !</td>
     </tr>
 
     <tr>
-      <td colspan="3"><b>Total</b></td>
+      <td colspan="3"><b i18n>Total</b></td>
       <td>{{cart.total}}</td>
     </tr>
   </table>
 
   <hr>
-  <p>Rappel important : si votre commande contient des goodies, <strong>assurez vous de disposer d'un billet pour entrer
+  <p i18n>Rappel important : si votre commande contient des goodies, <strong>assurez vous de disposer d'un billet pour entrer
   dans la manifestation, ou vous ne pourrez pas les récupérer.</strong></p>
-  <p>Si vous confirmez que la commande est correcte, vous pouvez passer au paiement ici :</p>
-  <a class="btn btn-success" href="{{checkoutLink}}" *ngIf="checkoutLink"><i class="far fa-credit-card"></i> Paiement sécurisé <i class="fas fa-lock"></i></a>
+  <p i18n>Si vous confirmez que la commande est correcte, vous pouvez passer au paiement ici :</p>
+  <a class="btn btn-success" href="{{checkoutLink}}" *ngIf="checkoutLink" i18n><i class="far fa-credit-card"></i> Paiement sécurisé <i class="fas fa-lock"></i></a>
 
   <div *ngIf="isGift">
     <h3>M'envoyer les billets par email</h3>
@@ -100,13 +100,13 @@
 </div>
 
 <div *ngIf="adminSent">
-  <h1>Commande confirmée !</h1>
-  <p>La commande a bien été envoyée et validée :)</p>
+  <h1 i18n>Commande confirmée !</h1>
+  <p i18n>La commande a bien été envoyée et validée :)</p>
 </div>
 
 <div *ngIf="adminSendErrors && adminSendErrors.length > 0" class="alert alert-danger">
-  <h2>Oups, impossible de terminer la commande</h2>
-  <p>Voici le(s) code(s) d'erreur(s) rencontré(s) :</p>
+  <h2 i18n>Oups, impossible de terminer la commande</h2>
+  <p i18n>Voici le(s) code(s) d'erreur(s) rencontré(s) :</p>
   <ul>
     <li *ngFor="let err of adminSendErrors">
       {{err}}

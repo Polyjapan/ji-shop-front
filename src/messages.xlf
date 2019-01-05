@@ -1,0 +1,1010 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="44f9ba5df48225d8da1e392752b33c7732412390" datatype="html">
+        <source>Article</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/order-content.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0fa0fa182cb40a78a71b2cbcaab5ea23dd260e92" datatype="html">
+        <source>Prix unit. H.T.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/order-content.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ac0d6812963be073dd69ed4976e8f61da7354f14" datatype="html">
+        <source>Quantité</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/order-content.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9b0372312881e5a84b45025e5f830c64e9010af2" datatype="html">
+        <source>Prix total H.T.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/order-content.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f9bd4cec98574d7119ebe99c830832c058032375" datatype="html">
+        <source>Prix total TTC</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/order-content.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5c0a4accdde6530c7bc2e03b27ad93a4f7dfa422" datatype="html">
+        <source>Billets</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/order-content.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9abc8c26e1b2fa703093b793badfe8369da888c1" datatype="html">
+        <source>Total HT</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/order-content.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7185b258f7183082c204a1b07d135f31318b1809" datatype="html">
+        <source>TVA 7.7%</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/order-content.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="85cb84b6f88dadcd6440896192d753ca27820f71" datatype="html">
+        <source>Total TTC</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/order-content.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9458ebb55bfe0c617abcc7347d582eaca3fbf3e1" datatype="html">
+        <source>Veuillez patienter...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/emailcheck.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/view-order.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8e12b66ecb2a4b8f7cf14964cbba40485538f161" datatype="html">
+        <source>Merci de patienter quelques instants, nous vérifions votre commande.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4205afcffe263fdcd3844b800907726a760c291c" datatype="html">
+        <source>Impossible de passer la commande</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d99f2e1ddd961957b90857da400d3f8c9728f33c" datatype="html">
+        <source>Récapitulatif de commande</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="82c5c8d522beafa982417f1fa67e4c2673c76431" datatype="html">
+        <source>Vérifiez que votre commande est correcte.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cee5543a7168134ae6a704f026c92bfb2f43c708" datatype="html">
+        <source>Attention !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4281ff5cc92e0728d411bd6d64572f8cf2ff5df2" datatype="html">
+        <source>Les éléments suivants se trouvaient dans votre panier et ont été supprimés.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a72e04cf5d5ee575a2dcde590fab7edd2ea4a770" datatype="html">
+        <source>Prix unitaire</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dd0c9f0eb16b2a3e16ae69c2fcff17670fe2dc92" datatype="html">
+        <source>Prix total</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e4498218b413db4ce39307ae313a10e82068547f" datatype="html">
+        <source>Particularités</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="27d88e6b4fd2c1afdd99d97ea2f02e5fe0e7d266" datatype="html">
+        <source>Quantité modifiée !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d04d5b5d13ac9acf9750f1807f0227eeee98b247" datatype="html">
+        <source>Total</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="243b0c0e55c1f4eea5097146c2eb89903fd17fde" datatype="html">
+        <source>Rappel important : si votre commande contient des goodies, <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>assurez vous de disposer d&apos;un billet pour entrer
+  dans la manifestation, ou vous ne pourrez pas les récupérer.<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e4b03dacfaa8f1b53d2cd99111899b50ea50e2ff" datatype="html">
+        <source>Si vous confirmez que la commande est correcte, vous pouvez passer au paiement ici :</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2e105cdc05616050598bba53e62279c2796636be" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Paiement sécurisé <x id="START_ITALIC_TEXT_1" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="728cc4f5b3f64de5458e3488533389f6dafd65d7" datatype="html">
+        <source>Commande confirmée !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="30f2a81396a476b79ab443b0c26a847133688a95" datatype="html">
+        <source>La commande a bien été envoyée et validée :)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="834d94eb4ab3a7417283c34bea548c2a2718330e" datatype="html">
+        <source>Oups, impossible de terminer la commande</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">108</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d4d7b1d22720d05ba55a774c089f66983e68b330" datatype="html">
+        <source>Voici le(s) code(s) d&apos;erreur(s) rencontré(s) :</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/checkout.component.html</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1fb521447cb8627ecb296ea15339fe5dae9be07b" datatype="html">
+        <source>Merci pour vos achats !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/callback.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b2f2031552a22985154a87035dcf824cf3317d4d" datatype="html">
+        <source>Votre commande a bien été acceptée. Vos billets vous seront envoyés par email dès que nous aurons reçu votre
+  paiement. Vous pourrez également les retrouver dans votre espace client. 
+    <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>A bientôt sur le festival !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/callback.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3f20221b2974ed57da6881a7826f9d2fb838d799" datatype="html">
+        <source>Votre paiement est en route !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/callback.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1600f7ddabfe1fdca286654a7fb9eddb067fc9b5" datatype="html">
+        <source>Votre paiement est encore en cours de traitement par PostFinance... Si tout va bien, vous devriez recevoir vos billets
+  par e-mail d&apos;ici moins d&apos;une heure. Dans le cas contraire, écrivez nous à <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>ticket@japan-impact.ch<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>A bientôt sur le festival !<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+  <x id="START_LINK_1" ctype="x-a" equiv-text="&lt;a&gt;"/>Retour à l&apos;accueil<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/checkout/callback.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e84a486889446e8bee38f3a83c27a960615e3e22" datatype="html">
+        <source>Merci de patienter quelques instants, nous vérifions votre email.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/emailcheck.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="56abba2a504d58ba45e3583b8d5c69851b6d8c79" datatype="html">
+        <source>Impossible de vérifier votre adresse</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/emailcheck.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3752a754e902950df18732b0dbb63910e5449ce7" datatype="html">
+        <source>Email vérifié !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/emailcheck.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="179ed7beb184ced12146c8500cd6c943824fbbce" datatype="html">
+        <source>Votre adresse email a bien été vérifiée ! Vous pouvez désormais poursuivre vos achats en cliquant sur le bouton ci dessous.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/emailcheck.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="edfc036a059184e9ed0458ee3f6354ff78d1c8af" datatype="html">
+        <source>Poursuivre mes achats</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/emailcheck.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="59afb6a01a262a089c135981eed47b85c6ecd806" datatype="html">
+        <source>Mes commandes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/my-orders.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cf16867ca280fbc00d4ae74449bd0a618cc422e2" datatype="html">
+        <source>Voici l&apos;historique des commandes que vous avez passées sur notre boutique.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/my-orders.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="843354734e6b37d9eecdbe7de2470fd61932f0ad" datatype="html">
+        <source>Veuillez patienter, chargement en cours...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/my-orders.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a250e3d8519aa455f7a4f551e6e96d62c0befe11" datatype="html">
+        <source>Impossible de charger vos commandes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/my-orders.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="47aed87562c697bc75573c2f1a59d3e212e4cc86" datatype="html">
+        <source>Vous n&apos;avez passé aucune commande sur le site.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/my-orders.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b3ee6295931d9befc33b15d84a97eb955b2c3777" datatype="html">
+        <source>Votre commande n&apos;apparaît pas encore ? Patientez quelques minutes, le traîtement de votre paiement peut
+  prendre un peu de temps.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/my-orders.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="71ef18165faf7e399e49cb433b52da0f86667796" datatype="html">
+        <source>Date de la commande</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/my-orders.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9bf76ef012909b8620e807d014554d3bb97c4824" datatype="html">
+        <source>Montant</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/my-orders.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5751eb6c6d990310166b25d62e95ee4270cb0782" datatype="html">
+        <source>Détails</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/my-orders.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7408785fd0cb466d239f33d8bb22d1733f95065b" datatype="html">
+        <source>Voir la commande</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/my-orders.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="18422ccd25b078bb510c95f874eac67f78735b8a" datatype="html">
+        <source>Merci de patienter quelques instants, nous recherchons votre commande.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/view-order.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1d86b0e98e560a175eb491f681dc470de417cec2" datatype="html">
+        <source>Une erreur s&apos;est produite</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/view-order.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dcaf89b8fb30e5c66aa1649a6dbf5e8dfeaa95fe" datatype="html">
+        <source>Commande #<x id="INTERPOLATION" equiv-text="{{order.order.id}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/view-order.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="45a87581847e874940ef14164124f4390a169396" datatype="html">
+        <source>Passée le <x id="INTERPOLATION" equiv-text="{{date}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/view-order.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="30128e287493e414de5378fa11e4292cb0d434c0" datatype="html">
+        <source>Récapitulatif de la commande</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/members/view-order.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ae2ce4d5465c27de314f523ec7ef6b063d3b3e3a" datatype="html">
+        <source>Mot de passe réinitialisé</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/recover-password.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c671405a407bcdbdf2c09b37d0c1a65b0afd7b58" datatype="html">
+        <source>Votre mot de passe a été modifié. Vous pouvez désormais vous connecter et poursuivre vos achats : <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>connexion<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/recover-password.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dfd02b18803125b4615b5110f77dee3967780b2a" datatype="html">
+        <source>Impossible de modifier votre mot de passe !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/recover-password.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="68dc2bea6af84ec3a80c57c63d9eb4e3727bd564" datatype="html">
+        <source>Récupération du mot de passe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/recover-password.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d24ea995fdefac7bf9053e960be56633c8ef8270" datatype="html">
+        <source>Vous pouvez désormais choisir un nouveau mot de passe ici :</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/recover-password.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7e53308554a4dd536132ff233f0af5f227192a16" datatype="html">
+        <source>Nouveau mot de passe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/recover-password.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="df9d935c95f3e8eda64cfd0967fbb9cb358409e4" datatype="html">
+        <source>Mot de passe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/recover-password.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="38343d7f715bf9a7e493d166056a54bfcda9d89e" datatype="html">
+        <source>Modifier le mot de passe
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/recover-password.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b29c9cc7095168841762f9ecd1356b4c0f134d54" datatype="html">
+        <source>Email envoyé</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/forgotten-password.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dccd326445eb02eea1363c50d7f7819df0f4d57c" datatype="html">
+        <source>Vous devriez recevoir dans les prochaines minutes un email vous permettant de réinitialiser votre
+    mot de passe.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/forgotten-password.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7eb42e2efa7a7bfbe3d29a64c7cbbd9eddf114ba" datatype="html">
+        <source>Impossible de réinitialiser votre mot de passe !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/forgotten-password.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="654d30c2e0c4c683d97a8626d593370c7deef6bf" datatype="html">
+        <source>Mot de passe oublié</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/forgotten-password.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c39b4df2bf1583241652926834db6f5a5a75e581" datatype="html">
+        <source>Vous ne vous souvenez plus de votre mot de passe ? Pas de panique ! Indiquez votre adresse e-mail ci dessous
+    pour le récupérer.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/forgotten-password.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="244aae9346da82b0922506c2d2581373a15641cc" datatype="html">
+        <source>Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/forgotten-password.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/forgotten-password.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="14a6dc8171a7680e93dcb9d1dadb29e148d95c39" datatype="html">
+        <source>Récupérer le mot de passe
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/forgotten-password.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="85c1fd656b56aa108e33994f371629a99933286d" datatype="html">
+        <source>Confirmation de l&apos;email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3a712b1b6fa63fec8b3d9c32c01082e24bc5e567" datatype="html">
+        <source>Nous avons bien enregistré votre inscription. Vous devriez d&apos;ici quelques instants recevoir un email permettant
+    de valider votre adresse. Lorsque vous le recevez, cliquez simplement sur le lien pour continuer vos achats.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7dcd19b16602555c3c070b66a1e6f50f8fd2ce45" datatype="html">
+        <source>Identifiez vous pour continuer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b0429688752cb55618430c22a2fe1e41cb3e0dd9" datatype="html">
+        <source>Notre boutique a été entièrement revue en 2018, aussi les comptes de l&apos;ancienne billetterie ne sont plus valables. Désolés !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="65cb040e832319c21b300215fa29000b31dc756c" datatype="html">
+        <source>Nouveau client</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ac3a78099acd51c2dfcce960bcbcb374da984c0c" datatype="html">
+        <source>Inscrivez vous en quelques instants !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6471032394091d2872fd5f5d61c595465b8ce8c3" datatype="html">
+        <source>Impossible de vous inscrire !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="be2bc63e2cd1274d4e43b10423d6b8f6cd829584" datatype="html">
+        <source>Prénom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="01afa66a69c6cf5671972200a4e4e2720815b344" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4d49c9bd947c716fe90860440e24ce618532e1dc" datatype="html">
+        <source>
+            J&apos;accepte de recevoir la newsletter bimensuelle de Japan Impact
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bb3dce0ace8cda46c164e0a9a1c1ba4f8d4ccb26" datatype="html">
+        <source>En vous inscrivant sur ce site, vous acceptez que PolyJapan (AGEPoly) conserve les informations que vous lui
+          transmettez.
+          Ces informations ne seront pas transmises à des tiers ou utilisées à des fins publicitaires.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4f998370699468d3e53f336c6c86058bdd18356f" datatype="html">
+        <source>Inscription
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fd30feede6f205ed6cb486f0e9522d874b82f792" datatype="html">
+        <source>Déjà client</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="be2ed16f8f0ce74dc422115cb498bd460a1ba9a6" datatype="html">
+        <source>Indiquez simplement votre email et votre mot de passe pour poursuivre.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4a35e840655742fc95aee529735f068ed3679a41" datatype="html">
+        <source>Impossible de vous connecter !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3bc5a7dad3d7b122ea908db9e2fffd76e1fc970b" datatype="html">
+        <source>Connexion
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/authenticate/authenticate.component.html</context>
+          <context context-type="linenumber">107</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="290dcee743ca740617883018c9b7efb766731921" datatype="html">
+        <source>Prix total : <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/><x id="INTERPOLATION" equiv-text="{{cart.total}}"/>.–<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/cart/cart.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a936415b86a297340898b6269fd0c50effc8ff61" datatype="html">
+        <source>Vous n&apos;avez rien mis dans votre panier pour le moment.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/cart/cart.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f38c4e1cda7fa238217bc913ab7246ac08f5da16" datatype="html">
+        <source>Exclu prévente!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/item-display.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7898c9be1ed0d2aec24617e46beec378eed0cddc" datatype="html">
+        <source>Chargement...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="14361f810cc73ec722b5af91caead2818efcca1b" datatype="html">
+        <source>Un petit instant, nous récupérons la liste des articles en vente...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b2f81ac7457d1e1348b4803e41b79e661e8aa567" datatype="html">
+        <source>Rien à voir ici :(</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a167d9d1b19e9cef634aa4806e0a401f1e0147f8" datatype="html">
+        <source>Nous sommes ravis de voir que notre événement vous intéresse, mais notre boutique n&apos;est pas encore ouverte. Revenez bientôt !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3db15d19bbf3ce258d76a35aebc8458a001f8b82" datatype="html">
+        <source>Notre boutique ouvre en général 3 mois avant Japan Impact. Vous y trouverez vos places pour la convention, ainsi que des goodies que vous pourrez y retirer !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b0d90dfe8b1eda67d6dd6e06b8d4b25e5ad1d008" datatype="html">
+        <source>Impossible de charger les données... Merci de réessayer plus tard !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="357358e8cdbac3fef723f690df93384322000873" datatype="html">
+        <source>Billetterie Japan Impact</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c37ec335a2370b793961b0f4e31bdd7e38bf7c15" datatype="html">
+        <source>Bienvenue sur la boutique officielle de Japan Impact. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dba618177e9f954bf83b0ec3ee08d528b17d9537" datatype="html">
+        <source>Goodies</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0138bb46961756a3bcc72ba0e0f0374019197677" datatype="html">
+        <source>Attention, les goodies sont à retirer sur notre stand lors de la convention, assurez vous de disposer d&apos;un billet d&apos;entrée avant d&apos;en commander.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="72a5ba7a94d745f3b3d0beac8af115cf544615a2" datatype="html">
+        <source>Panier</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d3276a66cd37a042eef60b47ad3ac37a6935cb08" datatype="html">
+        <source>Passer commande</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/home/home.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.alert.close" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/alert/alert.d.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.carousel.previous" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/carousel/carousel.d.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.carousel.next" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/carousel/carousel.d.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.previous-month" datatype="html">
+        <source>Previous month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.next-month" datatype="html">
+        <source>Next month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.select-month" datatype="html">
+        <source>Select month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.select-year" datatype="html">
+        <source>Select year</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.first" datatype="html">
+        <source>««</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.first-aria" datatype="html">
+        <source>First</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.previous" datatype="html">
+        <source>«</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.previous-aria" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.next" datatype="html">
+        <source>»</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.next-aria" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.last" datatype="html">
+        <source>»»</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.last-aria" datatype="html">
+        <source>Last</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.progressbar.value" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{getPercentValue()}}"/>%</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/progressbar/progressbar.d.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-hours" datatype="html">
+        <source>Increment hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.HH" datatype="html">
+        <source>HH</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.hours" datatype="html">
+        <source>Hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-hours" datatype="html">
+        <source>Decrement hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-minutes" datatype="html">
+        <source>Increment minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.MM" datatype="html">
+        <source>MM</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.minutes" datatype="html">
+        <source>Minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-minutes" datatype="html">
+        <source>Decrement minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-seconds" datatype="html">
+        <source>Increment seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.SS" datatype="html">
+        <source>SS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.seconds" datatype="html">
+        <source>Seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-seconds" datatype="html">
+        <source>Decrement seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.PM" datatype="html">
+        <source>PM</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.AM" datatype="html">
+        <source>AM</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
