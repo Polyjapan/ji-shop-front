@@ -21,6 +21,7 @@ import {AdminViewScanningConfigComponent} from './scan/admin-view-scanning-confi
 import {AdminSelectPosConfigComponent} from './pos/admin-select-pos-config.component';
 import {AdminCreatePosConfigComponent} from './pos/admin-create-pos-config.component';
 import {AdminViewPosConfigComponent} from './pos/admin-view-pos-config.component';
+import {AdminDownloadExportComponent} from './orders/admin-download-export.component';
 
 const routes: Routes = [
   {
@@ -70,6 +71,11 @@ const routes: Routes = [
                 path: 'import',
                 component: AdminUploadImportComponent,
                 data: {name: 'Importation Fnac', permission: Permissions.IMPORT_EXTERNAL}
+              },
+              {
+                path: 'export',
+                component: AdminDownloadExportComponent,
+                data: {name: 'Exportation', permission: Permissions.IMPORT_EXTERNAL}
               },
               {
                 path: 'products', data: {name: 'Produits'},

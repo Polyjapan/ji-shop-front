@@ -30,6 +30,7 @@ import {AdminViewPosConfigComponent} from './pos/admin-view-pos-config.component
 import {AdminViewPosItemComponent} from './pos/admin-view-pos-item.component';
 import {SidebarModule} from '../sidebar/sidebar.module';
 import {EventListService} from './event-list.service';
+import {AdminDownloadExportComponent} from './orders/admin-download-export.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import {EventListService} from './event-list.service';
     AdminCreatePosConfigComponent,
     AdminSelectPosConfigComponent,
     AdminViewPosConfigComponent,
-    AdminViewPosItemComponent
+    AdminViewPosItemComponent,
+    AdminDownloadExportComponent
   ],
   imports: [
     BrowserModule,

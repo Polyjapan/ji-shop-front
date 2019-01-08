@@ -1,0 +1,48 @@
+<h2>Exportation</h2>
+
+<div class="alert alert-danger" *ngIf="errors">
+  <h1 i18n>Une erreur s'est produite</h1>
+  <p i18n>Impossible de charger les données... Merci de réessayer plus tard !</p>
+  <hr>
+  <ul>
+    <li *ngFor="let err of errors">{{err}}</li>
+  </ul>
+</div>
+<hr>
+<h3>Export FNAC</h3>
+<p>Remplissez simplement la date de début de l'édition de Japan Impact ci dessous pour générer le lien de téléchargement.</p>
+
+<form class="form-inline">
+  <label class="sr-only" for="day">Jour (DD)</label>
+  <input type="text" class="form-control mb-2 mr-sm-2" id="day" name="day" [(ngModel)]="fnacDay" placeholder="Jour (en 2 chiffres)">
+  <label class="sr-only" for="month">Mois (MM)</label>
+  <input type="text" class="form-control mb-2 mr-sm-2" id="month" name="month" [(ngModel)]="fnacMonth" placeholder="Mois (en 2 chiffres)">
+  <label class="sr-only" for="year">Année (YYYY)</label>
+  <input type="text" class="form-control mb-2 mr-sm-2" id="year" name="year" [(ngModel)]="fnacYear" placeholder="Année (en 4 chiffres)">
+
+  <button class="btn btn-success form-control mb-2 mr-sm-2" [disabled]="fnacLoading" (click)="getFnacUrl()">Obtenir le lien</button>
+</form>
+
+<a class="btn btn-outline-success" *ngIf="fnacUrl" [href]="fnacUrl">Télécharger l'export Fnac</a>
+
+<hr>
+<h3>Export de statistiques</h3>
+
+
+<form class="form-inline">
+  <label for="source">Source des ventes</label>
+
+  <select id="source" class="form-control mb-2 mr-sm-2" name="source" [(ngModel)]="source" required>
+    <option [value]="undefined">Toutes les ventes</option>
+    <option [value]="Source.Web">Vente en ligne</option>
+    <option [value]="Source.Gift">Cadeau</option>
+    <option [value]="Source.OnSite">Vente sur place</option>
+    <option [value]="Source.Physical">Vente physique anticipée</option>
+    <option [value]="Source.Reseller">Vente par revendeur</option>
+  </select>
+</form>
+
+<button class="btn btn-success" [disabled]="csvLoading" (click)="getCsvUrl()">Obtenir le lien</button>
+
+<br><br>
+<a class="btn btn-outline-success" *ngIf="csvUrl" [href]="csvUrl">Télécharger l'export de stats</a>

@@ -29,6 +29,7 @@ export class AdminEventSidebarComponent implements OnInit {
     this.menu.push(new MenuItem('update', 'Modifier l\'événement', 'edit'));
     this.menu.push(new MenuItem('products', 'Produits en vente', 'shopping-cart'));
     this.menu.push(new MenuItem('import', 'Import de billets', 'file-import'));
+    this.menu.push(new MenuItem('export', 'Exportation', 'file-export'));
     this.menu.push(new MenuItem('orders', 'Listing de commandes', 'receipt'));
   }
 

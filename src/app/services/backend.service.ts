@@ -126,14 +126,34 @@ export class BackendService {
   }
 
   getStats(event: number, start?: number, end?: number): Observable<StatsReturn[]> {
-    const params = new HttpParams();
+    let params = new HttpParams();
     if (start) {
-      params.append('start', start.toString(10));
+      params = params.append('start', start.toString(10));
     }
     if (end) {
-      params.append('end', end.toString(10));
+      params = params.append('end', end.toString(10));
     }
     return this.http.get<StatsReturn[]>(this._adminUrl + '/stats/' + event, {params: params});
+  }
+
+  getOrderStats(event: number, start?: number, end?: number, source?: Source): Observable<string> {
+    let params = new HttpParams();
+    if (start) {
+      params = params.append('start', start.toString(10));
+    }
+    if (end) {
+      params = params.append('end', end.toString(10));
+    }
+    if (source) {
+      params = params.append('source', source.toString());
+    }
+    console.log(params);
+    console.log(source);
+    return this.http.get(this._adminUrl + '/stats/' + event + '/salesData.csv', {params: params, responseType: 'text'});
+  }
+
+  fnacExport(event: number, date: string): Observable<string> {
+    return this.http.get(this._adminUrl + '/orders/export/' + event + '/' + date, {responseType: 'text'});
   }
 
   getItems(): Observable<ItemsResponse> {
