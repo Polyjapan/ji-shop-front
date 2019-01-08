@@ -14,6 +14,7 @@ import {Event} from '../types/event';
 import {PosConfiguration, PosGetConfigResponse, PosOrderResponse, PosPaymentLog} from '../types/pos_configuration';
 import {StatsReturn} from '../types/stats';
 import {Client, ClientAndPermissions} from '../types/client';
+import {TicketData} from '../types/ticket_data';
 
 
 @Injectable()
@@ -123,6 +124,10 @@ export class BackendService {
 
   deleteScanConfig(configId: number): Observable<ApiResult> {
     return this.http.delete<ApiResult>(this._scanUrl + '/configurations/' + configId);
+  }
+
+  getTicketData(ticket: string): Observable<TicketData> {
+    return this.http.get<TicketData>(this._adminUrl + '/tickets/' + ticket);
   }
 
   getStats(event: number, start?: number, end?: number): Observable<StatsReturn[]> {

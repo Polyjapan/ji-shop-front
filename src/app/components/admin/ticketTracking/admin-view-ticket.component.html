@@ -1,0 +1,36 @@
+<h1>Recherche de données sur un billet</h1>
+<p>Entrez le code barre ci dessous pour obtenir des informations sur le billet :</p>
+
+<form (submit)="processTicket()">
+  <input type="text" name="ticket" class="form-control" placeholder="Code" [(ngModel)]="barcode" autofocus>
+</form>
+
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+  <h2>Oups, petit problème...</h2>
+  <p>{{errorMessage}}</p>
+</div>
+
+<ng-container *ngIf="ticketData">
+  <hr>
+
+  <h2>Ticket trouvé : <code>{{barcode}}</code></h2>
+
+  <h3>Données sur le billet :</h3>
+  <ul>
+    <li><b>ID: </b> {{ticketData.ticket.id}}</li>
+    <li><b>Créé le: </b> {{parseDate(ticketData.ticket.createdAt)}}</li>
+    <li><b>Supprimé ? </b>{{ticketData.ticket.removed ? "Oui !!" : "Non"}}</li>
+    <li><b>Validation : </b>
+      <ng-container *ngIf="ticketData.validation.scanned">Scanné par <a [routerLink]="['/', 'admin', 'users', ticketData.validation.scannedBy.id]">{{ticketData.validation.scannedBy.firstname}} {{ticketData.validation.scannedBy.lastname}}</a> le {{parseDate(ticketData.validation.scannedAt)}}</ng-container>
+      <ng-container *ngIf="!ticketData.validation.scanned">Non scanné</ng-container>
+    </li>
+  </ul>
+
+  <p>Attention : si un ticket est marqué comme supprimé, cela signifie que sa commande a été annulée, il n'est donc pas
+  valide, même s'il existe bel et bien ici et qu'il apparait comme non scanné.</p>
+
+  <hr>
+  <h3>Données sur la commande liée (#{{ticketData.orderId}})</h3>
+
+  <app-admin-view-order [id]="ticketData.orderId"></app-admin-view-order>
+</ng-container>

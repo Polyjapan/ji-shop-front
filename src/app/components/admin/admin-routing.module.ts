@@ -22,6 +22,7 @@ import {AdminSelectPosConfigComponent} from './pos/admin-select-pos-config.compo
 import {AdminCreatePosConfigComponent} from './pos/admin-create-pos-config.component';
 import {AdminViewPosConfigComponent} from './pos/admin-view-pos-config.component';
 import {AdminDownloadExportComponent} from './orders/admin-download-export.component';
+import {AdminViewTicketComponent} from './ticketTracking/admin-view-ticket.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
         data: {tag: 'home'}
       },
       {path: 'users', component: AdminListUsersComponent, data: {tag: 'users'}},
+      {path: 'tickets', component: AdminViewTicketComponent, data: {tag: 'tickets'}},
       {path: 'users/:id', component: AdminViewUserComponent, data: {tag: 'users'}},
       {path: 'orders/:id', component: AdminViewOrderComponent},
       {

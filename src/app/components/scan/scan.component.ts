@@ -6,6 +6,7 @@ import * as Errors from '../../constants/errors';
 import {ErrorCodes} from '../../constants/errors';
 import {ApiError} from '../../types/api_result';
 import {ScanResult} from '../../types/scan_result';
+import {parseDate} from '../../utils/time_utils';
 
 @Component({
   selector: 'app-scan',
@@ -48,9 +49,7 @@ export class ScanComponent implements OnInit {
   }
 
   parseDate(time: number): string {
-    const date = new Date(time);
-
-    return date.toLocaleString();
+    return parseDate(time);
   }
 
 

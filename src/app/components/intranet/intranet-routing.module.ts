@@ -78,7 +78,7 @@ const routes: Routes = [
            {path: 'clone/:cloneId', component: AdminCreateEventComponent},
            {path: 'users', component: AdminListUsersComponent},
            {path: 'users/:id', component: AdminViewUserComponent},
-           {path: 'orders/:id', component: AdminViewOrderComponent},
+           {path: 'orders/:id', component: AdminViewTicketComponent},
            {
              path: 'scan',
              children: [
@@ -122,7 +122,7 @@ const routes: Routes = [
                  path: 'orders', data: {name: 'Commandes'},
                  children: [
                    {path: '', component: AdminListOrdersComponent, data: {name: 'Liste'}},
-                   {path: ':id', component: AdminViewOrderComponent, data: {name: 'Contenu de la commande'}},
+                   {path: ':id', component: AdminViewTicketComponent, data: {name: 'Contenu de la commande'}},
                  ]
                },
              ]

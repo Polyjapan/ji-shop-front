@@ -22,6 +22,7 @@ export class AdminComponent {
     this.menu.push(new MenuItem('users', 'Utilisateurs', 'users'));
     this.menu.push(new MenuItem('scan', 'Configurations de scan', 'barcode'));
     this.menu.push(new MenuItem('pos', 'Configurations point de vente', 'money-bill'));
+    this.menu.push(new MenuItem('tickets', 'Infos sur un billet', 'ticket-alt'));
   }
 
   parseChild(path: ActivatedRouteSnapshot) {

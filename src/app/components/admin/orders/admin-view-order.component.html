@@ -17,12 +17,12 @@
   <ul>
     <li><b>Paiement validé : </b>{{order.order.paymentConfirmed ? 'Oui' : 'Non'}}
 
-      <button class="btn btn-danger btn-sm" *ngIf="!order.order.paymentConfirmed" (click)="forceAccept()" [disabled]="working">
+      <button class="btn btn-danger btn-sm" *ngIf="!order.order.paymentConfirmed && canAccept()" (click)="forceAccept()" [disabled]="working">
         {{working ? 'En cours d\'acceptation...' : 'Forcer acceptation'}}
       </button>
 
 
-      <button class="btn btn-warning btn-sm" *ngIf="order.order.paymentConfirmed" (click)="resendEmail()" [disabled]="sending">
+      <button class="btn btn-warning btn-sm" *ngIf="order.order.paymentConfirmed && canResend()" (click)="resendEmail()" [disabled]="sending">
         {{sending ? 'En cours d\'envoi...' : 'Renvoyer les billets'}}
       </button>
     </li>
@@ -31,7 +31,7 @@
     <li><b>Supprimée ? </b>{{order.order.removed ? "Oui" : "Non"}}
 
 
-      <button class="btn btn-danger btn-sm" *ngIf="!order.order.removed" (click)="deleteOrder()" [disabled]="deleting">
+      <button class="btn btn-danger btn-sm" *ngIf="!order.order.removed && canDelete()" (click)="deleteOrder()" [disabled]="deleting">
         {{deleting ? 'Suppression...' : 'Supprimer'}}
       </button>
 

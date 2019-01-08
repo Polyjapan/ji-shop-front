@@ -68,6 +68,11 @@ export enum Permissions {
   ADMIN_SCAN_MANAGE = 'admin.change_scanning_configurations',
 
   /**
+   * Permission to remove an order
+   */
+  ADMIN_REMOVE_ORDER = 'admin.remove_order',
+
+  /**
    * Permission to manage the events
    */
   ADMIN_EVENT_MANAGE = 'admin.event_manage',

@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {BackendService} from '../../../services/backend.service';
 import {ActivatedRoute} from '@angular/router';
 import {FullOrder, OrderLog} from '../../../types/order';
 import {Client} from '../../../types/client';
 import {PosPaymentLog} from '../../../types/pos_configuration';
+import {AuthService} from '../../../services/auth.service';
+import {Permissions} from '../../../constants/permissions';
 
 @Component({
   selector: 'app-admin-view-order',
@@ -14,17 +16,20 @@ export class AdminViewOrderComponent implements OnInit {
   user: Client;
   orderLogs: PosPaymentLog[];
   logs: OrderLog[];
-  id: number;
+  @Input() id: number;
   working = false;
   deleting = false;
   sending = false;
 
 
-  constructor(private backend: BackendService, private route: ActivatedRoute) {
+  constructor(private backend: BackendService, private route: ActivatedRoute, private auth: AuthService) {
   }
 
   ngOnInit(): void {
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.route.snapshot.paramMap.get('id')) {
+      // This component can be embedded - in the later case, it doesn't get its id though URL params
+      this.id = Number(this.route.snapshot.paramMap.get('id'));
+    }
 
     this.backend.getOrder(this.id).subscribe(ord => this.order = ord);
     this.backend.getOrderClient(this.id).subscribe(client => this.user = client);
@@ -38,7 +43,23 @@ export class AdminViewOrderComponent implements OnInit {
     return date.toLocaleString();
   }
 
+  canAccept(): boolean {
+    return this.auth.hasPermission(Permissions.FORCE_VALIDATION);
+  }
+
+  canDelete(): boolean {
+    return this.auth.hasPermission(Permissions.ADMIN_REMOVE_ORDER);
+  }
+
+  canResend(): boolean {
+    return this.auth.hasPermission(Permissions.FORCE_VALIDATION);
+  }
+
   forceAccept() {
+    if (!this.canAccept()) {
+      return;
+    }
+
     if (confirm('Voulez vous vraiment valider cette commande de force ? Les statistiques de ventes pourraient être faussées.')) {
 
       this.working = true;
@@ -49,6 +70,10 @@ export class AdminViewOrderComponent implements OnInit {
   }
 
   deleteOrder() {
+    if (!this.canDelete()) {
+      return;
+    }
+
     if (
       confirm('Voulez vous vraiment supprimer cette commande ? L\'action est irréversible et tous les billets associés seront invalidés ' +
       'définitivement.') && confirm('ATTENTION ? Vous êtes vraiment vraiment certain de vouloir faire ça ? C\'est définitif on a dit.')
@@ -64,6 +89,10 @@ export class AdminViewOrderComponent implements OnInit {
   }
 
   resendEmail() {
+    if (!this.canResend()) {
+      return;
+    }
+
     this.sending = true;
     this.backend.resendEmail(this.id).subscribe(res => {
       this.sending = false;
