@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light navbar-dark bg-danger">
   <a class="navbar-brand" href="#" routerLink="/">Japan Impact Shop</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -27,14 +28,16 @@
       </li>
     </ul>
 
-    <ul  class="navbar-nav mr-left">
+    <ul class="navbar-nav mr-left">
 
       <li class="nav-item active">
         <a class="nav-link" routerLink="/intranet" *ngIf="auth.hasPermission(Permissions.INTRANET_VIEW)">Intranet</a>
       </li>
 
-      <li class="nav-item active"><a class="nav-link" href="#" *ngIf="auth.isAuthenticated()" (click)="auth.logout()"><b class="glyphicon glyphicon-off"></b> Déconnexion</a></li>
-      <li class="nav-item active"><a class="nav-link" routerLink="/login" *ngIf="!auth.isAuthenticated()"><b class="glyphicon glyphicon-off"></b> Connexion / Inscription</a></li>
+      <li class="nav-item active"><a class="nav-link" href="#" *ngIf="auth.isAuthenticated()" (click)="auth.logout()"><b
+        class="glyphicon glyphicon-off"></b> Déconnexion</a></li>
+      <li class="nav-item active"><a class="nav-link" routerLink="/login" *ngIf="!auth.isAuthenticated()"><b
+        class="glyphicon glyphicon-off"></b> Connexion / Inscription</a></li>
     </ul>
   </div>
 </nav>
@@ -43,4 +46,15 @@
   <br/>
 
   <router-outlet></router-outlet>
+
+  <footer class="pt-3 my-md-5 pt-md-3 border-top">
+    <div class="row">
+      <div class="col-12 col-md">
+
+        <small class="d-block mb-3 text-muted">&copy; PolyJapan 2018-2019 - <a class="text-muted" routerLink="/terms">Termes
+          et conditions</a></small>
+
+      </div>
+    </div>
+  </footer>
 </main>

@@ -8,13 +8,15 @@ import {HttpClientModule} from '@angular/common/http';
 import {AuthModule} from '../../services/auth.module';
 import {FormsModule} from '@angular/forms';
 import {CartModule} from '../cart/cart.module';
+import {TermsComponent} from './terms.component';
 
 @NgModule({
   declarations: [
     ItemDisplayComponent,
     ItemListDisplayComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    TermsComponent
   ],
   imports: [
     BrowserModule,
