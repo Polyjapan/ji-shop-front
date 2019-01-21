@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Item} from '../../types/items';
 import {CartService} from '../cart/cart.service';
+import {Permissions} from '../../constants/permissions';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-item-display',
@@ -29,7 +31,7 @@ export class ItemDisplayComponent implements OnInit {
   @Input() item: Item = null;
   price: number;
 
-  constructor(private cart: CartService) {}
+  constructor(private cart: CartService, private auth: AuthService) {}
 
   addItem() {
     if (this.canAddMore) {
@@ -50,7 +52,11 @@ export class ItemDisplayComponent implements OnInit {
   }
 
   get canAddMore(): boolean {
-    return this.amountAdded < this.maxItems;
+    return !this.isOutOfStock || this.auth.hasPermission(Permissions.GIVE_FOR_FREE);
+  }
+
+  get isOutOfStock(): boolean {
+    return (this.amountAdded >= this.maxItems);
   }
 
   ngOnInit(): void {

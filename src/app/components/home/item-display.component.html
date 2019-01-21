@@ -1,6 +1,7 @@
 <tr>
   <td><strong [class]="item.isVisible ? '' : 'text-muted'">{{item.name}}</strong>
     <span class="badge badge-warning align-top" *ngIf="item.isWebExclusive" style="margin-left: .25rem;" i18n>Exclu prévente!</span>
+
     <br>{{item.description}}</td>
   <td width="17%" *ngIf="!item.freePrice" style="padding-left: 0.8rem;">
     <span *ngIf="item.estimatedRealPrice && item.estimatedRealPrice > item.price" class="strikethrough" style="margin-right: .5rem;">{{item.estimatedRealPrice}}.&ndash;</span>
@@ -19,7 +20,8 @@
 
   <td width="5%">
   <div class="input-group">
-    <button (click)="addItem()" [disabled]="!canAddMore" class="btn btn-success"><span class="fas fa-cart-plus"></span></button>
+    <button (click)="addItem()" *ngIf="canAddMore" class="btn btn-success"><span class="fas fa-cart-plus"></span></button>
+    <button *ngIf="!canAddMore" disabled class="btn btn-danger"><span class="fas fa-cart-plus" title="Plus en stock :("></span></button>
   </div>
 </td>
 </tr>
