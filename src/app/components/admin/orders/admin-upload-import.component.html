@@ -39,6 +39,7 @@
   <h3>Traitement des données</h3>
   <h4>Catégories de prix</h4>
   <p>Merci d'associer à chacune des catégories de prix suivantes un produit : <b>ATTENTION: utilisez les bons produits (merci.)</b></p>
+  <p>Rappel utile : vous insérez actuellement des billets pour <b>{{manifHelper}}</b></p>
   <form>
     <div class="form-group" *ngFor="let categ of clientCategories">
       <label [htmlFor]="categ.id">{{categ.name}} ({{categ.id}})</label>

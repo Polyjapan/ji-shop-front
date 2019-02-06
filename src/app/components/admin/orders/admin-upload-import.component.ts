@@ -21,6 +21,7 @@ export class AdminUploadImportComponent implements OnInit {
   // User process input data
   clientCategories: ClientCategory[];
   processingOrders: ProcessingOrder[];
+  manifHelper: string;
 
   // API result
   log: string;
@@ -64,6 +65,7 @@ export class AdminUploadImportComponent implements OnInit {
         refundLocation: -1
       };
       let state = 0;
+      let manif = '';
 
       for (const l of lines) {
         const arr = l.split(';');
@@ -89,6 +91,10 @@ export class AdminUploadImportComponent implements OnInit {
           case 2: // Finished finding products
             if (l.startsWith('Mouvement')) {
               state = 3;
+            } else if (arr.length > 1 && arr[0].toLowerCase() === 'manifestation') {
+              manif = arr[1];
+            } else if (arr.length > 1 && arr[0].toLowerCase() === 'seance') {
+              manif += ' ' + arr[1];
             }
             break;
           case 3:
@@ -161,6 +167,7 @@ export class AdminUploadImportComponent implements OnInit {
       } else {
         me.processingOrders = orders;
         me.clientCategories = clientCategories;
+        me.manifHelper = manif;
       }
 
       me.componentState = ComponentState.USER_PROCESS;
