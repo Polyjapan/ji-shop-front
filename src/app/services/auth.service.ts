@@ -62,7 +62,9 @@ export class AuthService {
     if (this.isAuthenticated() && token && token.user && token.user.permissions) {
       const perms: string[] = token.user.permissions;
 
-      if (perms && perms.indexOf(perm) !== -1) {
+      if (perms && perms.indexOf('-' + perm) !== -1) {
+        return false; // perms exclusion
+      } else if (perms && perms.indexOf(perm) !== -1) {
         return true;
       } else {
         const groups = perm.split('.').reverse();
