@@ -3,7 +3,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import {environment} from '../../environments/environment';
 import {Item, ItemList, ItemsResponse} from '../types/items';
-import {CheckedOutItem, FullOrder, FullOrderData, Order, OrderLog, Source} from '../types/order';
+import {CheckedOutItem, FullOrder, FullOrderData, ImportedItemData, Order, OrderLog, Source} from '../types/order';
 import {LoginResponse} from './auth.service';
 import {ApiResult} from '../types/api_result';
 import {HttpClient, HttpParams} from '@angular/common/http';
@@ -296,9 +296,9 @@ export class BackendService {
       .post<ApiResult>(this._posUrl + '/paymentLog/' + orderId, log);
   }
 
-  importTickets(event: number, tickets: string): Observable<ApiResult> {
+  importTickets(event: number, tickets: ImportedItemData[]): Observable<string> {
     return this.http
-      .post<ApiResult>(this._adminUrl + '/orders/import/' + event, tickets);
+      .post(this._adminUrl + '/orders/import/' + event, tickets, {responseType: 'text'});
   }
 
   getClients(): Observable<Client[]> {

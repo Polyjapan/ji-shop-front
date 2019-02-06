@@ -43,6 +43,14 @@ export class CheckedOutItem {
   itemPrice?: number;
 }
 
+export class ImportedItemData {
+  product: number;
+  barcode: string;
+  paidPrice: number;
+  date: string;
+  refunded: boolean;
+}
+
 
 export class OrderLog {
   id?: number;

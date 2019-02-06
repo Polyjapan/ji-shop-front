@@ -10,13 +10,59 @@
     <li *ngFor="let err of errors">{{err}}</li>
   </ul>
 </div>
-<div *ngIf="success" class="alert alert-success"><b>Parfait !</b> La liste a bien été importée :)
+<div *ngIf="componentState == ComponentState.DONE_SUCCESS" class="alert alert-success"><b>Parfait !</b> La liste a bien
+  été importée :)
 </div>
-<form>
+<form *ngIf="componentState == ComponentState.IDLE">
   <div class="form-group">
     <label for="file">Fichier à importer</label>
     <input type="file" class="form-control-file" name="file" id="file" #file>
   </div>
 
-  <button type="submit" class="btn btn-success" (click)="submit(file)" [disabled]="sending">Envoi</button>
+  <button type="submit" class="btn btn-success" (click)="submit(file)">Envoi</button>
 </form>
+<div *ngIf="componentState == ComponentState.PRE_PROCESS || !items" class="alert alert-info"><b>Traitement...</b> La
+  liste
+  est en cours de traitement... Patientez un instant.
+</div>
+
+<ng-container *ngIf="componentState == ComponentState.USER_PROCESS && !errors && items">
+  <h3>Traitement des données</h3>
+  <h4>Catégories de prix</h4>
+  <p>Merci d'associer à chacune des catégories de prix suivantes un produit :</p>
+  <form>
+    <div class="form-group" *ngFor="let categ of clientCategories">
+      <label [htmlFor]="categ.id">{{categ.name}} ({{categ.id}})</label>
+      <select [id]="categ.id" class="form-control" [(ngModel)]="categ.matchedCategory" name="matchedCategory">
+        <option *ngFor="let it of items" [value]="it.id">{{it.name}} (id {{it.id}})</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success" (click)="finishSubmission()">Envoi</button>
+  </form>
+
+  <hr>
+  <h4>Listing des commandes</h4>
+  <table class="table table-bordered">
+    <tr>
+      <th>Date</th>
+      <th>Catégorie</th>
+      <th>Code barre</th>
+      <th>Remboursement</th>
+      <th>Prix</th>
+    </tr>
+
+    <tr *ngFor="let order of processingOrders">
+      <td>{{order.date}}</td>
+      <td>{{order.clientCategory.id}}
+        <ng-container *ngIf="order.clientCategory.matchedCategory">
+          --> internal id {{order.clientCategory.matchedCategory}}
+        </ng-container></td>
+      <td><code>{{order.barcode}}</code></td>
+      <td>{{order.refunded}}</td>
+      <td>{{order.paidPrice}}</td>
+
+    </tr>
+  </table>
+</ng-container>
+
