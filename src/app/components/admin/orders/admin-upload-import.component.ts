@@ -167,11 +167,25 @@ export class AdminUploadImportComponent implements OnInit {
     };
   }
 
+  reset() {
+    this.errors = null;
+    this.clientCategories = undefined;
+    this.processingOrders = undefined;
+    this.log = undefined;
+    this.componentState = ComponentState.IDLE;
+  }
+
   finishSubmission() {
     this.componentState = ComponentState.SERVER_PROCESS;
     const itemsToAdd: ImportedItemData[] = [];
 
     for (const item of this.processingOrders) {
+      if (!item.clientCategory.matchedCategory) {
+        alert('Certaines catégories de prix n\'ont pas été associées à des items.');
+        this.componentState = ComponentState.USER_PROCESS;
+        return;
+      }
+
       itemsToAdd.push({
         product: Number.parseInt(item.clientCategory.matchedCategory),
         barcode: item.barcode,

@@ -8,10 +8,16 @@
   <ul>
     <li *ngFor="let err of errors">{{err}}</li>
   </ul>
+
+  <br>
+  <br><button (click)="reset()" class="btn">Importer d'autres billets</button>
 </div>
 <div *ngIf="componentState == ComponentState.DONE_SUCCESS" class="alert alert-success"><b>Parfait !</b> La liste a bien
   été importée :)
 
+  <br>
+  <br><button (click)="reset()" class="btn">Importer d'autres billets</button>
+  <br>
   <br>Log d'importation :
   <pre>
     {{log}}
