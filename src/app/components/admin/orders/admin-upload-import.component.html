@@ -1,7 +1,6 @@
 <h2>Import FNAC</h2>
 
-<p>Utilisez ce formulaire pour uploader un fichier de billets fnac. Attention, un fichier ne peut être importé qu'une
-  seule fois.</p>
+<p>Utilisez ce formulaire pour uploader un fichier de billets fnac.</p>
 
 
 <div class="alert alert-danger" role="alert" *ngIf="errors">
@@ -12,6 +11,11 @@
 </div>
 <div *ngIf="componentState == ComponentState.DONE_SUCCESS" class="alert alert-success"><b>Parfait !</b> La liste a bien
   été importée :)
+
+  <br>Log d'importation :
+  <pre>
+    {{log}}
+  </pre>
 </div>
 <form *ngIf="componentState == ComponentState.IDLE">
   <div class="form-group">
@@ -22,14 +26,13 @@
   <button type="submit" class="btn btn-success" (click)="submit(file)">Envoi</button>
 </form>
 <div *ngIf="componentState == ComponentState.PRE_PROCESS || !items" class="alert alert-info"><b>Traitement...</b> La
-  liste
-  est en cours de traitement... Patientez un instant.
+  liste est en cours de traitement... Patientez un instant.
 </div>
 
 <ng-container *ngIf="componentState == ComponentState.USER_PROCESS && !errors && items">
   <h3>Traitement des données</h3>
   <h4>Catégories de prix</h4>
-  <p>Merci d'associer à chacune des catégories de prix suivantes un produit :</p>
+  <p>Merci d'associer à chacune des catégories de prix suivantes un produit : <b>ATTENTION: utilisez les bons produits (merci.)</b></p>
   <form>
     <div class="form-group" *ngFor="let categ of clientCategories">
       <label [htmlFor]="categ.id">{{categ.name}} ({{categ.id}})</label>

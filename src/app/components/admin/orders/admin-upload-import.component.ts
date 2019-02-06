@@ -173,7 +173,7 @@ export class AdminUploadImportComponent implements OnInit {
 
     for (const item of this.processingOrders) {
       itemsToAdd.push({
-        product: item.clientCategory.matchedCategory,
+        product: Number.parseInt(item.clientCategory.matchedCategory),
         barcode: item.barcode,
         paidPrice: item.paidPrice,
         date: item.date,
@@ -197,7 +197,7 @@ export class AdminUploadImportComponent implements OnInit {
 class ClientCategory {
   id: number;
   name: string;
-  matchedCategory?: number;
+  matchedCategory?: string;
 }
 
 class ProcessingOrder {
