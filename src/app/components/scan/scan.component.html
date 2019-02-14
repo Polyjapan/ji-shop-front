@@ -3,7 +3,10 @@
 <br>
 
 <form (submit)="processTicket()">
-  <input #ticketLine type="text" name="firstname" class="form-control" placeholder="Code" [(ngModel)]="ticketId" [disabled]="status === Status.SENDING" autofocus>
+    <div class="form-group">
+        <input #ticketLine type="text" name="firstname" class="form-control" placeholder="Code" [(ngModel)]="ticketId" [disabled]="status === Status.SENDING" autofocus>
+    </div>
+  <button type="submit" class="btn btn-default">Scan</button>
 </form>
 
 <br>
