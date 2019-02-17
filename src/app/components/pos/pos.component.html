@@ -176,8 +176,8 @@
       <h2>Items demandés</h2>
 
       <app-cart>
-        <button type="button" class="btn btn-success btn-lg" style="min-width: 150px;" (click)="payByCash(cashPaymentStart)">Cash</button>
-        <button *ngIf="config.acceptCards" type="button" class="btn btn-outline-dark btn-lg" style="float: right;" (click)="payByCard(cardPaymentStart)">Carte</button>
+        <button type="button" class="btn btn-success btn-lg" style="min-width: 150px;" (click)="payByCash(cashPaymentStart, checkoutError)">Cash</button>
+        <button *ngIf="config.acceptCards" type="button" class="btn btn-outline-dark btn-lg" style="float: right;" (click)="payByCard(cardPaymentStart, checkoutError)">Carte</button>
       </app-cart>
 
 

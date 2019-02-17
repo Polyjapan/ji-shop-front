@@ -143,26 +143,33 @@ export class PosComponent implements OnInit {
     }
   }
 
-  payByCard(cardModal): void {
-    this.sumUp.startPayment(this.checkoutOrderId);
-    this.openModal(cardModal);
+  payByCard(cardModal, errorModal): void {
+    this.pay(cardModal, () => {
+      this.sumUp.startPayment(this.checkoutOrderId);
+    }, errorModal);
   }
 
-  payByCash(cashModal): void {
-    this.backend.sendPosLog(this.checkoutOrderId, {
-      paymentMethod: PaymentMethod.Cash,
-      accepted: false,
-      cardTransactionMessage: 'Cash payment start.',
-    }).subscribe(() => {});
-    this.openModal(cashModal);
+  payByCash(cashModal, errorModal): void {
+    this.pay(cashModal, () => {
+      this.backend.sendPosLog(this.checkoutOrderId, {
+        paymentMethod: PaymentMethod.Cash,
+        accepted: false,
+        cardTransactionMessage: 'Cash payment start.',
+      }).subscribe(() => {});
+    }, errorModal);
+
   }
 
-  pay(modalSuccess, modalError): void {
+  pay(modalSuccess, callback: () => void, modalError): void {
     const order = this.cart.getOrder();
 
     this.backend.placePosOrder(order).subscribe(response => {
       this.checkoutPrice = response.price;
       this.checkoutOrderId = response.orderId;
+
+      console.log(this.checkoutPrice + " / " + this.checkoutOrderId);
+
+      callback();
 
       // Open the "payment method" modal
       this.openModal(modalSuccess);
