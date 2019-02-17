@@ -34,22 +34,20 @@
 
 <ng-template #cashPaymentStart let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">Paiement Cash</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+    <button type="button" class="close" style="float: left; margin: -1rem -1rem -1rem;" aria-label="Close" (click)="modal.dismiss()">
       <span aria-hidden="true">&times;</span>
     </button>
+    <h4 class="modal-title">Paiement Cash</h4>
   </div>
   <div class="modal-body">
     <h2>Montant total : <b>{{checkoutPrice}} .-</b></h2>
 
-    <b>ATTENTION! Une fois le bouton "Paiement Validé" enclanché, il est impossible d'annuler la transaction.</b>
-
-    <p>Aide au rendu de monnaie</p>
+    <b>ATTENTION! Après, il est impossible d'annuler la transaction.</b>
     <p>Pour un paiement cash, utilisez ce formulaire pour vous aider :</p>
 
     <div class="form-row">
       <div class="col-lg-4">
-        <input type="number" [(ngModel)]="givenAmount" class="form-control form-control-lg" style="text-align: center;">
+        <input type="number" [(ngModel)]="givenAmount" class="form-control form-control-lg" style="text-align: center;" autofocus>
       </div>
       <div class="col-lg-4" style="text-align: center">
         <h3>=> rendre =></h3>
@@ -62,7 +60,6 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-success btn-lg" (click)="paymentFinished(paymentOkModal)">Paiement Validé</button>
-    <button type="button" class="btn btn-outline-warning btn-lg" (click)="openModal(processToPayment)">Retour</button>
   </div>
 </ng-template>
 
@@ -179,7 +176,8 @@
       <h2>Items demandés</h2>
 
       <app-cart>
-        <button class="btn btn-success btn-lg" (click)="pay(processToPayment, checkoutError)">Paiement</button>
+        <button type="button" class="btn btn-success btn-lg" style="min-width: 150px;" (click)="payByCash(cashPaymentStart)">Cash</button>
+        <button *ngIf="config.acceptCards" type="button" class="btn btn-outline-dark btn-lg" style="float: right;" (click)="payByCard(cardPaymentStart)">Carte</button>
       </app-cart>
 
 

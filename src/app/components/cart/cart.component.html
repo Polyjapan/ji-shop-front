@@ -1,10 +1,10 @@
 <ng-container *ngIf="cart.items.length > 0">
   <table style="width: 100%;">
-    <tr *ngFor="let item of cart.items">
-      <td>{{item.amount}} * <b>{{item.baseItem.name}}</b> ({{item.price}}.&ndash;)</td>
+    <tr style="line-height: 4em;" *ngFor="let item of cart.items">
+      <td>{{item.amount}}*<b>{{item.baseItem.name}}</b>({{item.price}}.&ndash;)</td>
       <td width="10%">{{item.amount * item.price}}.&ndash;</td>
       <td width="5%" *ngIf="!displayMode">
-          <button (click)="removeItem(item)" class="btn btn-danger btn"><span class="fas fa-trash-alt"></span></button>
+          <button (click)="removeItem(item)" class="btn btn-danger btn-lg"><span class="fas fa-trash-alt"></span></button>
       </td>
     </tr>
 
