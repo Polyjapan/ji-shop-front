@@ -174,6 +174,10 @@ export class PosComponent implements OnInit {
       this.checkoutPrice = response.price;
       this.checkoutOrderId = response.orderId;
 
+      console.log(this.checkoutPrice + " / " + this.checkoutOrderId);
+
+      callback();
+
       // Open the "payment method" modal
       cb(this);
       //this.openModal(modalSuccess);
