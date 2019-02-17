@@ -27,7 +27,7 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark btn-lg" (click)="payByCash(cashPaymentStart)">Cash</button>
+    <button type="button" class="btn btn-outline-dark btn-lg" (click)="payByCash(cashPaymentStart, checkoutError )">Cash</button>
     <button *ngIf="config.acceptCards" type="button" class="btn btn-outline-dark btn-lg" (click)="payByCard(cardPaymentStart)">Carte</button>
   </div>
 </ng-template>
