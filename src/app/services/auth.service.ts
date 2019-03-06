@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import {ApiResult} from '../types/api_result';
 import {BackendService} from './backend.service';
@@ -8,11 +8,16 @@ import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
+  private static ID_TOKEN_KEY = 'id_token';
+  private static REFRESH_TOKEN_KEY = 'refresh_token';
 
-  constructor(private backend: BackendService, private jwtHelper: JwtHelperService, private route: Router) {}
+  constructor(private backend: BackendService, private jwtHelper: JwtHelperService, private route: Router) {
 
-  login(token: string, activeRedirect: boolean = true): string {
-    localStorage.setItem('id_token', token);
+  }
+
+  login(authToken: string, refreshToken: string, activeRedirect: boolean = true): string {
+    localStorage.setItem(AuthService.ID_TOKEN_KEY, authToken);
+    localStorage.setItem(AuthService.REFRESH_TOKEN_KEY, refreshToken);
     let act = this.loadNextAction();
 
     if (!act) {
@@ -48,17 +53,24 @@ export class AuthService {
   }
 
   public logout(): void {
+    const token = localStorage.getItem(AuthService.REFRESH_TOKEN_KEY);
+
+    if (token !== null) {
+      this.backend.logout(token);
+    }
+
     // Remove tokens and expiry time from localStorage
-    localStorage.removeItem('id_token');
+    localStorage.removeItem(AuthService.ID_TOKEN_KEY);
+    localStorage.removeItem(AuthService.REFRESH_TOKEN_KEY);
   }
 
-  public getToken() {
-    const token = localStorage.getItem('id_token');
+  public getTokenNow() {
+    const token = localStorage.getItem(AuthService.ID_TOKEN_KEY);
     return this.jwtHelper.decodeToken(token);
   }
 
   public hasPermission(perm: string): boolean {
-    const token = this.getToken();
+    const token = this.getTokenNow();
     if (this.isAuthenticated() && token && token.user && token.user.permissions) {
       const perms: string[] = token.user.permissions;
 
@@ -86,19 +98,52 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    const token = localStorage.getItem('id_token');
-    if (token === null) {
+    const token = localStorage.getItem(AuthService.ID_TOKEN_KEY);
+    if (token === null || localStorage.getItem(AuthService.REFRESH_TOKEN_KEY) === null) {
       return false;
     }
 
-    try {
-      return !this.jwtHelper.isTokenExpired(token);
-    } catch (e) {
-      return false;
+    if (this.jwtHelper.isTokenExpired(token, 60)) {
+      // If the token expires in less than 1mn
+      this.refreshToken();
+    }
+
+    return true;
+  }
+
+  public getToken(): Promise<string> {
+    const token = localStorage.getItem(AuthService.ID_TOKEN_KEY);
+    if (token === null || localStorage.getItem(AuthService.REFRESH_TOKEN_KEY) === null) {
+      return Promise.reject('no token');
+    }
+
+    if (this.jwtHelper.isTokenExpired(token, 30)) {
+      // If the token expires in less than 1mn
+      return this.refreshToken();
+    } else {
+      return Promise.resolve(token);
+    }
+  }
+
+  private refreshToken(): Promise<string> {
+    const token = localStorage.getItem(AuthService.REFRESH_TOKEN_KEY);
+
+    if (token !== null) {
+      this.backend.refreshAccessToken(token).toPromise().then(succ => {
+        localStorage.setItem(AuthService.ID_TOKEN_KEY, succ.auth_token);
+        return succ.auth_token;
+      }).catch(rejected => {
+        this.logout();
+        return Promise.reject('invalid token');
+      });
+    } else {
+      localStorage.removeItem(AuthService.ID_TOKEN_KEY);
+      return Promise.reject('no token');
     }
   }
 }
 
 export class LoginResponse extends ApiResult {
-  token?: string;
+  refresh_token?: string;
+  auth_token?: string;
 }

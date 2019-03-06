@@ -60,7 +60,7 @@ export class AuthenticateComponent implements OnInit {
     this.backend.login(form.value).subscribe(
       res => {
         console.log(res);
-        this.auth.login(res.token);
+        this.auth.login(res.auth_token, res.refresh_token);
         this.loginSent = false;
       },
       err => {

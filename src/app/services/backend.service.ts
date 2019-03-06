@@ -194,6 +194,22 @@ export class BackendService {
       .post<LoginResponse>(this._authUrl + '/login', data);
   }
 
+  refreshAccessToken(token: string): Observable<LoginResponse> {
+    return this.http.get<LoginResponse>(this._authUrl + '/refresh', {
+      headers: {
+        'Refresh-Token': token
+      }
+    });
+  }
+
+  logout(token: string): Observable<LoginResponse> {
+    return this.http.get<ApiResult>(this._authUrl + '/logout', {
+      headers: {
+        'Refresh-Token': token
+      }
+    });
+  }
+
   register(data: string): Observable<ApiResult> {
     return this.http
       .post<ApiResult>(this._authUrl + '/signup', data);

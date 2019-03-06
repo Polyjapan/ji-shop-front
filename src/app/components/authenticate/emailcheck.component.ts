@@ -42,7 +42,7 @@ export class EmailcheckComponent implements OnInit {
             }
           }
 
-          this.returnUrl = this.auth.login(result.token, false);
+          this.returnUrl = this.auth.login(result.auth_token, result.refresh_token, false);
         },
         error => {
           this.loading = false;
@@ -61,7 +61,7 @@ export class EmailcheckComponent implements OnInit {
             }
           }
         }
-      )
+      );
     }
   }
 }
