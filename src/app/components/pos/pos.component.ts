@@ -144,28 +144,27 @@ export class PosComponent implements OnInit {
   }
 
   payByCard(cardModal): void {
-    this.pay((that)=>{
+    this.pay((that) => {
         that.sumUp.startPayment(that.checkoutOrderId);
         that.openModal(cardModal);
-        
     });
   }
 
   payByCash(cashModal, modalError): void {
-  this.pay((that)=>{
-    if(that.checkoutErrors){
-      that.openModal(modalError);
-    }else{
-      that.backend.sendPosLog(that.checkoutOrderId, {
-        paymentMethod: PaymentMethod.Cash,
-        accepted: false,
-        cardTransactionMessage: 'Cash payment start.',
-      }).subscribe(() => {});
-      that.openModal(cashModal);
+    this.pay((that) => {
+      if (that.checkoutErrors) {
+        that.openModal(modalError);
+      } else {
+        that.backend.sendPosLog(that.checkoutOrderId, {
+          paymentMethod: PaymentMethod.Cash,
+          accepted: false,
+          cardTransactionMessage: 'Cash payment start.',
+        }).subscribe(() => {});
+        that.openModal(cashModal);
 
-    }
-      });
-    }
+      }
+    });
+  }
 
   pay(cb): void {
     const order = this.cart.getOrder();
@@ -174,21 +173,17 @@ export class PosComponent implements OnInit {
       this.checkoutPrice = response.price;
       this.checkoutOrderId = response.orderId;
 
-      console.log(this.checkoutPrice + " / " + this.checkoutOrderId);
-
-      callback();
+      console.log(this.checkoutPrice + ' / ' + this.checkoutOrderId);
 
       // Open the "payment method" modal
       cb(this);
-      //this.openModal(modalSuccess);
     }, err => {
       this.checkoutErrors = Errors.replaceErrorsInResponse(err, new Map<string, string>([
         [ErrorCodes.OUT_OF_STOCK, 'Certains produits de votre commande ne sont plus disponibles.'],
         [ErrorCodes.MISSING_ITEM, 'Certains produits de votre commande n\'existent pas.'],
         [ErrorCodes.NO_REQUESTED_ITEM, 'Votre commande est vide.'],
       ]));
-      cb(this)
-      //this.openModal(modalError);
+      cb(this);
     });
 
   }
