@@ -189,9 +189,9 @@ export class BackendService {
     return this.http.get<FullOrder>(this._ordersUrl + '/view/' + id);
   }
 
-  login(data: string): Observable<LoginResponse> {
+  login(ticket: String): Observable<LoginResponse> {
     return this.http
-      .post<LoginResponse>(this._authUrl + '/login', data);
+      .post<LoginResponse>(this._authUrl + '/login', ticket);
   }
 
   register(data: string): Observable<ApiResult> {

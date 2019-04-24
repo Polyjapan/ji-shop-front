@@ -5,6 +5,9 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import * as Errors from '../../constants/errors';
 import {ErrorCodes} from '../../constants/errors';
+import {AuthApiError, AuthApiService, LoginErrorCodes} from '../../services/authapi.service';
+import {ApiError} from '../../types/api_result';
+import {Log} from '@angular/core/testing/src/logger';
 
 
 @Component({
@@ -19,7 +22,7 @@ export class AuthenticateComponent implements OnInit {
 
   registerOk = false;
 
-  constructor(private backend: BackendService, private auth: AuthService, private router: Router) {
+  constructor(private backend: BackendService, private authApi: AuthApiService, private auth: AuthService, private router: Router) {
 
   }
 
@@ -57,25 +60,44 @@ export class AuthenticateComponent implements OnInit {
     this.loginErrors = null;
     this.loginSent = true;
 
-    this.backend.login(form.value).subscribe(
-      res => {
-        console.log(res);
-        this.auth.login(res.token);
-        this.loginSent = false;
-      },
-      err => {
-        console.log(err);
-        this.loginErrors = Errors.replaceErrorsInResponse(err, new Map<string, string>([
-          [ErrorCodes.NOT_FOUND, 'Cette combinaison email/mot de passe n\'existe pas.'],
-          [ErrorCodes.EMAIL_NOT_CONFIRMED, 'Vous devez confirmer votre adresse email pour continuer.'],
-        ]), new Map<string, string>([
-          ['email', 'Email'],
-          ['password', 'Mot de passe'],
-        ]));
+    this.authApi.login(form.value).subscribe(apiSuccess => {
+      this.backend.login(apiSuccess.ticket).subscribe(
+        res => {
+          console.log(res);
+          this.auth.login(res.token);
+          this.loginSent = false;
+        },
+        err => {
+          console.log(err);
+          this.loginErrors = Errors.replaceErrorsInResponse(err, new Map<string, string>([]), new Map<string, string>([
+            ['email', 'Email'],
+            ['password', 'Mot de passe'],
+          ]));
 
-        this.loginSent = false;
+          this.loginSent = false;
+        }
+      );
+    }, err => {
+      try {
+        const code = (err as AuthApiError).code;
+
+        switch (code) {
+          case LoginErrorCodes.EmailNotConfirmed:
+            this.loginErrors = ['Vous devez confirmer votre adresse email pour continuer.'];
+            break;
+          case LoginErrorCodes.UserOrPasswordInvalid:
+            this.loginErrors = ['Cette combinaison email/mot de passe n\'existe pas.'];
+            break;
+          default:
+            this.loginErrors = [AuthApiService.parseGeneralError(code)];
+        }
+      } catch (e) {
+        this.loginErrors = [AuthApiService.parseGeneralError(200)];
+        console.log(e);
       }
-    );
+
+      this.loginSent = false;
+    });
   }
 
 

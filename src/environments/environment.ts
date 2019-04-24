@@ -5,7 +5,13 @@
 
 export const environment = {
   production: false,
-  apiurl: 'http://localhost:9000',
+  apiurl: 'http://localhost:10000',
+
+  auth: {
+    apiurl: 'http://localhost:9000',
+    clientId: 'first_app'
+  },
+
   tokenWhitelist: ['localhost:9000'],
 
   // apiurl: 'https://shop.japan-impact.ch/api',
