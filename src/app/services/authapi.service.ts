@@ -24,6 +24,9 @@ export class AuthApiService {
   private apiKey = environment.auth.clientId;
   private loginUrl = this.baseApiUrl + 'login';
   private registerUrl = this.baseApiUrl + 'register';
+  private emailConfirmUrl = this.baseApiUrl + 'email_confirm';
+  private forgotPasswordUrl = this.baseApiUrl + 'forgot_password';
+  private passwordResetUrl = this.baseApiUrl + 'password_reset';
 
   static parseGeneralError(code: number): string {
     switch (code) {
@@ -48,14 +51,35 @@ export class AuthApiService {
       .post<AuthApiSuccess>(this.loginUrl, data);
   }
 
+  register(data: string): Observable<AuthApiSuccess> {
+    data['clientId'] = this.apiKey;
+    return this.http
+      .post<AuthApiSuccess>(this.registerUrl, data);
+  }
+
+  emailConfirm(user: string, code: string): Observable<AuthApiSuccess> {
+    return this.http
+      .post<AuthApiSuccess>(this.emailConfirmUrl, {'email': user, 'code': code, 'clientId': this.apiKey});
+  }
+
+  forgotPassword(mail: string, captcha: string): Observable<any> {
+    return this.http
+      .post(this.forgotPasswordUrl, {'email': mail, 'captcha': captcha, 'clientId': this.apiKey});
+  }
+
+  passwordReset(user: string, code: string, password: string): Observable<AuthApiSuccess> {
+    return this.http
+      .post<AuthApiSuccess>(this.passwordResetUrl, {'email': user, 'code': code, 'password': password, 'clientId': this.apiKey});
+  }
+
   /* register(data: string): Observable<AuthApiSuccess> {
      return this.http
        .post<ApiResult>(this._authUrl + '/signup', data);
    }
 
-   emailConfirm(user: string, code: string): Observable<LoginResponse> {
+   emailConfirm(user: string, errorCode: string): Observable<LoginResponse> {
      return this.http
-       .post<ApiResult>(this._authUrl + '/emailConfirm', {'email': user, 'code': code});
+       .post<ApiResult>(this._authUrl + '/emailConfirm', {'email': user, 'errorCode': errorCode});
    }
 
    passwordRecover(mail: string, captcha: string): Observable<ApiResult> {
@@ -68,9 +92,9 @@ export class AuthApiService {
        .post<ApiResult>(this._authUrl + '/changePassword', {'password': password});
    }
 
-   passwordReset(user: string, code: string, password: string): Observable<ApiResult> {
+   passwordReset(user: string, errorCode: string, password: string): Observable<ApiResult> {
      return this.http
-       .post<ApiResult>(this._authUrl + '/resetPassword', {'email': user, 'code': code, 'password': password});
+       .post<ApiResult>(this._authUrl + '/resetPassword', {'email': user, 'errorCode': errorCode, 'password': password});
    }*/
 
 
@@ -89,10 +113,14 @@ export enum LoginErrorCodes {
   EmailNotConfirmed = 202
 }
 
+export enum EmailConfirmErrorCodes {
+  InvalidConfirmCode = 201
+}
+
 export class AuthApiSuccess {
   ticket: String;
 }
 
 export class AuthApiError {
-  code: number;
+  errorCode: number;
 }

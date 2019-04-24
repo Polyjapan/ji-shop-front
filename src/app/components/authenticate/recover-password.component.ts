@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {isNullOrUndefined} from 'util';
 import {ErrorCodes} from '../../constants/errors';
 import {AuthService} from '../../services/auth.service';
+import {AuthApiService} from '../../services/authapi.service';
 
 @Component({
   selector: 'app-recover-password',
@@ -18,25 +19,19 @@ export class RecoverPasswordComponent implements OnInit {
   email: string;
   code: string;
 
-  constructor(private backend: BackendService, private route: ActivatedRoute, private router: Router, private auth: AuthService) {
+  constructor(private backend: BackendService, private authApi: AuthApiService, private route: ActivatedRoute, private router: Router, private auth: AuthService) {
   }
 
   resetPassword(form: HTMLInputElement) {
     this.sending = true;
 
-    this.backend.passwordReset(this.email, this.code, form.value).subscribe(
+    this.authApi.passwordReset(this.email, this.code, form.value).subscribe(
       success => {
-        if (success.success) {
-          this.sent = true;
-        } else {
-          this.errors = Errors.replaceErrors(success.errors,
-            new Map([[ErrorCodes.NOT_FOUND, 'Cette demande de réinitialisation de mot de passe n\'a pas été trouvée']]),
-            new Map([['password', 'Mot de passe']])
-          );
-          this.sending = false;
-        }
+        this.sent = true;
       },
       err => {
+        // TODO: handle errors
+
         this.errors = Errors.replaceErrorsInResponse(err,
           new Map([[ErrorCodes.NOT_FOUND, 'Cette demande de réinitialisation de mot de passe n\'a pas été trouvée']],),
           new Map([['password', 'Mot de passe']])

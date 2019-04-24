@@ -7,6 +7,7 @@ import {ApiError} from '../../types/api_result';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as Errors from '../../constants/errors';
 import {ErrorCodes} from '../../constants/errors';
+import {AuthApiError, AuthApiService, EmailConfirmErrorCodes, LoginErrorCodes} from '../../services/authapi.service';
 
 @Component({
   selector: 'app-emailcheck',
@@ -18,8 +19,7 @@ export class EmailcheckComponent implements OnInit {
   errors: string[] = [];
   returnUrl = '/';
 
-  constructor(private route: ActivatedRoute, private backend: BackendService, private router: Router, private auth: AuthService) {
-
+  constructor(private route: ActivatedRoute, private authApi: AuthApiService, private backend: BackendService, private router: Router, private auth: AuthService) {
   }
 
   ngOnInit(): void {
@@ -30,38 +30,39 @@ export class EmailcheckComponent implements OnInit {
       const email = params.get('email');
       const code = params.get('code');
 
-      this.backend.emailConfirm(email, code).subscribe(
-        result => {
-          this.success = result.success;
-          this.loading = false;
 
-          for (const err of result.errors) {
-            const apiErr = err as ApiError;
-            for (const msg of apiErr.messages) {
-              this.errors.push(msg);
-            }
+      this.authApi.emailConfirm(email, code).subscribe(apiSuccess => {
+        this.backend.login(apiSuccess.ticket).subscribe(
+          res => {
+            console.log(res);
+            this.loading = false;
+            this.success = res.success;
+            this.returnUrl = this.auth.login(res.token, false);
+          },
+          err => {
+            console.log(err);
+            this.errors = Errors.replaceErrorsInResponse(err, new Map<string, string>([]), new Map<string, string>([]));
+            this.loading = false;
           }
+        );
+      }, err => {
+        try {
+          const ec = (err.error as AuthApiError).errorCode;
 
-          this.returnUrl = this.auth.login(result.token, false);
-        },
-        error => {
-          this.loading = false;
-          this.errors = Errors.replaceErrorsInResponse(error, new Map<string, string>([
-            [ErrorCodes.NOT_FOUND, '{key} n\'a pas été trouvé.'],
-          ]), new Map<string, string>([
-            ['email', 'Cet email'],
-            ['code', 'Ce code de confirmation'],
-          ]));
-
-
-          for (const err of error.error.errors) {
-            const apiErr = err as ApiError;
-            for (const msg of apiErr.messages) {
-              this.errors.push(msg);
-            }
+          switch (ec) {
+            case EmailConfirmErrorCodes.InvalidConfirmCode:
+              this.errors = ['Le code de confirmation ou l\'email est incorrect'];
+              break;
+            default:
+              this.errors = [AuthApiService.parseGeneralError(ec)];
           }
+        } catch (e) {
+          this.errors = [AuthApiService.parseGeneralError(200)];
+          console.log(e);
         }
-      )
+
+        this.loading = false;
+      });
     }
   }
 }

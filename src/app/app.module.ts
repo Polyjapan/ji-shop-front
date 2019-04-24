@@ -28,6 +28,7 @@ import {OrderContentComponent} from './components/members/order-content.componen
 import {OrderContentModule} from './components/members/order-content.module';
 import {IntranetModule} from './components/intranet/intranet.module';
 import {MainComponent} from './main.component';
+import {EmailCallbackComponent} from './components/authenticate/email-callback.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {MainComponent} from './main.component';
     ScanComponent,
     ScanSelectComponent,
     MainComponent,
+    EmailCallbackComponent,
 
     AuthenticateComponent
   ],

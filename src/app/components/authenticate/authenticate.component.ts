@@ -6,9 +6,6 @@ import {Router} from '@angular/router';
 import * as Errors from '../../constants/errors';
 import {ErrorCodes} from '../../constants/errors';
 import {AuthApiError, AuthApiService, LoginErrorCodes} from '../../services/authapi.service';
-import {ApiError} from '../../types/api_result';
-import {Log} from '@angular/core/testing/src/logger';
-
 
 @Component({
   selector: 'app-authenticate',
@@ -36,24 +33,39 @@ export class AuthenticateComponent implements OnInit {
     const data = form.value;
     data['captcha'] = grecaptcha.getResponse();
 
-    this.backend.register(data).subscribe(
-      res => {
-        this.registerOk = true;
-        this.registerSent = false;
-      },
-      err => {
-        this.registerErrors = Errors.replaceErrorsInResponse(err, new Map<string, string>([
-          [ErrorCodes.USER_EXISTS, 'Un utilisateur avec cette adresse email existe déjà.'],
-        ]), new Map<string, string>([
-          ['firstname', 'Prénom'],
-          ['lastname', 'Nom'],
-          ['email', 'Email'],
-          ['password', 'Mot de passe'],
-        ]));
+    this.authApi.register(data).subscribe(apiSuccess => {
+      data['password'] = undefined;
+      data['ticket'] = apiSuccess.ticket;
 
-        this.registerSent = false;
+      this.backend.register(data).subscribe(
+        res => {
+          this.registerOk = true;
+          this.registerSent = false;
+        },
+        err => {
+          this.registerErrors = Errors.replaceErrorsInResponse(err, new Map<string, string>([
+            [ErrorCodes.USER_EXISTS, 'Un utilisateur avec cette adresse email existe déjà.'],
+          ]), new Map<string, string>([
+            ['firstname', 'Prénom'],
+            ['lastname', 'Nom'],
+            ['email', 'Email'],
+            ['password', 'Mot de passe'],
+          ]));
+
+          this.registerSent = false;
+        }
+      );
+    }, err => {
+      try {
+        const code = (err as AuthApiError).errorCode;
+        this.loginErrors = [AuthApiService.parseGeneralError(code)];
+      } catch (e) {
+        this.loginErrors = [AuthApiService.parseGeneralError(200)];
+        console.log(e);
       }
-    );
+
+      this.loginSent = false;
+    });
   }
 
   onLogin(form: NgForm) {
@@ -79,7 +91,7 @@ export class AuthenticateComponent implements OnInit {
       );
     }, err => {
       try {
-        const code = (err as AuthApiError).code;
+        const code = (err as AuthApiError).errorCode;
 
         switch (code) {
           case LoginErrorCodes.EmailNotConfirmed:

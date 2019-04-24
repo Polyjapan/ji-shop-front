@@ -5,6 +5,7 @@ import {NgForm} from '@angular/forms';
 import * as Errors from '../../constants/errors';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
+import {AuthApiService} from '../../services/authapi.service';
 
 @Component({
   selector: 'app-forgotten-password',
@@ -15,7 +16,7 @@ export class ForgottenPasswordComponent implements OnInit {
   sent = false;
   sending = false;
 
-  constructor(private backend: BackendService, private router: Router, private auth: AuthService) {
+  constructor(private authApi: AuthApiService, private router: Router, private auth: AuthService) {
   }
 
   resetPassword(form: NgForm) {
@@ -23,16 +24,12 @@ export class ForgottenPasswordComponent implements OnInit {
     declare var grecaptcha: any;
     this.sending = true;
 
-    this.backend.passwordRecover(form.value.email, grecaptcha.getResponse()).subscribe(
+    this.authApi.forgotPassword(form.value.email, grecaptcha.getResponse()).subscribe(
       success => {
-        if (success.success) {
-          this.sent = true;
-        } else {
-          this.errors = Errors.replaceErrors(success.errors);
-          this.sending = false;
-        }
+        this.sent = true;
       },
       err => {
+        // TODO: handle errors
         this.errors = Errors.replaceErrorsInResponse(err);
         this.sending = false;
       });

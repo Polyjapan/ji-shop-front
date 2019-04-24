@@ -12,7 +12,7 @@ export const environment = {
     clientId: 'first_app'
   },
 
-  tokenWhitelist: ['localhost:9000'],
+  tokenWhitelist: ['localhost:9000', 'localhost:10000'],
 
   // apiurl: 'https://shop.japan-impact.ch/api',
   // tokenWhitelist: ['shop.japan-impact.ch'],

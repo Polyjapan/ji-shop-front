@@ -19,6 +19,7 @@ import {PosSelectComponent} from './components/pos/pos-select.component';
 import {PosCallbackComponent} from './components/pos/pos-callback.component';
 import {MainComponent} from './main.component';
 import {TermsComponent} from './components/home/terms.component';
+import {EmailCallbackComponent} from './components/authenticate/email-callback.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,7 @@ const routes: Routes = [
       { path: 'checkout/:ordertype', component: CheckoutComponent, canActivate: [PermissionAuthGuard] },
       { path: 'callback/:accepted', component: CallbackComponent },
       { path: 'emailConfirm/:email/:code', component: EmailcheckComponent },
+      { path: 'emailCallback', component: EmailCallbackComponent },
       { path: 'passwordForget', component: ForgottenPasswordComponent },
       { path: 'passwordReset/:email/:code', component: RecoverPasswordComponent },
       { path: 'orders', component: MyOrdersComponent, canActivate: [PermissionAuthGuard] },
