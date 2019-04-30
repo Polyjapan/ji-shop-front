@@ -37,7 +37,7 @@ export class EmailcheckComponent implements OnInit {
             console.log(res);
             this.loading = false;
             this.success = res.success;
-            this.returnUrl = this.auth.login(res.token, false);
+            this.returnUrl = this.auth.login(res, false);
           },
           err => {
             console.log(err);

@@ -1,18 +1,34 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import {ApiResult} from '../types/api_result';
 import {BackendService} from './backend.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {Observable} from 'rxjs/Rx';
 import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private backend: BackendService, private jwtHelper: JwtHelperService, private route: Router) {}
+  private static ID_TOKEN_KEY = 'id_token';
+  private static TEMP_TOKEN_KEY = '_login_temp_token';
+  private static REDIRECT_LOCATION_KEY = 'post_login_action';
 
-  login(token: string, activeRedirect: boolean = true): string {
-    localStorage.setItem('id_token', token);
+  constructor(private backend: BackendService, private jwtHelper: JwtHelperService, private route: Router) {
+  }
+
+  get temporaryToken(): string {
+    return localStorage.getItem(AuthService.TEMP_TOKEN_KEY);
+  }
+
+  login(result: LoginResponse, activeRedirect: boolean = true): string {
+    if (result.requireInfo) {
+      this.requestMoreInfo(result.token);
+      return 'firstLogin';
+    }
+
+
+    localStorage.setItem(AuthService.ID_TOKEN_KEY, result.token);
+    this.removeTemporaryToken();
+
     let act = this.loadNextAction();
 
     if (!act) {
@@ -23,6 +39,15 @@ export class AuthService {
       this.route.navigate([act]);
     }
     return act;
+  }
+
+  requestMoreInfo(token: string) {
+    if (this.isAuthenticated()) {
+      return;
+    }
+
+    this.storeTemporaryToken(token);
+    this.route.navigate(['firstLogin']);
   }
 
   requiresLogin(redirectTo: string): boolean {
@@ -36,24 +61,13 @@ export class AuthService {
     }
   }
 
-  private storeNextAction(action: string) {
-    localStorage.setItem('_post_login_action', action);
-  }
-
-  private loadNextAction(): string {
-    const act = localStorage.getItem('_post_login_action');
-    localStorage.removeItem('_post_login_action');
-
-    return act;
-  }
-
   public logout(): void {
     // Remove tokens and expiry time from localStorage
-    localStorage.removeItem('id_token');
+    localStorage.removeItem(AuthService.ID_TOKEN_KEY);
   }
 
   public getToken() {
-    const token = localStorage.getItem('id_token');
+    const token = localStorage.getItem(AuthService.ID_TOKEN_KEY);
     return this.jwtHelper.decodeToken(token);
   }
 
@@ -86,7 +100,7 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    const token = localStorage.getItem('id_token');
+    const token = localStorage.getItem(AuthService.ID_TOKEN_KEY);
     if (token === null) {
       return false;
     }
@@ -97,8 +111,28 @@ export class AuthService {
       return false;
     }
   }
+
+  private storeTemporaryToken(token: string) {
+    localStorage.setItem(AuthService.TEMP_TOKEN_KEY, token);
+  }
+
+  private removeTemporaryToken() {
+    localStorage.removeItem(AuthService.TEMP_TOKEN_KEY);
+  }
+
+  private storeNextAction(action: string) {
+    localStorage.setItem(AuthService.REDIRECT_LOCATION_KEY, action);
+  }
+
+  private loadNextAction(): string {
+    const act = localStorage.getItem(AuthService.REDIRECT_LOCATION_KEY);
+    localStorage.removeItem(AuthService.REDIRECT_LOCATION_KEY);
+
+    return act;
+  }
 }
 
 export class LoginResponse extends ApiResult {
   token?: string;
+  requireInfo: boolean;
 }

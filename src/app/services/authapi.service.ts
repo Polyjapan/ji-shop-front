@@ -2,20 +2,8 @@ import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import {environment} from '../../environments/environment';
-import {Item, ItemList, ItemsResponse} from '../types/items';
-import {CheckedOutItem, FullOrder, FullOrderData, ImportedItemData, Order, OrderLog, Source} from '../types/order';
-import {LoginResponse} from './auth.service';
-import {ApiResult} from '../types/api_result';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ScanResult} from '../types/scan_result';
-import {ScanConfiguration, ScanConfigurationWithItems} from '../types/scan_configuration';
-import {Event} from '../types/event';
-import {PosConfiguration, PosGetConfigResponse, PosOrderResponse, PosPaymentLog} from '../types/pos_configuration';
-import {StatsReturn} from '../types/stats';
-import {Client, ClientAndPermissions} from '../types/client';
-import {TicketData} from '../types/ticket_data';
-import {ObservableInput} from 'rxjs/Observable';
 
 
 @Injectable()
@@ -27,6 +15,9 @@ export class AuthApiService {
   private emailConfirmUrl = this.baseApiUrl + 'email_confirm';
   private forgotPasswordUrl = this.baseApiUrl + 'forgot_password';
   private passwordResetUrl = this.baseApiUrl + 'password_reset';
+
+  constructor(private http: HttpClient) {
+  }
 
   static parseGeneralError(code: number): string {
     switch (code) {
@@ -42,16 +33,13 @@ export class AuthApiService {
     }
   }
 
-  constructor(private http: HttpClient) {
-  }
-
   login(data: string): Observable<AuthApiSuccess> {
     data['clientId'] = this.apiKey;
     return this.http
       .post<AuthApiSuccess>(this.loginUrl, data);
   }
 
-  register(data: string): Observable<AuthApiSuccess> {
+  register(data: any): Observable<AuthApiSuccess> {
     data['clientId'] = this.apiKey;
     return this.http
       .post<AuthApiSuccess>(this.registerUrl, data);
@@ -118,7 +106,7 @@ export enum EmailConfirmErrorCodes {
 }
 
 export class AuthApiSuccess {
-  ticket: String;
+  ticket: string;
 }
 
 export class AuthApiError {

@@ -16,14 +16,13 @@ export class EmailCallbackComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParamMap.subscribe(pmap => {
-      const pm = pmap.params;
+    this.route.queryParamMap.subscribe(pm => {
       console.log(pm);
 
-      if (pm['action'] === 'confirmEmail' && pm['confirmCode'] && pm['email']) {
-        this.router.navigate(['/', 'emailConfirm', pm['email'], pm['confirmCode']]);
-      } else if (pm['action'] === 'passwordReset' && pm['resetCode'] && pm['email']) {
-        this.router.navigate(['/', 'passwordReset', pm['email'], pm['resetCode']]);
+      if (pm.get('action') === 'confirmEmail' && pm.get('confirmCode') && pm.get('email')) {
+        this.router.navigate(['/', 'emailConfirm', pm.get('email'), pm.get('confirmCode')]);
+      } else if (pm.get('action') === 'passwordReset' && pm.get('resetCode') && pm.get('email')) {
+        this.router.navigate(['/', 'passwordReset', pm.get('email'), pm.get('resetCode')]);
       } else {
         this.router.navigate(['/']);
       }

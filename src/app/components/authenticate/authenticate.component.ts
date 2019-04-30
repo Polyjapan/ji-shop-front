@@ -58,13 +58,13 @@ export class AuthenticateComponent implements OnInit {
     }, err => {
       try {
         const code = (err as AuthApiError).errorCode;
-        this.loginErrors = [AuthApiService.parseGeneralError(code)];
+        this.registerErrors = [AuthApiService.parseGeneralError(code)];
       } catch (e) {
-        this.loginErrors = [AuthApiService.parseGeneralError(200)];
+        this.registerErrors = [AuthApiService.parseGeneralError(200)];
         console.log(e);
       }
 
-      this.loginSent = false;
+      this.registerSent = false;
     });
   }
 
@@ -76,7 +76,7 @@ export class AuthenticateComponent implements OnInit {
       this.backend.login(apiSuccess.ticket).subscribe(
         res => {
           console.log(res);
-          this.auth.login(res.token);
+          this.auth.login(res);
           this.loginSent = false;
         },
         err => {

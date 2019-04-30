@@ -20,6 +20,7 @@ import {PosCallbackComponent} from './components/pos/pos-callback.component';
 import {MainComponent} from './main.component';
 import {TermsComponent} from './components/home/terms.component';
 import {EmailCallbackComponent} from './components/authenticate/email-callback.component';
+import {FirstloginComponent} from './components/authenticate/firstlogin.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent },
       { path: 'login', component: AuthenticateComponent },
+      { path: 'firstLogin', component: FirstloginComponent },
       { path: 'terms', component: TermsComponent },
       { path: 'checkout', component: CheckoutComponent, canActivate: [PermissionAuthGuard] },
       { path: 'checkout/:ordertype', component: CheckoutComponent, canActivate: [PermissionAuthGuard] },

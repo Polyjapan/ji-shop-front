@@ -189,34 +189,20 @@ export class BackendService {
     return this.http.get<FullOrder>(this._ordersUrl + '/view/' + id);
   }
 
-  login(ticket: String): Observable<LoginResponse> {
+  login(ticket: string): Observable<LoginResponse> {
     return this.http
       .post<LoginResponse>(this._authUrl + '/login', ticket);
   }
 
-  register(data: string): Observable<ApiResult> {
+  firstLogin(data: any, token: string): Observable<LoginResponse> {
+    data['ticket'] = token;
+    return this.http
+      .post<LoginResponse>(this._authUrl + '/firstLogin', data);
+  }
+
+  register(data: any): Observable<ApiResult> {
     return this.http
       .post<ApiResult>(this._authUrl + '/signup', data);
-  }
-
-  emailConfirm(user: string, code: string): Observable<LoginResponse> {
-    return this.http
-      .post<ApiResult>(this._authUrl + '/emailConfirm', {'email': user, 'code': code});
-  }
-
-  passwordRecover(mail: string, captcha: string): Observable<ApiResult> {
-    return this.http
-      .post<ApiResult>(this._authUrl + '/recoverPassword', {'email': mail, 'captcha': captcha});
-  }
-
-  passwordChange(password: string): Observable<ApiResult> {
-    return this.http
-      .post<ApiResult>(this._authUrl + '/changePassword', {'password': password});
-  }
-
-  passwordReset(user: string, code: string, password: string): Observable<ApiResult> {
-    return this.http
-      .post<ApiResult>(this._authUrl + '/resetPassword', {'email': user, 'code': code, 'password': password});
   }
 
   placeOrder(items: CheckedOutItem[], source?: Source): Observable<CheckOutResponse> {
