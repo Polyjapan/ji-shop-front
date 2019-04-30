@@ -57,10 +57,10 @@ export class AuthenticateComponent implements OnInit {
       );
     }, err => {
       try {
-        const code = (err as AuthApiError).errorCode;
+        const code = (err.error as AuthApiError).errorCode;
         this.registerErrors = [AuthApiService.parseGeneralError(code)];
       } catch (e) {
-        this.registerErrors = [AuthApiService.parseGeneralError(200)];
+        this.registerErrors = [AuthApiService.parseGeneralError(100)];
         console.log(e);
       }
 
@@ -91,20 +91,20 @@ export class AuthenticateComponent implements OnInit {
       );
     }, err => {
       try {
-        const code = (err as AuthApiError).errorCode;
+        const code = (err.error as AuthApiError).errorCode;
 
         switch (code) {
           case LoginErrorCodes.EmailNotConfirmed:
             this.loginErrors = ['Vous devez confirmer votre adresse email pour continuer.'];
             break;
           case LoginErrorCodes.UserOrPasswordInvalid:
-            this.loginErrors = ['Cette combinaison email/mot de passe n\'existe pas.'];
+            this.loginErrors = ['Email ou mot de passe incorrect.'];
             break;
           default:
             this.loginErrors = [AuthApiService.parseGeneralError(code)];
         }
       } catch (e) {
-        this.loginErrors = [AuthApiService.parseGeneralError(200)];
+        this.loginErrors = [AuthApiService.parseGeneralError(100)];
         console.log(e);
       }
 

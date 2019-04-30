@@ -49,12 +49,10 @@ export class EmailcheckComponent implements OnInit {
         try {
           const ec = (err.error as AuthApiError).errorCode;
 
-          switch (ec) {
-            case EmailConfirmErrorCodes.InvalidConfirmCode:
-              this.errors = ['Le code de confirmation ou l\'email est incorrect'];
-              break;
-            default:
-              this.errors = [AuthApiService.parseGeneralError(ec)];
+          if (ec === EmailConfirmErrorCodes.InvalidConfirmCode) {
+            this.errors = ['Le code de confirmation ou l\'email est incorrect'];
+          } else {
+            this.errors = [AuthApiService.parseGeneralError(ec)];
           }
         } catch (e) {
           this.errors = [AuthApiService.parseGeneralError(200)];

@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {BackendService} from '../../services/backend.service';
-import * as Errors from '../../constants/errors';
 import {ActivatedRoute, Router} from '@angular/router';
 import {isNullOrUndefined} from 'util';
-import {ErrorCodes} from '../../constants/errors';
 import {AuthService} from '../../services/auth.service';
-import {AuthApiService} from '../../services/authapi.service';
+import {AuthApiError, AuthApiService, PasswordResetErrorCodes} from '../../services/authapi.service';
 
 @Component({
   selector: 'app-recover-password',
@@ -30,16 +28,19 @@ export class RecoverPasswordComponent implements OnInit {
         this.sent = true;
       },
       err => {
-        // TODO: handle errors
+        try {
+          const code = (err.error as AuthApiError).errorCode;
 
-        this.errors = Errors.replaceErrorsInResponse(err,
-          new Map([[ErrorCodes.NOT_FOUND, 'Cette demande de réinitialisation de mot de passe n\'a pas été trouvée']],),
-          new Map([['password', 'Mot de passe']])
-        );
-
-        this.sending = false;
-      }
-    );
+          if (code === PasswordResetErrorCodes.InvalidResetCode) {
+            this.errors = ['Aucune demande de réinitialisation de mot de passe correspondante trouvée.'];
+          } else {
+            this.errors = [AuthApiService.parseGeneralError(code)];
+          }
+        } catch (e) {
+          this.errors = [AuthApiService.parseGeneralError(100)];
+          console.log(e);
+        }
+      });
   }
 
   ngOnInit(): void {

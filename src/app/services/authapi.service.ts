@@ -33,6 +33,7 @@ export class AuthApiService {
     }
   }
 
+
   login(data: string): Observable<AuthApiSuccess> {
     data['clientId'] = this.apiKey;
     return this.http
@@ -59,33 +60,6 @@ export class AuthApiService {
     return this.http
       .post<AuthApiSuccess>(this.passwordResetUrl, {'email': user, 'code': code, 'password': password, 'clientId': this.apiKey});
   }
-
-  /* register(data: string): Observable<AuthApiSuccess> {
-     return this.http
-       .post<ApiResult>(this._authUrl + '/signup', data);
-   }
-
-   emailConfirm(user: string, errorCode: string): Observable<LoginResponse> {
-     return this.http
-       .post<ApiResult>(this._authUrl + '/emailConfirm', {'email': user, 'errorCode': errorCode});
-   }
-
-   passwordRecover(mail: string, captcha: string): Observable<ApiResult> {
-     return this.http
-       .post<ApiResult>(this._authUrl + '/recoverPassword', {'email': mail, 'captcha': captcha});
-   }
-
-   passwordChange(password: string): Observable<ApiResult> {
-     return this.http
-       .post<ApiResult>(this._authUrl + '/changePassword', {'password': password});
-   }
-
-   passwordReset(user: string, errorCode: string, password: string): Observable<ApiResult> {
-     return this.http
-       .post<ApiResult>(this._authUrl + '/resetPassword', {'email': user, 'errorCode': errorCode, 'password': password});
-   }*/
-
-
 }
 
 export enum GeneralErrorCodes {
@@ -103,6 +77,10 @@ export enum LoginErrorCodes {
 
 export enum EmailConfirmErrorCodes {
   InvalidConfirmCode = 201
+}
+
+export enum PasswordResetErrorCodes {
+  InvalidResetCode = 201
 }
 
 export class AuthApiSuccess {
