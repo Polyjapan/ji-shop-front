@@ -1,0 +1,20 @@
+.footer-links li {
+  display: inline-block;
+}
+
+.footer-links {
+  padding-left: 0;
+}
+
+.footer-links li+li {
+  margin-left: 1rem;
+}
+
+footer a {
+  color: black;
+  font-weight: 600;
+}
+
+footer {
+  text-align: right;
+}
