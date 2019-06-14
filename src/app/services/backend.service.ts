@@ -9,9 +9,9 @@ import {ApiResult} from '../types/api_result';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ScanResult} from '../types/scan_result';
-import {ScanConfiguration, ScanConfigurationWithItems} from '../types/scan_configuration';
+import {ScanConfiguration, ScanConfigurationList, ScanConfigurationWithItems} from '../types/scan_configuration';
 import {Event} from '../types/event';
-import {PosConfiguration, PosGetConfigResponse, PosOrderResponse, PosPaymentLog} from '../types/pos_configuration';
+import {PosConfiguration, PosConfigurationList, PosGetConfigResponse, PosOrderResponse, PosPaymentLog} from '../types/pos_configuration';
 import {StatsReturn} from '../types/stats';
 import {Client, ClientAndPermissions} from '../types/client';
 import {TicketData} from '../types/ticket_data';
@@ -74,19 +74,19 @@ export class BackendService {
     }
   }
 
-  createOrUpdateConfig(config: ScanConfiguration): Observable<number> {
+  createOrUpdateConfig(eventId: number, config: ScanConfiguration): Observable<number> {
     if (config.id) {
-      return this.http.put<number>(this._scanUrl + '/configurations/' + config.id.toString(10), config);
+      return this.http.put<number>(this._scanUrl + '/configurations/' + eventId + '/' + config.id.toString(10), config);
     } else {
-      return this.http.post<number>(this._scanUrl + '/configurations', config);
+      return this.http.post<number>(this._scanUrl + '/configurations/' + eventId, config);
     }
   }
 
-  createOrUpdatePosConfig(config: PosConfiguration): Observable<number> {
+  createOrUpdatePosConfig(eventId: number, config: PosConfiguration): Observable<number> {
     if (config.id) {
-      return this.http.put<number>(this._posUrl + '/configurations/' + config.id.toString(10), config);
+      return this.http.put<number>(this._posUrl + '/configurations/' + eventId + '/' + config.id.toString(10), config);
     } else {
-      return this.http.post<number>(this._posUrl + '/configurations', config);
+      return this.http.post<number>(this._posUrl + '/configurations/' + eventId, config);
     }
   }
 
@@ -118,12 +118,12 @@ export class BackendService {
     return this.http.delete<ApiResult>(this._adminUrl + '/events/' + eventId);
   }
 
-  deletePosConfig(configId: number): Observable<ApiResult> {
-    return this.http.delete<ApiResult>(this._posUrl + '/configurations/' + configId);
+  deletePosConfig(eventId: number, configId: number): Observable<ApiResult> {
+    return this.http.delete<ApiResult>(this._posUrl + '/configurations/' + eventId + '/' + configId);
   }
 
-  deleteScanConfig(configId: number): Observable<ApiResult> {
-    return this.http.delete<ApiResult>(this._scanUrl + '/configurations/' + configId);
+  deleteScanConfig(eventId: number, configId: number): Observable<ApiResult> {
+    return this.http.delete<ApiResult>(this._scanUrl + '/configurations/' + eventId + '/' + configId);
   }
 
   getTicketData(ticket: string): Observable<TicketData> {
@@ -221,26 +221,30 @@ export class BackendService {
       .post<ScanResult>(this._scanUrl + '/process/' + configId, {'barcode': ticketId});
   }
 
-  getScanningConfigurations(): Observable<ScanConfiguration[]> {
-    return this.http.get<ScanConfiguration[]>(this._scanUrl + '/configurations');
+  getAllScanningConfigurations(): Observable<ScanConfigurationList[]> {
+    return this.http.get<ScanConfigurationList[]>(this._scanUrl + '/configurations');
   }
 
-  getScanningConfiguration(id: number): Observable<ScanConfiguration> {
-    return this.http.get<ScanConfiguration>(this._scanUrl + '/configurations/' + id);
+  getScanningConfigurations(eventId: number): Observable<ScanConfiguration[]> {
+    return this.http.get<ScanConfiguration[]>(this._scanUrl + '/configurations/' + eventId);
   }
 
-  addProductToScanningConfiguration(config: number, item: Item): Observable<ApiResult> {
+  getScanningConfiguration(eventId: number, id: number): Observable<ScanConfiguration> {
+    return this.http.get<ScanConfiguration>(this._scanUrl + '/configurations/' + eventId + '/' + id);
+  }
+
+  addProductToScanningConfiguration(eventId: number, config: number, item: Item): Observable<ApiResult> {
     return this.http
-      .post<ApiResult>(this._scanUrl + '/configurations/' + config + '/addProduct', item.id.toString());
+      .post<ApiResult>(this._scanUrl + '/configurations/' + eventId + '/' + config + '/addProduct', item.id.toString());
   }
 
-  removeProductFromScanningConfiguration(config: number, item: Item): Observable<ApiResult> {
+  removeProductFromScanningConfiguration(eventId: number, config: number, item: Item): Observable<ApiResult> {
     return this.http
-      .post<ApiResult>(this._scanUrl + '/configurations/' + config + '/removeProduct', item.id.toString());
+      .post<ApiResult>(this._scanUrl + '/configurations/' + eventId + '/' + config + '/removeProduct', item.id.toString());
   }
 
-  getFullScanningConfiguration(id: number): Observable<ScanConfigurationWithItems> {
-    return this.http.get<any[]>(this._scanUrl + '/configurations/' + id + '/full')
+  getFullScanningConfiguration(eventId: number, id: number): Observable<ScanConfigurationWithItems> {
+    return this.http.get<any[]>(this._scanUrl + '/configurations/' + eventId + '/' + id + '/full')
       .map(val => {
         console.log(val);
 
@@ -251,25 +255,29 @@ export class BackendService {
       });
   }
 
-  getPosConfigurations(): Observable<PosConfiguration[]> {
-    return this.http.get<PosConfiguration[]>(this._posUrl + '/configurations');
+  getAllPosConfigurations(): Observable<PosConfigurationList[]> {
+    return this.http.get<PosConfigurationList[]>(this._posUrl + '/configurations');
   }
 
-  getPosConfiguration(id: number): Observable<PosGetConfigResponse> {
-    return this.http.get<PosGetConfigResponse>(this._posUrl + '/configurations/' + id);
+  getPosConfigurations(eventId: number): Observable<PosConfiguration[]> {
+    return this.http.get<PosConfiguration[]>(this._posUrl + '/configurations/' + eventId);
   }
 
-  addProductToPosConfiguration(config: number, item: Item, row: number, col: number, bgColor: string, fgColor: string): Observable<ApiResult> {
+  getPosConfiguration(eventId: number, id: number): Observable<PosGetConfigResponse> {
+    return this.http.get<PosGetConfigResponse>(this._posUrl + '/configurations/' + eventId + '/' + id);
+  }
+
+  addProductToPosConfiguration(eventId: number, config: number, item: Item, row: number, col: number, bgColor: string, fgColor: string): Observable<ApiResult> {
     return this.http
-      .post<ApiResult>(this._posUrl + '/configurations/' + config + '/addProduct', {
+      .post<ApiResult>(this._posUrl + '/configurations/' + eventId + '/' + config + '/addProduct', {
         productId: item.id,
         row: row, col: col, color: bgColor, textColor: fgColor
       });
   }
 
-  removeProductFromPosConfiguration(config: number, item: Item): Observable<ApiResult> {
+  removeProductFromPosConfiguration(eventId: number, config: number, item: Item): Observable<ApiResult> {
     return this.http
-      .post<ApiResult>(this._posUrl + '/configurations/' + config + '/removeProduct', item.id.toString());
+      .post<ApiResult>(this._posUrl + '/configurations/' + eventId + '/' + config + '/removeProduct', item.id.toString());
   }
 
   placePosOrder(items: CheckedOutItem[]): Observable<PosOrderResponse> {

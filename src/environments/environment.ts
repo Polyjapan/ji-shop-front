@@ -8,8 +8,8 @@ export const environment = {
   apiurl: 'http://localhost:10000',
 
   auth: {
-    apiurl: 'http://localhost:9000',
-    clientId: 'first_app'
+    apiurl: 'https://auth.japan-impact.ch/',
+    clientId: '3lHGENIo0Kn0s1ynR2Q508E3ae000PLkIcgrNtKsUGs'
   },
 
   tokenWhitelist: ['localhost:9000', 'localhost:10000'],

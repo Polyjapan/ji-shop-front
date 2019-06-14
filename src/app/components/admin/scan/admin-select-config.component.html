@@ -1,4 +1,4 @@
-<h1>Choix de la configuration de scan à modifier</h1>
+<h2>Choix de la configuration de scan à modifier</h2>
 
 <ul *ngIf="configs">
   <li *ngFor="let config of configs"><a [routerLink]="[config.id]">{{config.name}}</a></li>

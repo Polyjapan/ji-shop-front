@@ -13,6 +13,7 @@ export class PosCallbackComponent implements OnInit {
   accepted = false;
   invalid = false;
   configId: number;
+  eventId: number;
 
   constructor(public backend: BackendService, private cart: CartService,
               private route: ActivatedRoute, private sumUp: SumupService) {
@@ -21,6 +22,7 @@ export class PosCallbackComponent implements OnInit {
   ngOnInit(): void {
     const params = this.route.snapshot.paramMap;
     this.configId = parseInt(params.get('configId'), 10) as number;
+    this.eventId = parseInt(params.get('eventId'), 10) as number;
 
     const queryParams = this.route.snapshot.queryParams;
     this.sumUp.paymentCallback(

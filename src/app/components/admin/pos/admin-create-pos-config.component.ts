@@ -3,7 +3,6 @@ import {BackendService} from '../../../services/backend.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as Errors from '../../../constants/errors';
 import {EventService} from '../event.service';
-import {ScanConfiguration} from '../../../types/scan_configuration';
 import {PosConfiguration} from '../../../types/pos_configuration';
 
 @Component({
@@ -15,13 +14,17 @@ export class AdminCreatePosConfigComponent implements OnInit {
   sending = false;
   loading = false;
   isNew = true;
+  event = undefined;
+  eventId = undefined;
 
-  constructor(private backend: BackendService, private router: Router, private route: ActivatedRoute, private eventService: EventService) {}
+  constructor(private backend: BackendService, private router: Router, private route: ActivatedRoute, private eventService: EventService) {
+  }
 
   submit() {
-    this.backend.createOrUpdatePosConfig(this.config).subscribe(
+    console.log(this.config);
+    this.backend.createOrUpdatePosConfig(this.eventId, this.config).subscribe(
       res => {
-        this.router.navigate(['admin', 'pos', res]);
+        this.router.navigate(['admin', 'events', this.eventId, 'pos', res]);
       },
       err => {
         const errors = Errors.replaceErrorsInResponse(err, undefined, new Map<string, string>([
@@ -37,20 +40,19 @@ export class AdminCreatePosConfigComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.route.parent) {
-      this.route.paramMap.subscribe(map => {
-        if (map.has('id')) {
-          const configId = map.get('id');
-          this.loading = true;
+    this.eventId = this.route.snapshot.parent.parent.paramMap.get('event');
+    this.route.paramMap.subscribe(map => {
+      if (map.has('id')) {
+        const configId = map.get('id');
+        this.loading = true;
 
-          this.backend.getPosConfiguration(Number(configId)).subscribe(c => {
-            this.config = c.config;
-            this.isNew = false;
-            this.loading = false;
-          });
-        }
-      });
-    }
+        this.backend.getPosConfiguration(this.eventId, Number(configId)).subscribe(c => {
+          this.config = c.config;
+          this.isNew = false;
+          this.loading = false;
+        });
+      }
+    });
 
     this.config = new PosConfiguration();
   }

@@ -22,6 +22,7 @@ export class PosComponent implements OnInit {
   config: PosConfiguration;
   loading = true;
   configId: number;
+  eventId: number;
 
   // Processing checkout
   checkoutPrice: number;
@@ -100,8 +101,9 @@ export class PosComponent implements OnInit {
     }
 
     this.configId = parseInt(params.get('configId'), 10) as number;
+    this.eventId = parseInt(params.get('eventId'), 10) as number;
 
-    this.backend.getPosConfiguration(this.configId).subscribe(data => {
+    this.backend.getPosConfiguration(this.eventId, this.configId).subscribe(data => {
       this.items = this.buildRows(data.items);
       this.config = data.config;
       this.loading = false;

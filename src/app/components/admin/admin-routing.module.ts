@@ -40,23 +40,6 @@ const routes: Routes = [
       {path: 'users/:id', component: AdminViewUserComponent, data: {tag: 'users'}},
       {path: 'orders/:id', component: AdminViewOrderComponent},
       {
-        path: 'scan', data: {tag: 'scan'},
-        children: [
-          {path: '', component: AdminSelectConfigComponent},
-          {path: 'create', component: AdminCreateScanningConfigComponent},
-          {path: ':id', component: AdminViewScanningConfigComponent},
-          {path: ':id/update', component: AdminCreateScanningConfigComponent},
-        ],
-      },
-      {
-        path: 'pos', data: {tag: 'pos'},
-        children: [
-          {path: '', component: AdminSelectPosConfigComponent},
-          {path: 'create', component: AdminCreatePosConfigComponent},
-          {path: ':id', component: AdminViewPosConfigComponent},
-          {path: ':id/update', component: AdminCreatePosConfigComponent},
-        ],
-      }, {
         path: 'events', data: {tag: 'events'},
         children: [
           {path: 'create', component: AdminCreateEventComponent},
@@ -94,6 +77,24 @@ const routes: Routes = [
                   {path: ':id', component: AdminViewOrderComponent, data: {name: 'Contenu de la commande'}},
                 ]
               },
+              {
+                path: 'scan', data: {tag: 'scan'},
+                children: [
+                  {path: '', component: AdminSelectConfigComponent},
+                  {path: 'create', component: AdminCreateScanningConfigComponent},
+                  {path: ':id', component: AdminViewScanningConfigComponent},
+                  {path: ':id/update', component: AdminCreateScanningConfigComponent},
+                ],
+              },
+              {
+                path: 'pos', data: {tag: 'pos'},
+                children: [
+                  {path: '', component: AdminSelectPosConfigComponent},
+                  {path: 'create', component: AdminCreatePosConfigComponent},
+                  {path: ':id', component: AdminViewPosConfigComponent},
+                  {path: ':id/update', component: AdminCreatePosConfigComponent},
+                ],
+              }
             ]
           }
         ]

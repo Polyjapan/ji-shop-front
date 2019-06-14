@@ -12,6 +12,7 @@ import {PosConfiguration} from '../../../types/pos_configuration';
 export class AdminViewPosItemComponent {
   @Input() item: Item;
   @Input() configId: number;
+  @Input() eventId: number;
   @Output() finish = new EventEmitter();
 
   col: number;
@@ -29,7 +30,7 @@ export class AdminViewPosItemComponent {
   }
 
   addProduct() {
-    this.backend.addProductToPosConfiguration(this.configId, this.item, this.line, this.col, this.bgColor, this.fgColor).subscribe(res => this.finish.emit());
+    this.backend.addProductToPosConfiguration(this.eventId, this.configId, this.item, this.line, this.col, this.bgColor, this.fgColor).subscribe(res => this.finish.emit());
   }
 
 }

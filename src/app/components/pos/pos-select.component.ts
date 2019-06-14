@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BackendService} from '../../services/backend.service';
-import {PosConfiguration} from '../../types/pos_configuration';
+import {PosConfiguration, PosConfigurationList} from '../../types/pos_configuration';
 
 @Component({
   selector: 'app-pos-select',
@@ -9,13 +9,13 @@ import {PosConfiguration} from '../../types/pos_configuration';
 export class PosSelectComponent implements OnInit {
   loading = true;
   error = false;
-  list: PosConfiguration[];
+  list: PosConfigurationList[];
 
   constructor(public backend: BackendService) {
   }
 
   ngOnInit(): void {
-    this.backend.getPosConfigurations().subscribe(data => {
+    this.backend.getAllPosConfigurations().subscribe(data => {
         this.list = data;
         this.loading = false;
       }, err => {

@@ -1,20 +1,18 @@
 <ng-container *ngIf="config">
   <div class="row">
     <div class="col-md-6">
-      <h1>Configuration de scan <i>{{config.name}}</i></h1>
+      <h2>Configuration de scan <i>{{config.name}}</i></h2>
     </div>
     <div class="col-md-6" style="text-align: right;">
-      <button class="btn btn-outline-danger" style="margin-left: 0.5rem;" (click)="delete()">Supprimer la
-        configuration
-      </button>
+      <a class="btn btn-outline-primary" style="margin-left: 0.5rem;" routerLink="..">Retour</a>
+      <button class="btn btn-outline-danger" style="margin-left: 0.5rem;" (click)="delete()">Supprimer</button>
+      <a class="btn btn-outline-warning" style="margin-left: 0.5rem;" routerLink="update">Modifier</a>
     </div>
   </div>
 
 
   <p>Goodies : {{config.acceptOrderTickets ? 'Acceptés' : 'Refusés'}}</p>
-  <p><a routerLink="update">Modifier la configuration</a> | <a routerLink="..">Retour</a></p>
 
-  <hr>
   <div class="row">
     <div class="col-md-6">
       <div class="card">
@@ -45,14 +43,12 @@
           <p>Cliquez sur un produit pour l'ajouter.</p>
 
           <ul>
-            <li *ngFor="let itemList of filteredAvailableItems"><b>{{itemList.event.name}}</b>
-              <ul>
-                <li *ngFor="let prod of itemList.items" (click)="addProduct(prod)">
-                  <b>{{prod.name}}</b> ({{prod.description}})
-                </li>
-              </ul>
+            <li *ngFor="let prod of filteredAvailableItems.items" (click)="addProduct(prod)">
+              <b>{{prod.name}}</b> ({{prod.description}})
             </li>
           </ul>
+
+          <i *ngIf="filteredAvailableItems.items.length === 0">Tous les items ont été ajoutés</i>
         </div>
       </div>
     </div>

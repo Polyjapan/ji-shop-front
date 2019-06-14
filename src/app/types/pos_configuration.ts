@@ -1,7 +1,10 @@
 import {PosConfigItem} from './items';
+import {Event} from './event';
+import {ScanConfiguration} from './scan_configuration';
 
 export class PosConfiguration {
   id: number;
+  eventId: number;
   name: string;
   acceptCards: boolean;
 }
@@ -10,6 +13,12 @@ export class PosGetConfigResponse {
   config: PosConfiguration;
   items: PosConfigItem[];
 }
+
+export class PosConfigurationList {
+  event: Event;
+  configs: PosConfiguration[];
+}
+
 
 export class PosOrderResponse {
   orderId: number;

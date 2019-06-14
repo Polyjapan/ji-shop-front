@@ -1,5 +1,5 @@
-<h1 *ngIf="!loading && isNew">Créer une configuration Point de Vente</h1>
-<h2 *ngIf="!isNew">Modification de la configuration de Point de Vente</h2>
+<h2 *ngIf="!loading && isNew">Créer une configuration caisse</h2>
+<h2 *ngIf="!isNew">Modification de la configuration de caisse</h2>
 <br>
 
 
@@ -17,6 +17,7 @@
     </label>
   </div>
 
+  <br>
 
   <button *ngIf="!isNew" type="submit" class="btn btn-primary" (click)="submit()" [disabled]="sending">Modifier</button>
   <button *ngIf="isNew" type="submit" class="btn btn-primary" (click)="submit()" [disabled]="sending">Créer</button>

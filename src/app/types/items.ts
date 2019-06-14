@@ -19,6 +19,7 @@ export class Item {
 
 export class ItemList {
   event: Event;
+  goodies?: boolean;
   items: Item[];
 }
 

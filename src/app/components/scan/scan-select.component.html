@@ -1,8 +1,6 @@
 <h1>Scan de billets</h1>
 <h2>Sélection de la configuration de scan</h2>
 <p>Référez vous à un responsable si vous avez un doute sur la configuration à utiliser.</p>
-<br>
-
 
 <div class="alert alert-info" role="alert" *ngIf="loading">
   <h2>Chargement des données...</h2>
@@ -14,8 +12,13 @@
 
 <div *ngIf="!loading && !error">
   <ul>
-    <li *ngFor="let config of list">
-      <a routerLink="{{config.id}}">{{config.name}}</a>
+    <li *ngFor="let elem of list">
+      <b>{{elem.event.name}} :</b>
+      <ul>
+        <li *ngFor="let config of elem.configs">
+          <a routerLink="{{config.id}}">{{config.name}}</a>
+        </li>
+      </ul>
     </li>
   </ul>
 </div>

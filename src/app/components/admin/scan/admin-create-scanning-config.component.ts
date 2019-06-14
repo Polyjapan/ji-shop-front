@@ -14,13 +14,15 @@ export class AdminCreateScanningConfigComponent implements OnInit {
   sending = false;
   loading = false;
   isNew = true;
+  event: number;
 
-  constructor(private backend: BackendService, private router: Router, private route: ActivatedRoute, private eventService: EventService) {}
+  constructor(private backend: BackendService, private router: Router, private route: ActivatedRoute, private eventService: EventService) {
+  }
 
   submit() {
-    this.backend.createOrUpdateConfig(this.config).subscribe(
+    this.backend.createOrUpdateConfig(this.event, this.config).subscribe(
       res => {
-        this.router.navigate(['admin', 'scan', res]);
+        this.router.navigate(['admin', 'events', this.event, 'scan', res]);
       },
       err => {
         const errors = Errors.replaceErrorsInResponse(err, undefined, new Map<string, string>([
@@ -36,20 +38,20 @@ export class AdminCreateScanningConfigComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.route.parent) {
-      this.route.paramMap.subscribe(map => {
-        if (map.has('id')) {
-          const configId = map.get('id');
-          this.loading = true;
+    this.event = Number(this.route.snapshot.parent.parent.paramMap.get('event'));
 
-          this.backend.getScanningConfiguration(Number(configId)).subscribe(c => {
-            this.config = c;
-            this.isNew = false;
-            this.loading = false;
-          });
-        }
-      });
-    }
+    this.route.paramMap.subscribe(map => {
+      if (map.has('id')) {
+        const configId = map.get('id');
+        this.loading = true;
+
+        this.backend.getScanningConfiguration(this.event, Number(configId)).subscribe(c => {
+          this.config = c;
+          this.isNew = false;
+          this.loading = false;
+        });
+      }
+    });
 
     this.config = new ScanConfiguration();
   }

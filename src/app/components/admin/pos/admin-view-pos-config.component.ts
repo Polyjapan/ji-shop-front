@@ -16,6 +16,7 @@ export class AdminViewPosConfigComponent implements OnInit {
   private addedItems: number[];
   private availableItems: ItemList[];
   filteredAvailableItems: ItemList[];
+  event: number = undefined;
 
   private events: Map<number, string> = new Map();
 
@@ -41,7 +42,7 @@ export class AdminViewPosConfigComponent implements OnInit {
   }
 
   reload() {
-    this.backend.getPosConfiguration(this.id).subscribe(res => {
+    this.backend.getPosConfiguration(this.event, this.id).subscribe(res => {
       this.config = res.config;
       this.items = res.items;
 
@@ -51,6 +52,8 @@ export class AdminViewPosConfigComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.event = Number(this.route.snapshot.parent.parent.paramMap.get('event'));
+
     this.route.paramMap.subscribe(map => {
       if (!map.has('id') || !map.get('id')) {
         return;
@@ -60,7 +63,7 @@ export class AdminViewPosConfigComponent implements OnInit {
 
       this.reload();
       this.backend.getInvisibleItems().subscribe(res => {
-        this.availableItems = res.tickets.concat(res.goodies);
+        this.availableItems = res.tickets.concat(res.goodies).filter(item => item.event.id === this.event);
         this.filterAvailableItems();
       });
     });
@@ -81,20 +84,20 @@ export class AdminViewPosConfigComponent implements OnInit {
 
 
     this.filteredAvailableItems = this.availableItems.map(list => {
-      return {event: list.event, items: list.items.filter(it => this.addedItems.indexOf(it.id) === -1)};
+      return {event: list.event, items: list.items.filter(it => this.addedItems.indexOf(it.id) === -1), goodies: !list.items.some(e => e.isTicket)};
     }).filter(list => list.items.length > 0);
   }
 
   removeProduct(product: Item) {
-    this.backend.removeProductFromPosConfiguration(this.id, product).subscribe(res => this.reload());
+    this.backend.removeProductFromPosConfiguration(this.event, this.id, product).subscribe(res => this.reload());
   }
 
   delete(): void {
     const conf = confirm('Voulez vous vraiment supprimer cette configuration ? Elle sera définitivement perdue.');
 
     if (conf) {
-      this.backend.deletePosConfig(this.id).subscribe(res => {
-        this.router.navigate(['admin', 'pos']);
+      this.backend.deletePosConfig(this.event, this.id).subscribe(res => {
+        this.router.navigate(['admin', 'events', this.event, 'pos']);
       }, err => {
         alert('Une erreur s\'est produite.');
         this.reload();
