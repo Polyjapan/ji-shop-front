@@ -84,7 +84,6 @@ export class AdminEventParentComponent implements OnInit {
       this.eventService.clear();
 
       this.eventService.get(id).subscribe(ev => {
-        console.log(ev);
         this.event = ev;
       });
     });

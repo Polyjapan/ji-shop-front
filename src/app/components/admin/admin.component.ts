@@ -31,7 +31,6 @@ export class AdminComponent {
           this.event = this.eventService.getNow(this.eventId);
           this.eventService.get(this.eventId).subscribe(e => this.event = e);
 
-          console.log(this.eventId + ' - ' + this.event);
           return;
         }
       }

@@ -49,7 +49,6 @@ export class SidebarMenuComponent implements OnInit {
     }
 
     this.firstChild = path.routeConfig.path;
-    console.log('firstChild: "' + this.firstChild + '"');
     this.childChange.emit(path);
   }
 
