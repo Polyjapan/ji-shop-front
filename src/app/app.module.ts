@@ -10,7 +10,7 @@ import {FormsModule} from '@angular/forms';
 import {HomeModule} from './components/home/home.module';
 import {AuthenticateComponent} from './components/authenticate/authenticate.component';
 import {CheckoutComponent} from './components/checkout/checkout.component';
-import {JwtModule} from '@auth0/angular-jwt';
+import {JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import {environment} from '../environments/environment';
 import {CallbackComponent} from './components/checkout/callback.component';
 import {EmailcheckComponent} from './components/authenticate/emailcheck.component';
@@ -60,13 +60,6 @@ import {FirstloginComponent} from './components/authenticate/firstlogin.componen
     PosModule,
     OrderContentModule,
     RecaptchaModule.forRoot(),
-
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: environment.tokenWhitelist
-      }
-    }),
 
     AppRoutingModule
   ],
