@@ -17,7 +17,7 @@
   </div>
 
   <div class="form-check">
-    <input class="form-check-input" type="checkbox" name="eventPublic" id="eventPublic" [(ngModel)]="event.visible">
+    <input class="form-check-input" type="checkbox" name="eventPublic" id="eventPublic" [(ngModel)]="event.visible" [disabled]="event.archived">
     <label class="form-check-label" for="eventPublic">
       Visible au public
     </label>

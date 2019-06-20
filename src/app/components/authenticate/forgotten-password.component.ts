@@ -6,6 +6,7 @@ import * as Errors from '../../constants/errors';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {AuthApiService} from '../../services/authapi.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-forgotten-password',
@@ -15,6 +16,7 @@ export class ForgottenPasswordComponent implements OnInit {
   errors: string[];
   sent = false;
   sending = false;
+  siteKey: string = environment.reCaptcha.siteKey;
 
   constructor(private authApi: AuthApiService, private router: Router, private auth: AuthService) {
   }

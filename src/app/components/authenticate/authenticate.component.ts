@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import * as Errors from '../../constants/errors';
 import {ErrorCodes} from '../../constants/errors';
 import {AuthApiError, AuthApiService, LoginErrorCodes} from '../../services/authapi.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-authenticate',
@@ -18,6 +19,7 @@ export class AuthenticateComponent implements OnInit {
   registerSent = false;
 
   registerOk = false;
+  siteKey: string = environment.reCaptcha.siteKey;
 
   constructor(private backend: BackendService, private authApi: AuthApiService, private auth: AuthService, private router: Router) {
 

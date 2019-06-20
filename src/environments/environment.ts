@@ -18,5 +18,8 @@ export const environment = {
   // tokenWhitelist: ['shop.japan-impact.ch'],
   sumUpKey: 'a-wrong-key',
   sumUpApp: 'japan_impact',
-  baseUrl: 'http://localhost:9000'
+  baseUrl: 'http://localhost:9000',
+  reCaptcha: {
+    siteKey: '6LclcWoUAAAAAAcrg1eRSxLCIIX5-k3FYkZGoyAV'
+  }
 };
