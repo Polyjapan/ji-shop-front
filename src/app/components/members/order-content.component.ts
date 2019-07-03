@@ -42,6 +42,21 @@ export class OrderContentComponent {
     });
   }
 
+  downloadInvoice() {
+    this.backend.getInvoice(this.order.order.id).subscribe(blob => {
+      console.log(blob);
+
+      if (blob) {
+        FileSaver.saveAs(blob, 'invoice-' + this.order.order.id + '.pdf');
+      }
+    }, error => {
+      const errors = Errors.replaceErrorsInResponse(error, new Map<string, string>(
+        [[ErrorCodes.NOT_FOUND, 'Cette facture n\'existe pas ou ne peut pas être consultée par vous.']]));
+
+      alert('Impossible de télécharger la facture : \n' + errors.join('\n'));
+    });
+  }
+
   offTax(paidPrice: number) {
     return (paidPrice / 1.077).toFixed(2);
   }

@@ -177,6 +177,10 @@ export class BackendService {
     return this.http.get(this._ordersUrl + '/download/' + barcode + '.pdf', {responseType: 'blob'});
   }
 
+  getInvoice(order: number): Observable<Blob> {
+    return this.http.get(this._ordersUrl + '/invoice/' + order + '.pdf', {responseType: 'blob'});
+  }
+
   getOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(this._ordersUrl + '/view');
   }

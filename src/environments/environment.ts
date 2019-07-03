@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiurl: 'http://localhost:10000',
+  apiurl: 'http://localhost:9000',
 
   auth: {
     apiurl: 'https://auth.japan-impact.ch/',

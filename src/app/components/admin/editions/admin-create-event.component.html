@@ -16,6 +16,11 @@
     <input type="text" class="form-control" id="eventPlace" name="eventPlace" placeholder="EPFL, Lausanne" [(ngModel)]="event.location" required>
   </div>
 
+  <div class="form-group">
+    <label for="eventImage">Image pour les billets (max 150ko, 627px de large)</label>
+    <input type="text" class="form-control" id="eventImage" name="eventImage" placeholder="https://mon-image" [(ngModel)]="event.ticketsImage">
+  </div>
+
   <div class="form-check">
     <input class="form-check-input" type="checkbox" name="eventPublic" id="eventPublic" [(ngModel)]="event.visible" [disabled]="event.archived">
     <label class="form-check-label" for="eventPublic">
