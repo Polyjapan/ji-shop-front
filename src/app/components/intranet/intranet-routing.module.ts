@@ -74,8 +74,8 @@ const routes: Routes = [
          canActivateChild: [PermissionAuthGuard],
          children: [
            {path: '', component: AdminHomeComponent},
-           {path: 'create', component: AdminCreateEventComponent},
-           {path: 'clone/:cloneId', component: AdminCreateEventComponent},
+           {path: 'create', component: AdminUploadsComponent},
+           {path: 'clone/:cloneId', component: AdminUploadsComponent},
            {path: 'users', component: AdminListUsersComponent},
            {path: 'users/:id', component: AdminViewUserComponent},
            {path: 'orders/:id', component: AdminViewTicketComponent},
@@ -104,7 +104,7 @@ const routes: Routes = [
              children: [
                {path: '', component: AdminEventSidebarComponent, data: {name: 'Menu principal'}},
                {path: 'stats', component: AdminShowStatsComponent, data: {name: 'Statistiques'}},
-               {path: 'update', component: AdminCreateEventComponent, data: {name: 'Edition'}},
+               {path: 'update', component: AdminUploadsComponent, data: {name: 'Edition'}},
                {
                  path: 'import',
                  component: AdminUploadImportComponent,

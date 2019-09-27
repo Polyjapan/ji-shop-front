@@ -6,7 +6,7 @@ import {Item, ItemList, ItemsResponse} from '../types/items';
 import {CheckedOutItem, FullOrder, FullOrderData, ImportedItemData, Order, OrderLog, Source} from '../types/order';
 import {LoginResponse} from './auth.service';
 import {ApiResult} from '../types/api_result';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ScanResult} from '../types/scan_result';
 import {ScanConfiguration, ScanConfigurationList, ScanConfigurationWithItems} from '../types/scan_configuration';
@@ -15,6 +15,7 @@ import {PosConfiguration, PosConfigurationList, PosGetConfigResponse, PosOrderRe
 import {StatsReturn} from '../types/stats';
 import {Client, ClientAndPermissions} from '../types/client';
 import {TicketData} from '../types/ticket_data';
+import {Image} from '../types/upload';
 
 
 @Injectable()
@@ -322,6 +323,14 @@ export class BackendService {
 
   removePermission(client: number, permission: string): Observable<ApiResult> {
     return this.http.post<ApiResult>(this._adminUrl + '/users/' + client + '/permissions/remove', permission);
+  }
+
+  getUploads(category: string): Observable<Image[]> {
+    return this.http.get<Image[]>(this._adminUrl + '/images/' + category);
+  }
+
+  uploadFile(category: string, file: File): Observable<HttpEvent<Image>> {
+    return this.http.post<Image>(this._adminUrl + '/images/' + category, file, {observe: 'events', reportProgress: true});
   }
 }
 

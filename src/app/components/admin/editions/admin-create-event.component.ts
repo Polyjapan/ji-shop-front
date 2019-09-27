@@ -5,6 +5,9 @@ import * as Errors from '../../../constants/errors';
 import {Event} from '../../../types/event';
 import {EventService} from '../event.service';
 import {Observable} from 'rxjs/Rx';
+import {HttpEvent, HttpEventType, HttpResponse, HttpSentEvent} from '@angular/common/http';
+import {HttpUploadProgressEvent} from '@angular/common/http/src/response';
+import {Image} from '../../../types/upload';
 
 @Component({
   selector: 'app-admin-create-event',
@@ -17,7 +20,8 @@ export class AdminCreateEventComponent implements OnInit {
   isNew = true;
   cloneId: number;
 
-  constructor(private backend: BackendService, private router: Router, private route: ActivatedRoute, private eventService: EventService) {}
+  constructor(private backend: BackendService, private router: Router, private route: ActivatedRoute, private eventService: EventService) {
+  }
 
   submit() {
     let obs: Observable<number>;
@@ -76,4 +80,5 @@ export class AdminCreateEventComponent implements OnInit {
 
     this.event = new Event();
   }
+
 }

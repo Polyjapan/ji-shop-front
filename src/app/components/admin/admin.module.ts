@@ -32,6 +32,7 @@ import {SidebarModule} from '../sidebar/sidebar.module';
 import {EventListService} from './event-list.service';
 import {AdminDownloadExportComponent} from './orders/admin-download-export.component';
 import {AdminViewTicketComponent} from './ticketTracking/admin-view-ticket.component';
+import {AdminUploadsComponent} from './uploads/admin-uploads.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {AdminViewTicketComponent} from './ticketTracking/admin-view-ticket.compo
     AdminViewPosConfigComponent,
     AdminViewPosItemComponent,
     AdminDownloadExportComponent,
-    AdminViewTicketComponent
+    AdminViewTicketComponent,
+    AdminUploadsComponent,
   ],
   imports: [
     BrowserModule,

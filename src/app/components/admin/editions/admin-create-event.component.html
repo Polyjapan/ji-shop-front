@@ -21,6 +21,8 @@
     <input type="text" class="form-control" id="eventImage" name="eventImage" placeholder="https://mon-image" [(ngModel)]="event.ticketsImage">
   </div>
 
+  <app-uploads category="tests" (selectUrl)="event.ticketsImage = $event" [selected]="event.ticketsImage"></app-uploads>
+
   <div class="form-check">
     <input class="form-check-input" type="checkbox" name="eventPublic" id="eventPublic" [(ngModel)]="event.visible" [disabled]="event.archived">
     <label class="form-check-label" for="eventPublic">
