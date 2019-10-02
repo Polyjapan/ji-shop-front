@@ -131,13 +131,13 @@ export class BackendService {
     return this.http.get<TicketData>(this._adminUrl + '/tickets/' + ticket);
   }
 
-  getStats(event: number, start?: number, end?: number): Observable<StatsReturn[]> {
+  getStats(event: number, start?: Date, end?: Date): Observable<StatsReturn[]> {
     let params = new HttpParams();
     if (start) {
-      params = params.append('start', start.toString(10));
+      params = params.append('start', start.getTime().toString(10));
     }
     if (end) {
-      params = params.append('end', end.toString(10));
+      params = params.append('end', end.getTime().toString(10));
     }
     return this.http.get<StatsReturn[]>(this._adminUrl + '/stats/' + event, {params: params});
   }

@@ -1,4 +1,27 @@
 <h2>Statistiques</h2>
+<h3 *ngIf="effectiveEnd || effectiveStart">Filtré : de
+  {{ effectiveStart ? effectiveStart.toString() : '&infin;' }} à
+  {{ effectiveEnd ? effectiveEnd.toString() : '&infin;' }}
+</h3>
+
+<p>Filtrer par date (et heure) de début et/ou de fin : <br>
+  <i>Merci de respecter le format <b>JJ/MM/AAAA</b>, <b>JJ/MM/AAAA HH:MM</b> ou <b>JJ/MM/AAAA HH:MM:SS</b></i></p>
+
+<form (ngSubmit)="updateFilter()" target="_self">
+  <div class="form-row">
+    <div class="col">
+      <input type="text" name="startDate" class="form-control" placeholder="De..." [(ngModel)]="startDate">
+    </div>
+    <div class="col">
+      <input type="text" name="endDate" class="form-control" placeholder="A..." [(ngModel)]="endDate">
+    </div>
+    <div class="col-2">
+      <button type="submit" class="btn btn-success">Confirmer</button>
+    </div>
+  </div>
+</form>
+
+<br>
 
 <table *ngIf="stats" class="table table-striped">
   <tr>
@@ -16,7 +39,8 @@
     <td>{{line.product.name}}</td>
     <td>{{line.product.price}}</td>
     <td *ngIf="shouldDisplay('WEB')">{{priceStats(line.salesData.WEB)}}</td>
-    <td *ngIf="shouldDisplay('ONSITE')">{{priceStats(line.salesData.ONSITE)}}<br><i>{{paymentMethodSalesData(line.salesData.ONSITE)}}</i></td>
+    <td *ngIf="shouldDisplay('ONSITE')">{{priceStats(line.salesData.ONSITE)}}
+      <br><i>{{paymentMethodSalesData(line.salesData.ONSITE)}}</i></td>
     <td *ngIf="shouldDisplay('GIFT')">{{priceStats(line.salesData.GIFT)}}</td>
     <td *ngIf="shouldDisplay('RESELLER')">{{priceStats(line.salesData.RESELLER)}}</td>
     <td *ngIf="shouldDisplay('PHYSICAL')">{{priceStats(line.salesData.PHYSICAL)}}</td>
@@ -26,7 +50,8 @@
   <tr>
     <td colspan="2"><b>Total</b></td>
     <td *ngIf="shouldDisplay('WEB')">{{priceTotalForSource('WEB')}}</td>
-    <td *ngIf="shouldDisplay('ONSITE')">{{priceTotalForSource('ONSITE')}}<br><i>{{paymentMethodData(cashAmount, cardAmount)}}</i></td>
+    <td *ngIf="shouldDisplay('ONSITE')">{{priceTotalForSource('ONSITE')}}
+      <br><i>{{paymentMethodData(cashAmount, cardAmount)}}</i></td>
     <td *ngIf="shouldDisplay('GIFT')">{{priceTotalForSource('GIFT')}}</td>
     <td *ngIf="shouldDisplay('RESELLER')">{{priceTotalForSource('RESELLER')}}</td>
     <td *ngIf="shouldDisplay('PHYSICAL')">{{priceTotalForSource('PHYSICAL')}}</td>
