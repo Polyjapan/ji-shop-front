@@ -34,6 +34,8 @@ export class AuthenticateComponent implements OnInit {
 
     const data = form.value;
     data['captcha'] = grecaptcha.getResponse();
+    data['firstName'] = data['firstname'];
+    data['lastName'] = data['lastname'];
 
     this.authApi.register(data).subscribe(apiSuccess => {
       data['password'] = undefined;
