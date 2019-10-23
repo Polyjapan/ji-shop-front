@@ -33,11 +33,11 @@ export class AdminShowStatsComponent implements OnInit {
   }
 
   get ticketStats() {
-    return this.stats.filter((value) => value.product.isTicket);
+    return this.stats.filter((value) => value.product.isTicket).sort((a, b) => a.product.name.localeCompare(b.product.name));
   }
 
   get goodiesStats() {
-    return this.stats.filter((value) => !value.product.isTicket);
+    return this.stats.filter((value) => !value.product.isTicket).sort((a, b) => a.product.name.localeCompare(b.product.name));
   }
 
   ngOnInit(): void {
