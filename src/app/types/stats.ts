@@ -6,6 +6,11 @@ export class StatsReturn {
   salesData: Map<Source, SalesData>;
 }
 
+export class EntranceStats {
+  sold: number[][];
+  scanned: number[][];
+}
+
 export class SalesData {
   amountSold: number;
   moneyGenerated: number;

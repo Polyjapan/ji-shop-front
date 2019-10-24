@@ -12,7 +12,7 @@ import {ScanResult} from '../types/scan_result';
 import {ScanConfiguration, ScanConfigurationList, ScanConfigurationWithItems} from '../types/scan_configuration';
 import {Event} from '../types/event';
 import {PosConfiguration, PosConfigurationList, PosGetConfigResponse, PosOrderResponse, PosPaymentLog} from '../types/pos_configuration';
-import {StatsReturn} from '../types/stats';
+import {EntranceStats, StatsReturn} from '../types/stats';
 import {Client, ClientAndPermissions} from '../types/client';
 import {TicketData} from '../types/ticket_data';
 import {Image} from '../types/upload';
@@ -140,6 +140,12 @@ export class BackendService {
       params = params.append('end', end.getTime().toString(10));
     }
     return this.http.get<StatsReturn[]>(this._adminUrl + '/stats/' + event, {params: params});
+  }
+
+  getEntrances(event: number, groupBy: number): Observable<EntranceStats> {
+    const params = new HttpParams().append('groupBy', groupBy.toString(10));
+
+    return this.http.get<EntranceStats>(this._adminUrl + '/stats/' + event + '/entrances', {params: params});
   }
 
   getOrderStats(event: number, start?: number, end?: number, source?: Source): Observable<string> {

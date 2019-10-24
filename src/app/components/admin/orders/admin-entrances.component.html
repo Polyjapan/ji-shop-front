@@ -1,0 +1,50 @@
+<h2>Nombre d'entrées</h2>
+
+<p *ngIf="!stats" class="text-muted"><i>Récupération des statistiques en cours...</i></p>
+
+<form (ngSubmit)="reload()" target="_self">
+  <div class="form-row">
+    <label class="col-sm-2 col-form-label">Grouper par</label>
+
+    <div class="col">
+      <div class="input-group mb-2">
+        <input type="text" name="groupBy" class="form-control" [(ngModel)]="groupBy">
+        <div class="input-group-append">
+          <div class="input-group-text">secondes</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <button type="submit" class="btn btn-success">Recharger</button>
+    </div>
+  </div>
+</form>
+
+<ng-container *ngIf="stats">
+
+  <ng-container *ngFor="let day of days">
+    <hr>
+
+    <highcharts-chart *ngIf="stats"
+                      [Highcharts]="Highcharts"
+
+                      [constructorType]="'chart'"
+                      [options]="series(day)"
+                      [runOutsideAngular]="true"
+                      style="width: 50%; height: 400px; display: inline-block;"
+    >
+    </highcharts-chart>
+
+    <highcharts-chart *ngIf="stats"
+                      [Highcharts]="Highcharts"
+
+                      [constructorType]="'chart'"
+                      [options]="seriesArea(day)"
+                      [runOutsideAngular]="true"
+                      style="width: 50%; height: 400px; display: inline-block;"
+    >
+    </highcharts-chart>
+  </ng-container>
+
+</ng-container>

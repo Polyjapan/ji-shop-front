@@ -33,6 +33,8 @@ import {EventListService} from './event-list.service';
 import {AdminDownloadExportComponent} from './orders/admin-download-export.component';
 import {AdminViewTicketComponent} from './ticketTracking/admin-view-ticket.component';
 import {AdminUploadsComponent} from './uploads/admin-uploads.component';
+import {AdminEntrancesComponent} from './orders/admin-entrances.component';
+import {HighchartsChartModule} from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,7 @@ import {AdminUploadsComponent} from './uploads/admin-uploads.component';
     AdminDownloadExportComponent,
     AdminViewTicketComponent,
     AdminUploadsComponent,
+    AdminEntrancesComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,8 @@ import {AdminUploadsComponent} from './uploads/admin-uploads.component';
     FormsModule,
     AdminRoutingModule,
     OrderContentModule,
-    SidebarModule
+    SidebarModule,
+    HighchartsChartModule
   ],
   providers: [ EventService, EventListService ]
 })

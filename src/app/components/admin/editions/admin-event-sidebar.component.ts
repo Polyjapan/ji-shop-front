@@ -26,6 +26,7 @@ export class AdminEventSidebarComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private eventService: EventService) {
     this.menu.push(new MenuItem('stats', 'Statistiques', 'chart-bar'));
+    this.menu.push(new MenuItem('entrances', 'Entrées', 'chart-bar'));
     this.menu.push(new MenuItem('update', 'Modifier l\'événement', 'edit'));
     this.menu.push(new MenuItem('products', 'Produits en vente', 'shopping-cart'));
     this.menu.push(new MenuItem('orders', 'Listing de commandes', 'receipt'));

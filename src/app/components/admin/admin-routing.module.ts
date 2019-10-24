@@ -23,6 +23,7 @@ import {AdminCreatePosConfigComponent} from './pos/admin-create-pos-config.compo
 import {AdminViewPosConfigComponent} from './pos/admin-view-pos-config.component';
 import {AdminDownloadExportComponent} from './orders/admin-download-export.component';
 import {AdminViewTicketComponent} from './ticketTracking/admin-view-ticket.component';
+import {AdminEntrancesComponent} from './orders/admin-entrances.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,7 @@ const routes: Routes = [
             children: [
               {path: '', redirectTo: 'stats', pathMatch: 'full'},
               {path: 'stats', component: AdminShowStatsComponent, data: {name: 'Statistiques'}},
+              {path: 'entrances', component: AdminEntrancesComponent, data: {name: 'Statistiques'}},
               {path: 'update', component: AdminCreateEventComponent, data: {name: 'Edition'}},
               {
                 path: 'import',
