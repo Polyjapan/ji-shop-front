@@ -122,6 +122,7 @@ export class AdminEntrancesComponent implements OnInit {
 
   reload() {
     this.stats = undefined;
+    this.days = [];
 
     this.backend.getEntrances(this.id, this.groupBy).subscribe(stats => {
       this.cumulative = new EntranceStats();
