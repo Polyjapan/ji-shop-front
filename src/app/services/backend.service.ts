@@ -148,6 +148,12 @@ export class BackendService {
     return this.http.get<EntranceStats>(this._adminUrl + '/stats/' + event + '/entrances', {params: params});
   }
 
+  getSales(event: number, groupBy: number): Observable<Map<Source, number[][]>> {
+    const params = new HttpParams().append('groupBy', groupBy.toString(10));
+
+    return this.http.get<Map<Source, number[][]>>(this._adminUrl + '/stats/' + event + '/sales', {params: params});
+  }
+
   getOrderStats(event: number, start?: number, end?: number, source?: Source): Observable<string> {
     let params = new HttpParams();
     if (start) {

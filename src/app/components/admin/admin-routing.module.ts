@@ -52,7 +52,7 @@ const routes: Routes = [
             children: [
               {path: '', redirectTo: 'stats', pathMatch: 'full'},
               {path: 'stats', component: AdminShowStatsComponent, data: {name: 'Statistiques'}},
-              {path: 'entrances', component: AdminEntrancesComponent, data: {name: 'Statistiques'}},
+              {path: 'graphs', component: AdminEntrancesComponent, data: {name: 'Statistiques'}},
               {path: 'update', component: AdminCreateEventComponent, data: {name: 'Edition'}},
               {
                 path: 'import',

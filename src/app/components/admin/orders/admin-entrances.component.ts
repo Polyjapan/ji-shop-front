@@ -50,6 +50,8 @@ export class AdminEntrancesComponent implements OnInit {
 
       plotOptions: {
         series: {
+          connectNulls: true,
+          pointPlacement: 'between',
           stacking: 'normal',
           lineColor: '#666666',
           lineWidth: 1,

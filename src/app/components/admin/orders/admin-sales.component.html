@@ -1,4 +1,4 @@
-<h2>Nombre d'entrées</h2>
+<h2>Historique des ventes</h2>
 
 <p *ngIf="!stats" class="text-muted"><i>Récupération des statistiques en cours...</i></p>
 
@@ -10,7 +10,7 @@
       <div class="input-group mb-2">
         <input type="text" name="groupBy" class="form-control" [(ngModel)]="groupBy">
         <div class="input-group-append">
-          <div class="input-group-text">secondes</div>
+          <div class="input-group-text">heures</div>
         </div>
       </div>
     </div>
@@ -22,15 +22,11 @@
 </form>
 
 <ng-container *ngIf="stats">
-
-  <ng-container *ngFor="let day of days">
-    <hr>
-
     <highcharts-chart *ngIf="stats"
                       [Highcharts]="Highcharts"
 
                       [constructorType]="'chart'"
-                      [options]="series(day)"
+                      [options]="series"
                       [runOutsideAngular]="true"
                       style="width: 50%; height: 400px; display: inline-block;"
     >
@@ -40,14 +36,9 @@
                       [Highcharts]="Highcharts"
 
                       [constructorType]="'chart'"
-                      [options]="seriesArea(day)"
+                      [options]="seriesArea"
                       [runOutsideAngular]="true"
                       style="width: 50%; height: 400px; display: inline-block;"
     >
     </highcharts-chart>
-  </ng-container>
-
 </ng-container>
-
-<hr>
-<app-admin-sales></app-admin-sales>

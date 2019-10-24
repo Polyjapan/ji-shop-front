@@ -37,6 +37,30 @@ export enum Source {
   Web = 'WEB', OnSite = 'ONSITE', Reseller = 'RESELLER', Gift = 'GIFT', Physical = 'PHYSICAL'
 }
 
+export const Sources = [Source.Web, Source.OnSite, Source.Reseller, Source.Gift, Source.Physical];
+
+export function sourceToHuman(s: Source) {
+  switch (s) {
+    case Source.Web:
+      return 'En ligne';
+    case Source.OnSite:
+      return 'Sur place';
+    case Source.Reseller:
+      return 'Revendeur';
+    case Source.Gift:
+      return 'Cadeau';
+    case Source.Physical:
+      return 'Physique';
+    default:
+      return '???'
+  }
+}
+
+export function sourceFromString(s: string) {
+  const filtered = Sources.filter(src => s === src);
+  return filtered.length > 0 ? filtered[0] : undefined;
+}
+
 export class CheckedOutItem {
   itemId: number;
   itemAmount: number;

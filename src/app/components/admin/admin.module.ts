@@ -35,6 +35,7 @@ import {AdminViewTicketComponent} from './ticketTracking/admin-view-ticket.compo
 import {AdminUploadsComponent} from './uploads/admin-uploads.component';
 import {AdminEntrancesComponent} from './orders/admin-entrances.component';
 import {HighchartsChartModule} from 'highcharts-angular';
+import {AdminSalesComponent} from './orders/admin-sales.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import {HighchartsChartModule} from 'highcharts-angular';
     AdminViewTicketComponent,
     AdminUploadsComponent,
     AdminEntrancesComponent,
+    AdminSalesComponent
   ],
   imports: [
     BrowserModule,
