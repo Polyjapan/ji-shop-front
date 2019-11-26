@@ -27,7 +27,7 @@ export class AuthService {
 
   login(result: LoginResponse, activeRedirect: boolean = true): string {
     if (result.requireInfo) {
-      this.requestMoreInfo(result.idToken);
+      this.requestMoreInfo(result.token);
       return 'firstLogin';
     }
 
@@ -187,6 +187,7 @@ export class AuthService {
 
 export class LoginResponse extends ApiResult {
   idToken?: string;
+  token?: string; // for partial login
   refreshToken?: string;
   requireInfo: boolean;
 }
