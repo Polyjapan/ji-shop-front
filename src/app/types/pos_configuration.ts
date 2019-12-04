@@ -7,6 +7,7 @@ export class PosConfiguration {
   eventId: number;
   name: string;
   acceptCards: boolean;
+  acceptCamipro: boolean;
 }
 
 export class PosGetConfigResponse {
@@ -26,7 +27,7 @@ export class PosOrderResponse {
 }
 
 export enum PaymentMethod {
-  Cash = 'CASH', Card = 'CARD'
+  Cash = 'CASH', Card = 'CARD', Camipro = 'CAMIPRO'
 }
 
 export class PosPaymentLog {

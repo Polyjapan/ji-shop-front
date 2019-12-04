@@ -17,6 +17,13 @@
     </label>
   </div>
 
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="acceptCamipro" id="acceptCamipro" [(ngModel)]="config.acceptCamipro">
+    <label class="form-check-label" for="acceptCamipro">
+      Accepte les cartes camipro
+    </label>
+  </div>
+
   <br>
 
   <button *ngIf="!isNew" type="submit" class="btn btn-primary" (click)="submit()" [disabled]="sending">Modifier</button>

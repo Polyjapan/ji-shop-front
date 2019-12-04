@@ -28,9 +28,30 @@
 
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark btn-lg" (click)="payByCash(cashPaymentStart, checkoutError )">Cash</button>
-    <button *ngIf="config.acceptCards" type="button" class="btn btn-outline-dark btn-lg" (click)="payByCard(cardPaymentStart)">Carte</button>
+    <button *ngIf="config.acceptCards" type="button" class="btn btn-outline-dark btn-lg" (click)="payByCard(cardPaymentStart, checkoutError)">Carte</button>
+    <button *ngIf="config.acceptCamipro" type="button" class="btn btn-outline-dark btn-lg" (click)="payCamipro(camiproPaymentCard, checkoutError)">Camipro</button>
   </div>
 </ng-template>
+
+<ng-template #camiproPaymentCard let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" style="float: left; margin: -1rem -1rem -1rem;" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">Paiement Camipro</h4>
+  </div>
+  <div class="modal-body">
+    <h2>Montant total : <b>{{checkoutPrice}} .-</b></h2>
+
+    <p>Saisissez le montant sur le terminal Camipro et procédez au paiement.</p>
+    <b>Ne confirmez le paiement qu'une fois que le paiement a fonctionné sur le terminal Camipro.</b>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-success btn-lg" (click)="paymentFinished(paymentOkModal, PaymentMethod.Camipro)">Paiement Validé</button>
+  </div>
+</ng-template>
+
 
 <ng-template #cashPaymentStart let-modal>
   <div class="modal-header">
@@ -63,11 +84,10 @@
   </div>
 </ng-template>
 
-
 <ng-template #cardPaymentStart let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Paiement par carte</h4>
-    <button type="button" class="close" aria-label="Close" (click)="cancelCardPayment()">
+    <button type="button" class="close" aria-label="Close" (click)="cancelCardPayment(undefined)">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -178,6 +198,7 @@
       <app-cart>
         <button type="button" class="btn btn-success btn-lg" style="min-width: 150px;" (click)="payByCash(cashPaymentStart, checkoutError)">Cash</button>
         <button *ngIf="config.acceptCards" type="button" class="btn btn-outline-dark btn-lg" style="float: right;" (click)="payByCard(cardPaymentStart, checkoutError)">Carte</button>
+        <button *ngIf="config.acceptCamipro" type="button" class="btn btn-outline-dark btn-lg" style="float: right;" (click)="payCamipro(camiproPaymentCard, checkoutError)">Camipro</button>
       </app-cart>
 
 

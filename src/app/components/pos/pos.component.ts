@@ -20,6 +20,7 @@ import {PaymentMethod, PosConfiguration} from '../../types/pos_configuration';
 export class PosComponent implements OnInit {
   items: PosConfigItem[][];
   config: PosConfiguration;
+  PaymentMethod = PaymentMethod;
   loading = true;
   configId: number;
   eventId: number;
@@ -41,47 +42,6 @@ export class PosComponent implements OnInit {
     return this.givenAmount - this.checkoutPrice;
   }
 
-  private resetComponent(): void {
-    this.cart.clear();
-
-    this.checkoutPrice = undefined;
-    this.givenAmount = undefined;
-    this.checkoutOrderId = undefined;
-    this.checkoutErrors = undefined;
-  }
-
-  private buildRows(itemsArray: PosConfigItem[]): PosConfigItem[][] {
-    let maxRow = 0;
-    let maxCol = 0;
-
-    for (const item of itemsArray) {
-      if (item.row > maxRow) {
-        maxRow = item.row;
-      }
-      if (item.col > maxCol) {
-        maxCol = item.col;
-      }
-    }
-
-    const items: PosConfigItem[][] = [];
-    for (let row = 0; row <= maxRow; row++) {
-      items.push([]);
-      for (let col = 0; col <= maxCol; col++) {
-        items[row].push(null);
-      }
-    }
-
-    console.log(items);
-
-    for (const item of itemsArray) {
-      items[item.row][item.col] = item;
-    }
-
-    console.log(items);
-
-    return items;
-  }
-
   addItem(i: PosConfigItem): void {
     console.log(i);
 
@@ -89,7 +49,7 @@ export class PosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.meta.updateTag({ name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' });
+    this.meta.updateTag({name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0'});
 
     const params = this.route.snapshot.paramMap;
 
@@ -116,14 +76,15 @@ export class PosComponent implements OnInit {
     return ['pos-item', item.color, item.fontColor].join(' ');
   }
 
-  paymentFinished(modal): void {
+  paymentFinished(modal, mode: PaymentMethod = PaymentMethod.Cash): void {
     // Open the "payment ok" modal
     this.modalService.dismissAll();
     this.backend.sendPosLog(this.checkoutOrderId, {
-      paymentMethod: PaymentMethod.Cash,
+      paymentMethod: mode,
       accepted: true,
-      cardTransactionMessage: 'Cash transaction success.'
-    }).subscribe(() => {});
+      cardTransactionMessage: mode + ' transaction success.'
+    }).subscribe(() => {
+    });
     this.modalService.open(modal, {size: 'lg'}).result.then(() => {
       this.resetComponent();
     }, () => {
@@ -145,10 +106,30 @@ export class PosComponent implements OnInit {
     }
   }
 
-  payByCard(cardModal): void {
+  payByCard(cardModal, modalError): void {
     this.pay((that) => {
+      if (that.checkoutErrors) {
+        that.openModal(modalError);
+      } else {
         that.sumUp.startPayment(that.checkoutOrderId);
         that.openModal(cardModal);
+      }
+    });
+  }
+
+  payCamipro(camiproModal, modalError): void {
+    this.pay((that) => {
+      if (that.checkoutErrors) {
+        that.openModal(modalError);
+      } else {
+        that.backend.sendPosLog(that.checkoutOrderId, {
+          paymentMethod: PaymentMethod.Camipro,
+          accepted: false,
+          cardTransactionMessage: 'CAMIPRO payment start.',
+        }).subscribe(() => {
+        });
+        that.openModal(camiproModal);
+      }
     });
   }
 
@@ -161,7 +142,8 @@ export class PosComponent implements OnInit {
           paymentMethod: PaymentMethod.Cash,
           accepted: false,
           cardTransactionMessage: 'Cash payment start.',
-        }).subscribe(() => {});
+        }).subscribe(() => {
+        });
         that.openModal(cashModal);
 
       }
@@ -219,6 +201,47 @@ export class PosComponent implements OnInit {
     }
 
     return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+
+  private resetComponent(): void {
+    this.cart.clear();
+
+    this.checkoutPrice = undefined;
+    this.givenAmount = undefined;
+    this.checkoutOrderId = undefined;
+    this.checkoutErrors = undefined;
+  }
+
+  private buildRows(itemsArray: PosConfigItem[]): PosConfigItem[][] {
+    let maxRow = 0;
+    let maxCol = 0;
+
+    for (const item of itemsArray) {
+      if (item.row > maxRow) {
+        maxRow = item.row;
+      }
+      if (item.col > maxCol) {
+        maxCol = item.col;
+      }
+    }
+
+    const items: PosConfigItem[][] = [];
+    for (let row = 0; row <= maxRow; row++) {
+      items.push([]);
+      for (let col = 0; col <= maxCol; col++) {
+        items[row].push(null);
+      }
+    }
+
+    console.log(items);
+
+    for (const item of itemsArray) {
+      items[item.row][item.col] = item;
+    }
+
+    console.log(items);
+
+    return items;
   }
 
 }
