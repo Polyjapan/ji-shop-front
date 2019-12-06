@@ -5,7 +5,7 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import * as Errors from '../../constants/errors';
 import {ErrorCodes} from '../../constants/errors';
-import {AuthApiError, AuthApiService, LoginErrorCodes} from '../../services/authapi.service';
+import {AuthApiError, AuthApiService, LoginErrorCodes, loginErrorMessages, registerErrorMessages} from '../../services/authapi.service';
 import {environment} from '../../../environments/environment';
 
 @Component({
@@ -62,7 +62,7 @@ export class AuthenticateComponent implements OnInit {
     }, err => {
       try {
         const code = (err.error as AuthApiError).errorCode;
-        this.registerErrors = [AuthApiService.parseGeneralError(code)];
+        this.registerErrors = [AuthApiService.parseGeneralError(code, registerErrorMessages)];
       } catch (e) {
         this.registerErrors = [AuthApiService.parseGeneralError(100)];
         console.log(e);
@@ -97,16 +97,7 @@ export class AuthenticateComponent implements OnInit {
       try {
         const code = (err.error as AuthApiError).errorCode;
 
-        switch (code) {
-          case LoginErrorCodes.EmailNotConfirmed:
-            this.loginErrors = ['Vous devez confirmer votre adresse email pour continuer.'];
-            break;
-          case LoginErrorCodes.UserOrPasswordInvalid:
-            this.loginErrors = ['Email ou mot de passe incorrect.'];
-            break;
-          default:
-            this.loginErrors = [AuthApiService.parseGeneralError(code)];
-        }
+        this.loginErrors = [AuthApiService.parseGeneralError(code, loginErrorMessages)];
       } catch (e) {
         this.loginErrors = [AuthApiService.parseGeneralError(100)];
         console.log(e);
