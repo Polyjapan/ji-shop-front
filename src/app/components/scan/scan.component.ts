@@ -20,7 +20,7 @@ export class ScanComponent implements OnInit {
   ticketId: string; // used in ngModel
   previousTicketId: string;
   status = Status.IDLE;
-  @ViewChild('ticketLine') ticketLine: ElementRef;
+  @ViewChild('ticketLine', { static: true }) ticketLine: ElementRef;
 
   errorType: string;
   errorMessage: string;
