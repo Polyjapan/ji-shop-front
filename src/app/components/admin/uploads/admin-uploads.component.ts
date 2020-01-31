@@ -1,15 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BackendService} from '../../../services/backend.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import * as Errors from '../../../constants/errors';
-import {Event} from '../../../types/event';
-import {EventService} from '../event.service';
-import {Observable} from 'rxjs';
-import {HttpEvent, HttpEventType, HttpResponse, HttpSentEvent} from '@angular/common/http';
-import {HttpUploadProgressEvent} from '@angular/common/http/src/response';
+import {ActivatedRoute} from '@angular/router';
+import {HttpEventType, HttpResponse, HttpUploadProgressEvent} from '@angular/common/http';
 import {Image} from '../../../types/upload';
-import {environment} from '../../../../environments/environment';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-uploads',
