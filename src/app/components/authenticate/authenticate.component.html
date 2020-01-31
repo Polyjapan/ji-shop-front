@@ -41,11 +41,11 @@
         </div>
         <div class="form-group">
           <label for="inputEmail" i18n>Email</label>
-          <input type="email" name="email" class="form-control" id="inputEmail" i18n-placeholder placeholder="Email" required ngModel>
+          <input type="email" name="email" class="form-control" id="inputEmail" i18n-placeholder placeholder="Email" required ngModel autocomplete="username">
         </div>
         <div class="form-group">
           <label for="inputPassword" i18n>Mot de passe</label>
-          <input type="password" name="password" class="form-control" id="inputPassword" i18n-placeholder placeholder="Mot de passe"
+          <input type="password" name="password" class="form-control" id="inputPassword" i18n-placeholder placeholder="Mot de passe" autocomplete="new-password"
                  required ngModel>
         </div>
 
@@ -91,12 +91,12 @@
         <div class="form-group">
           <label for="inputLoginEmail" i18n>Email</label>
           <input type="email" name="email" class="form-control" id="inputLoginEmail" i18n-placeholder placeholder="Email" required
-                 ngModel>
+                 ngModel autocomplete="username">
         </div>
         <div class="form-group">
           <label for="inputLoginPassword" i18n>Mot de passe</label>
           <input type="password" name="password" class="form-control" id="inputLoginPassword" i18n-placeholder placeholder="Mot de passe"
-                 required ngModel>
+                 required ngModel autocomplete="current-password">
         </div>
 
         <br>
