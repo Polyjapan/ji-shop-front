@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {BackendService} from '../../services/backend.service';
@@ -6,9 +8,7 @@ import {ActivatedRoute} from '@angular/router';
 import {CartItem, CartService} from '../cart/cart.service';
 import {CheckedOutItem, Source} from '../../types/order';
 import {Permissions} from '../../constants/permissions';
-import {Observable} from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
-import 'rxjs-compat/add/operator/map';
+import {Observable} from 'rxjs';
 import * as Errors from '../../constants/errors';
 import {ErrorCodes} from '../../constants/errors';
 
@@ -56,7 +56,7 @@ export class CheckoutComponent implements OnInit {
 
     const order = this.cart.getOrder();
 
-    return this.backend.placeOrder(order, source).map(response => {
+    return this.backend.placeOrder(order, source).pipe(map(response => {
       // Build a map
       const netMap: Map<string, CheckedOutItem> = new Map<string, CheckedOutItem>();
       for (const item of response.ordered) {
@@ -84,7 +84,7 @@ export class CheckoutComponent implements OnInit {
       }
 
       return {checkoutLink: response.redirect, orderId: response['orderId'], updated: updated, removed: removed};
-    });
+    }));
 
   }
 

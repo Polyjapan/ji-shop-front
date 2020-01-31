@@ -1,5 +1,5 @@
 import {Event} from '../../types/event';
-import {Observable, Subject} from 'rxjs/Rx';
+import {Observable, Subject} from 'rxjs';
 import {BackendService} from '../../services/backend.service';
 import {Injectable} from '@angular/core';
 import {query} from '@angular/animations';

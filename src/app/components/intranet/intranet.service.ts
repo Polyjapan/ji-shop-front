@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
+
+
 import {environment} from '../../../environments/environment';
 import {ApiResult} from '../../types/api_result';
 import {HttpClient} from '@angular/common/http';

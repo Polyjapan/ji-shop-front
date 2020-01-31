@@ -1,6 +1,8 @@
+
+import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
+
+
 import {environment} from '../../environments/environment';
 import {Item, ItemList, ItemsResponse} from '../types/items';
 import {CheckedOutItem, FullOrder, FullOrderData, ImportedItemData, Order, OrderLog, Source} from '../types/order';
@@ -266,15 +268,15 @@ export class BackendService {
   }
 
   getFullScanningConfiguration(eventId: number, id: number): Observable<ScanConfigurationWithItems> {
-    return this.http.get<any[]>(this._scanUrl + '/configurations/' + eventId + '/' + id + '/full')
-      .map(val => {
+    return this.http.get<any[]>(this._scanUrl + '/configurations/' + eventId + '/' + id + '/full').pipe(
+      map(val => {
         console.log(val);
 
         const config = val[0] as ScanConfiguration;
         config['items'] = val[1] as ItemList[];
 
         return config as ScanConfigurationWithItems;
-      });
+      }));
   }
 
   getAllPosConfigurations(): Observable<PosConfigurationList[]> {

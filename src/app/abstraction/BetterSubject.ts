@@ -2,7 +2,7 @@ import {SubscriptionLike} from 'rxjs/internal/types';
 import {rxSubscriber as rxSubscriberSymbol} from 'rxjs/internal/symbol/rxSubscriber';
 import {Subscriber} from 'rxjs/internal/Subscriber';
 import {Subscription} from 'rxjs/internal/Subscription';
-import {Subject} from 'rxjs/Rx';
+import {Subject} from 'rxjs';
 
 export class BetterSubjectSubscriber<T> extends Subscriber<T> {
   constructor(protected destination: BetterSubject<T>) {

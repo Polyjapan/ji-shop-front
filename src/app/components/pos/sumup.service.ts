@@ -1,7 +1,10 @@
+
+import {of as observableOf, Observable} from 'rxjs';
+
+import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {isNullOrUndefined} from 'util';
 import {BackendService} from '../../services/backend.service';
-import {Observable} from 'rxjs/Rx';
 import {PaymentMethod, PosPaymentLog} from '../../types/pos_configuration';
 
 @Injectable()
@@ -46,7 +49,7 @@ export class SumupService {
                          failureCode?: string): Observable<CallbackReturn> {
 
     if (isNullOrUndefined(this.currentTransaction)) {
-      return Observable.of(CallbackReturn.NO_TRANSACTION);
+      return observableOf(CallbackReturn.NO_TRANSACTION);
     }
 
     const log: PosPaymentLog = {
@@ -58,12 +61,12 @@ export class SumupService {
       cardReceiptSend: receipt === 'true'
     };
 
-    return this.backend.sendPosLog(this.currentTransaction, log).map(value => {
+    return this.backend.sendPosLog(this.currentTransaction, log).pipe(map(value => {
       this.currentTransaction = undefined;
       this.save();
 
       return value.success ? CallbackReturn.SUCCESS : CallbackReturn.ERROR;
-    });
+    }));
   }
 }
 

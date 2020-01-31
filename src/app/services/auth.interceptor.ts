@@ -1,6 +1,8 @@
+
+import {catchError, mergeMap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
 import {parse} from 'url';
 import {environment} from '../../environments/environment';
@@ -28,14 +30,14 @@ export class AuthInterceptor implements HttpInterceptor {
     if (this.auth.isAuthenticated() && this.isWhitelistedDomain(req) && !isRefresh) {
       if (this.auth.needsRefresh()) {
         console.log('Refreshing token...');
-        return this.auth.refreshToken().flatMap(res => {
+        return this.auth.refreshToken().pipe(mergeMap(res => {
           if (res === true) {
             console.log('Done, requesting again');
             return this.doIntercept(req, next, true);
           } else {
             return next.handle(srcReq); // Pass the source request
           }
-        });
+        }));
       } else {
         req = req.clone({
           setHeaders: {
@@ -51,7 +53,7 @@ export class AuthInterceptor implements HttpInterceptor {
       });
     }
 
-    return next.handle(req).catch(err => {
+    return next.handle(req).pipe(catchError(err => {
       console.log(err);
       if (err.status === 401 && !isRefresh) {
         if (retry) {
@@ -59,16 +61,16 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         console.log('Refreshing token...');
 
-        return this.auth.refreshToken().flatMap(res => {
+        return this.auth.refreshToken().pipe(mergeMap(res => {
           if (res) {
             return this.doIntercept(req, next, true);
           } else {
             return next.handle(srcReq); // Pass the source request
           }
-        });
+        }));
       } else {
         throw err;
       }
-    });
+    }));
   }
 }

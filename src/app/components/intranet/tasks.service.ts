@@ -1,10 +1,11 @@
+
+import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs';
+
+
+import {Observable, Subject, of} from 'rxjs';
 import {PartialIntranetTask, TaskState, TaskStateUtils} from '../../types/intranet';
 import {IntranetService} from './intranet.service';
-import {Subject} from 'rxjs/Rx';
 
 
 @Injectable()
@@ -36,7 +37,7 @@ export class TasksService {
   }
 
   private query() {
-    return this.backend.getTasks(this.event).map(tasks => {
+    return this.backend.getTasks(this.event).pipe(map(tasks => {
       this.tasks = tasks;
 
       for (const obs of this.observables) {
@@ -59,7 +60,7 @@ export class TasksService {
       }
 
       return this.taskMap;
-    });
+    }));
   }
 
   private checkId(event: number) {
@@ -91,7 +92,7 @@ export class TasksService {
       return this.query();
     }
 
-    return Observable.of(this.taskMap);
+    return of(this.taskMap);
   }
 }
 

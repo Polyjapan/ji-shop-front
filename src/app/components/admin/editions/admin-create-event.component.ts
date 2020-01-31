@@ -4,10 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import * as Errors from '../../../constants/errors';
 import {Event} from '../../../types/event';
 import {EventService} from '../event.service';
-import {Observable} from 'rxjs/Rx';
-import {HttpEvent, HttpEventType, HttpResponse, HttpSentEvent} from '@angular/common/http';
-import {HttpUploadProgressEvent} from '@angular/common/http/src/response';
-import {Image} from '../../../types/upload';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-admin-create-event',

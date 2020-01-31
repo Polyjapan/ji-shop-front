@@ -32,7 +32,6 @@
     "moment-timezone": "^0.5.27",
     "ng-recaptcha": "^4.0.0",
     "rxjs": "^6.2.2",
-    "rxjs-compat": "^6.0.0-rc.0",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {

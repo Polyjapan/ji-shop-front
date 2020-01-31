@@ -1,10 +1,13 @@
+
+import {of as observableOf, AsyncSubject, Observable} from 'rxjs';
+
+import {catchError, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import 'rxjs/add/operator/toPromise';
+
 import {ApiResult} from '../types/api_result';
 import {BackendService} from './backend.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Router} from '@angular/router';
-import {AsyncSubject, Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class AuthService {
@@ -72,17 +75,17 @@ export class AuthService {
     if (this.refresh === undefined) {
       this.refresh = new AsyncSubject();
 
-      this.backend.refreshToken().map(result => {
+      this.backend.refreshToken().pipe(map(result => {
         localStorage.setItem(AuthService.REFRESH_TOKEN_KEY, result.refreshToken);
         localStorage.setItem(AuthService.ID_TOKEN_KEY, result.idToken);
 
         return true;
-      }).catch(err => {
+      }),catchError(err => {
         console.log(err);
         this.logout();
 
-        return Observable.of(false);
-      }).subscribe(succ => {
+        return observableOf(false);
+      }),).subscribe(succ => {
         console.log(succ);
         this.refresh.next(succ);
         this.refresh.complete();
