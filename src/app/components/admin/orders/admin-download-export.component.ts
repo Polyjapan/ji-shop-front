@@ -3,29 +3,29 @@ import {BackendService} from '../../../services/backend.service';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
 import * as Errors from '../../../constants/errors';
-import {ErrorCodes} from '../../../constants/errors';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Source} from '../../../types/order';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-admin-export',
   templateUrl: './admin-download-export.component.html'
 })
 export class AdminDownloadExportComponent implements OnInit {
-  private id: number;
   errors = null;
-
   source: Source;
   csvLoading = false;
   csvUrl: SafeUrl;
-
   fnacDay: string;
   fnacMonth: string;
   fnacYear: string;
   fnacLoading = false;
   fnacUrl: SafeUrl;
-
   Source = Source;
+  private id: number;
+
+  constructor(private backend: BackendService, private route: ActivatedRoute, private auth: AuthService, private sanitizer: DomSanitizer) {
+  }
 
   getText(source: Source) {
     switch (source) {
@@ -42,8 +42,6 @@ export class AdminDownloadExportComponent implements OnInit {
     }
   }
 
-  constructor(private backend: BackendService, private route: ActivatedRoute, private auth: AuthService, private sanitizer: DomSanitizer) {}
-
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.parent.paramMap.get('event'));
   }
@@ -56,9 +54,9 @@ export class AdminDownloadExportComponent implements OnInit {
     console.log(this.source);
 
     this.backend.getOrderStats(this.id, undefined, undefined, this.source).subscribe(result => {
-      const blob = new Blob([ result ], { type : 'text/csv' });
-      console.log(blob);
-      this.csvUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(blob));
+      if (result) {
+        FileSaver.saveAs(result, 'stats-' + this.id + '.csv');
+      }
       this.csvLoading = false;
     }, err => {
       console.log(err);
@@ -73,7 +71,7 @@ export class AdminDownloadExportComponent implements OnInit {
     this.errors = null;
 
     this.backend.fnacExport(this.id, this.fnacYear + this.fnacMonth + this.fnacDay).subscribe(result => {
-      const blob = new Blob([ result ], { type : 'text/csv' });
+      const blob = new Blob([result], {type: 'text/csv'});
       console.log(blob);
       this.fnacUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(blob));
       this.fnacLoading = false;

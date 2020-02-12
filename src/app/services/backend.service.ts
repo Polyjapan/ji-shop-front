@@ -156,7 +156,7 @@ export class BackendService {
     return this.http.get<Map<Source, number[][]>>(this._adminUrl + '/stats/' + event + '/sales', {params: params});
   }
 
-  getOrderStats(event: number, start?: number, end?: number, source?: Source): Observable<string> {
+  getOrderStats(event: number, start?: number, end?: number, source?: Source): Observable<Blob> {
     let params = new HttpParams();
     if (start) {
       params = params.append('start', start.toString(10));
@@ -167,9 +167,7 @@ export class BackendService {
     if (source) {
       params = params.append('source', source.toString());
     }
-    console.log(params);
-    console.log(source);
-    return this.http.get(this._adminUrl + '/stats/' + event + '/salesData.csv', {params: params, responseType: 'text'});
+    return this.http.get(this._adminUrl + '/stats/' + event + '/salesData.csv', {params: params, responseType: 'blob'});
   }
 
   fnacExport(event: number, date: string): Observable<string> {

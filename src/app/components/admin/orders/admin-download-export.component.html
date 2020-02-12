@@ -42,7 +42,5 @@
   </select>
 </form>
 
-<button class="btn btn-success" [disabled]="csvLoading" (click)="getCsvUrl()">Obtenir le lien</button>
+<button class="btn btn-success" [disabled]="csvLoading" (click)="getCsvUrl()">Télécharger</button>
 
-<br><br>
-<a class="btn btn-outline-success" *ngIf="csvUrl" [href]="csvUrl">Télécharger l'export de stats</a>
