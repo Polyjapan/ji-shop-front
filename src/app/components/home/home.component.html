@@ -6,9 +6,11 @@
 
 <div class="jumbotron" *ngIf="!hasContent() && !loading">
   <h1 class="display-4" i18n>Rien à voir ici :(</h1>
-  <p class="lead" i18n>Nous sommes ravis de voir que notre événement vous intéresse, mais notre boutique est actuellement fermée.</p>
+  <p class="lead" i18n>Nous sommes ravis de voir que notre événement vous intéresse, mais il n'y a actuellement rien à
+    vendre sur notre boutique.</p>
   <hr class="my-4">
-  <p i18n>Notre boutique ouvre en général en décembre, et ferme la veille du festival. Vous pouvez y trouver vos places pour la convention, ainsi que des goodies que vous pourrez y retirer !</p>
+  <p i18n>Notre boutique ouvre en général peu de temps avant les fêtes. Vous pouvez y trouver vos places pour la
+    convention, ainsi que des goodies que vous pourrez y retirer !</p>
 </div>
 
 <div class="alert alert-danger" *ngIf="errors">
@@ -21,25 +23,37 @@
 </div>
 
 <ng-container *ngIf="hasContent()">
-  <h1 class="display-4" i18n>Billetterie Japan Impact</h1>
-  <p i18n>Bienvenue sur la boutique officielle de Japan Impact. </p>
-  <!-- todo: editable text? -->
-  <hr class="my-3" />
+  <h1 class="display-4" i18n>Billetterie - {{event ? event.name : 'Japan Impact'}}</h1>
+
+  <ng-container *ngIf="event && event.ticketsImage">
+    <br><br>
+
+    <img [src]="event.ticketsImage" alt="Image de l'événement" style="width: 100%;"/>
+
+    <br><br>
+  </ng-container>
+
+  <p i18n *ngIf="!event || !event.description">Bienvenue sur la boutique officielle de Japan Impact. </p>
+  <p i18n *ngIf="event && event.description">{{event.description}}</p>
+
+
+  <hr class="my-3"/>
 
   <div class="row">
     <div class="col-lg-8">
 
       <ng-container *ngIf="hasTickets()">
-          <h2 i18n>Billets</h2>
-          <app-item-list-display [items]="tickets"></app-item-list-display>
+        <h2 i18n>Billets</h2>
+        <app-item-list-display [items]="tickets"></app-item-list-display>
       </ng-container>
 
-      <hr class="my-3" />
+      <hr class="my-3"/>
 
       <ng-container *ngIf="hasGoodies()">
-          <h2 i18n>Goodies</h2>
-          <p i18n>Attention, les goodies sont à retirer sur notre stand lors de la convention, assurez vous de disposer d'un billet d'entrée avant d'en commander.</p>
-          <app-item-list-display [items]="goodies"></app-item-list-display>
+        <h2 i18n>Goodies</h2>
+        <p i18n>Attention, les goodies sont à retirer sur notre stand lors de la convention, assurez vous de disposer
+          d'un billet d'entrée avant d'en commander.</p>
+        <app-item-list-display [items]="goodies"></app-item-list-display>
       </ng-container>
 
     </div>
@@ -50,8 +64,10 @@
 
         <app-cart>
           <a href="checkout" class="btn btn-primary" i18n>Passer commande</a> <!-- Why routerLink doesnt work? -->
-          <a href="checkout/gift" class="btn btn-success" *ngIf="isAdmin">Générer un cadeau</a> <!-- Why routerLink doesnt work? -->
-          <a href="checkout/physical" class="btn btn-success" *ngIf="canSell">Vendre à un tiers</a> <!-- Why routerLink doesnt work? -->
+          <a href="checkout/gift" class="btn btn-success" *ngIf="isAdmin">Générer un cadeau</a>
+          <!-- Why routerLink doesnt work? -->
+          <a href="checkout/physical" class="btn btn-success" *ngIf="canSell">Vendre à un tiers</a>
+          <!-- Why routerLink doesnt work? -->
         </app-cart>
 
       </div>

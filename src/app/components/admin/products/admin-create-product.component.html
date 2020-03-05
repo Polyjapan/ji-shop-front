@@ -38,6 +38,8 @@
            [(ngModel)]="product.image">
   </div>
 
+  <app-uploads category="product_images" (selectUrl)="product.image  = $event" [selected]="product.image"></app-uploads>
+
   <div class="form-group">
     <label for="shortDescr">Description courte (affichée dans la boutique)</label>
 

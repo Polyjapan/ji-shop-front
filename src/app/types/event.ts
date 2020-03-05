@@ -4,6 +4,7 @@ export class Event {
   name: string;
   location: string;
   ticketsImage?: string;
+  description?: string;
   visible: boolean;
   archived: boolean;
 }

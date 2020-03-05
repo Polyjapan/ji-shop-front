@@ -5,6 +5,7 @@ import {ItemList, ItemsResponse} from '../../types/items';
 import {Observable} from 'rxjs';
 import {Permissions} from '../../constants/permissions';
 import {replaceErrorsInResponse} from '../../constants/errors';
+import {Event} from '../../types/event';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,18 @@ export class HomeComponent implements OnInit {
   errors: string[];
 
   constructor(public backend: BackendService, private auth: AuthService) {
+  }
+
+  get event(): Event {
+    const events = [];
+    this.goodies.map(e => e.event).filter(e => e.visible).forEach(e => events.push(e));
+    this.tickets.map(e => e.event).filter(e => e.visible).filter(e => !events.includes(e)).forEach(e => events.push(e));
+
+    if (events.length !== 1) {
+      return undefined;
+    } else {
+      return events[0];
+    }
   }
 
 

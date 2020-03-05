@@ -23,6 +23,13 @@
 
   <app-uploads category="events_headers" (selectUrl)="event.ticketsImage = $event" [selected]="event.ticketsImage"></app-uploads>
 
+  <div class="form-group">
+    <label for="descr">Description de l'événement</label>
+
+    <textarea class="form-control" rows="4" id="descr" name="descr"
+              [(ngModel)]="event.description"></textarea>
+  </div>
+
   <div class="form-check">
     <input class="form-check-input" type="checkbox" name="eventPublic" id="eventPublic" [(ngModel)]="event.visible" [disabled]="event.archived">
     <label class="form-check-label" for="eventPublic">
