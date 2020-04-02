@@ -2,115 +2,92 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {BackendService} from '../../services/backend.service';
 import {NgForm} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import * as Errors from '../../constants/errors';
 import {ErrorCodes} from '../../constants/errors';
-import {AuthApiError, AuthApiService, LoginErrorCodes, loginErrorMessages, registerErrorMessages} from '../../services/authapi.service';
-import {environment} from '../../../environments/environment';
+import {AuthApiService} from '../../services/authapi.service';
 
 @Component({
   selector: 'app-authenticate',
   templateUrl: './authenticate.component.html'
 })
 export class AuthenticateComponent implements OnInit {
-  registerErrors: string[] = null;
-  loginErrors: string[] = null;
+  accessToken: string;
   loginSent = false;
-  registerSent = false;
 
-  registerOk = false;
-  siteKey: string = environment.reCaptcha.siteKey;
+  loginErrors: string[] = null;
+  requiresInfo: true;
 
-  constructor(private backend: BackendService, private authApi: AuthApiService, private auth: AuthService, private router: Router) {
+  constructor(private backend: BackendService, private authApi: AuthApiService, private auth: AuthService, private router: Router, private ar: ActivatedRoute) {
 
   }
 
   onRegister(form: NgForm) {
-    this.registerErrors = null;
-    this.registerSent = true;
+    if (this.loginSent) {
+      return;
+    }
 
-    // @ts-ignore
-    declare var grecaptcha: any;
-
+    this.loginSent = true;
     const data = form.value;
-    data['captcha'] = grecaptcha.getResponse();
-    data['firstName'] = data['firstname'];
-    data['lastName'] = data['lastname'];
 
-    this.authApi.register(data).subscribe(apiSuccess => {
-      data['password'] = undefined;
-      data['ticket'] = apiSuccess.ticket;
+    this.backend.firstLogin(data, this.accessToken).subscribe(apiSuccess => {
+        console.log(apiSuccess);
+        this.auth.login(apiSuccess);
+        this.loginSent = false;
+      },
+      err => {
+        this.loginErrors = Errors.replaceErrorsInResponse(err, new Map<string, string>([
+          [ErrorCodes.USER_EXISTS, 'Un utilisateur avec cette adresse email existe déjà.'],
+        ]), new Map<string, string>([
+          ['ticket', 'Données d\'identification'],
+        ]));
 
-      this.backend.register(data).subscribe(
-        res => {
-          this.registerOk = true;
-          this.registerSent = false;
-        },
-        err => {
-          this.registerErrors = Errors.replaceErrorsInResponse(err, new Map<string, string>([
-            [ErrorCodes.USER_EXISTS, 'Un utilisateur avec cette adresse email existe déjà.'],
-          ]), new Map<string, string>([
-            ['firstname', 'Prénom'],
-            ['lastname', 'Nom'],
-            ['email', 'Email'],
-            ['password', 'Mot de passe'],
-          ]));
-
-          this.registerSent = false;
-        }
-      );
-    }, err => {
-      try {
-        const code = (err.error as AuthApiError).errorCode;
-        this.registerErrors = [AuthApiService.parseGeneralError(code, registerErrorMessages)];
-      } catch (e) {
-        this.registerErrors = [AuthApiService.parseGeneralError(100)];
-        console.log(e);
+        this.loginSent = false;
       }
-
-      this.registerSent = false;
-    });
+    );
   }
 
-  onLogin(form: NgForm) {
-    this.loginErrors = null;
+  onLoginToken() {
+    if (this.loginSent) {
+      return;
+    }
+
     this.loginSent = true;
 
-    this.authApi.login(form.value).subscribe(apiSuccess => {
-      this.backend.login(apiSuccess.ticket).subscribe(
-        res => {
-          console.log(res);
+    this.backend.login(this.accessToken).subscribe(
+      res => {
+        console.log(res);
+        if (res.requireInfo) {
+          this.requiresInfo = true;
+        } else {
           this.auth.login(res);
-          this.loginSent = false;
-        },
-        err => {
-          console.log(err);
-          this.loginErrors = Errors.replaceErrorsInResponse(err, new Map<string, string>([]), new Map<string, string>([
-            ['email', 'Email'],
-            ['password', 'Mot de passe'],
-          ]));
-
-          this.loginSent = false;
         }
-      );
-    }, err => {
-      try {
-        const code = (err.error as AuthApiError).errorCode;
+        this.loginSent = false;
+      },
+      err => {
+        console.log(err);
+        this.loginErrors = Errors.replaceErrorsInResponse(err, new Map<string, string>([]), new Map<string, string>([
+          ['email', 'Email'],
+          ['password', 'Mot de passe'],
+        ]));
 
-        this.loginErrors = [AuthApiService.parseGeneralError(code, loginErrorMessages)];
-      } catch (e) {
-        this.loginErrors = [AuthApiService.parseGeneralError(100)];
-        console.log(e);
+        this.loginSent = false;
       }
-
-      this.loginSent = false;
-    });
+    );
   }
-
 
   ngOnInit(): void {
     if (this.auth.isAuthenticated()) {
       this.router.navigate(['/']);
     }
+
+    this.ar.queryParamMap.subscribe(qpm => {
+      if (qpm.has('accessToken')) {
+        this.accessToken = qpm.get('accessToken');
+        this.onLoginToken();
+      } else {
+        this.router.navigateByUrl(this.auth.loginUrl());
+      }
+    });
   }
 }

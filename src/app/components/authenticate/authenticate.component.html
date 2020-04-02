@@ -1,114 +1,44 @@
-<ng-container *ngIf="registerOk">
-  <h1 i18n>Confirmation de l'email</h1>
-
-  <p i18n>Nous avons bien enregistré votre inscription. Vous devriez d'ici quelques instants recevoir un email permettant
-    de valider votre adresse. Lorsque vous le recevez, cliquez simplement sur le lien pour continuer vos achats.</p>
+<ng-container *ngIf="loginSent">
+  <h1>Connexion en cours</h1>
+  <p>Merci de bien vouloir patienter. Cela ne devrait durer que quelques secondes.</p>
 </ng-container>
 
-<ng-container *ngIf="!registerOk">
+<div class="alert alert-danger" role="alert" *ngIf="loginErrors && loginErrors.length > 0">
+  <p i18n>Impossible de vous connecter !</p>
+  <ul>
+    <li *ngFor="let err of loginErrors">{{err}}</li>
+  </ul>
 
 
-  <h1 i18n>Identifiez vous pour continuer</h1>
-  <p i18n>Notre boutique a été entièrement revue en 2018, aussi les comptes de l'ancienne billetterie ne sont plus valables. Désolés !</p>
-  <hr class="mb-4">
-
-  <div class="row">
-    <div class="col-md-6">
-      <h2 i18n>Nouveau client</h2>
-      <p class="text-muted" i18n>Inscrivez vous en quelques instants !</p>
-      <br>
+  <button class="btn btn-primary" [disabled]="loginSent" (click)="onLoginToken()" i18n>Réessayer
+    <i class="fas fa-spinner" *ngIf="loginSent"></i>
+  </button>
+</div>
 
 
-      <div class="alert alert-danger" role="alert" *ngIf="registerErrors && registerErrors.length > 0">
-        <p i18n>Impossible de vous inscrire !</p>
-        <ul>
-          <li *ngFor="let err of registerErrors">{{err}}</li>
-        </ul>
-      </div>
 
-      <form #register="ngForm" class="form" (ngSubmit)="onRegister(register)" action="#">
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputFirstName" i18n>Prénom</label>
-            <input type="text" name="firstname" class="form-control" id="inputFirstName" i18n-placeholder placeholder="Prénom" required
-                   ngModel>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputLastName" i18n>Nom</label>
-            <input type="text" name="lastname" class="form-control" id="inputLastName" i18n-placeholder placeholder="Nom" required
-                   ngModel>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail" i18n>Email</label>
-          <input type="email" name="email" class="form-control" id="inputEmail" i18n-placeholder placeholder="Email" required ngModel autocomplete="username">
-        </div>
-        <div class="form-group">
-          <label for="inputPassword" i18n>Mot de passe</label>
-          <input type="password" name="password" class="form-control" id="inputPassword" i18n-placeholder placeholder="Mot de passe" autocomplete="new-password"
-                 required ngModel>
-        </div>
+<ng-container *ngIf="requiresInfo && !loginSent">
+  <h1 i18n>Il nous manque quelques informations</h1>
+  <p i18n>Vous y êtes presque ! Comme c'est la première fois que vous venez, nous voulons simplement savoir si vous souhaitez recevoir une lettre
+    d'informations de notre part. C'est promis, nous n'en envoyons pas plus d'une dizaine par année !
 
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" name="acceptNews" value="true" id="acceptNewsletter" ngModel>
-          <label class="form-check-label" for="acceptNewsletter" i18n>
-            J'accepte de recevoir la newsletter bimensuelle de Japan Impact
-          </label>
-        </div>
+  <br>
 
-        <hr>
+  <form #register="ngForm" class="form" (ngSubmit)="onRegister(register)" action="#">
 
-        <p i18n>En vous inscrivant sur ce site, vous acceptez que PolyJapan (AGEPoly) conserve les informations que vous lui
-          transmettez.
-          Ces informations ne seront pas transmises à des tiers ou utilisées à des fins publicitaires.</p>
-
-        <br>
-
-        <re-captcha siteKey="{{siteKey}}"></re-captcha>
-
-        <br>
-
-        <button type="submit" class="btn btn-primary" [disabled]="!register.valid || registerSent" i18n>Inscription
-          <i class="fas fa-spinner" *ngIf="registerSent"></i>
-        </button>
-      </form>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" name="acceptNews" value="true" id="acceptNewsletter" ngModel>
+      <label class="form-check-label" for="acceptNewsletter" i18n>
+        J'accepte de recevoir la lettre d'informations de Japan Impact
+      </label>
     </div>
 
-    <div class="col-md-6 border-left text-right">
-      <h2 i18n>Déjà client</h2>
-      <p class="text-muted" i18n>Indiquez simplement votre email et votre mot de passe pour poursuivre.</p>
+    <br>
 
-      <br>
+    <button type="submit" class="btn btn-primary" [disabled]="!register.valid || loginSent" i18n>Continuer
+      <i class="fas fa-spinner" *ngIf="loginSent"></i>
+    </button>
+  </form>
 
-      <div class="alert alert-danger" role="alert" *ngIf="loginErrors && loginErrors.length > 0">
-        <p i18n>Impossible de vous connecter !</p>
-        <ul>
-          <li *ngFor="let err of loginErrors">{{err}}</li>
-        </ul>
-      </div>
-
-      <form #login="ngForm" class="form" (ngSubmit)="onLogin(login)" action="#">
-        <div class="form-group">
-          <label for="inputLoginEmail" i18n>Email</label>
-          <input type="email" name="email" class="form-control" id="inputLoginEmail" i18n-placeholder placeholder="Email" required
-                 ngModel autocomplete="username">
-        </div>
-        <div class="form-group">
-          <label for="inputLoginPassword" i18n>Mot de passe</label>
-          <input type="password" name="password" class="form-control" id="inputLoginPassword" i18n-placeholder placeholder="Mot de passe"
-                 required ngModel autocomplete="current-password">
-        </div>
-
-        <br>
-        <a routerLink="/passwordForget" i18n>Mot de passe oublié</a>
-
-        <hr>
-
-        <button type="submit" class="btn btn-primary" [disabled]="!login.valid || loginSent" i18n>Connexion
-          <i class="fas fa-spinner" *ngIf="loginSent"></i>
-        </button>
-      </form>
-    </div>
-  </div>
 
 </ng-container>

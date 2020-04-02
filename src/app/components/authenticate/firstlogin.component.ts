@@ -24,25 +24,7 @@ export class FirstloginComponent implements OnInit {
     this.registerErrors = null;
     this.registerSent = true;
 
-    const data = form.value;
 
-    this.backend.firstLogin(data, this.token).subscribe(apiSuccess => {
-        console.log(apiSuccess);
-        this.auth.login(apiSuccess);
-        this.registerSent = false;
-      },
-      err => {
-        this.registerErrors = Errors.replaceErrorsInResponse(err, new Map<string, string>([
-          [ErrorCodes.USER_EXISTS, 'Un utilisateur avec cette adresse email existe déjà.'],
-        ]), new Map<string, string>([
-          ['firstname', 'Prénom'],
-          ['lastname', 'Nom'],
-          ['ticket', 'Données d\'identification'],
-        ]));
-
-        this.registerSent = false;
-      }
-    );
   }
 
   ngOnInit(): void {

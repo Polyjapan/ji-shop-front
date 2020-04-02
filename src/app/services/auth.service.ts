@@ -8,6 +8,7 @@ import {ApiResult} from '../types/api_result';
 import {BackendService} from './backend.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Router} from '@angular/router';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -185,6 +186,11 @@ export class AuthService {
     localStorage.removeItem(AuthService.REDIRECT_LOCATION_KEY);
 
     return act;
+  }
+
+  loginUrl() {
+    const route = window.location.origin + this.route.createUrlTree(['/', 'login']).toString();
+    return environment.auth.apiurl + '/internal/login?service=' + route;
   }
 }
 
