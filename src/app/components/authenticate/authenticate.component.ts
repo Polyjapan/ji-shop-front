@@ -12,13 +12,14 @@ import {AuthApiService} from '../../services/authapi.service';
   templateUrl: './authenticate.component.html'
 })
 export class AuthenticateComponent implements OnInit {
-  accessToken: string;
   loginSent = false;
 
   loginErrors: string[] = null;
   requiresInfo: true;
+  tempSession: string;
 
-  constructor(private backend: BackendService, private authApi: AuthApiService, private auth: AuthService, private router: Router, private ar: ActivatedRoute) {
+  constructor(private backend: BackendService, private authApi: AuthApiService, public auth: AuthService, private router: Router,
+              private ar: ActivatedRoute) {
 
   }
 
@@ -30,7 +31,7 @@ export class AuthenticateComponent implements OnInit {
     this.loginSent = true;
     const data = form.value;
 
-    this.backend.firstLogin(data, this.accessToken).subscribe(apiSuccess => {
+    this.backend.firstLogin(data, this.tempSession).subscribe(apiSuccess => {
         console.log(apiSuccess);
         this.auth.login(apiSuccess);
         this.loginSent = false;
@@ -47,18 +48,19 @@ export class AuthenticateComponent implements OnInit {
     );
   }
 
-  onLoginToken() {
+  onLoginToken(ticket: string) {
     if (this.loginSent) {
       return;
     }
 
     this.loginSent = true;
 
-    this.backend.login(this.accessToken).subscribe(
+    this.backend.login(ticket).subscribe(
       res => {
         console.log(res);
         if (res.requireInfo) {
           this.requiresInfo = true;
+          this.tempSession = res.idToken;
         } else {
           this.auth.login(res);
         }
@@ -82,9 +84,8 @@ export class AuthenticateComponent implements OnInit {
     }
 
     this.ar.queryParamMap.subscribe(qpm => {
-      if (qpm.has('accessToken')) {
-        this.accessToken = qpm.get('accessToken');
-        this.onLoginToken();
+      if (qpm.has('ticket')) {
+        this.onLoginToken(qpm.get('ticket'));
       } else {
         this.router.navigateByUrl(this.auth.loginUrl());
       }

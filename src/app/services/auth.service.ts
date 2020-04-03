@@ -32,7 +32,7 @@ export class AuthService {
   login(result: LoginResponse, activeRedirect: boolean = true): string {
     if (result.requireInfo) {
       this.requestMoreInfo(result.token);
-      return 'firstLogin';
+      return 'login';
     }
 
 
@@ -81,12 +81,12 @@ export class AuthService {
         localStorage.setItem(AuthService.ID_TOKEN_KEY, result.idToken);
 
         return true;
-      }),catchError(err => {
+      }), catchError(err => {
         console.log(err);
         this.logout();
 
         return observableOf(false);
-      }),).subscribe(succ => {
+      })).subscribe(succ => {
         console.log(succ);
         this.refresh.next(succ);
         this.refresh.complete();
@@ -190,7 +190,7 @@ export class AuthService {
 
   loginUrl() {
     const route = window.location.origin + this.route.createUrlTree(['/', 'login']).toString();
-    return environment.auth.apiurl + '/internal/login?service=' + route;
+    return environment.auth.apiurl + '/cas/login?service=' + route;
   }
 }
 

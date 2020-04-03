@@ -10,9 +10,7 @@
   </ul>
 
 
-  <button class="btn btn-primary" [disabled]="loginSent" (click)="onLoginToken()" i18n>Réessayer
-    <i class="fas fa-spinner" *ngIf="loginSent"></i>
-  </button>
+  <a class="btn btn-primary" [href]="auth.loginUrl()" i18n>Réessayer</a>
 </div>
 
 

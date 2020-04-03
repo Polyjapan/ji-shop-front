@@ -13,7 +13,8 @@ export const environment = {
 
   auth: {
     apiurl: 'https://auth.japan-impact.ch/',
-    clientId: '3lHGENIo0Kn0s1ynR2Q508E3ae000PLkIcgrNtKsUGs'
+    clientId: '3lHGENIo0Kn0s1ynR2Q508E3ae000PLkIcgrNtKsUGs',
+    service: 'localhost'
   },
   reCaptcha: {
     siteKey: '6LclcWoUAAAAAAcrg1eRSxLCIIX5-k3FYkZGoyAV'

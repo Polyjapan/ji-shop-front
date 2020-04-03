@@ -8,7 +8,8 @@ export const environment = {
 
   auth: {
     apiurl: 'https://auth.japan-impact.ch/',
-    clientId: '8pdszcUWxht75pmttKnyAxxHzc9HarutYvScP6uHq5WsDXJqGfQcWeCRHGZgHwtGE9dQvKgu'
+    clientId: '8pdszcUWxht75pmttKnyAxxHzc9HarutYvScP6uHq5WsDXJqGfQcWeCRHGZgHwtGE9dQvKgu',
+    service: 'shop.japan-impact.ch'
   },
   reCaptcha: {
     siteKey: '6LclcWoUAAAAAAcrg1eRSxLCIIX5-k3FYkZGoyAV'

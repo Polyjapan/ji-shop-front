@@ -22,7 +22,6 @@ import {RecaptchaModule} from 'ng-recaptcha';
 import {OrderContentModule} from './components/members/order-content.module';
 import {IntranetModule} from './components/intranet/intranet.module';
 import {MainComponent} from './main.component';
-import {FirstloginComponent} from './components/authenticate/firstlogin.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import * as Sentry from '@sentry/browser';
@@ -75,8 +74,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     ScanSelectComponent,
     MainComponent,
 
-    AuthenticateComponent,
-    FirstloginComponent
+    AuthenticateComponent
   ],
   imports: [
     BrowserModule,

@@ -217,14 +217,8 @@ export class BackendService {
   }
 
   firstLogin(data: any, token: string): Observable<LoginResponse> {
-    data['ticket'] = token;
     return this.http
-      .post<LoginResponse>(this._authUrl + '/firstLogin', data);
-  }
-
-  register(data: any): Observable<ApiResult> {
-    return this.http
-      .post<ApiResult>(this._authUrl + '/signup', data);
+      .post<LoginResponse>(this._authUrl + '/firstLogin', data, {headers: {'Authorization': 'Bearer ' + token}});
   }
 
   placeOrder(items: CheckedOutItem[], source?: Source): Observable<CheckOutResponse> {
