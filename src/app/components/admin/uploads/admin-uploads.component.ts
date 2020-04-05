@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BackendService} from '../../../services/backend.service';
+import {BackendService, UploadsApiResponse} from '../../../services/backend.service';
 import {ActivatedRoute} from '@angular/router';
 import {HttpEventType, HttpResponse, HttpUploadProgressEvent} from '@angular/common/http';
 import {Image} from '../../../types/upload';
@@ -19,7 +19,7 @@ export class AdminUploadsComponent implements OnInit {
   constructor(private backend: BackendService, private route: ActivatedRoute) {
   }
 
-  click(img: Image) {
+  click(img: {url: string}) {
     this.selectUrl.emit(img.url);
   }
 
@@ -41,12 +41,16 @@ export class AdminUploadsComponent implements OnInit {
           break;
 
         case HttpEventType.Response:
-          const res = (httpEvent as HttpResponse<Image>);
-          console.log('Upload success ' + res.body.name + ' ' + res.body.category);
+          const res = (httpEvent as HttpResponse<UploadsApiResponse>);
+          console.log('Upload success ' + res.body.data.url);
           this.progress = -1;
           field.value = '';
-          this.images.push(res.body);
-          this.click(res.body);
+          this.images.push({
+            category: this.category,
+            size: 0, // we don't care about the size
+            url: res.body.data.url
+          });
+          this.click(res.body.data);
           field.disabled = false;
           break;
         default:

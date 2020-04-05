@@ -1,5 +1,5 @@
 
-import {map} from 'rxjs/operators';
+import {flatMap, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 
 
@@ -335,8 +335,11 @@ export class BackendService {
     return this.http.get<Image[]>(this._adminUrl + '/images/' + category);
   }
 
-  uploadFile(category: string, file: File): Observable<HttpEvent<Image>> {
-    return this.http.post<Image>(this._adminUrl + '/images/' + category, file, {observe: 'events', reportProgress: true});
+  uploadFile(category: string, file: File): Observable<HttpEvent<UploadsApiResponse>> {
+    return this.http.post(this._adminUrl + '/images/' + category, {}, {responseType: 'text'})
+      .pipe(
+        flatMap(url => this.http.put<UploadsApiResponse>(url, file, {observe: 'events', responseType: 'json'})),
+      );
   }
 }
 
@@ -345,4 +348,10 @@ export class CheckOutResponse extends ApiResult {
   redirect?: string;
 }
 
+export class UploadsApiResponse {
+  success: boolean;
+  data?: {
+    url: string;
+  };
+}
 
