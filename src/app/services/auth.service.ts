@@ -13,26 +13,15 @@ import {environment} from '../../environments/environment';
 @Injectable()
 export class AuthService {
 
-  private static ID_TOKEN_KEY = 'id_token';
-  private static REFRESH_TOKEN_KEY = 'refresh_token';
-  private static TEMP_TOKEN_KEY = '_login_temp_token';
+  public static ID_TOKEN_KEY = 'id_token';
   private static REDIRECT_LOCATION_KEY = 'post_login_action';
-  private jwtHelper: JwtHelperService = new JwtHelperService();
 
-  private refresh: AsyncSubject<boolean> = undefined;
-
-  constructor(private backend: BackendService, private route: Router) {
-
+  constructor(private backend: BackendService, private jwtHelper: JwtHelperService, private route: Router) {
   }
 
-  get temporaryToken(): string {
-    return localStorage.getItem(AuthService.TEMP_TOKEN_KEY);
-  }
 
   login(result: LoginResponse, activeRedirect: boolean = true): string {
-    localStorage.setItem(AuthService.REFRESH_TOKEN_KEY, result.refreshToken);
-    localStorage.setItem(AuthService.ID_TOKEN_KEY, result.idToken);
-    this.removeTemporaryToken();
+    localStorage.setItem(AuthService.ID_TOKEN_KEY, result.token);
 
     let act = this.loadNextAction();
 
@@ -57,60 +46,14 @@ export class AuthService {
     }
   }
 
-  public refreshToken(): Observable<boolean> {
-    if (this.refresh === undefined) {
-      this.refresh = new AsyncSubject();
-
-      this.backend.refreshToken().pipe(map(result => {
-        localStorage.setItem(AuthService.REFRESH_TOKEN_KEY, result.refreshToken);
-        localStorage.setItem(AuthService.ID_TOKEN_KEY, result.idToken);
-
-        return true;
-      }), catchError(err => {
-        console.log(err);
-        this.logout();
-
-        return observableOf(false);
-      })).subscribe(succ => {
-        console.log(succ);
-        this.refresh.next(succ);
-        this.refresh.complete();
-        this.refresh = undefined;
-      }, err => {
-        console.log(err);
-        this.refresh.error(err);
-        this.refresh.complete();
-        this.refresh = undefined;
-      });
-    }
-
-    return this.refresh;
-  }
-
   public logout(): void {
     // Remove tokens and expiry time from localStorage
     localStorage.removeItem(AuthService.ID_TOKEN_KEY);
-    localStorage.removeItem(AuthService.REFRESH_TOKEN_KEY);
   }
 
   public getToken() {
-    return this.jwtHelper.decodeToken(this.getRawToken());
-  }
-
-  public needsRefresh() {
-    return this.jwtHelper.isTokenExpired(this.getRawToken(), 3);
-  }
-
-  public getRawToken() {
-    return localStorage.getItem(AuthService.ID_TOKEN_KEY);
-  }
-
-  public getRawRefreshToken() {
-    return localStorage.getItem(AuthService.REFRESH_TOKEN_KEY);
-  }
-
-  public getRefreshToken() {
-    return this.jwtHelper.decodeToken(this.getRawRefreshToken());
+    const token = localStorage.getItem(AuthService.ID_TOKEN_KEY);
+    return this.jwtHelper.decodeToken(token);
   }
 
   public hasPermission(perm: string): boolean {
@@ -142,7 +85,7 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    const token = localStorage.getItem(AuthService.REFRESH_TOKEN_KEY);
+    const token = localStorage.getItem(AuthService.ID_TOKEN_KEY);
     if (token === null) {
       return false;
     }
@@ -152,14 +95,6 @@ export class AuthService {
     } catch (e) {
       return false;
     }
-  }
-
-  private storeTemporaryToken(token: string) {
-    localStorage.setItem(AuthService.TEMP_TOKEN_KEY, token);
-  }
-
-  private removeTemporaryToken() {
-    localStorage.removeItem(AuthService.TEMP_TOKEN_KEY);
   }
 
   private storeNextAction(action: string) {
@@ -180,7 +115,5 @@ export class AuthService {
 }
 
 export class LoginResponse extends ApiResult {
-  idToken?: string;
-  token?: string; // for partial login
-  refreshToken?: string;
+  token?: string;
 }

@@ -211,11 +211,6 @@ export class BackendService {
       .post<LoginResponse>(this._authUrl + '/login', ticket);
   }
 
-  refreshToken(): Observable<LoginResponse> {
-    return this.http
-      .get<LoginResponse>(this._authUrl + '/refresh');
-  }
-
   firstLogin(data: any, token: string): Observable<LoginResponse> {
     return this.http
       .post<LoginResponse>(this._authUrl + '/firstLogin', data, {headers: {'Authorization': 'Bearer ' + token}});

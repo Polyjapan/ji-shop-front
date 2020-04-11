@@ -10,6 +10,8 @@ import {FormsModule} from '@angular/forms';
 import {HomeModule} from './components/home/home.module';
 import {AuthenticateComponent} from './components/authenticate/authenticate.component';
 import {CheckoutComponent} from './components/checkout/checkout.component';
+import {JwtModule} from '@auth0/angular-jwt';
+import {environment} from '../environments/environment';
 import {CallbackComponent} from './components/checkout/callback.component';
 import {MyOrdersComponent} from './components/members/my-orders.component';
 import {ViewOrderComponent} from './components/members/view-order.component';
@@ -88,6 +90,13 @@ export class ErrorInterceptor implements HttpInterceptor {
     OrderContentModule,
     RecaptchaModule.forRoot(),
     BrowserAnimationsModule,
+
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: environment.tokenWhitelist
+      }
+    }),
 
     AppRoutingModule
   ],
