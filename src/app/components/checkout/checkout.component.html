@@ -17,7 +17,9 @@
   <p *ngIf="isSale">Cette commande sera générée comme <b>une vente en avance</b>.</p>
 
   <div *ngIf="checkoutRemoved" class="alert alert-warning">
-    <h2 i18n>Attention !</h2>
+    <h2 i18n>A
+  requiresInfo: true;
+  tempSession: string;ttention !</h2>
     <p i18n>Les éléments suivants se trouvaient dans votre panier et ont été supprimés.</p>
     <table>
       <tr *ngFor="let item of checkoutRemoved">

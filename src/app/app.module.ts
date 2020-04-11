@@ -20,7 +20,6 @@ import {AdminModule} from './components/admin/admin.module';
 import {PosModule} from './components/pos/pos.module';
 import {RecaptchaModule} from 'ng-recaptcha';
 import {OrderContentModule} from './components/members/order-content.module';
-import {IntranetModule} from './components/intranet/intranet.module';
 import {MainComponent} from './main.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -48,12 +47,14 @@ export class SentryErrorHandler implements ErrorHandler {
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
     private _injector: Injector,
-  ) {}
+  ) {
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req)
       .pipe(
-        tap(event => {}, error => {
+        tap(event => {
+        }, error => {
           if (error && error.error) {
             console.log(error);
             Sentry.captureMessage('HTTP Request failed: ' + req.method + ' ' + req.url + ' => ' + error.status + ' ' + error.message, Severity.Error);
@@ -83,7 +84,6 @@ export class ErrorInterceptor implements HttpInterceptor {
     FormsModule,
     HomeModule,
     AdminModule,
-    IntranetModule,
     PosModule,
     OrderContentModule,
     RecaptchaModule.forRoot(),

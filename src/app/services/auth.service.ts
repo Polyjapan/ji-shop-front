@@ -30,12 +30,6 @@ export class AuthService {
   }
 
   login(result: LoginResponse, activeRedirect: boolean = true): string {
-    if (result.requireInfo) {
-      this.requestMoreInfo(result.token);
-      return 'login';
-    }
-
-
     localStorage.setItem(AuthService.REFRESH_TOKEN_KEY, result.refreshToken);
     localStorage.setItem(AuthService.ID_TOKEN_KEY, result.idToken);
     this.removeTemporaryToken();
@@ -50,15 +44,6 @@ export class AuthService {
       this.route.navigate([act]);
     }
     return act;
-  }
-
-  requestMoreInfo(token: string) {
-    if (this.isAuthenticated()) {
-      return;
-    }
-
-    this.storeTemporaryToken(token);
-    this.route.navigate(['firstLogin']);
   }
 
   requiresLogin(redirectTo: string): boolean {
@@ -198,5 +183,4 @@ export class LoginResponse extends ApiResult {
   idToken?: string;
   token?: string; // for partial login
   refreshToken?: string;
-  requireInfo: boolean;
 }

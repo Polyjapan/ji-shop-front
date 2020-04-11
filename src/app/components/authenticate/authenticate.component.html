@@ -13,30 +13,3 @@
   <a class="btn btn-primary" [href]="auth.loginUrl()" i18n>Réessayer</a>
 </div>
 
-
-
-<ng-container *ngIf="requiresInfo && !loginSent">
-  <h1 i18n>Il nous manque quelques informations</h1>
-  <p i18n>Vous y êtes presque ! Comme c'est la première fois que vous venez, nous voulons simplement savoir si vous souhaitez recevoir une lettre
-    d'informations de notre part. C'est promis, nous n'en envoyons pas plus d'une dizaine par année !
-
-  <br>
-
-  <form #register="ngForm" class="form" (ngSubmit)="onRegister(register)" action="#">
-
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="acceptNews" value="true" id="acceptNewsletter" ngModel>
-      <label class="form-check-label" for="acceptNewsletter" i18n>
-        J'accepte de recevoir la lettre d'informations de Japan Impact
-      </label>
-    </div>
-
-    <br>
-
-    <button type="submit" class="btn btn-primary" [disabled]="!register.valid || loginSent" i18n>Continuer
-      <i class="fas fa-spinner" *ngIf="loginSent"></i>
-    </button>
-  </form>
-
-
-</ng-container>
