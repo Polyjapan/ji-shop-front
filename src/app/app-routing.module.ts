@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import {PageNotFoundComponent} from './page-not-found.component';
 import {HomeComponent} from './components/home/home.component';
 import {AuthenticateComponent} from './components/authenticate/authenticate.component';
@@ -14,38 +14,34 @@ import {Permissions} from './constants/permissions';
 import {PosComponent} from './components/pos/pos.component';
 import {PosSelectComponent} from './components/pos/pos-select.component';
 import {PosCallbackComponent} from './components/pos/pos-callback.component';
+import {MainComponent} from './main.component';
 import {TermsComponent} from './components/home/terms.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'login', component: AuthenticateComponent},
-  {path: 'terms', component: TermsComponent},
-  {path: 'checkout', component: CheckoutComponent, canActivate: [PermissionAuthGuard]},
-  {path: 'checkout/:ordertype', component: CheckoutComponent, canActivate: [PermissionAuthGuard]},
-  {path: 'callback/:accepted', component: CallbackComponent},
-  {path: 'orders', component: MyOrdersComponent, canActivate: [PermissionAuthGuard]},
-  {path: 'orders/:id', component: ViewOrderComponent, canActivate: [PermissionAuthGuard]},
-  {path: 'scan/:configId', component: ScanComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SCAN_TICKET}},
-  {path: 'scan', component: ScanSelectComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SCAN_TICKET}},
   {
-    path: 'pos/:eventId/:configId',
-    component: PosComponent,
-    canActivate: [PermissionAuthGuard],
-    data: {permission: Permissions.SELL_ON_SITE}
-  },
-  {
-    path: 'pos/:eventId/:configId/callback',
-    component: PosCallbackComponent,
-    canActivate: [PermissionAuthGuard],
-    data: {permission: Permissions.SELL_ON_SITE}
-  },
-  {path: 'pos', component: PosSelectComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SELL_ON_SITE}},
-  {path: '**', component: PageNotFoundComponent}
+    path: '',
+    component: MainComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'login', component: AuthenticateComponent },
+      { path: 'terms', component: TermsComponent },
+      { path: 'checkout', component: CheckoutComponent, canActivate: [PermissionAuthGuard] },
+      { path: 'checkout/:ordertype', component: CheckoutComponent, canActivate: [PermissionAuthGuard] },
+      { path: 'callback/:accepted', component: CallbackComponent },
+      { path: 'orders', component: MyOrdersComponent, canActivate: [PermissionAuthGuard] },
+      { path: 'orders/:id', component: ViewOrderComponent, canActivate: [PermissionAuthGuard] },
+      { path: 'scan/:configId', component: ScanComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SCAN_TICKET} },
+      { path: 'scan', component: ScanSelectComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SCAN_TICKET} },
+      { path: 'pos/:eventId/:configId', component: PosComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SELL_ON_SITE} },
+      { path: 'pos/:eventId/:configId/callback', component: PosCallbackComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SELL_ON_SITE} },
+      { path: 'pos', component: PosSelectComponent, canActivate: [PermissionAuthGuard], data: {permission: Permissions.SELL_ON_SITE} },
+      { path: '**', component: PageNotFoundComponent }
+    ]
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [ RouterModule.forRoot(routes) ],
+  exports: [ RouterModule ]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

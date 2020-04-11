@@ -22,6 +22,7 @@ import {AdminModule} from './components/admin/admin.module';
 import {PosModule} from './components/pos/pos.module';
 import {RecaptchaModule} from 'ng-recaptcha';
 import {OrderContentModule} from './components/members/order-content.module';
+import {MainComponent} from './main.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import * as Sentry from '@sentry/browser';
@@ -60,8 +61,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         }, error => {
           if (error && error.error) {
             console.log(error);
-            Sentry.captureMessage('HTTP Request failed: ' + req.method + ' ' + req.url + ' => ' +
-              error.status + ' ' + error.message, Severity.Error);
+            Sentry.captureMessage('HTTP Request failed: ' + req.method + ' ' + req.url + ' => ' + error.status + ' ' + error.message, Severity.Error);
           }
         })
       );
@@ -77,6 +77,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     ViewOrderComponent,
     ScanComponent,
     ScanSelectComponent,
+    MainComponent,
 
     AuthenticateComponent
   ],
