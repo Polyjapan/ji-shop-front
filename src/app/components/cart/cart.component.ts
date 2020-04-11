@@ -1,7 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {CartItem, CartService} from './cart.service';
-import {AuthService} from '../../services/auth.service';
-import {Permissions} from '../../constants/permissions';
+import {CartItem, CartService} from '../../services/cart.service';
 
 @Component({
   selector: 'app-cart',

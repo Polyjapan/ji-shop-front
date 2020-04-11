@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {BackendService} from '../../services/backend.service';
-import {CartService} from '../cart/cart.service';
+import {CartService} from '../../services/cart.service';
 import {ActivatedRoute} from '@angular/router';
-import {CallbackReturn, SumupService} from './sumup.service';
+import {CallbackReturn, SumupService} from '../../services/sumup.service';
 
 @Component({
   selector: 'app-pos-callback',

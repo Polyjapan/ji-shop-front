@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {CartService} from '../cart/cart.service';
+import {CartService} from '../../services/cart.service';
 
 @Component({
   selector: 'app-callback',

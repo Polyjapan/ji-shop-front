@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BackendService} from '../../../services/backend.service';
 import {Event} from '../../../types/event';
-import {EventListService} from '../event-list.service';
+import {EventListService} from '../../../services/event-list.service';
 
 @Component({
   selector: 'app-admin-select-edition',

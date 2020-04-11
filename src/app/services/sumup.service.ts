@@ -4,8 +4,8 @@ import {of as observableOf, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {isNullOrUndefined} from 'util';
-import {BackendService} from '../../services/backend.service';
-import {PaymentMethod, PosPaymentLog} from '../../types/pos_configuration';
+import {BackendService} from './backend.service';
+import {PaymentMethod, PosPaymentLog} from '../types/pos_configuration';
 
 @Injectable()
 export class SumupService {

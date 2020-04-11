@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BackendService} from '../../../services/backend.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as Errors from '../../../constants/errors';
-import {EventService} from '../event.service';
+import {EventService} from '../../../services/event.service';
 import {PosConfiguration} from '../../../types/pos_configuration';
 
 @Component({

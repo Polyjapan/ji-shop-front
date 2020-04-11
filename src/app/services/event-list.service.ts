@@ -1,9 +1,9 @@
-import {Event} from '../../types/event';
+import {Event} from '../types/event';
 import {Observable, Subject} from 'rxjs';
-import {BackendService} from '../../services/backend.service';
+import {BackendService} from './backend.service';
 import {Injectable} from '@angular/core';
 import {query} from '@angular/animations';
-import {BetterSubject} from '../../abstraction/BetterSubject';
+import {BetterSubject} from '../abstraction/BetterSubject';
 
 @Injectable()
 export class EventListService {

@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Event} from '../../../types/event';
 import {MenuItem} from '../../sidebar/menuitem';
-import {EventService} from '../event.service';
+import {EventService} from '../../../services/event.service';
 
 @Component({
   selector: 'app-admin-event-sidebar',

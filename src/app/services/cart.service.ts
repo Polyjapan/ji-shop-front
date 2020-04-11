@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Item} from '../../types/items';
-import {CheckedOutItem} from '../../types/order';
+import {Item} from '../types/items';
+import {CheckedOutItem} from '../types/order';
 import {isNullOrUndefined, isUndefined} from 'util';
 
 @Injectable()

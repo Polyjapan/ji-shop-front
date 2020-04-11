@@ -5,7 +5,7 @@ import {SalesData, StatsReturn} from '../../../types/stats';
 import {Source} from '../../../types/order';
 import {Item, ItemList} from '../../../types/items';
 import {Event} from '../../../types/event';
-import {EventListService} from '../event-list.service';
+import {EventListService} from '../../../services/event-list.service';
 
 @Component({
   selector: 'app-admin-list-products',

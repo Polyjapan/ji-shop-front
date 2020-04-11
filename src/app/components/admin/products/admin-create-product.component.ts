@@ -6,7 +6,7 @@ import {Source} from '../../../types/order';
 import * as Errors from '../../../constants/errors';
 import {ErrorCodes} from '../../../constants/errors';
 import {Event} from '../../../types/event';
-import {EventService} from '../event.service';
+import {EventService} from '../../../services/event.service';
 import {Item} from '../../../types/items';
 
 @Component({

@@ -14,8 +14,6 @@ import {SidebarMenuComponent} from './sidebar-menu.component';
     RouterModule
   ],
   exports: [
-    SidebarComponent,
-    SidebarMenuComponent
   ]
 })
 export class SidebarModule { }

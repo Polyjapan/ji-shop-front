@@ -4,7 +4,7 @@ import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@an
 import {isNullOrUndefined} from 'util';
 import {NavigationComponent} from '../../abstraction/navigation-component';
 import {MenuItem} from '../sidebar/menuitem';
-import {EventService} from './event.service';
+import {EventService} from '../../services/event.service';
 import {Event} from '../../types/event';
 
 @Component({
