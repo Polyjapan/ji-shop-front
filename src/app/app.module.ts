@@ -4,7 +4,7 @@ import {ErrorHandler, Injectable, Injector, NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {BackendService} from './services/backend.service';
-import {AuthModule} from './services/auth.module';
+import {AuthModule, tokenGetter} from './services/auth.module';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {HomeModule} from './components/home/home.module';
@@ -30,9 +30,11 @@ import {Severity} from '@sentry/browser';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 
-Sentry.init({
-  dsn: 'https://2cb1ffaf5a934ef9b91661ecd6bcd8c7@sentry.io/2124798'
-});
+if (environment.production) {
+  Sentry.init({
+    dsn: 'https://2cb1ffaf5a934ef9b91661ecd6bcd8c7@sentry.io/2124798'
+  });
+}
 
 @Injectable()
 export class SentryErrorHandler implements ErrorHandler {

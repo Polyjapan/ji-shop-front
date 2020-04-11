@@ -206,9 +206,8 @@ export class BackendService {
     return this.http.get<FullOrder>(this._ordersUrl + '/view/' + id);
   }
 
-  login(ticket: string): Observable<LoginResponse> {
-    return this.http
-      .post<LoginResponse>(this._authUrl + '/login', ticket);
+  login(ticket: string): Observable<string> {
+    return this.http.post(this._authUrl + '/login', ticket, {responseType: 'text'});
   }
 
   firstLogin(data: any, token: string): Observable<LoginResponse> {

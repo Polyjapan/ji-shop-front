@@ -4,7 +4,7 @@ import {AuthApiService} from './authapi.service';
 
 
 export function tokenGetter() {
-  return localStorage.getItem('id_token');
+  return localStorage.getItem(AuthService.ID_TOKEN_KEY);
 }
 
 @NgModule({

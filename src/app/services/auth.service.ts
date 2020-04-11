@@ -1,7 +1,3 @@
-
-import {of as observableOf, AsyncSubject, Observable} from 'rxjs';
-
-import {catchError, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 
 import {ApiResult} from '../types/api_result';
@@ -20,8 +16,8 @@ export class AuthService {
   }
 
 
-  login(result: LoginResponse, activeRedirect: boolean = true): string {
-    localStorage.setItem(AuthService.ID_TOKEN_KEY, result.token);
+  login(result: string, activeRedirect: boolean = true): string {
+    localStorage.setItem(AuthService.ID_TOKEN_KEY, result);
 
     let act = this.loadNextAction();
 
@@ -97,6 +93,11 @@ export class AuthService {
     }
   }
 
+  loginUrl() {
+    const route = window.location.origin + this.route.createUrlTree(['/', 'login']).toString();
+    return environment.auth.apiurl + '/cas/login?service=' + route;
+  }
+
   private storeNextAction(action: string) {
     localStorage.setItem(AuthService.REDIRECT_LOCATION_KEY, action);
   }
@@ -106,11 +107,6 @@ export class AuthService {
     localStorage.removeItem(AuthService.REDIRECT_LOCATION_KEY);
 
     return act;
-  }
-
-  loginUrl() {
-    const route = window.location.origin + this.route.createUrlTree(['/', 'login']).toString();
-    return environment.auth.apiurl + '/cas/login?service=' + route;
   }
 }
 

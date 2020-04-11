@@ -27,7 +27,6 @@ export class AuthenticateComponent implements OnInit {
 
     this.backend.login(ticket).subscribe(
       res => {
-        console.log(res);
         this.auth.login(res);
         this.loginSent = false;
       },
